@@ -34,6 +34,5 @@ validation-report.json
 
 # Folders to ignore
 node_modules
-wp-content/uploads
 
 env.php
