@@ -9,8 +9,9 @@
 
 get_header(); ?>
 
-	<section id="primary" class="content-area">
-		<main id="main" class="site-main" role="main">
+	<div id="primary" class="container">
+		<div class="row">
+			<main id="main" class="twelve columns" role="main">
 
 		<?php if ( have_posts() ) : ?>
 
@@ -95,7 +96,8 @@ get_header(); ?>
 
 		<?php endif; ?>
 
-		</main><!-- #main -->
+			</main><!-- #main -->
+		</div>
 	</section><!-- #primary -->
 
 <?php get_sidebar(); ?>

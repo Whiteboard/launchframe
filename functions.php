@@ -8,6 +8,13 @@
 /**
  * Set the content width based on the theme's design and stylesheet.
  */
+
+require_once('dev.php');
+function dev_env(){
+	global $devenv;
+	return $devenv == true;
+}
+
 if ( ! isset( $content_width ) )
 	$content_width = 640; /* pixels */
 
@@ -19,12 +26,6 @@ if ( ! function_exists( '_s_setup' ) ) :
  * before the init hook. The init hook is too late for some features, such as indicating
  * support post thumbnails.
  */
-
-require_once('env.php');
-
-function dev_env(){
-	return $devenv;
-}
 
 function _s_setup() {
 
