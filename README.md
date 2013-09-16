@@ -41,3 +41,11 @@ OR
 * Search for: `Text Domain: _s` and replace with: `Text Domain: megatherium` in style.css.
 
 Then, update the stylesheet header in style.css and the links in footer.php with your own information.
+
+Development processes
+---------------
+Make sure you create a dev.php file, which only has the job of setting the `$devenv` variable. This file can also be used to set environment specific variables. *DO NOT use this to set up wordpress configuration variables.* Edit .less files and the script.js and plugin.js files directly; do not edit the build.js or style.css files unless you are doing away with the build process.
+
+Go Live
+---------------
+When you go live, make sure `env.php` sets $devenv to false. This will switch assets to their minified versions.

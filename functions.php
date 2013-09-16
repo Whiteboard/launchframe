@@ -19,6 +19,13 @@ if ( ! function_exists( '_s_setup' ) ) :
  * before the init hook. The init hook is too late for some features, such as indicating
  * support post thumbnails.
  */
+
+require_once('env.php');
+
+function dev_env(){
+	return $devenv;
+}
+
 function _s_setup() {
 
 	/**
@@ -83,18 +90,19 @@ add_action( 'widgets_init', '_s_widgets_init' );
  * Enqueue scripts and styles
  */
 function _s_scripts() {
+	// Theme definition
 	wp_enqueue_style( '_s-style', get_stylesheet_uri() );
 
-	wp_enqueue_style( '_s-style', get_template_directory_uri() . "/css/style.min.css"  );
-
-	wp_enqueue_script( '_s-mainscript', get_template_directory_uri() . '/js/build.js' );
+	if (dev_env()){
+		wp_enqueue_style( '_s-style', get_template_directory_uri() . "/css/style.css"  );
+		wp_enqueue_script( 'buildjs', get_template_directory_uri() . '/js/build.js', array( 'jquery' ) );
+	} else {
+		wp_enqueue_style( '_s-style', get_template_directory_uri() . "/css/style.min.css"  );
+		wp_enqueue_script( 'buildjs', get_template_directory_uri() . '/js/build.min.js', array( 'jquery' ) );
+	}
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
-	}
-
-	if ( is_singular() && wp_attachment_is_image() ) {
-		wp_enqueue_script( '_s-keyboard-image-navigation', get_template_directory_uri() . '/js/keyboard-image-navigation.js', array( 'jquery' ), '20120202' );
 	}
 }
 add_action( 'wp_enqueue_scripts', '_s_scripts' );
