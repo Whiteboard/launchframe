@@ -31,13 +31,13 @@ Extended to be dynamic based on variables defined above
 
 .container.plusfour,
 .container.pluseight {
-  width: 90%;
+  width: 100%;
 }
 
 .container .column.one-third,
 .container .column.two-thirds,
 .container .column.one {
-  width: 90%;
+  width: 100%;
 }
 
 .container .columns.two,
@@ -57,7 +57,7 @@ Extended to be dynamic based on variables defined above
 .container .columns.sixteen,
 .container .columns.twenty,
 .container .columns.twentyfour {
-  width: 90%;
+  width: 100%;
 }
 
 /* Offsets */
