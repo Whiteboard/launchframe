@@ -1,0 +1,11 @@
+{
+  "name": "launchframe",
+  "version": "1.0.0",
+  "main": ["./js/build.js", "./css/style.css"],
+  "ignore": [
+      "**/.*"
+  ],
+  "dependencies": {
+    "jquery": ">= 1.9.0"
+  }
+}
