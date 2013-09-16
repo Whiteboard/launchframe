@@ -1,10 +1,10 @@
 // SETTING UP @MEDIA QUERY VARIABLES
 @tinywidth : 300px;
 @tiny: ~"only screen and (min-width: @{tinywidth})";
-@smallwidth : 500px;
+@verysmallwidth : 500px;
+@verysmall: ~"only screen and (min-width: @{verysmallwidth})";
+@smallwidth : 720px;
 @small: ~"only screen and (min-width: @{smallwidth})";
-@mediumwidth : 720px;
-@medium: ~"only screen and (min-width: @{smallwidth})";
 @mediumwidth : 940px;
 @medium: ~"only screen and (min-width: @{mediumwidth})";
 @largewidth : 1100px;
@@ -143,6 +143,9 @@ Extended to be dynamic based on variables defined above
 
 // MR. GORBACHEV, BUILD OUR GRIDS!!!
 
+@media @small {
+	.buildGrid(@smallwidth);
+}
 @media @medium {
 	.buildGrid(@mediumwidth);
 }
