@@ -9,7 +9,7 @@
  * Set the content width based on the theme's design and stylesheet.
  */
 
-require_once('dev.php');
+require_once('env.php');
 function dev_env(){
 	global $devenv;
 	return $devenv == true;
