@@ -14,7 +14,8 @@
 @hugewidth : 1240px;
 @huge: ~"only screen and (min-width: @{hugewidth})";
 
-
+@ratio : 2;
+@numcolumns : 16;
 
 /*
 * Based somewhat on Skeleton
@@ -83,9 +84,8 @@ Extended to be dynamic based on variables defined above
 }
 
 .buildGrid(@width : @mediumwidth){
-	@column: @width/24;
-	@gutter: @width/48;
-	@numcolumns: 16;
+	@gutter: @width / ((@ratio+1) * @numcolumns);
+	@column: @gutter * @ratio;
 	.container                                  { position: relative; width: (@column+@gutter) * @numcolumns; margin: 0 auto; padding: 0; }
 	.container.plusfour                         { width: (@column+@gutter) * (@numcolumns+4); }
 	.container.pluseight                        { width: (@column+@gutter) * (@numcolumns+8); }
