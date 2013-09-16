@@ -8,9 +8,8 @@
 get_header(); ?>
 
 
-	<div id="primary" class="container">
-		<div class="row">
-			<main id="main" class="twelve columns" role="main">
+	<div id="primary" class="twelve columns">
+			<main id="main" role="main">
 
 				<section class="error-404 not-found">
 					<header class="page-header">
@@ -52,8 +51,7 @@ get_header(); ?>
 					</div><!-- .page-content -->
 				</section><!-- .error-404 -->
 
-			</main><!-- #main -->
-		</div>
+		</main><!-- #main -->
 	</div><!-- #primary -->
 
 <?php get_footer(); ?>

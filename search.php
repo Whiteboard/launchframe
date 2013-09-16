@@ -7,9 +7,8 @@
 
 get_header(); ?>
 
-	<div id="primary" class="container">
-		<div class="row">
-			<main id="main" class="twelve columns" role="main">
+	<div id="primary" class="twelve columns">
+			<main id="main" role="main">
 
 		<?php if ( have_posts() ) : ?>
 
@@ -32,8 +31,7 @@ get_header(); ?>
 
 		<?php endif; ?>
 
-			</main><!-- #main -->
-		</div>
+		</main><!-- #main -->
 	</section><!-- #primary -->
 
 <?php get_sidebar(); ?>
