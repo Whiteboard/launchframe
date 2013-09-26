@@ -12,7 +12,7 @@
 
 get_header(); ?>
 
-	<div id="primary" class="twelve columns">
+	<div id="primary">
 			<main id="main" role="main">
 
 			<?php while ( have_posts() ) : the_post(); ?>
