@@ -38,6 +38,14 @@ module.exports = function(grunt) {
         src: ['js/tests/unit/*.js']
       }
     },
+    autoprefixer: {
+        dist: {
+            files: {
+                'css/style.css': 'css/style.css',
+                'css/style.min.css': 'css/style.min.css'
+            }
+        }
+    },
 
     concat: {
       options: {
@@ -129,13 +137,14 @@ module.exports = function(grunt) {
       // },
       recess: {
         files: 'less/*.less',
-        tasks: ['recess']
+        tasks: ['recess', 'autoprefixer']
       }
     }
   });
 
 
   // These plugins provide necessary tasks.
+  grunt.loadNpmTasks('grunt-autoprefixer');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-connect');
