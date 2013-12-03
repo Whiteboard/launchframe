@@ -1,8 +1,8 @@
 <?php
 /**
- * _s functions and definitions
+ * launchframe functions and definitions
  *
- * @package _s
+ * @package launchframe
  */
 
 /**
@@ -18,7 +18,7 @@ function dev_env(){
 if ( ! isset( $content_width ) )
 	$content_width = 640; /* pixels */
 
-if ( ! function_exists( '_s_setup' ) ) :
+if ( ! function_exists( 'launchframe_setup' ) ) :
 /**
  * Sets up theme defaults and registers support for various WordPress features.
  *
@@ -27,15 +27,15 @@ if ( ! function_exists( '_s_setup' ) ) :
  * support post thumbnails.
  */
 
-function _s_setup() {
+function launchframe_setup() {
 
 	/**
 	 * Make theme available for translation
 	 * Translations can be filed in the /languages/ directory
 	 * If you're building a theme based on _s, use a find and replace
-	 * to change '_s' to the name of your theme in all the template files
+	 * to change 'launchframe' to the name of your theme in all the template files
 	 */
-	load_theme_textdomain( '_s', get_template_directory() . '/languages' );
+	load_theme_textdomain( 'launchframe', get_template_directory() . '/languages' );
 
 	/**
 	 * Add default posts and comments RSS feed links to head
@@ -53,7 +53,7 @@ function _s_setup() {
 	 * This theme uses wp_nav_menu() in one location.
 	 */
 	register_nav_menus( array(
-		'primary' => __( 'Primary Menu', '_s' ),
+		'primary' => __( 'Primary Menu', 'launchframe' ),
 	) );
 
 	/**
@@ -64,20 +64,20 @@ function _s_setup() {
 	/**
 	 * Setup the WordPress core custom background feature.
 	 */
-	add_theme_support( 'custom-background', apply_filters( '_s_custom_background_args', array(
+	add_theme_support( 'custom-background', apply_filters( 'launchframe_custom_background_args', array(
 		'default-color' => 'ffffff',
 		'default-image' => '',
 	) ) );
 }
-endif; // _s_setup
-add_action( 'after_setup_theme', '_s_setup' );
+endif; // launchframe_setup
+add_action( 'after_setup_theme', 'launchframe_setup' );
 
 /**
  * Register widgetized area and update sidebar with default widgets
  */
-function _s_widgets_init() {
+function launchframe_widgets_init() {
 	register_sidebar( array(
-		'name'          => __( 'Sidebar', '_s' ),
+		'name'          => __( 'Sidebar', 'launchframe' ),
 		'id'            => 'sidebar-1',
 		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
 		'after_widget'  => '</aside>',
@@ -85,20 +85,20 @@ function _s_widgets_init() {
 		'after_title'   => '</h1>',
 	) );
 }
-add_action( 'widgets_init', '_s_widgets_init' );
+add_action( 'widgets_init', 'launchframe_widgets_init' );
 
 /**
  * Enqueue scripts and styles
  */
-function _s_scripts() {
+function launchframe_scripts() {
 	// Theme definition
-	wp_enqueue_style( '_s-style', get_stylesheet_uri() );
+	wp_enqueue_style( 'launchframe-style', get_stylesheet_uri() );
 
 	if (dev_env()){
-		wp_enqueue_style( '_s-style-custom', get_template_directory_uri() . "/css/style.css"  );
+		wp_enqueue_style( 'launchframe-style-custom', get_template_directory_uri() . "/css/style.css"  );
 		wp_enqueue_script( 'buildjs', get_template_directory_uri() . '/js/build.js', array( 'jquery' ), '201301.1', true );
 	} else {
-		wp_enqueue_style( '_s-style-custom', get_template_directory_uri() . "/css/style.min.css"  );
+		wp_enqueue_style( 'launchframe-style-custom', get_template_directory_uri() . "/css/style.min.css"  );
 		wp_enqueue_script( 'buildjs', get_template_directory_uri() . '/js/build.min.js', array( 'jquery' ), '201301.2', true );
 	}
 
@@ -106,7 +106,7 @@ function _s_scripts() {
 		wp_enqueue_script( 'comment-reply' );
 	}
 }
-add_action( 'wp_enqueue_scripts', '_s_scripts' );
+add_action( 'wp_enqueue_scripts', 'launchframe_scripts' );
 
 /**
  * Implement the Custom Header feature.

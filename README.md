@@ -26,16 +26,16 @@ You can do a one off build by running `grunt`, or you can watch the less and js 
 
 To change the theme's name, use the following instructions from the _s documentation.
 
-1. Search for `'_s'` (inside single quotations) to capture the text domain.
-2. Search for `_s_` to capture all the function names.
+1. Search for `'launchframe'` (inside single quotations) to capture the text domain.
+2. Search for `launchframe_` to capture all the function names.
 3. Search for <code>&nbsp;_s</code> (with a space before it) to capture DocBlocks.
 4. Search for `_s-` to capture prefixed handles.
 5. Search for `Text Domain: _s` in style.css.
 
 OR
 
-* Search for: `'_s'` and replace with: `'megatherium'`
-* Search for: `_s_` and replace with: `megatherium_`
+* Search for: `'launchframe'` and replace with: `'megatherium'`
+* Search for: `launchframe_` and replace with: `megatherium_`
 * Search for: <code>&nbsp;_s</code> and replace with: <code>&nbsp;Megatherium</code>
 * Search for: `_s-` and replace with: `megatherium-`
 * Search for: `Text Domain: _s` and replace with: `Text Domain: megatherium` in style.css.

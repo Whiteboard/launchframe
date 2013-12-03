@@ -4,7 +4,7 @@
  *
  * Displays all of the <head> section and everything up till <main id="main">
  *
- * @package _s
+ * @package launchframe
  */
 ?><!DOCTYPE html>
 <html <?php language_attributes(); ?>>
@@ -29,8 +29,8 @@
 			</div>
 
 			<nav id="site-navigation" class="main-navigation" role="navigation">
-				<h1 class="menu-toggle"><?php _e( 'Menu', '_s' ); ?></h1>
-				<div class="screen-reader-text skip-link"><a href="#content" title="<?php esc_attr_e( 'Skip to content', '_s' ); ?>"><?php _e( 'Skip to content', '_s' ); ?></a></div>
+				<h1 class="menu-toggle"><?php _e( 'Menu', 'launchframe' ); ?></h1>
+				<div class="screen-reader-text skip-link"><a href="#content" title="<?php esc_attr_e( 'Skip to content', 'launchframe' ); ?>"><?php _e( 'Skip to content', 'launchframe' ); ?></a></div>
 
 				<?php wp_nav_menu( array( 'theme_location' => 'primary' ) ); ?>
 			</nav><!-- #site-navigation -->
