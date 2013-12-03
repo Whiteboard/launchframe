@@ -40,10 +40,10 @@ module.exports = function(grunt) {
     },
     autoprefixer: {
         dist: {
-            files: {
-                'css/style.css': 'css/style.css',
-                'css/style.min.css': 'css/style.min.css'
-            }
+            src : 'css/style.css'
+        },
+        min : {
+          src : 'css/style.min.css'
         }
     },
 
@@ -71,21 +71,29 @@ module.exports = function(grunt) {
       }
     },
 
-    recess: {
-      options: {
-        compile: true,
-        banner: '<%= banner %>'
-      },
+    less: {
       launchframe: {
-        src: ['less/style.less'],
-        dest: 'css/style.css'
-      },
+        options: {
+            paths: ['css/'],
+            // LESS source maps
+          // To enable, set sourceMap to true and update sourceMapRootpath based on your install
+            sourceMap: true,
+            sourceMapFilename: 'css/style.css.map',
+            sourceMapBasepath: 'less/'
+          },
+          files: {
+            "css/style.css": "less/style.less"
+          },
+          banner: '<%= banner %>'
+        },
       min: {
         options: {
-          compress: true
-        },
-        src: ['less/style.less'],
-        dest: 'css/style.min.css'
+          paths: ['css/'],
+          files: {
+            "css/style.min.css": "less/style.less"
+          },
+          banner: '<%= banner %>'
+        }
       }
     },
 
@@ -125,6 +133,17 @@ module.exports = function(grunt) {
     //     src: ["_gh_pages/**/*.html"]
     //   }
     // },
+    cssmin : {
+      add_banner: {
+          options: {
+              // adds this banner to the minified output
+              banner: "/* Launchframe minified with cssmin */"
+          },
+          files: {
+              "css/style.min.css": "css/style.min.css"
+          }
+      }
+    },
 
     watch: {
       src: {
@@ -135,9 +154,9 @@ module.exports = function(grunt) {
       //   files: '<%= jshint.test.src %>',
       //   tasks: ['jshint:test', 'qunit']
       // },
-      recess: {
+      less: {
         files: 'less/*.less',
-        tasks: ['recess', 'autoprefixer']
+        tasks: ['less', 'autoprefixer', 'cssmin']
       }
     }
   });
@@ -146,17 +165,19 @@ module.exports = function(grunt) {
   // These plugins provide necessary tasks.
   grunt.loadNpmTasks('grunt-autoprefixer');
   grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks("grunt-contrib-cssmin");
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-less');
   // grunt.loadNpmTasks('grunt-contrib-qunit');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-html-validation');
   grunt.loadNpmTasks('grunt-jekyll');
-  grunt.loadNpmTasks('grunt-recess');
-  grunt.loadNpmTasks('browserstack-runner');
+  // grunt.loadNpmTasks('grunt-recess');
+  // grunt.loadNpmTasks('browserstack-runner');
 
   // Docs HTML validation task
   // grunt.registerTask('validate-html', ['jekyll', 'validation']);
@@ -176,7 +197,7 @@ module.exports = function(grunt) {
   grunt.registerTask('dist-js', ['concat', 'uglify']);
 
   // CSS distribution task.
-  grunt.registerTask('dist-css', ['recess']);
+  grunt.registerTask('dist-css', ['less']);
 
   // Fonts distribution task.
   // grunt.registerTask('dist-fonts', ['copy']);
