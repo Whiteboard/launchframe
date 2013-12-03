@@ -83,7 +83,8 @@ Extended to be dynamic based on variables defined above
 	.offset-by-fifteen { padding-left: 0; }
 }
 
-.buildGrid(@width : @mediumwidth){
+.buildGrid(@screenwidth : @mediumwidth){
+	@width: @screenwidth * .9;
 	@gutter: @width / ((@ratio+1) * @numcolumns);
 	@column: @gutter * @ratio;
 	.container                                  { position: relative; width: (@column+@gutter) * @numcolumns; margin: 0 auto; padding: 0; }
