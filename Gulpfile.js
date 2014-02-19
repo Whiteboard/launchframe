@@ -8,13 +8,6 @@
  */
 
 
-module.exports = function () {
-  'use strict';
-
-  RegExp.quote = function (string) {
-    return string.replace(/[-\\^$*+?.()|[\]{}]/g, '\\$&');
-  };
-
   var gulp = require('gulp');
   var gutil = require('gulp-util');
   // Note: gulp-load-tasks looks at package.json, and brings everything in like:
@@ -24,13 +17,13 @@ module.exports = function () {
 
   // Convenience function, since notification isn't really a task.
   var notify = tasks.notify;
+  var pkg = require('./package.json');
 
   var config = {
     meta : {
-      pkg : require('./package.json'),
       banner: '/*!\n' +
             ' * Bootstrap v<%= pkg.version %> (<%= pkg.homepage %>)\n' +
-            ' * Copyright 2011-<%= grunt.template.today("yyyy") %> <%= pkg.author %>\n' +
+            ' * Copyright 2011-' + gutil.date(new Date(), "yyyy") + ' <%= pkg.author %>\n' +
             ' * Licensed under <%= pkg.license.type %> (<%= pkg.license.url %>)\n' +
             ' */\n',
       jqueryCheck: 'if (typeof jQuery === \'undefined\') { throw new Error(\'Bootstrap\\\'s JavaScript requires jQuery\') }\n\n',
@@ -55,16 +48,16 @@ module.exports = function () {
         ],
         dest : {
           parent : "./dist/js/",
-          min : "<%= pkg.name %>.min.js",
-          unmin : "<%= pkg.name %>.js"
+          min : pkg.name + ".min.js",
+          unmin : pkg.name + ".js"
         }
       },
       css : {
         src : ["less/bootstrap.less"],
         dest : {
           parent : "./dist/css/",
-          min : "<%= pkg.name %>.min.css",
-          unmin : "<%= pkg.name %>.css"
+          min : pkg.name + ".min.css",
+          unmin : pkg.name + ".css"
         }
       }
     }
@@ -73,9 +66,8 @@ module.exports = function () {
   // Config-y auto-tasks from Gruntfile:
   // clean
   gulp.task('clean', function(){
-    return gulp.src("dist", { read: false }),
-      .pipe(tasks.clean({force: true}))
-      .pipe(gulp.dest("dist"));
+    return gulp.src(["dist/js", "dist/css"], { read: false })
+      .pipe(tasks.clean({force: true}));
   });
   // combined:
     // jshint
@@ -108,14 +100,15 @@ module.exports = function () {
   gulp.task('dist-js', function() {
     return gulp.src(config.paths.scripts.src)
       .pipe(tasks.concat(config.paths.scripts.dest.unmin))
-      .pipe(tasks.header(config.meta.banner + "\n" + config.meta.jqueryCheck, config.meta.pkg))
+      .pipe(tasks.header(config.meta.banner + "\n" + config.meta.jqueryCheck, { pkg : pkg }))
       .pipe(gulp.dest(config.paths.scripts.dest.parent))
-      .pipe(tasks.jshint('js/.jshintrc'))
-      .pipe(tasks.jscs('js/.jscs.json'))
+      .pipe(tasks.rename({suffix: '.min'}))
+      .pipe(tasks.jshint('./js/.jshintrc'))
+      .pipe(tasks.jscs(__dirname + '/js/.jscs.json'))
       .pipe(tasks.jshint.reporter('default'))
       .pipe(tasks.jshint.reporter('fail'))
       .pipe(tasks.uglify())
-      .pipe(gulp.dest(config.paths.scripts.dest.parent + config.paths.scripts.dest.min));
+      .pipe(gulp.dest(config.paths.scripts.dest.parent))
       .pipe(notify({ message: 'JS Compiling Complete' }));
   });
   // dist-css
@@ -127,22 +120,20 @@ module.exports = function () {
           sourceMap: true
         })
       )
+      .pipe(tasks.rename(config.paths.css.dest.unmin))
       .pipe(tasks.autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
       .pipe(tasks.csscomb('less/.csscomb.json'))
       .pipe(tasks.csslint('less/.csslintrc'))
       .pipe(tasks.csslint.reporter())
-      .pipe(tasks.header(config.meta.banner, config.meta.pkg))
+      .pipe(tasks.header(config.meta.banner, { pkg : pkg }))
       .pipe(gulp.dest(config.paths.css.dest.parent))
-      .pipe(tasks.rename({suffix: '.min'}))
+      .pipe(tasks.rename(config.paths.css.dest.min))
       .pipe(tasks.cssmin())
       .pipe(gulp.dest(config.paths.css.dest.parent))
       .pipe(notify({ message: 'CSS Compiling Complete' }));
   });
   // dist-docs
   // dist (parent)
-  gulp.task('dist', ['clean', 'dist-js', 'dist-css'], function(){
-    notify({ message: 'Gulping Complete!' });
-  });
+  gulp.task('dist', ['clean', 'dist-css', 'dist-js']);
   // default
   gulp.task('default', ['clean', 'dist']);
-}
