@@ -32,6 +32,7 @@
     "gulp-jshint": "*",
     "gulp-less": "*",
     "gulp-notify": "*",
+    "gulp-plumber": "*",
     "gulp-rename": "*",
     "gulp-qunit": "*",
     "gulp-uglify": "*",
