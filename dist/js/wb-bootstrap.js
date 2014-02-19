@@ -1,6 +1,6 @@
 /*!
- * Bootstrap v0.1.0 (http://whiteboard.is)
- * Copyright 2011-2014 Whiteboard
+ * WB-Bootstrap v0.1.0 (http://whiteboard.is)
+ * Copyright 2014-2014 Whiteboard
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 
