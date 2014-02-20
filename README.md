@@ -15,32 +15,21 @@ We started with _s [http://underscores.me/](http://underscores.me/) - from their
 * A script at `js/navigation.js` that makes your menu a toggled dropdown on small screens (like your phone), ready for CSS artistry. It's enqueued in `functions.php`.
 * 2 sample CSS layouts in `layouts` for a sidebar on either side of your content.
 
-We've kept most of this, except we moved the JavaScript plugins into the "plugins" file. No need to mess with those, so why have them in their own files?
+We've kept most of this, but we've also included WB-Bootstrap, which is a pared down version of Twitter Bootstrap, adapted to use [Gulp.js](http://gulpjs.com/).
 
 Getting Started
 ---------------
 
-We've built our own LESS files to build out using Grunt. To get going with this, change into the theme directory and run `npm install`. This will bring the `node_modules` folder into the project; make sure these don't go with your project to production unnecessarily.
+Prerequisites: You will need to have [Node](http://nodejs.org/) and [Gulp](http://gulpjs.com/) installed. Once you [install Node](http://nodejs.org/), you can then run `npm install --global gulp`. This also assumes you have a working Wordpress installation on your local machine.
 
-You can do a one off build by running `grunt`, or you can watch the less and js files by using `grunt watch`. The Gruntfile is largely borrowed from [Twitter Bootstrap](https://github.com/twbs/bootstrap/blob/master/Gruntfile.js).
+*Steps to get going:*
+1. Clone this repo into your `wp-content/themes/` directory
+2. `cd wp-content/themes/launchframe/assets`
+3. `npm install`
+4. `gulp watch`
+5. Go!
 
-To change the theme's name, use the following instructions from the _s documentation.
-
-1. Search for `'launchframe'` (inside single quotations) to capture the text domain.
-2. Search for `launchframe_` to capture all the function names.
-3. Search for <code>&nbsp;_s</code> (with a space before it) to capture DocBlocks.
-4. Search for `_s-` to capture prefixed handles.
-5. Search for `Text Domain: _s` in style.css.
-
-OR
-
-* Search for: `'launchframe'` and replace with: `'megatherium'`
-* Search for: `launchframe_` and replace with: `megatherium_`
-* Search for: <code>&nbsp;_s</code> and replace with: <code>&nbsp;Megatherium</code>
-* Search for: `_s-` and replace with: `megatherium-`
-* Search for: `Text Domain: _s` and replace with: `Text Domain: megatherium` in style.css.
-
-Then, update the stylesheet header in style.css and the links in footer.php with your own information.
+Note: the assets folder for the base theme may change based on WB-Bootstrap, as it is brought in using [git subtree](http://makingsoftware.wordpress.com/2013/02/16/using-git-subtrees-for-repository-separation/).
 
 Development processes
 ---------------
