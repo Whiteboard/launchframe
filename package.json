@@ -1,0 +1,45 @@
+{
+  "name": "wb-bootstrap",
+  "description": "Whiteboard's modified version of Twitter Bootstrap",
+  "version": "0.1.0",
+  "keywords": [
+    "bootstrap",
+    "css"
+  ],
+  "homepage": "http://whiteboard.is",
+  "author": "Whiteboard",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jcutrell/bootstrap.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jcutrell/bootstrap/issues"
+  },
+  "license": {
+    "type": "MIT",
+    "url": "https://github.com/twbs/bootstrap/blob/master/LICENSE"
+  },
+  "devDependencies": {
+    "gulp": "*",
+    "gulp-util": "*",
+    "gulp-header": "*",
+    "gulp-autoprefixer": "*",
+    "gulp-clean": "*",
+    "gulp-concat": "*",
+    "gulp-csslint": "*",
+    "gulp-cssmin": "*",
+    "gulp-csscomb": "~0.1.0",
+    "gulp-jshint": "*",
+    "gulp-less": "*",
+    "gulp-notify": "*",
+    "gulp-plumber": "*",
+    "gulp-rename": "*",
+    "gulp-qunit": "*",
+    "gulp-uglify": "*",
+    "gulp-watch": "~0.5.0",
+    "gulp-jscs": "*",
+    "gulp-replace": "*",
+    "gulp-load-tasks": "*",
+    "gulp-template" : "*"
+  }
+}
