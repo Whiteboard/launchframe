@@ -29,11 +29,19 @@ Prerequisites: You will need to have [Node](http://nodejs.org/) and [Gulp](http:
 4. `gulp watch`
 5. Go!
 
-Note: the assets folder for the base theme may change based on WB-Bootstrap, as it is brought in using [git subtree](http://makingsoftware.wordpress.com/2013/02/16/using-git-subtrees-for-repository-separation/).
+Note: the assets folder for the base theme may change based on WB-Bootstrap, as it is brought in using [git subtree](http://makingsoftware.wordpress.com/2013/02/16/using-git-subtrees-for-repository-separation/). Quite a few of the naming structures are a result of the base being Twitter Bootstrap.
+
+Easy Overrides for Bootstrap
+---------------
+To reduce the number of merge conflicts between Twitter Bootstrap and WB-Bootstrap, and by extension in Launchframe, we have chosen to use override files for the variables and mixins (both of which are in `assets/less`), and add a style.less file for your primary styles. You'll use the `script.js` file for your primary custom JavaScript, and `plugins.js` for anything beyond what Bootstrap already offers you. Gulp takes care of the building processes.
+
+Bootstrap CSS and JavaScript Plugins
+---------------
+Just a reminder, the CSS and JavaScript from Bootstrap are now included by default.
 
 Development processes
 ---------------
-Make sure you create a dev.php file, which only has the job of setting the `$devenv` variable. This file can also be used to set environment specific variables. *DO NOT use this to set up wordpress configuration variables.* Edit .less files and the script.js and plugin.js files directly; do not edit the build.js or style.css files unless you are doing away with the build process.
+The dev.php file only has one job of setting the `$devenv` variable. This file can also be used to set environment specific variables. *DO NOT use this to set up wordpress configuration variables.* Edit .less files and the script.js and plugin.js files directly; do not edit the build.js or style.css files unless you are doing away with the build process.
 
 Go Live
 ---------------
