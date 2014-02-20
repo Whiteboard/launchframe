@@ -5,7 +5,7 @@
  * @package launchframe
  */
 ?>
-	<div id="secondary" class="widget-area four columns" role="complementary">
+	<div id="secondary" class="widget-area col-xs-4" role="complementary">
 		<?php do_action( 'before_sidebar' ); ?>
 		<?php if ( ! dynamic_sidebar( 'sidebar-1' ) ) : ?>
 
