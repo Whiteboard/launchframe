@@ -103,7 +103,10 @@
       .pipe(tasks.header(config.meta.banner + "\n" + config.meta.jqueryCheck, { pkg : pkg }))
       .pipe(gulp.dest(config.paths.scripts.dest.parent))
       .pipe(tasks.rename({suffix: '.min'}))
-      .pipe(tasks.jscs(__dirname + '/js/.jscs.json').on('error', function(message){ gutil.log(unescape(message)); gutil.beep(); }))
+      .pipe(tasks.jscs(__dirname + '/js/.jscs.json').on('error', function(message){
+          gutil.log(unescape(message)); gutil.beep();
+        })
+      )
       .pipe(tasks.jshint('./js/.jshintrc'))
       .pipe(tasks.jshint.reporter('default'))
       .pipe(tasks.uglify().on('error', gutil.log))
