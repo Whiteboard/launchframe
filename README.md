@@ -37,7 +37,9 @@ To reduce the number of merge conflicts between Twitter Bootstrap and WB-Bootstr
 
 Bootstrap CSS and JavaScript Plugins
 ---------------
-Just a reminder, the CSS and JavaScript from Bootstrap are now included by default.
+Just a reminder, the CSS and JavaScript from Bootstrap are now included by default. Take a look at the docs: [JS](http://getbootstrap.com/javascript/) [CSS](http://getbootstrap.com/css/)
+
+**This breaks the old grid system in the previous version of Launchframe.**
 
 Development processes
 ---------------
