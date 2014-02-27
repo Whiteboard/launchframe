@@ -53,7 +53,7 @@
         }
       },
       css : {
-        src : ["less/bootstrap.less"],
+        src : ["less/*.less"],
         dest : {
           parent : "./dist/css/",
           min : pkg.name + ".min.css",
@@ -66,7 +66,7 @@
   // Config-y auto-tasks from Gruntfile:
   // clean
   gulp.task('clean', function(){
-    return gulp.src(["dist/js", "dist/css"], { read: false })
+    return gulp.src(["dist/js", "dist/css", "dist/img", "dist/fonts"], { read: false })
       .pipe(tasks.clean({force: true}));
   });
   // combined:
@@ -89,7 +89,7 @@
   // watch
   gulp.task("watch", function(){
     gulp.watch(config.paths.scripts.src, ['dist-js']);
-    gulp.watch(config.paths.css.src, ['dist-css']);
+    gulp.watch(config.paths.css.src, ['dist-css', 'dist-img', 'dist-fonts']);
   });
   // sed - not used
   // exec - not used
@@ -98,6 +98,8 @@
   // TASKS:
   // dist-js
   gulp.task('dist-js', function() {
+    gulp.src("js/vendor/*.js", {base : "./js/"})
+      .pipe(gulp.dest(config.paths.scripts.dest.parent));
     return gulp.src(config.paths.scripts.src)
       .pipe(tasks.concat(config.paths.scripts.dest.unmin))
       .pipe(tasks.header(config.meta.banner + "\n" + config.meta.jqueryCheck, { pkg : pkg }))
@@ -115,13 +117,16 @@
   });
   // dist-css
   gulp.task('dist-css', function() {
-    return gulp.src(config.paths.css.src)
+    return gulp.src("less/bootstrap.less")
       .pipe(
         tasks.less({
-          paths: config.paths.css.src,
+          paths: ["less/bootstrap.less"],
           sourceMap: true
         })
       )
+      .on('error', function(message){
+          gutil.log(unescape(message)); gutil.beep();
+        })
       .pipe(tasks.rename(config.paths.css.dest.unmin))
       .pipe(tasks.autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
       .pipe(tasks.csscomb('less/.csscomb.json'))
@@ -134,8 +139,21 @@
       .pipe(gulp.dest(config.paths.css.dest.parent))
       .pipe(notify({ message: 'CSS Compiling Complete' }));
   });
+
+  gulp.task('dist-fonts', function(){
+    return gulp.src("fonts/*", {base : "./fonts/"})
+      .pipe(tasks.newer('dist/fonts'))
+      .pipe(gulp.dest('dist/fonts'));
+  });
+
+  gulp.task('dist-img', function(){
+    return gulp.src(['img/*.jpg', 'img/*.png'])
+      .pipe(tasks.newer('dist/img'))
+      .pipe(tasks.imagemin())
+      .pipe(gulp.dest('dist/img'));
+  });
   // dist-docs
   // dist (parent)
-  gulp.task('dist', ['clean', 'dist-css', 'dist-js']);
+  gulp.task('dist', ['clean', 'dist-css', 'dist-js', 'dist-img', 'dist-fonts']);
   // default
   gulp.task('default', ['clean', 'dist']);
