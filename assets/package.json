@@ -41,7 +41,7 @@
     "gulp-watch": "~0.5.0",
     "gulp-jscs": "*",
     "gulp-replace": "*",
-    "gulp-load-tasks": "*",
+    "gulp-load-plugins": "*",
     "gulp-template" : "*"
   }
 }
