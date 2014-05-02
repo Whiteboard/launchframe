@@ -12,8 +12,8 @@
   var gutil = require('gulp-util');
   // Note: gulp-load-tasks looks at package.json, and brings everything in like:
   // gulp-less => tasks.less
-  var gulpLoadTasks = require("gulp-load-tasks");
-  var tasks = gulpLoadTasks({scope: ["devDependencies"]});
+  var gulpLoadTasks = require("gulp-load-plugins");
+  var tasks = gulpLoadPlugins({scope: ["devDependencies"]});
 
   // Convenience function, since notification isn't really a task.
   var notify = tasks.notify;
