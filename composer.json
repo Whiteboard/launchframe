@@ -1,0 +1,24 @@
+{
+  "name": "Launchframe Four",
+  "type": "project",
+  "license": "MIT",
+  "description": "WordPress, Whiteboard Style",
+  "homepage": "http://whiteboard.is",
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "http://wpackagist.org"
+    }
+  ],
+  "require": {
+    "composer/installers": "v1.0.12",
+    "vlucas/phpdotenv": "1.0.9"
+  },
+  "extra": {
+    "installer-paths": {
+      "wp-content/mu-plugins/{$name}/": ["type:wordpress-muplugin"],
+      "wp-content/plugins/{$name}/": ["type:wordpress-plugin"],
+      "wp-content/themes/{$name}/": ["type:wordpress-theme"]
+    }
+  }
+}
