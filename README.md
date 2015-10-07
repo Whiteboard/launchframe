@@ -1,4 +1,4 @@
-#LAUNCH!
+![](wp-content/themes/launchframe/screenshot.png)
 
 It's time for Launchframe to take advantage of the tools available.
 
@@ -8,6 +8,7 @@ It's time for Launchframe to take advantage of the tools available.
 - NPM and Gulp
 - Timber and Twig
 - etc
+
 
 To get started, run `bundle`, then `./start`.
 
