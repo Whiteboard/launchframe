@@ -69,14 +69,28 @@ gulp.task('dist-img', function(){
 	  .pipe(gulp.dest('assets/dist/img'));
 });
 
+gulp.task('version-update', function(){
+  var date = new Date().toISOString();
+  del(['inc/version.php']);
+  return gulp.src(['inc/version.tmp.php'])
+    .pipe(replace('PACKAGEVERSION', "'"+date+"'"))
+    .pipe(tasks.rename({
+      basename: 'version',
+      extname: '.php'
+    }))
+    .pipe(gulp.dest('inc/'));
+});
+
 gulp.task('watch', function () {
 	livereload.listen();
 	watch('assets/src/**/*.js', function () {
 		gulp.start('dist-js');
-	    livereload.changed();
+    livereload.changed();
+    gulp.start('version-update');
 	});
 	watch('assets/src/**/*.scss', function () {
 		gulp.start('dist-sass');
+    gulp.start('version-update');
 		livereload.changed();
 	});
 });
