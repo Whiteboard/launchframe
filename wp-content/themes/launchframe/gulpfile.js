@@ -26,13 +26,16 @@ gulp.task('dist-sass', function () {
         'config': 'scss-lint.yml',
       }));
     gulp.src('./assets/src/scss/application.scss')
-	  .pipe(tasks.sourcemaps.init())
+		//.pipe(tasks.sourcemaps.init())
 	    .pipe(tasks.sass())
+      .on('error', function(message){
+        console.log(message);
+      })
 	    .pipe(tasks.autoprefixer('last 2 versions', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
 	    .pipe(gulp.dest('./assets/dist/css'))
       .pipe(tasks.rename({suffix: '.min'}))
       .pipe(tasks.cssmin())
-	  .pipe(tasks.sourcemaps.write())
+		//.pipe(tasks.sourcemaps.write())
 	  .pipe(gulp.dest('./assets/dist/css'));
 });
 
