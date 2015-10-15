@@ -23,6 +23,12 @@ class Installer
       system("wp plugin install advanced-custom-fields")
       system("wp plugin activate advanced-custom-fields")
     end
+    if ENV["WP_INSTALL_AUTOPTIMIZER"]
+      system("wp plugin install autoptimizer")
+      system("wp plugin activate autoptimizer")
+    end
+    system("bundle install")
+    system("cd wp-content/themes/launchframe && npm install && bower install")
     puts "The install has completed. Make sure you read the logs for any extra relevant info."
   end
 end

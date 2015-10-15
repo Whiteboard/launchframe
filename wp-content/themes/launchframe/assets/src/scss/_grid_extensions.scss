@@ -1,0 +1,38 @@
+.no-gutter {
+  padding-left: 0;
+  padding-right: 0;
+}
+@each $breakpoint, $breakpoint-def in $grid-breakpoints {
+  @media only screen and (min-width: #{map-get($grid-breakpoints, $breakpoint)}) {
+    .vm-#{$breakpoint}-top-0 { margin-top: 0; }
+    .vm-#{$breakpoint}-bottom-0 { margin-bottom: 0; }
+    .vp-#{$breakpoint}-top-0 { padding-top: 0; }
+    .vp-#{$breakpoint}-bottom-0 { padding-bottom: 0; }
+    .no-gutter-#{$breakpoint}-left {
+      padding-left: 0;
+    }
+    .no-gutter-#{$breakpoint}-right {
+      padding-right: 0;
+    }
+    .no-gutter-#{$breakpoint} {
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    // Grid scaffold
+    @for $i from 1 through $grid-columns {
+      .vp-#{$breakpoint}-top-#{$i} {
+        padding-top: $spacer * $i;
+      }
+      .vp-#{$breakpoint}-bottom-#{$i} {
+        padding-bottom: $spacer * $i;
+      }
+      .vm-#{$breakpoint}-top-#{$i} {
+        margin-top: $spacer * $i;
+      }
+      .vm-#{$breakpoint}-bottom-#{$i} {
+        margin-bottom: $spacer * $i;
+      }
+    }
+  }
+}

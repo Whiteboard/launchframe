@@ -9,7 +9,7 @@ if ( ! class_exists( 'Timber' ) ) {
 
 Timber::$dirname = array('templates', 'views');
 
-class StarterSite extends TimberSite {
+class LaunchframeSite extends TimberSite {
 
 	function __construct() {
 		add_theme_support( 'post-formats' );
@@ -24,6 +24,7 @@ class StarterSite extends TimberSite {
 
 	function register_post_types() {
 		//this is where you can register custom post types
+
 	}
 
 	function register_taxonomies() {
@@ -31,9 +32,6 @@ class StarterSite extends TimberSite {
 	}
 
 	function add_to_context( $context ) {
-		$context['foo'] = 'bar';
-		$context['stuff'] = 'I am a value set in your functions.php file';
-		$context['notes'] = 'These values are available everytime you call Timber::get_context();';
 		$context['menu'] = new TimberMenu();
 		$context['site'] = $this;
 		return $context;
@@ -48,9 +46,5 @@ class StarterSite extends TimberSite {
 
 }
 
-new StarterSite();
+new LaunchframeSite();
 
-function myfoo( $text ) {
-	$text .= ' bar!';
-	return $text;
-}
