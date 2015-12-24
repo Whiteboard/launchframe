@@ -3,32 +3,8 @@ require 'dotenv'
 class Installer
   def run
     Dotenv.load
-    if ENV["WP_USER"].nil? or !File.exists? ".env"
-      puts "Make sure you've set up your .env first."
-      return true
-    end
-    system('wp core download')
-    system("wp core config --dbuser=#{ENV["WP_USER"]} --dbpass=#{ENV["WP_PASS"]} --dbname=#{ENV["WP_DBNAME"]}")
-    system("wp db create")
-    system("wp core install --url=#{ENV["WP_URL"]} --title=#{ENV["WP_TITLE"]} --admin_user=#{ENV["WP_ADMIN_USER"]} --admin_password=#{ENV["WP_ADMIN_PASS"]} --admin_email=#{ENV["WP_ADMIN_EMAIL"]}")
-    system("wp theme activate launchframe")
-    open('wp-config.php', 'a') do |f|
-      f << "/** Composer Autoloader */\n";
-      f << "require_once(ABSPATH.'vendor/autoload.php');"
-    end
-    system("composer install")
-    system("composer create-project --no-dev jarednova/timber wp-content/plugins/timber")
-    system("wp plugin activate timber")
-    if ENV["WP_INSTALL_ACF"]
-      system("wp plugin install advanced-custom-fields")
-      system("wp plugin activate advanced-custom-fields")
-    end
-    if ENV["WP_INSTALL_AUTOPTIMIZER"]
-      system("wp plugin install autoptimizer")
-      system("wp plugin activate autoptimizer")
-    end
     system("bundle install")
-    system("cd wp-content/themes/launchframe && npm install && bower install")
+    system("npm install && bower install")
     puts "The install has completed. Make sure you read the logs for any extra relevant info."
   end
 end
