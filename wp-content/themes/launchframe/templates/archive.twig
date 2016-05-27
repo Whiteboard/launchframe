@@ -1,0 +1,18 @@
+{% extends "base.twig" %}
+{% block content %}
+	<div class="content-wrapper">
+		{% if posts %}
+			{% for post in posts %}
+				<article class="post-type-{{post.post_type}}" id="post-{{post.ID}}">
+					<section class="article-content">
+						<h3 class="article-h3">{{post.title}}</h3>
+						<div class="article-body">
+							{{post.post_excerpt}}
+						</div>
+						<a href="{{post.link}}" class="article-link">Read Post</a>
+					</section>
+				</article>
+			{% endfor %}
+		{% endif %}
+	</div><!-- .content-wrapper -->
+{% endblock %}
