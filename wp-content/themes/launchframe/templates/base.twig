@@ -7,7 +7,7 @@
 {% endblock %}
 
 	<body class="{{body_class}}" data-template="base.twig">
-		<header class="site-header" >
+		<header class="site-header">
 			{% block header %}
 			{% endblock %}
       {% include 'nav.twig' %}
@@ -28,7 +28,7 @@
 		</main>
 
 		{% block footer %}
-			<footer id="footer">
+			<footer class="site-footer">
 				{% include 'footer.twig' %}
 			</footer>
 			{{ function('wp_footer') }}
