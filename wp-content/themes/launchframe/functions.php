@@ -40,9 +40,9 @@ class LaunchframeSite extends TimberSite {
   function register_stylesheets() {
     global $package_version;
     //wp_enqueue_style( 'application', get_template_directory_uri() . '/assets/dist/css/application.css', false, $package_version );
-    if (!is_home() && !is_front_page()){
-      wp_enqueue_style( 'application', get_template_directory_uri() . '/assets/dist/css/application.min.css', false, $package_version );
-    }
+    //if (!is_home() && !is_front_page()){
+      //wp_enqueue_style( 'application', get_template_directory_uri() . '/assets/dist/css/application.min.css', false, $package_version );
+    //}
   }
   function register_scripts() {
   	global $package_version;
@@ -67,9 +67,9 @@ class LaunchframeSite extends TimberSite {
 
 	function add_to_twig( $twig ) {
 		/* this is where you can add your own fuctions to twig */
-		$twig->addExtension( new Twig_Extension_StringLoader() );
-		$twig->addFilter( 'myfoo', new Twig_Filter_Function( 'myfoo' ) );
-		return $twig;
+		//$twig->addExtension( new Twig_Extension_StringLoader() );
+		//$twig->addFilter( 'myfoo', new Twig_Filter_Function( 'myfoo' ) );
+		//return $twig;
 	}
 
 }
