@@ -17,11 +17,18 @@ var gulp = require('gulp'),
   eslint = require('gulp-eslint'),
   replace = require('gulp-replace'),
   request = require('request'),
+  fs = require('fs'),
   del = require('del'),
-  cmq = require('gulp-combine-media-queries'),
+  //cmq = require('gulp-combine-media-queries'),
+  path = require('path'),
   notify = tasks.notify;
 
-function getDevUrl(){}
+function getDevUrl(){
+  return `http://${path.resolve('../../..').split("/").reverse()[0]}.dev`;
+}
+gulp.task('site-name', function(){
+  console.log(getDevUrl());
+});
 
 gulp.task('dist-sass', function () {
     gulp.src('./assets/src/scss/*.scss')
@@ -35,24 +42,25 @@ gulp.task('dist-sass', function () {
         console.log(message);
       })
 	    .pipe(tasks.autoprefixer('last 2 versions', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
+      //.pipe(cmq({
+        //log: true
+      //}))
 	    .pipe(gulp.dest('./assets/dist/css'))
       .pipe(tasks.rename({suffix: '.min'}))
-      .pipe(cmq({
-        log: true
-      }))
       .pipe(tasks.cssmin())
 		//.pipe(tasks.sourcemaps.write())
-	  .pipe(gulp.dest('./assets/dist/css'));
+	  .pipe(gulp.dest('./assets/dist/css')).on('end', function(){
 
     var tmpDir = require('os').tmpdir();
     var cssUrl = './assets/dist/css/application.min.css';
-    var cssPath = path.join( tmpDir, 'style.css' );
-    request(cssUrl).pipe(fs.createWriteStream(cssPath)).on('close', function() {
-      criticalcss.getRules(cssPath, function(err, output) {
+    //var cssPath = path.join( tmpDir, 'style.css' );
+    //gulp.src(cssUrl).pipe(fs.createWriteStream(cssPath)).on('close', function() {
+      criticalcss.getRules(cssUrl, function(err, output) {
         if (err) {
+          console.log(err);
           throw new Error(err);
         } else {
-          criticalcss.findCritical(getDevUrl, { rules: JSON.parse(output) }, function(err, output) {
+          criticalcss.findCritical(getDevUrl(), { rules: JSON.parse(output) }, function(err, output) {
             if (err) {
               console.log(err);
               throw new Error(err);
@@ -63,6 +71,7 @@ gulp.task('dist-sass', function () {
           });
         }
       });
+    //});
     });
 });
 

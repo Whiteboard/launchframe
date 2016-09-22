@@ -2,3 +2,6 @@
 wp-config.php
 **/node_modules
 tags
+**/assets/vendor
+Gemfile.lock
+**/*/dist
