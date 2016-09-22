@@ -60,28 +60,29 @@ gulp.task('dist-sass', function () {
 		//.pipe(tasks.sourcemaps.write())
 	  .pipe(gulp.dest('./assets/dist/css')).on('end', function(){
 
+});
+
+
+gulp.task('build-critical', function(){
     var tmpDir = require('os').tmpdir();
     var cssUrl = './assets/dist/css/application.min.css';
-    //var cssPath = path.join( tmpDir, 'style.css' );
-    //gulp.src(cssUrl).pipe(fs.createWriteStream(cssPath)).on('close', function() {
-      criticalcss.getRules(cssUrl, function(err, output) {
-        if (err) {
-          console.log(err);
-          throw new Error(err);
-        } else {
-          criticalcss.findCritical(getDevUrl(), { rules: JSON.parse(output) }, function(err, output) {
-            if (err) {
-              console.log(err);
-              throw new Error(err);
-            } else {
-              console.log(output);
-              fs.writeFileSync( './assets/dist/css/critical.css', output );
-            }
-          });
-        }
-      });
-    //});
+    criticalcss.getRules(cssUrl, function(err, output) {
+      if (err) {
+        console.log(err);
+        throw new Error(err);
+      } else {
+        criticalcss.findCritical(getDevUrl(), { rules: JSON.parse(output) }, function(err, output) {
+          if (err) {
+            console.log(err);
+            throw new Error(err);
+          } else {
+            console.log(output);
+            fs.writeFileSync( './assets/dist/css/critical.css', output );
+          }
+        });
+      }
     });
+  });
 });
 
 gulp.task('dist-js', function () {
