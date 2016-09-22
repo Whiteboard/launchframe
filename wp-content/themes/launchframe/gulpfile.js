@@ -2,6 +2,17 @@
 ////
 //
 
+if (process.cwd() !== __dirname) {
+  console.log("\x1b[31m", "Please run all gulp tasks from the theme directory where the Gulpfile is located.");
+  process.exit(1);
+}
+
+
+process.on('uncaughtException', function(err) {
+	console.error(err);
+	process.exit(1);
+});
+
 
 var gulp = require('gulp'),
   sass = require('gulp-sass'),
@@ -19,7 +30,7 @@ var gulp = require('gulp'),
   request = require('request'),
   fs = require('fs'),
   del = require('del'),
-  //cmq = require('gulp-combine-media-queries'),
+  gcmq = require('gulp-group-css-media-queries'),
   path = require('path'),
   notify = tasks.notify;
 
@@ -42,9 +53,7 @@ gulp.task('dist-sass', function () {
         console.log(message);
       })
 	    .pipe(tasks.autoprefixer('last 2 versions', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
-      //.pipe(cmq({
-        //log: true
-      //}))
+      .pipe(gcmq())
 	    .pipe(gulp.dest('./assets/dist/css'))
       .pipe(tasks.rename({suffix: '.min'}))
       .pipe(tasks.cssmin())
