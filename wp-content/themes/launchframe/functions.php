@@ -38,12 +38,12 @@ class LaunchframeSite extends TimberSite {
   }
 
   function register_stylesheets() {
-    global $package_version;
-    wp_enqueue_style( 'application-style', get_template_directory_uri() . '/assets/dist/css/application.min.css', true, $package_version );
+      global $package_version;
+      wp_enqueue_style( 'application-style', get_template_directory_uri() . '/assets/dist/css/application.min.css', true, $package_version );
   }
   function register_scripts() {
-  	global $package_version;
-    wp_enqueue_style( 'application-js', get_template_directory_uri() . '/assets/dist/js/script.min.js', true, $package_version );
+      global $package_version;
+      wp_enqueue_script( 'application-js', get_template_directory_uri() . '/assets/dist/js/script.min.js', array(), $package_version, true );
   }
 
 	function register_post_types() {
