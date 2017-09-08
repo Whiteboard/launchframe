@@ -1,7 +1,7 @@
 $enable-flex:               true;
 $enable-grid-classes:       true;
+@import '~bootstrap/scss/functions';
 @import '~bootstrap/scss/_variables.scss';
 @import '~bootstrap/scss/_mixins.scss';
-@import '~bootstrap/scss/_normalize.scss';
-@import '~bootstrap/scss/_reboot.scss';
+@import '~bootstrap/scss/bootstrap-reboot.scss';
 @import '~bootstrap/scss/_grid.scss';

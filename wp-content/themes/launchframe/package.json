@@ -8,6 +8,7 @@
 	"scripts": {
 		"build": "npm run lint && webpack --config ./assets/webpack.config.js -p",
 		"dev": "npm run lint && webpack --config ./assets/webpack.dev.config.js --watch",
+		"watch": "npm run lint && webpack --config ./assets/webpack.dev.config.js --watch",
 		"lint": "./node_modules/.bin/eslint js"
 	},
 	"engines": {
@@ -32,6 +33,6 @@
 	},
 	"dependencies": {
 		"bootstrap": "^4.0.0-beta",
-		"clean-webpack-plugin": "^0.1.16",
+		"clean-webpack-plugin": "^0.1.16"
 	}
 }
