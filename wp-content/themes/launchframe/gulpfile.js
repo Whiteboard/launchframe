@@ -32,7 +32,9 @@ var gulp = require('gulp'),
   del = require('del'),
   gcmq = require('gulp-group-css-media-queries'),
   path = require('path'),
-  notify = tasks.notify;
+  notify = tasks.notify,
+  webpack = require('webpack-stream'),
+  webpackConfig = require('./assets/webpack.config.js');
 
 function getDevUrl(){
   return `http://${path.resolve('../../..').split("/").reverse()[0]}.dev`;
@@ -47,17 +49,14 @@ gulp.task('dist-sass', function () {
         'config': 'scss-lint.yml',
       }));
     gulp.src('./assets/src/scss/application.scss')
-		//.pipe(tasks.sourcemaps.init())
-	    .pipe(tasks.sass())
+	    .pipe(webpack(webpackConfig))
       .on('error', function(message){
         console.log(message);
       })
 	    .pipe(tasks.autoprefixer('last 2 versions', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
-      .pipe(gcmq())
 	    .pipe(gulp.dest('./assets/dist/css'))
       .pipe(tasks.rename({suffix: '.min'}))
       .pipe(tasks.cssmin())
-		//.pipe(tasks.sourcemaps.write())
 	  .pipe(gulp.dest('./assets/dist/css')).on('end', function(){
 
 });
@@ -89,8 +88,7 @@ gulp.task('dist-js', function () {
 	gulp.src('./assets/src/js/script.js')
     .pipe(sourcemaps.init())
     .pipe(tasks.concat('./assets/dist/js/script.js'))
-    .pipe(eslint())
-    .pipe(babel())
+    .pipe(webpack(webpackConfig))
     .pipe(gulp.dest('./'))
     .pipe(tasks.rename({suffix: '.min'}))
     .pipe(tasks.uglify())

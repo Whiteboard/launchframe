@@ -1,7 +1,0 @@
-{
-  "name" : "Launchframe",
-  "version" : "4.1.0",
-  "dependencies" : {
-    "bootstrap" : ">=4.0.0-alpha.4"
-  }
-}

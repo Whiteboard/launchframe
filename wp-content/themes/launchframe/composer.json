@@ -1,12 +1,12 @@
 {
-  "name": "upstatement/timber-starter-theme",
-  "description": "Starter theme to build a Timber theme",
+  "name": "Launchframe",
+  "description": "Whiteboard Starting Theme",
   "type":"wordpress-theme",
   "minimum-stability" : "stable",
   "authors": [
       {
-          "name": "jarednova",
-          "email": "jared@upstatement.com"
+          "name": "Jonathan Cutrell",
+          "email": "jonathan@whiteboard.is"
       }
   ],
   "extra": {
@@ -18,12 +18,12 @@
   	}
 	},
   "require": {
-	  "wpackagist-plugin/timber-library": "0.21.*"
+	  "wpackagist-plugin/timber-library": "1.3.4"
   },
   "repositories": [
     {
       "type": "composer",
-      "url": "http://wpackagist.org"
+      "url": "https://wpackagist.org"
     }
   ]
 }
