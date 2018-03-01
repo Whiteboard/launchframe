@@ -30,6 +30,6 @@
     "jsx": true
   },
   "rules" : {
-    "no-unused-vars":false
+    "no-unused-vars":0,
   }
 }

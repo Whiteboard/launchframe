@@ -1,6 +1,7 @@
 (function($) {
+    "use strict";
 
-    var w = {}
+    var w = {};
 
     w.width = $(window).width();
 
@@ -11,8 +12,8 @@
             },
             run: function() {
 
-            },
-        },
+            }
+        }
     };
 
     function runObject() {
