@@ -1,7 +1,7 @@
 # Launchframe
 ## Whiteboard's Wordpress Boilerplate.
 
-**Note:** This branch is currently stable.
+[![Build Status](https://travis-ci.org/Whiteboard/launchframe.svg?branch=master)](https://travis-ci.org/Whiteboard/launchframe)
 
 ### Setup
 ```
