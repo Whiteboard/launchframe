@@ -32,7 +32,6 @@ env:
 # Failures in this section will result in build status 'errored'.
 install:
     - yarn
-    - gulp watch
 
 # Run test script commands.
 # Default is specific to project language.
