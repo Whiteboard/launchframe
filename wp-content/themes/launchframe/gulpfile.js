@@ -9,8 +9,8 @@ if (process.cwd() !== __dirname) {
 
 
 process.on('uncaughtException', function(err) {
-	console.error(err);
-	process.exit(1);
+  console.error(err);
+  process.exit(1);
 });
 
 
@@ -32,9 +32,8 @@ var gulp = require('gulp'),
   del = require('del'),
   gcmq = require('gulp-group-css-media-queries'),
   path = require('path'),
-  notify = tasks.notify,
-  webpack = require('webpack-stream'),
-  webpackConfig = require('./assets/webpack.config.js');
+  livereload = require('gulp-livereload'),
+  notify = tasks.notify;
 
 function getDevUrl(){
   return `http://${path.resolve('../../..').split("/").reverse()[0]}.dev`;
@@ -49,16 +48,19 @@ gulp.task('dist-sass', function () {
         'config': 'scss-lint.yml',
       }));
     gulp.src('./assets/src/scss/application.scss')
-	    .pipe(webpack(webpackConfig))
+    //.pipe(tasks.sourcemaps.init())
+      .pipe(tasks.sass())
       .on('error', function(message){
         console.log(message);
       })
-	    .pipe(tasks.autoprefixer('last 2 versions', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
-	    .pipe(gulp.dest('./assets/dist/css'))
+      .pipe(tasks.autoprefixer('last 2 versions', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
+      .pipe(gcmq())
+      .pipe(gulp.dest('./assets/dist/css'))
       .pipe(tasks.rename({suffix: '.min'}))
       .pipe(tasks.cssmin())
-	  .pipe(gulp.dest('./assets/dist/css')).on('end', function(){
-
+    //.pipe(tasks.sourcemaps.write())
+    .pipe(gulp.dest('./assets/dist/css')).on('end', function(){
+      gulp.watch('assets/src/**/*.scss', gulp.parallel('dist-sass', 'version-update'));
 });
 
 
@@ -85,10 +87,11 @@ gulp.task('build-critical', function(){
 });
 
 gulp.task('dist-js', function () {
-	gulp.src('./assets/src/js/script.js')
+  gulp.src('./assets/src/js/script.js')
     .pipe(sourcemaps.init())
     .pipe(tasks.concat('./assets/dist/js/script.js'))
-    .pipe(webpack(webpackConfig))
+    .pipe(eslint())
+    .pipe(babel())
     .pipe(gulp.dest('./'))
     .pipe(tasks.rename({suffix: '.min'}))
     .pipe(tasks.uglify())
@@ -102,10 +105,10 @@ gulp.task('dist-js', function () {
 });
 
 gulp.task('dist-img', function(){
-	return gulp.src(['assets/src/img/*.jpg', 'assets/src/img/*.png', 'assets/src/img/*.svg'])
-	  .pipe(tasks.newer('assets/dist/img'))
-	  .pipe(tasks.imagemin())
-	  .pipe(gulp.dest('assets/dist/img'));
+  return gulp.src(['assets/src/img/*.jpg', 'assets/src/img/*.png', 'assets/src/img/*.svg'])
+    .pipe(tasks.newer('assets/dist/img'))
+    .pipe(tasks.imagemin())
+    .pipe(gulp.dest('assets/dist/img'));
 });
 
 gulp.task('version-update', function(){
@@ -121,6 +124,6 @@ gulp.task('version-update', function(){
 });
 
 gulp.task('watch', function () {
-	watch('assets/src/**/*.js', gulp.parallel('dist-js', 'version-update'));
-	gulp.watch('assets/src/**/*.scss', gulp.parallel('dist-sass', 'version-update'));
+  watch('assets/src/**/*.js', gulp.parallel('dist-js', 'version-update'));
+  gulp.watch('assets/src/**/*.scss', gulp.parallel('dist-sass', 'version-update'));
 });
