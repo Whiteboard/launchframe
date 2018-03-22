@@ -38,7 +38,7 @@ class LaunchframeSite extends TimberSite {
 	}
 	function register_scripts() {
 	  global $package_version;
-	  wp_enqueue_script( 'application-js', get_template_directory_uri() . '/assets/dist/js/script.min.js#async', array(), $package_version, true );
+	  wp_enqueue_script( 'application-js', get_template_directory_uri() . '/assets/dist/js/script.min.js#async', array('jquery'), $package_version, true );
 	}
 	function register_post_types() {
 		//this is where you can register custom post types
