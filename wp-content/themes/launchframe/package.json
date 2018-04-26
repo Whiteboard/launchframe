@@ -1,8 +1,8 @@
 {
 		"name": "launchframe",
-		"version": "4.0.0",
-		"description": "Launchframe 4",
-		"main": "src/js/app.js",
+		"version": "5.0.0",
+		"description": "Launchframe 5",
+		"main": "assets/src/js/app.js",
 		"scripts": {
 				"start": "webpack-dev-server --config conf/webpack.dev.js",
 				"build": "webpack --env=prod --progress --profile --colors",
