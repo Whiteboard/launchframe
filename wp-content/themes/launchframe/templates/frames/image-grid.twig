@@ -1,0 +1,20 @@
+<div class="vp-xs-bottom-4" style="background-color: #F0F0F0;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <div class="products-wrapper">
+                    {% for product in component.products %}
+                        <a class="product " href="{{ product.url }}">
+                            <div class="product__img" style="background-image: url('{{ product.image }}');"></div>
+                            <div class="product__title">{{ product.title }}</div>
+                            <h6 class="product__btn">Shop Now</h6>
+                        </a>
+                    {% endfor %}
+                </div>
+                {% if component.button_text %}
+                    <a href="{{ component.button_url }}" class="button button--primary">{{ component.button_text }}</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>

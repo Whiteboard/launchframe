@@ -1,0 +1,32 @@
+.content-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    margin-bottom: 2rem;
+}
+
+.content-block {
+    position: relative;
+    padding: 1rem 0;
+
+    &__title {
+        margin-bottom: .5rem;
+    }
+}
+
+.image-wrapper {
+    position: relative;
+    width: 100%;
+    height: auto;
+
+    &__source {
+        width: 100%;
+        height: 300px;
+        background-position: center;
+        background-size: cover;
+        @include media-breakpoint-up(md) {
+            width: 100%;
+            height: 400px;
+        }
+    }
+}

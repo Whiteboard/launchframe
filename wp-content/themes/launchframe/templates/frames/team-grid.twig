@@ -1,0 +1,32 @@
+<div class="the-team">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 offset-lg-2">
+				<h6 class="the-team__subheader">{{ component.subheader }}</h6>
+				<h4 class="the-team__header">{{ component.header }}</h4>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-8 offset-lg-2">
+				<div class="the-team__departments">
+					{% for department in component.departments %}
+						<div class="the-team__department-name">
+							<h5>{{ department.department_name }}</h5>
+						</div>
+						<div class="team-member__wrapper">
+							{% for member in department.members %}
+								<div class="team-member">
+									{% if department.include_images %}
+										<div class="team-member__image" style="background-image: url({{ member.image }});"></div>
+									{% endif %}
+									<div class="team-member__name">{{ member.name }}</div>
+									<div class="team-member__title">{{ member.title }}</div>
+								</div>
+							{% endfor %}
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

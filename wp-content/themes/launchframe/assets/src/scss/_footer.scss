@@ -1,0 +1,230 @@
+.footer-container {
+    padding: 36px 15px;
+    @include media-breakpoint-up(md) {
+        display: flex;
+        padding: 55px 0 0;
+        flex-direction: row;
+    }
+    &__left {
+        @include media-breakpoint-up(md) {
+            width: 60%;
+            padding-left: 100px;
+        }
+    }
+    &__right {
+        display: none;
+        @include media-breakpoint-up(md) {
+            display: block;
+            width: 40%;
+        }
+    }
+}
+
+.footer-menus {
+    display: flex;
+    font-family: $font-family-sans-serif;
+    font-size: .75rem;
+    letter-spacing: 1.5px;
+    border-bottom: 1px solid #F5F5F5;
+    flex-wrap: wrap;
+    flex-direction: row;
+
+    @include media-breakpoint-up(md) {
+        font-size: .875rem;
+    }
+
+    &__list {
+        padding: 0;
+        margin: 0 auto 12px;
+        flex: 1 200px;
+        li {
+            margin: 20px 0;
+            text-transform: uppercase;
+        }
+        a {
+            position: relative;
+            color: $black;
+            text-decoration: none;
+            transition: .3s;
+            &::after {
+                position: absolute;
+                right: 0;
+                bottom: -2px;
+                left: 0;
+                width: 0;
+                height: 1px;
+                margin: 0 auto;
+                background-color: #000;
+                content: "";
+                transition: .3s;
+            }
+            &:hover {
+                color: #000;
+                &::after {
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
+
+.footer-connect {
+    position: relative;
+    padding: 28px 0;
+}
+
+.footer-signup {
+    width: 100%;
+    @include media-breakpoint-up(lg) {
+        width: 62%;
+    }
+    &__header {
+        margin-bottom: 0;
+        line-height: 40px;
+        letter-spacing: 2px;
+    }
+    &__form {
+        position: relative;
+    }
+    &__input {
+        width: 100%;
+        height: 35px;
+        padding: 0;
+        font-size: .875rem;
+        line-height: 35px;
+        color: $black;
+        background-color: transparent;
+        border: 0;
+        border-bottom: 1px solid $black;
+        border-radius: 0;
+    }
+    &__button {
+        position: absolute;
+        top: 50%;
+        right: 0;
+        padding: 3px 10px; 
+        font-size: 12px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        cursor: pointer;
+        background: #F6F6F6;
+        background-color: #F6F6F6;
+        border: 0;
+        -webkit-border-radius: 0;
+        -moz-border-radius: 0;
+        border-radius: 0;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        transform: translateY(-50%);
+    }
+}
+
+.social-list {
+    padding: 0;
+    margin: 30px 0 0;
+    text-align: center;
+
+    @include media-breakpoint-up(lg) {
+        position: absolute;
+        top: 50%;
+        right: 0;
+        width: 38%;
+        margin: 0 auto;
+        text-align: center;
+        transform: translateY(-50%);
+    }
+    li {
+        display: inline;
+        margin: 0 11px;
+        font-size: 1.5rem;
+    }
+    a {
+        color: $black;
+    }
+}
+
+.instagram-widget {
+    width: 229px;
+    margin: 0 auto;
+    &__image {
+        width: 100%;
+        height: 229px;
+        margin-bottom: 14px;
+        background-color: #F5F5F5;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    &__caption {
+        margin-bottom: 0;
+        font-family: $font-family-sans-serif;
+        font-size: 9px;
+        font-weight: 300;
+        letter-spacing: 2px;
+        color: #979797;
+        text-transform: uppercase;
+    }
+    a {
+        color: #979797;
+        transition: .2s;
+        &:hover {
+            color: $dark-gray;
+        }
+    }
+}
+
+.site-footer {
+    position: relative;
+    z-index: 1;
+}
+
+.site-base {
+    padding: 24px 0 84px;
+    border-top: 1px solid #F5F5F5;
+    @include media-breakpoint-up(md) {
+        padding: 24px 0;
+    }
+    &__mark {
+        width: 23px;
+        height: 23px;
+        margin: 0 auto 16px;
+        opacity: .3;
+        svg {
+            width: 100%;
+            height: 100%;
+        }
+    }
+    &__list {
+        padding: 0;
+        margin: 0 auto 12px;
+        font-family: $font-family-sans-serif;
+        font-size: 14px;
+        letter-spacing: 1.1px;
+        text-align: center;
+        @include media-breakpoint-up(lg) {
+            font-size: 16px;
+        }
+        li {
+            display: block;
+            margin: 12px 30px;
+            text-transform: uppercase;
+            @include media-breakpoint-up(md) {
+                display: inline;
+                margin: 0 30px;
+            }
+        }
+        a {
+            color: #CECECE;
+            text-decoration: none;
+            transition: .2s;
+            &:hover {
+                color: $black;
+            }
+        }
+        &--active-item {
+            a {
+                color: $black;
+            }
+        }
+    }
+}

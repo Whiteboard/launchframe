@@ -1,3 +1,123 @@
-.clearfix, .cf, .clear {
-  overflow: auto;
+html {
+    height: 100%;
+    overflow-y: scroll;
+    box-sizing: border-box;
+    -webkit-overflow-scrolling: touch;
+}
+
+body {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    background-color: $white;
+}
+
+*,
+*::after,
+*::before {
+    box-sizing: inherit;
+}
+
+.cf,
+.clear,
+.clearfix {
+    overflow: auto;
+}
+
+%abs-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+%nav-item {
+    font-family: 'Lato', sans-serif;
+    font-size: 14px;
+    letter-spacing: 2px;
+    color: $dark-gray;
+    text-transform: uppercase;
+    transition: .3s;
+
+    &:hover {
+        color: $dark-white;
+        transition: .3s;
+    }
+}
+
+%flex-center {
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+
+%menu-item {
+    font-family: 'Lato', sans-serif;
+    font-size: 14px;
+    line-height: 2;
+    letter-spacing: 2px;
+    color: $dark-gray;
+    text-transform: uppercase;
+    transition: .3s;
+
+    &:hover {
+        color: $dark-white;
+        transition: .3s;
+    }
+}
+
+%abs-full {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+%image-full {
+    background-color: #000;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+%flex-column,
+.flex-column {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -moz-flex;
+    display: -webkit-flex;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+%flex-row,
+.flex-row {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -moz-flex;
+    display: -webkit-flex;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.pos-center {
+    &--vert {
+        display: flex;
+        align-items: center;
+    }
+}
+
+.pagination {
+    padding: 4rem 0;
+
+    &__prev {
+        margin-right: 25px;
+    }
 }
