@@ -1,28 +1,4 @@
-html {
-    height: 100%;
-    overflow-y: scroll;
-    box-sizing: border-box;
-    -webkit-overflow-scrolling: touch;
-}
-
-body {
-    height: 100%;
-    padding: 0;
-    margin: 0;
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-font-smoothing: antialiased;
-    background-color: $white;
-}
-
-*,
-*::after,
-*::before {
-    box-sizing: inherit;
-}
-
-.cf,
-.clear,
-.clearfix {
+.cf, %cf {
     overflow: auto;
 }
 
