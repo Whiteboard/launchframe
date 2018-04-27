@@ -1,0 +1,14 @@
+if [ -f $(pwd)/templates/frames/$1.twig ]; then
+		echo "You've already created a frame called $1 - quitting now to avoid overwriting."
+else
+  mkdir -p $(pwd)/assets/src/js/frames/ $(pwd)/assets/src/scss/frames/ $(pwd)/templates/frames/
+
+  sed s/__FRAME__/$1/ < .lf/assets/src/js/frame.js > $(pwd)/assets/src/js/frames/$1.js
+  sed s/__FRAME__/$1/ < .lf/assets/src/scss/frame.scss > $(pwd)/assets/src/scss/frames/$1.scss
+  sed s/__FRAME__/$1/ < .lf/templates/frames/frame.twig > $(pwd)/templates/frames/$1.twig
+
+  touch $(pwd)/assets/src/scss/frames/frames.scss
+  touch $(pwd)/assets/src/js/frames/index.js
+  echo "import \"$1.scss\";" >> $(pwd)/assets/src/scss/frames/frames.scss
+  echo "export {default as $1} from \"./$1\"" >> $(pwd)/assets/src/js/frames/index.js
+fi
