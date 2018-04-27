@@ -94,9 +94,6 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(['assets/dist'], {root: process.cwd()}),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: "vendor"
-    }),
     extractSass
   ]
 };
