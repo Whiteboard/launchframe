@@ -3,12 +3,13 @@ if [ -f $(pwd)/templates/frames/$1.twig ]; then
 else
   mkdir -p $(pwd)/assets/src/js/frames/ $(pwd)/assets/src/scss/frames/ $(pwd)/templates/frames/
 
-  sed s/__FRAME__/$1/ < .lf/assets/src/js/frame.js > $(pwd)/assets/src/js/frames/$1.js
-  sed s/__FRAME__/$1/ < .lf/assets/src/scss/frame.scss > $(pwd)/assets/src/scss/frames/$1.scss
-  sed s/__FRAME__/$1/ < .lf/templates/frames/frame.twig > $(pwd)/templates/frames/$1.twig
+  sed s/__FRAME__/$1/g < .lf/assets/src/js/frame.js > $(pwd)/assets/src/js/frames/$1.js
+  sed s/__FRAME__/$1/g < .lf/assets/src/js/test.js > $(pwd)/assets/src/js/tests/$1.test.js
+  sed s/__FRAME__/$1/g < .lf/assets/src/scss/frame.scss > $(pwd)/assets/src/scss/frames/$1.scss
+  sed s/__FRAME__/$1/g < .lf/templates/frames/frame.twig > $(pwd)/templates/frames/$1.twig
 
   touch $(pwd)/assets/src/scss/frames/frames.scss
   touch $(pwd)/assets/src/js/frames/index.js
-  echo "import \"$1.scss\";" >> $(pwd)/assets/src/scss/frames/frames.scss
+  echo "@import \"$1\";" >> $(pwd)/assets/src/scss/frames/frames.scss
   echo "export {default as $1} from \"./$1\"" >> $(pwd)/assets/src/js/frames/index.js
 fi

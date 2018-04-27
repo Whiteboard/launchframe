@@ -78,6 +78,7 @@ wp-content/index.php
 wp-content/themes/twenty*
 wp-content/themes/index.php
 wp-content/themes/launchframe/assets/dist
+wp-content/themes/launchframe/coverage
 !wp-content/themes/launchframe/index.php
 
 # large/disallowed file types
