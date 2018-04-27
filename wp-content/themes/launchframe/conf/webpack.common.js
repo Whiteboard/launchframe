@@ -4,7 +4,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 const extractSass = new ExtractTextPlugin({
-    filename: "[name].css"
+    filename: "css/[name].css"
 });
 
 module.exports = {
@@ -14,12 +14,12 @@ module.exports = {
   devtool: 'source-map', // enhance debugging by adding meta info for the browser devtools
 
   entry: {
-    app: 'js/app.js'
+    app: ['js/app.js', 'scss/application.scss']
   },
 
   output: {
     path: path.join(process.cwd(), 'assets/dist'),
-    filename: '[name].js',
+    filename: 'js/[name].js',
     publicPath: '/',
     sourceMapFilename: '[name].map'
   },

@@ -9,19 +9,6 @@
     transform: translate(-50%, -50%);
 }
 
-%nav-item {
-    font-family: 'Lato', sans-serif;
-    font-size: 14px;
-    letter-spacing: 2px;
-    color: $dark-gray;
-    text-transform: uppercase;
-    transition: .3s;
-
-    &:hover {
-        color: $dark-white;
-        transition: .3s;
-    }
-}
 
 %flex-center {
     display: flex;
@@ -29,20 +16,6 @@
     align-items: center;
 }
 
-%menu-item {
-    font-family: 'Lato', sans-serif;
-    font-size: 14px;
-    line-height: 2;
-    letter-spacing: 2px;
-    color: $dark-gray;
-    text-transform: uppercase;
-    transition: .3s;
-
-    &:hover {
-        color: $dark-white;
-        transition: .3s;
-    }
-}
 
 %abs-full {
     position: absolute;

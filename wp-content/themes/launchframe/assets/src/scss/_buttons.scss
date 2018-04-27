@@ -15,8 +15,6 @@
         font-size: .75rem;
         font-weight: 700;
         letter-spacing: 2px;
-        color: $white;
-        background-color: $black;
     }
 
     &--secondary {
@@ -24,13 +22,7 @@
         font-size: 12px;
         line-height: 2;
         letter-spacing: 2px;
-        color: $black;
         text-transform: uppercase;
         background-color: transparent;
-        border-bottom: 2px solid $black;
-
-        &:hover {
-            color: lighten($black, 25%);
-        }
     }
 }
