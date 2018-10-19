@@ -1,0 +1,9 @@
+<div class="image-grid">
+  <div class="image-grid__wrapper">
+    {% for image in frame.image_grid %}
+    <a class="image-grid__image-link" href="{{ image.href }}">
+      <div class="image-grid__image" style="background-image: url('{{ image.src }}');"></div>
+    </a>
+    {% endfor %}
+  </div>
+</div>

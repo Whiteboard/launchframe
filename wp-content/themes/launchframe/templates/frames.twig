@@ -1,0 +1,3 @@
+{% for frame in post.get_field('frames') %}
+    {% include "frames/" ~ frame.acf_fc_layout ~ ".twig" %}
+{% endfor %}

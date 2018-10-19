@@ -1,0 +1,28 @@
+%button,
+.button {
+    margin: 12px 0 0;
+    font-family: $font-family-sans-serif;
+    text-transform: uppercase;
+    border-radius: 0;
+    transition: .3s;
+
+    &:hover {
+        opacity: .6;
+    }
+
+    &--primary {
+        padding: 10px 16px;
+        font-size: .75rem;
+        font-weight: 700;
+        letter-spacing: 2px;
+    }
+
+    &--secondary {
+        padding: 4px 0;
+        font-size: 12px;
+        line-height: 2;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        background-color: transparent;
+    }
+}

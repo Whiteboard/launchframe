@@ -1,0 +1,14 @@
+@mixin pseudo($location: after, $fill: true) {
+    &:#{$location} {
+        display: block;
+        content: "";
+        @if $fill {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+        }
+        @content;
+    }
+}
