@@ -1,0 +1,1988 @@
+# Copyright (C) 2019 Berend de Jong
+# This file is distributed under the same license as the Clientside package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Clientside 1.14.5\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-05-04 20:13:31+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2019-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: en\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Country: United States\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: "
+"__;_e;_x:1,2c;_ex:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;_nx_noop:1,2,3c;esc_"
+"attr__;esc_html__;esc_attr_e;esc_html_e;esc_attr_x:1,2c;esc_html_x:1,2c;\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-Bookmarks: \n"
+"X-Textdomain-Support: yes\n"
+"X-Generator: grunt-wp-i18n 1.0.3\n"
+
+#: class-clientside-admin-column-manager.php:28
+msgid "Posts"
+msgstr ""
+
+#: class-clientside-admin-column-manager.php:29
+msgid "Pages"
+msgstr ""
+
+#: class-clientside-admin-column-manager.php:30
+msgid "Media"
+msgstr ""
+
+#: class-clientside-admin-column-manager.php:31
+msgid "Users"
+msgstr ""
+
+#: class-clientside-admin-column-manager.php:32
+msgid "WooCommerce products"
+msgstr ""
+
+#: class-clientside-admin-column-manager.php:33
+msgid "WooCommerce orders"
+msgstr ""
+
+#: class-clientside-admin-column-manager.php:34
+msgid "WooCommerce coupons"
+msgstr ""
+
+#: class-clientside-admin-column-manager.php:51
+#: class-clientside-admin-column-manager.php:67
+#: class-clientside-admin-column-manager.php:83
+#: class-clientside-admin-column-manager.php:99
+#: class-clientside-admin-column-manager.php:115
+#: class-clientside-admin-column-manager.php:133
+#: class-clientside-admin-column-manager.php:153
+#: class-clientside-admin-column-manager.php:173
+#: class-clientside-admin-column-manager.php:195
+#: class-clientside-admin-column-manager.php:213
+#: class-clientside-admin-column-manager.php:231
+#: class-clientside-admin-column-manager.php:249
+#: class-clientside-admin-column-manager.php:267
+#: class-clientside-admin-column-manager.php:288
+#: class-clientside-admin-column-manager.php:310
+#: class-clientside-admin-column-manager.php:333
+#: class-clientside-admin-column-manager.php:355
+#: class-clientside-admin-column-manager.php:377
+#: class-clientside-admin-column-manager.php:406
+#: class-clientside-admin-column-manager.php:416
+#: class-clientside-admin-column-manager.php:426
+#: class-clientside-admin-column-manager.php:436
+#: class-clientside-admin-column-manager.php:446
+#: class-clientside-admin-column-manager.php:456
+#: class-clientside-admin-column-manager.php:466
+#: class-clientside-admin-column-manager.php:476
+#: class-clientside-admin-column-manager.php:486
+#: class-clientside-admin-column-manager.php:496
+#: class-clientside-admin-column-manager.php:508
+#: class-clientside-admin-column-manager.php:518
+#: class-clientside-admin-column-manager.php:528
+#: class-clientside-admin-column-manager.php:538
+#: class-clientside-admin-column-manager.php:548
+#: class-clientside-admin-column-manager.php:558
+#: class-clientside-admin-column-manager.php:568
+#: class-clientside-admin-column-manager.php:578
+#: class-clientside-admin-column-manager.php:588
+#: class-clientside-admin-column-manager.php:598
+#: class-clientside-admin-column-manager.php:610
+#: class-clientside-admin-column-manager.php:620
+#: class-clientside-admin-column-manager.php:630
+#: class-clientside-admin-column-manager.php:640
+#: class-clientside-admin-column-manager.php:650
+#: class-clientside-admin-column-manager.php:660
+#: class-clientside-admin-column-manager.php:670
+#: class-clientside-admin-column-manager.php:687
+#: class-clientside-admin-column-manager.php:697
+#: class-clientside-admin-column-manager.php:707
+#: class-clientside-admin-column-manager.php:717
+#: class-clientside-admin-column-manager.php:727
+#: class-clientside-admin-column-manager.php:737
+#: class-clientside-admin-column-manager.php:747
+#: class-clientside-admin-column-manager.php:759
+#: class-clientside-admin-column-manager.php:769
+#: class-clientside-admin-column-manager.php:779
+#: class-clientside-admin-column-manager.php:789
+#: class-clientside-admin-column-manager.php:799
+#: class-clientside-admin-column-manager.php:809
+#: class-clientside-admin-column-manager.php:819
+#: class-clientside-admin-widget-manager.php:79
+#: class-clientside-admin-widget-manager.php:102
+#: class-clientside-admin-widget-manager.php:114
+#: class-clientside-admin-widget-manager.php:126
+#: class-clientside-admin-widget-manager.php:138
+#: class-clientside-admin-widget-manager.php:150
+#: class-clientside-admin-widget-manager.php:168
+#: class-clientside-admin-widget-manager.php:186
+#: class-clientside-admin-widget-manager.php:213
+#: class-clientside-admin-widget-manager.php:231
+#: class-clientside-admin-widget-manager.php:249
+#: class-clientside-admin-widget-manager.php:268
+#: class-clientside-admin-widget-manager.php:286
+#: class-clientside-admin-widget-manager.php:304
+#: class-clientside-admin-widget-manager.php:322
+#: class-clientside-admin-widget-manager.php:340
+#: class-clientside-admin-widget-manager.php:362
+#: class-clientside-admin-widget-manager.php:380
+#: class-clientside-admin-widget-manager.php:402
+#: class-clientside-admin-widget-manager.php:420
+#: class-clientside-admin-widget-manager.php:438
+#: class-clientside-admin-widget-manager.php:456
+#: class-clientside-admin-widget-manager.php:474
+#: class-clientside-admin-widget-manager.php:494
+#: class-clientside-admin-widget-manager.php:520
+#: class-clientside-admin-widget-manager.php:546
+#: class-clientside-options.php:306 class-clientside-options.php:319
+#: class-clientside-options.php:356 class-clientside-options.php:809
+msgid "Enable for %s"
+msgstr ""
+
+#: class-clientside-admin-column-manager.php:286
+msgid "The user's username and avatar"
+msgstr ""
+
+#: class-clientside-admin-column-manager.php:287
+msgid "Username"
+msgstr ""
+
+#: class-clientside-admin-column-manager.php:311
+msgid "The user's full name"
+msgstr ""
+
+#: class-clientside-admin-column-manager.php:378
+msgid "The user's post count"
+msgstr ""
+
+#: class-clientside-admin-column-manager.php:405
+msgid "Product image"
+msgstr ""
+
+#: class-clientside-admin-column-manager.php:415
+msgid "Product title"
+msgstr ""
+
+#: class-clientside-admin-column-manager.php:425
+msgid "SKU"
+msgstr ""
+
+#: class-clientside-admin-column-manager.php:435
+msgid "Stock"
+msgstr ""
+
+#: class-clientside-admin-column-manager.php:445
+msgid "Price"
+msgstr ""
+
+#: class-clientside-admin-column-manager.php:455
+msgid "Categories"
+msgstr ""
+
+#: class-clientside-admin-column-manager.php:465
+msgid "Tags"
+msgstr ""
+
+#: class-clientside-admin-column-manager.php:475
+msgid "Featured product"
+msgstr ""
+
+#: class-clientside-admin-column-manager.php:485
+msgid "Product type"
+msgstr ""
+
+#: class-clientside-admin-column-manager.php:495
+msgid "Date"
+msgstr ""
+
+#: class-clientside-admin-column-manager.php:507
+msgid "Order status"
+msgstr ""
+
+#: class-clientside-admin-column-manager.php:517
+msgid "Order"
+msgstr ""
+
+#: class-clientside-admin-column-manager.php:527
+msgid "Order items"
+msgstr ""
+
+#: class-clientside-admin-column-manager.php:537
+msgid "Billing address"
+msgstr ""
+
+#: class-clientside-admin-column-manager.php:547
+msgid "Shipping address"
+msgstr ""
+
+#: class-clientside-admin-column-manager.php:557
+msgid "Customer message"
+msgstr ""
+
+#: class-clientside-admin-column-manager.php:567
+msgid "Order notes"
+msgstr ""
+
+#: class-clientside-admin-column-manager.php:577
+msgid "Order date"
+msgstr ""
+
+#: class-clientside-admin-column-manager.php:587
+msgid "Order total"
+msgstr ""
+
+#: class-clientside-admin-column-manager.php:597
+msgid "Order actions"
+msgstr ""
+
+#: class-clientside-admin-column-manager.php:609
+msgid "Coupon code"
+msgstr ""
+
+#: class-clientside-admin-column-manager.php:619
+msgid "Coupon type"
+msgstr ""
+
+#: class-clientside-admin-column-manager.php:629
+msgid "Coupon value"
+msgstr ""
+
+#: class-clientside-admin-column-manager.php:639
+msgid "Description"
+msgstr ""
+
+#: class-clientside-admin-column-manager.php:649
+msgid "Product IDs"
+msgstr ""
+
+#: class-clientside-admin-column-manager.php:659
+msgid "Usage / Limit"
+msgstr ""
+
+#: class-clientside-admin-column-manager.php:669
+msgid "Expiry date"
+msgstr ""
+
+#: class-clientside-admin-column-manager.php:686
+#: class-clientside-admin-column-manager.php:696
+#: class-clientside-admin-column-manager.php:706
+#: class-clientside-admin-column-manager.php:716
+#: class-clientside-admin-column-manager.php:726
+#: class-clientside-admin-column-manager.php:736
+#: class-clientside-admin-column-manager.php:746
+#: class-clientside-admin-column-manager.php:758
+#: class-clientside-admin-column-manager.php:768
+#: class-clientside-admin-column-manager.php:778
+#: class-clientside-admin-column-manager.php:788
+#: class-clientside-admin-column-manager.php:798
+#: class-clientside-admin-column-manager.php:808
+#: class-clientside-admin-column-manager.php:818
+msgid "Yoast SEO: %s"
+msgstr ""
+
+#: class-clientside-admin-column-manager.php:686
+#: class-clientside-admin-column-manager.php:746
+#: class-clientside-admin-column-manager.php:758
+#: class-clientside-admin-column-manager.php:818
+msgid "Internal links"
+msgstr ""
+
+#: class-clientside-admin-column-manager.php:696
+#: class-clientside-admin-column-manager.php:768
+msgid "SEO score"
+msgstr ""
+
+#: class-clientside-admin-column-manager.php:706
+#: class-clientside-admin-column-manager.php:778
+msgid "Readability score"
+msgstr ""
+
+#: class-clientside-admin-column-manager.php:716
+#: class-clientside-admin-column-manager.php:788
+msgid "SEO Title"
+msgstr ""
+
+#: class-clientside-admin-column-manager.php:726
+#: class-clientside-admin-column-manager.php:798
+msgid "Meta Desc."
+msgstr ""
+
+#: class-clientside-admin-column-manager.php:736
+#: class-clientside-admin-column-manager.php:808
+msgid "Focus KW"
+msgstr ""
+
+#: class-clientside-admin-menu-editor.php:67
+msgid "Profile"
+msgstr ""
+
+#: class-clientside-admin-menu-editor.php:205
+msgid "Edit"
+msgstr ""
+
+#: class-clientside-admin-menu-editor.php:206
+msgid "Close"
+msgstr ""
+
+#: class-clientside-admin-menu-editor.php:222
+msgid "Title"
+msgstr ""
+
+#: class-clientside-admin-menu-editor.php:228
+msgid "Role-based visibility"
+msgstr ""
+
+#: class-clientside-admin-widget-manager.php:27
+msgid "Dashboard widgets"
+msgstr ""
+
+#: class-clientside-admin-widget-manager.php:28
+msgid "Network dashboard widgets"
+msgstr ""
+
+#: class-clientside-admin-widget-manager.php:29
+msgid "Post/page edit screen widgets (metaboxes)"
+msgstr ""
+
+#: class-clientside-admin-widget-manager.php:50
+msgid "Right Now"
+msgstr ""
+
+#: class-clientside-admin-widget-manager.php:51
+#: class-clientside-admin-widget-manager.php:63
+#: class-clientside-admin-widget-manager.php:573
+#: class-clientside-options.php:332 class-clientside-options.php:344
+#: class-clientside-options.php:429 class-clientside-options.php:441
+#: class-clientside-options.php:454 class-clientside-options.php:466
+#: class-clientside-options.php:479 class-clientside-options.php:682
+#: class-clientside-options.php:822 class-clientside-options.php:834
+#: class-clientside-options.php:1068 class-clientside-options.php:1080
+#: class-clientside-options.php:1092 class-clientside-options.php:1104
+msgid "Enable"
+msgstr ""
+
+#: class-clientside-admin-widget-manager.php:519
+msgid "WooCommerce status"
+msgstr ""
+
+#: class-clientside-admin-widget-manager.php:545
+msgid "WooCommerce recent reviews"
+msgstr ""
+
+#: class-clientside-admin-widget-manager.php:572
+msgid "WooCommerce network orders"
+msgstr ""
+
+#: class-clientside-menu.php:47 class-clientside-menu.php:48
+msgid "Collapse menu"
+msgstr ""
+
+#: class-clientside-options.php:179 inc/page-tools.php:43 inc/page-tools.php:52
+msgid "Admin Menu Editor"
+msgstr ""
+
+#: class-clientside-options.php:189
+msgid "Front-end site"
+msgstr ""
+
+#: class-clientside-options.php:201
+msgid "Admin area and login screen"
+msgstr ""
+
+#: class-clientside-options.php:292
+msgid "Muted (default)"
+msgstr ""
+
+#: class-clientside-options.php:293
+msgid "Dark"
+msgstr ""
+
+#: class-clientside-options.php:369 class-clientside-options.php:381
+#: class-clientside-options.php:393 class-clientside-options.php:405
+#: class-clientside-options.php:417 class-clientside-options.php:785
+#: class-clientside-options.php:929 class-clientside-options.php:954
+msgid "Disable"
+msgstr ""
+
+#: class-clientside-options.php:491 class-clientside-options.php:512
+#: class-clientside-options.php:525 class-clientside-options.php:538
+#: class-clientside-options.php:563 class-clientside-options.php:584
+#: class-clientside-options.php:617 class-clientside-options.php:630
+#: class-clientside-options.php:643 class-clientside-options.php:656
+#: class-clientside-options.php:669 class-clientside-options.php:694
+#: class-clientside-options.php:707 class-clientside-options.php:720
+#: class-clientside-options.php:733 class-clientside-options.php:746
+#: class-clientside-options.php:759 class-clientside-options.php:772
+#: class-clientside-options.php:868
+msgid "Hide for %s"
+msgstr ""
+
+#: class-clientside-options.php:551 class-clientside-options.php:605
+#: class-clientside-options.php:894
+msgid "Hide"
+msgstr ""
+
+#: class-clientside-options.php:797
+msgid "Remove"
+msgstr ""
+
+#: class-clientside-options.php:881
+msgid "Always show for %s"
+msgstr ""
+
+#: class-clientside-options.php:906
+msgid "Collapse"
+msgstr ""
+
+#: class-clientside-options.php:941
+msgid "Disable for %s"
+msgstr ""
+
+#: class-clientside-options.php:966
+msgid "Make Clientside only manageable by Network/Super Admins"
+msgstr ""
+
+#: class-clientside-options.php:979
+msgid "Make site administrators unable to see and deactivate Clientside"
+msgstr ""
+
+#: class-clientside-options.php:992
+msgid ""
+"Hide the Appearance > Admin Theme > Import/Export Settings tab on network "
+"sites"
+msgstr ""
+
+#: class-clientside-options.php:1004
+msgid "Hide the Appearance > Admin Theme > Documentation tab on network sites"
+msgstr ""
+
+#: class-clientside-options.php:1016 class-clientside-options.php:1029
+#: class-clientside-options.php:1042 class-clientside-options.php:1055
+msgid "Disable everywhere"
+msgstr ""
+
+#: class-clientside-options.php:1149 class-clientside-options.php:1182
+msgid "Optional custom CSS"
+msgstr ""
+
+#: class-clientside-options.php:1160 class-clientside-options.php:1171
+#: class-clientside-options.php:1193 class-clientside-options.php:1204
+msgid "Optional custom JS"
+msgstr ""
+
+#: class-clientside-options.php:1650
+msgid "Import failed."
+msgstr ""
+
+#: class-clientside-options.php:1767 class-clientside-options.php:1769
+msgid "Choose specific roles"
+msgstr ""
+
+#: class-clientside-options.php:1767 class-clientside-options.php:1769
+msgid "Everyone"
+msgstr ""
+
+#: class-clientside-setup.php:197
+msgid "The changes you made will be lost if you navigate away from this page."
+msgstr ""
+
+#: class-clientside-setup.php:202
+msgid "Screen Options"
+msgstr ""
+
+#: class-clientside-setup.php:203
+msgid "Help"
+msgstr ""
+
+#: class-clientside-setup.php:204
+msgid "Loading..."
+msgstr ""
+
+#: class-clientside-setup.php:297
+msgid "Settings"
+msgstr ""
+
+#: class-clientside-updates.php:84
+msgid ""
+"An Unexpected HTTP Error occurred during the API request.</p> <p><a "
+"href=\"?\" onclick=\"document.location.reload(); return false;\">Try "
+"again</a>"
+msgstr ""
+
+#: class-clientside-updates.php:88
+msgid "An unknown error occurred"
+msgstr ""
+
+#: class-clientside.php:204
+msgid "View"
+msgstr ""
+
+#: class-clientside.php:222
+msgid "Update"
+msgstr ""
+
+#: inc/dashboard-widget-status.php:8 inc/dashboard-widget-status.php:17
+#: inc/dashboard-widget-status.php:26 inc/dashboard-widget-status.php:35
+msgid "Enabled"
+msgstr ""
+
+#: inc/dashboard-widget-status.php:8 inc/dashboard-widget-status.php:17
+#: inc/dashboard-widget-status.php:26 inc/dashboard-widget-status.php:35
+msgid "Disabled"
+msgstr ""
+
+#: inc/dashboard-widget-status.php:47
+msgid "Not found"
+msgstr ""
+
+#: inc/dashboard-widget-status.php:50 inc/dashboard-widget-status.php:79
+msgid "Yes"
+msgstr ""
+
+#: inc/dashboard-widget-status.php:50 inc/dashboard-widget-status.php:79
+msgid "No"
+msgstr ""
+
+#: inc/dashboard-widget-status.php:100
+msgid "Sites"
+msgstr ""
+
+#: inc/dashboard-widget-status.php:125
+msgid "Plugins"
+msgstr ""
+
+#: inc/dashboard-widget-status.php:141
+msgid "Themes"
+msgstr ""
+
+#: inc/dashboard-widget-status.php:153
+msgid "Comments"
+msgstr ""
+
+#: inc/dashboard-widget-status.php:171 inc/dashboard-widget-status.php:175
+#: inc/dashboard-widget-status.php:211 inc/dashboard-widget-status.php:224
+msgid "Change"
+msgstr ""
+
+#: inc/dashboard-widget-status.php:187
+msgid "Visit"
+msgstr ""
+
+#: inc/dashboard-widget-status.php:223
+msgid "None"
+msgstr ""
+
+#: inc/dashboard-widget-status.php:234
+msgid "Check for updates"
+msgstr ""
+
+#: inc/page-admin-column-manager.php:8 inc/page-admin-column-manager.php:65
+#: inc/page-admin-menu-editor.php:8 inc/page-admin-menu-editor.php:47
+#: inc/page-admin-widget-manager.php:8 inc/page-admin-widget-manager.php:65
+#: inc/page-custom-cssjs-tool.php:8 inc/page-custom-cssjs-tool.php:55
+#: inc/page-options-general.php:10 inc/page-options-general.php:85
+#: inc/page-options-network-site-defaults.php:11
+#: inc/page-options-network-site-defaults.php:64 inc/page-options-network.php:9
+#: inc/page-options-network.php:34
+msgid "Save Settings"
+msgstr ""
+
+#: inc/page-admin-column-manager.php:10 inc/page-admin-column-manager.php:67
+#: inc/page-admin-menu-editor.php:10 inc/page-admin-menu-editor.php:49
+#: inc/page-admin-widget-manager.php:10 inc/page-admin-widget-manager.php:67
+#: inc/page-custom-cssjs-tool.php:10 inc/page-custom-cssjs-tool.php:57
+#: inc/page-options-general.php:12
+#: inc/page-options-network-site-defaults.php:12
+#: inc/page-options-network.php:10
+msgid "Revert to Defaults"
+msgstr ""
+
+#: inc/page-admin-column-manager.php:16 inc/page-admin-widget-manager.php:16
+#: inc/page-custom-cssjs-tool.php:16 inc/page-options-general.php:18
+#: inc/page-options-network-site-defaults.php:27
+msgid "Index"
+msgstr ""
+
+#: inc/page-admin-column-manager.php:39 inc/page-admin-menu-editor.php:17
+#: inc/page-admin-widget-manager.php:39 inc/page-custom-cssjs-tool.php:29
+msgid ""
+"For instructions on using this tool, visit the Clientside Documentation "
+"pages:"
+msgstr ""
+
+#: inc/page-admin-column-manager.php:42 inc/page-admin-menu-editor.php:20
+#: inc/page-admin-widget-manager.php:42 inc/page-custom-cssjs-tool.php:32
+msgid "Documentation"
+msgstr ""
+
+#: inc/page-admin-column-manager.php:47 inc/page-admin-menu-editor.php:25
+#: inc/page-admin-widget-manager.php:47 inc/page-custom-cssjs-tool.php:37
+msgid "All Clientside Tools"
+msgstr ""
+
+#: inc/page-documentation.php:10
+msgid "Support"
+msgstr ""
+
+#: inc/page-importexport.php:13
+msgid ""
+"Use this page to import/export Clientside settings and configurations. "
+"Press Export to generate a text string which can then be imported later or "
+"in another installation (also useful for copying settings among a multisite "
+"installation)."
+msgstr ""
+
+#: inc/page-importexport.php:19
+msgid "Note that only Network Administrators have access to this tool."
+msgstr ""
+
+#: inc/page-importexport.php:21
+msgid ""
+"Note that both Network Administrators and Site Administrators have access "
+"to this tool."
+msgstr ""
+
+#: inc/page-importexport.php:25 inc/page-options-general.php:40
+#: inc/page-tools.php:20
+msgid "Visit the Network Options to change this behavior."
+msgstr ""
+
+#: inc/page-importexport.php:26 inc/page-options-general.php:41
+#: inc/page-tools.php:21
+msgid "Network Options"
+msgstr ""
+
+#: inc/page-importexport.php:30
+msgid "Note that only Administrators have access to this tool."
+msgstr ""
+
+#: inc/page-importexport.php:38
+msgid "Warning"
+msgstr ""
+
+#: inc/page-importexport.php:41
+msgid ""
+"Importing the Menu Editor Tool's configuration can cause unexpected results "
+"if the target site has different menu items."
+msgstr ""
+
+#: inc/page-importexport.php:42
+msgid "Importing settings will overwrite the current site's settings!"
+msgstr ""
+
+#: inc/page-importexport.php:51
+msgid "Import succeeded."
+msgstr ""
+
+#: inc/page-importexport.php:60
+msgid "Paste an export string here to import."
+msgstr ""
+
+#: inc/page-importexport.php:63
+msgid "Import"
+msgstr ""
+
+#: inc/page-importexport.php:72
+msgid "Please enable Javascript to make use of this functionality."
+msgstr ""
+
+#: inc/page-importexport.php:79
+msgid "Clientside Plugin Options"
+msgstr ""
+
+#: inc/page-importexport.php:85
+msgid "Menu Editor Tool Configuration"
+msgstr ""
+
+#: inc/page-importexport.php:92
+msgid "Admin Widget Manager Tool Configuration"
+msgstr ""
+
+#: inc/page-importexport.php:99
+msgid "Admin Column Manager Tool Configuration"
+msgstr ""
+
+#: inc/page-importexport.php:106
+msgid "Custom CSS/JS Tool Configuration"
+msgstr ""
+
+#: inc/page-importexport.php:117
+msgid "Press the Export button above."
+msgstr ""
+
+#: inc/page-importexport.php:119
+msgid ""
+"Save this text string as a backup or copy it over to another installation "
+"to import it."
+msgstr ""
+
+#: inc/page-options-general.php:34
+msgid "Note that only Network Administrators have access to these settings."
+msgstr ""
+
+#: inc/page-options-general.php:36
+msgid ""
+"Note that both Network Administrators and Site Administrators have access "
+"to these settings."
+msgstr ""
+
+#: inc/page-options-general.php:45
+msgid "Note that only Administrators have access to these settings."
+msgstr ""
+
+#: inc/page-options-general.php:54
+msgid ""
+"Note that these settings only apply to the current site &ndash; not all "
+"sites in the network."
+msgstr ""
+
+#: inc/page-options-general.php:65
+msgid "View all Tools"
+msgstr ""
+
+#: inc/page-options-network-site-defaults.php:19
+msgid ""
+"These settings will be used as defaults when creating a new site in this "
+"network."
+msgstr ""
+
+#: inc/page-tools.php:14
+msgid "Note that only Network Administrators have access to these Admin Tools."
+msgstr ""
+
+#: inc/page-tools.php:16
+msgid ""
+"Note that both Network Administrators and Site Administrators have access "
+"to these Admin Tools."
+msgstr ""
+
+#: inc/page-tools.php:25
+msgid "Note that only Administrators have access to these Admin Tools."
+msgstr ""
+
+#: inc/page-tools.php:48
+msgid ""
+"The menu editor allows you to reorder menu items, rename them and "
+"conditionally hide them for specific user roles. This avoids confusion and "
+"distraction for the affected user group."
+msgstr ""
+
+#: inc/page-tools.php:55 inc/page-tools.php:82 inc/page-tools.php:109
+#: inc/page-tools.php:136
+msgid "Disabled."
+msgstr ""
+
+#: inc/page-tools.php:70 inc/page-tools.php:79
+msgid "Admin Widget Manager"
+msgstr ""
+
+#: inc/page-tools.php:75
+msgid ""
+"The widget manager allows you to choose which admin widgets are visible to "
+"which user group. The widget manager lists widgets belonging to the "
+"Dashboard page and the Post Edit screen (all post types). Hiding a widget "
+"also makes it disappear from the page’s Screen Options."
+msgstr ""
+
+#: inc/page-tools.php:97 inc/page-tools.php:106
+msgid "Admin Column Manager"
+msgstr ""
+
+#: inc/page-tools.php:102
+msgid ""
+"The column manager allows you to choose which listing columns are visible "
+"to which user group. Hiding a column also makes it disappear from the "
+"page’s Screen Options."
+msgstr ""
+
+#: inc/page-tools.php:124 inc/page-tools.php:133
+msgid "Custom CSS/JS"
+msgstr ""
+
+#: inc/page-tools.php:129
+msgid "Add custom CSS and Javascript to your site or the admin area."
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Clientside"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "https://frique.me/clientside/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"Clientside is a meticulous combination of a redesigned admin theme and a "
+"set of settings and tools that help customize and unclutter the WordPress "
+"interface for yourself or your clients."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Berend de Jong"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://frique.me/"
+msgstr ""
+
+#: class-clientside-admin-column-manager.php:50
+#: class-clientside-admin-column-manager.php:132
+#: class-clientside-admin-column-manager.php:212
+msgctxt "Admin column title"
+msgid "Author"
+msgstr ""
+
+#: class-clientside-admin-column-manager.php:66
+msgctxt "Admin column title"
+msgid "Categories"
+msgstr ""
+
+#: class-clientside-admin-column-manager.php:82
+msgctxt "Admin column title"
+msgid "Tags"
+msgstr ""
+
+#: class-clientside-admin-column-manager.php:98
+#: class-clientside-admin-column-manager.php:152
+#: class-clientside-admin-column-manager.php:248
+msgctxt "Admin column title"
+msgid "Comments"
+msgstr ""
+
+#: class-clientside-admin-column-manager.php:114
+#: class-clientside-admin-column-manager.php:172
+#: class-clientside-admin-column-manager.php:266
+msgctxt "Admin column title"
+msgid "Date"
+msgstr ""
+
+#: class-clientside-admin-column-manager.php:194
+msgctxt "Admin column title"
+msgid "File icon / thumbnail preview"
+msgstr ""
+
+#: class-clientside-admin-column-manager.php:230
+msgctxt "Admin column title"
+msgid "Uploaded to"
+msgstr ""
+
+#: class-clientside-admin-column-manager.php:309
+msgctxt "Admin column title"
+msgid "Name"
+msgstr ""
+
+#: class-clientside-admin-column-manager.php:332
+msgctxt "Admin column title"
+msgid "E-mail"
+msgstr ""
+
+#: class-clientside-admin-column-manager.php:354
+msgctxt "Admin column title"
+msgid "Role"
+msgstr ""
+
+#: class-clientside-admin-column-manager.php:376
+msgctxt "Admin column title"
+msgid "Posts"
+msgstr ""
+
+#: class-clientside-admin-menu-editor.php:196
+msgctxt "Item name in the admin menu editor"
+msgid "(separator)"
+msgstr ""
+
+#: class-clientside-admin-widget-manager.php:62
+#: class-clientside-admin-widget-manager.php:185
+msgctxt "Admin widget title"
+msgid "Clientside Site and Server Status"
+msgstr ""
+
+#: class-clientside-admin-widget-manager.php:78
+msgctxt "Admin widget title"
+msgid "Welcome to WordPress"
+msgstr ""
+
+#: class-clientside-admin-widget-manager.php:101
+msgctxt "Admin widget title"
+msgid "\"Try Gutenberg\" Callout"
+msgstr ""
+
+#: class-clientside-admin-widget-manager.php:113
+msgctxt "Admin widget title"
+msgid "Browser Upgrade Warning"
+msgstr ""
+
+#: class-clientside-admin-widget-manager.php:125
+msgctxt "Admin widget title"
+msgid "WordPress Events and News"
+msgstr ""
+
+#: class-clientside-admin-widget-manager.php:137
+msgctxt "Admin widget title"
+msgid "Activity"
+msgstr ""
+
+#: class-clientside-admin-widget-manager.php:149
+msgctxt "Admin widget title"
+msgid "At a Glance"
+msgstr ""
+
+#: class-clientside-admin-widget-manager.php:167
+msgctxt "Admin widget title"
+msgid "Quick Draft"
+msgstr ""
+
+#: class-clientside-admin-widget-manager.php:212
+msgctxt "Admin widget title"
+msgid "\"Add New\" button"
+msgstr ""
+
+#: class-clientside-admin-widget-manager.php:230
+msgctxt "Admin widget title"
+msgid "Permalink control"
+msgstr ""
+
+#: class-clientside-admin-widget-manager.php:248
+msgctxt "Admin widget title"
+msgid "Media button"
+msgstr ""
+
+#: class-clientside-admin-widget-manager.php:267
+msgctxt "Admin widget title"
+msgid "Excerpt"
+msgstr ""
+
+#: class-clientside-admin-widget-manager.php:285
+msgctxt "Admin widget title"
+msgid "Send Trackbacks"
+msgstr ""
+
+#: class-clientside-admin-widget-manager.php:303
+msgctxt "Admin widget title"
+msgid "Custom Fields"
+msgstr ""
+
+#: class-clientside-admin-widget-manager.php:321
+msgctxt "Admin widget title"
+msgid "Discussion"
+msgstr ""
+
+#: class-clientside-admin-widget-manager.php:339
+msgctxt "Admin widget title"
+msgid "Comments"
+msgstr ""
+
+#: class-clientside-admin-widget-manager.php:361
+msgctxt "Admin widget title"
+msgid "Revisions"
+msgstr ""
+
+#: class-clientside-admin-widget-manager.php:379
+msgctxt "Admin widget title"
+msgid "Author"
+msgstr ""
+
+#: class-clientside-admin-widget-manager.php:401
+msgctxt "Admin widget title"
+msgid "Slug"
+msgstr ""
+
+#: class-clientside-admin-widget-manager.php:419
+msgctxt "Admin widget title"
+msgid "(Post) Format"
+msgstr ""
+
+#: class-clientside-admin-widget-manager.php:437
+msgctxt "Admin widget title"
+msgid "Categories"
+msgstr ""
+
+#: class-clientside-admin-widget-manager.php:455
+msgctxt "Admin widget title"
+msgid "Tags"
+msgstr ""
+
+#: class-clientside-admin-widget-manager.php:473
+msgctxt "Admin widget title"
+msgid "Featured Image"
+msgstr ""
+
+#: class-clientside-admin-widget-manager.php:493
+msgctxt "Admin widget title"
+msgid "Page Attributes"
+msgstr ""
+
+#: class-clientside-admin-widget-manager.php:214
+#: class-clientside-admin-widget-manager.php:232
+#: class-clientside-admin-widget-manager.php:250
+msgctxt "Option description"
+msgid "This is not technically a page widget, but close enough to include here."
+msgstr ""
+
+#: class-clientside-options.php:280
+msgctxt "Option description"
+msgid "Text on the Admin Dashboard button when viewing the site."
+msgstr ""
+
+#: class-clientside-options.php:309
+msgctxt "Option description"
+msgid ""
+"Disabling this option will completely disable Clientside functionality for "
+"the specific user role. Administrators still have access to these option "
+"pages and Clientside Tools to manage those for the other user roles."
+msgstr ""
+
+#: class-clientside-options.php:322
+msgctxt "Option description"
+msgid ""
+"Disabling this option will keep all Clientside functionality besides the "
+"visual theming aspect for the specific user role."
+msgstr ""
+
+#: class-clientside-options.php:335
+msgctxt "Option description"
+msgid ""
+"Useful when using any of the <a href=\"%s\" target=\"_blank\">affected "
+"external plugins</a>. Disabling this option can slightly improve "
+"performance because less CSS will be loaded."
+msgstr ""
+
+#: class-clientside-options.php:347
+msgctxt "Option description"
+msgid ""
+"This replaces the default behavior of clicking a menu item to expand its "
+"submenu and instead show a tooltip popover."
+msgstr ""
+
+#: class-clientside-options.php:359
+msgctxt "Option description"
+msgid ""
+"This will make the menu always start collapsed. It leaves more space for "
+"the main content but you'll have to manually open the menu to use it."
+msgstr ""
+
+#: class-clientside-options.php:370
+msgctxt "Option description"
+msgid ""
+"Prevent Google Webfonts from loading in the admin area. This can speed up "
+"page load times but can affect the admin theme's typography."
+msgstr ""
+
+#: class-clientside-options.php:382
+msgctxt "Option description"
+msgid ""
+"Stop WP from loading jQuery into your site. This speeds up page load times "
+"if your theme doesn't need it."
+msgstr ""
+
+#: class-clientside-options.php:394
+msgctxt "Option description"
+msgid ""
+"Stop WP from loading jQuery Migrate along with jQuery. This avoids an HTTP "
+"request and slightly speeds up page load times. Note that this can break "
+"old plugins and scripts!"
+msgstr ""
+
+#: class-clientside-options.php:406
+msgctxt "Option description"
+msgid ""
+"Stop WP from loading wp-embed.min.js into your site. This avoids an HTTP "
+"request and slightly speeds up page load times if you don't need the "
+"functionality."
+msgstr ""
+
+#: class-clientside-options.php:418
+msgctxt "Option description"
+msgid ""
+"Stop WP from loading wp-emoji-release.min.js into your site. This avoids an "
+"HTTP request and slightly speeds up page load times if you don't need the "
+"functionality."
+msgstr ""
+
+#: class-clientside-options.php:432
+msgctxt "Option description"
+msgid ""
+"Some themes might make the editor styling match the site's typography. "
+"Enabling this option will overwrite that styling."
+msgstr ""
+
+#: class-clientside-options.php:445
+msgctxt "Option description"
+msgid ""
+"When enabled, Clientside adds a close-button to the corner of admin "
+"widgets/metaboxes."
+msgstr ""
+
+#: class-clientside-options.php:457
+msgctxt "Option description"
+msgid "Show separator lines or go for a more minimal appearance without them."
+msgstr ""
+
+#: class-clientside-options.php:469
+msgctxt "Option description"
+msgid ""
+"Menu separators are hidden by default. This option enables them. Applies to "
+"the network admin environment."
+msgstr ""
+
+#: class-clientside-options.php:482
+msgctxt "Option description"
+msgid ""
+"Clientside adds additional item counts next to menu items. You can disable "
+"them with this option."
+msgstr ""
+
+#: class-clientside-options.php:492
+msgctxt "Option description"
+msgid ""
+"The affected user role won't be confronted with update information. This "
+"will also speed up certain page load times."
+msgstr ""
+
+#: class-clientside-options.php:513
+msgctxt "Option description"
+msgid ""
+"Hides the admin toolbar when viewing the site. Note that this overwrites "
+"the native user-based setting when checked."
+msgstr ""
+
+#: class-clientside-options.php:526
+msgctxt "Option description"
+msgid ""
+"Hides the \"Screen Options\" button in the toolbar. Note that this will "
+"make the affected users unable to manage the page's widgets and other page "
+"customizations."
+msgstr ""
+
+#: class-clientside-options.php:539
+msgctxt "Option description"
+msgid "Hides the \"Help\" button in the toolbar."
+msgstr ""
+
+#: class-clientside-options.php:552
+msgctxt "Option description"
+msgid "Hides the role changing dropdown above user-listings."
+msgstr ""
+
+#: class-clientside-options.php:564
+msgctxt "Option description"
+msgid "Hides the post-listing date filter dropdown (for all post types)."
+msgstr ""
+
+#: class-clientside-options.php:585
+msgctxt "Option description"
+msgid "Hides the post-listing category filter dropdown (for all post types)."
+msgstr ""
+
+#: class-clientside-options.php:606
+msgctxt "Option description"
+msgid ""
+"Hides the comment type filter (Comments / Pings) dropdown above "
+"comment-listings."
+msgstr ""
+
+#: class-clientside-options.php:618
+msgctxt "Option description"
+msgid ""
+"Hides the paging navigation above post-listings (for all post types). The "
+"bottom one remains."
+msgstr ""
+
+#: class-clientside-options.php:631
+msgctxt "Option description"
+msgid ""
+"Hides the Bulk Actions dropdown above post-listings (for all post types). "
+"The bottom one remains."
+msgstr ""
+
+#: class-clientside-options.php:644
+msgctxt "Option description"
+msgid "Hides the search form above post-listings (for all post types)."
+msgstr ""
+
+#: class-clientside-options.php:657
+msgctxt "Option description"
+msgid "Hides the view switcher above the media page."
+msgstr ""
+
+#: class-clientside-options.php:670
+msgctxt "Option description"
+msgid ""
+"Hides the Bulk Select button above the media page that allows for deletion "
+"of multiple files."
+msgstr ""
+
+#: class-clientside-options.php:683
+msgctxt "Option description"
+msgid ""
+"The Clientside Notification Center puts notifications away into a toolbar "
+"item instead of showing them directly on the page. Note that notifications "
+"still output normally on mobile."
+msgstr ""
+
+#: class-clientside-options.php:695
+msgctxt "Option description"
+msgid "Hides the \"View Posts\" (archive view) item in the toolbar."
+msgstr ""
+
+#: class-clientside-options.php:708
+msgctxt "Option description"
+msgid "Hides the \"New\" dropdown list in the toolbar."
+msgstr ""
+
+#: class-clientside-options.php:721
+msgctxt "Option description"
+msgid "Hides the \"Comments\" button in the toolbar."
+msgstr ""
+
+#: class-clientside-options.php:734
+msgctxt "Option description"
+msgid "Hides the \"Updates\" button in the toolbar."
+msgstr ""
+
+#: class-clientside-options.php:747
+msgctxt "Option description"
+msgid "Hides the search functionality in the toolbar when viewing the site."
+msgstr ""
+
+#: class-clientside-options.php:760
+msgctxt "Option description"
+msgid ""
+"Hides the \"Customize\" button in the toolbar on certain pages when viewing "
+"the site. This button is often not applicable and mistaken for the \"Edit "
+"Post\" button."
+msgstr ""
+
+#: class-clientside-options.php:773
+msgctxt "Option description"
+msgid "Hides the \"My Sites\" dropdown in the toolbar."
+msgstr ""
+
+#: class-clientside-options.php:786
+msgctxt "Option description"
+msgid "Prevent WP from showing login errors. This can add to security."
+msgstr ""
+
+#: class-clientside-options.php:798
+msgctxt "Option description"
+msgid ""
+"Prevent WP from printing the WP version in the site header. This can add to "
+"security."
+msgstr ""
+
+#: class-clientside-options.php:810
+msgctxt "Option description"
+msgid "Disable if you are experiencing theming issues in the Theme Customizer."
+msgstr ""
+
+#: class-clientside-options.php:823
+msgctxt "Option description"
+msgid "Also apply theming to the login/register pages."
+msgstr ""
+
+#: class-clientside-options.php:835
+msgctxt "Option description"
+msgid "Disable if the active site theme is breaking the toolbar positioning."
+msgstr ""
+
+#: class-clientside-options.php:846
+msgctxt "Option description"
+msgid ""
+"Will appear on the login page. Leave empty to use the default WordPress "
+"logo."
+msgstr ""
+
+#: class-clientside-options.php:857
+msgctxt "Option description"
+msgid "Will appear above the admin menu."
+msgstr ""
+
+#: class-clientside-options.php:869
+msgctxt "Option description"
+msgid ""
+"Applicable if a custom logo is uploaded. The \"View Site\" button will "
+"appear instead."
+msgstr ""
+
+#: class-clientside-options.php:882
+msgctxt "Option description"
+msgid ""
+"Always show the View Site button, even if a logo is visible. By defaukt the "
+"logo replaces the View Site button."
+msgstr ""
+
+#: class-clientside-options.php:895
+msgctxt "Option description"
+msgid ""
+"Completely hides the logo on the login page, wether it's a custom uploaded "
+"logo or the default."
+msgstr ""
+
+#: class-clientside-options.php:907
+msgctxt "Option description"
+msgid ""
+"When collapsed, each table row (post) is always one line. Hovering the row "
+"will show the row action buttons and the option to expand the row."
+msgstr ""
+
+#: class-clientside-options.php:918
+msgctxt "Option description"
+msgid ""
+"This changes the number of posts per page for all post types and all users "
+"and even overwrites the manual preference managed via Screen Options. Leave "
+"empty to use the default behaviour."
+msgstr ""
+
+#: class-clientside-options.php:930
+msgctxt "Option description"
+msgid ""
+"Prevent access to the theme/plugin file editing pages. Note that this will "
+"only work if the \"DISALLOW_FILE_EDIT\" constant isn't already defined "
+"(generally via wp-config.php)."
+msgstr ""
+
+#: class-clientside-options.php:942
+msgctxt "Option description"
+msgid "Remove the Quick Edit link under each post in post/page listings."
+msgstr ""
+
+#: class-clientside-options.php:955
+msgctxt "Option description"
+msgid ""
+"Clientside prevents PHP from printing errors before the document HTML and "
+"outputs them to the notification area instead. This feature can be disabled "
+"here if this causes problems with your own error logging solutions."
+msgstr ""
+
+#: class-clientside-options.php:967
+msgctxt "Option description"
+msgid ""
+"Plugin Options and Clientside Tools on all network sites will not be "
+"editable by site administrators."
+msgstr ""
+
+#: class-clientside-options.php:980
+msgctxt "Option description"
+msgid ""
+"Hides Clientside on individual network site's plugin listings for anyone "
+"except Network Admins, making Site Admins unable to deactivate the plugin. "
+"Note that if Clientside is network-activated, it will already be hidden "
+"from the individual site's plugin list."
+msgstr ""
+
+#: class-clientside-options.php:1017 class-clientside-options.php:1030
+#: class-clientside-options.php:1043 class-clientside-options.php:1056
+msgctxt "Option description"
+msgid ""
+"Hides the configuration page and disables the functionality of this tool "
+"for all network sites."
+msgstr ""
+
+#: class-clientside-options.php:1071 class-clientside-options.php:1083
+#: class-clientside-options.php:1095 class-clientside-options.php:1107
+msgctxt "Option description"
+msgid ""
+"Disabling this tool will hide it from the menu and prevent applying its "
+"functionality."
+msgstr ""
+
+#: class-clientside-dashboard.php:16 class-clientside-dashboard.php:30
+msgctxt "Dashboard widget title"
+msgid "Site and Server Status"
+msgstr ""
+
+#: class-clientside-error-handler.php:33
+msgctxt "A PHP error message"
+msgid "The following PHP error occurred: \"%s\" in the file: %s on line %d"
+msgstr ""
+
+#: class-clientside-menu.php:59
+msgctxt "Menu button description"
+msgid "Logo image"
+msgstr ""
+
+#: class-clientside-menu.php:72 class-clientside-menu.php:73
+msgctxt "Text on the menu button"
+msgid "View Site"
+msgstr ""
+
+#: class-clientside-options.php:30
+msgctxt "Option section name"
+msgid "General plugin options and extra functionality"
+msgstr ""
+
+#: class-clientside-options.php:57
+msgctxt "Option section name"
+msgid "Login Page Options"
+msgstr ""
+
+#: class-clientside-options.php:70
+msgctxt "Option section name"
+msgid "Admin Menu Options"
+msgstr ""
+
+#: class-clientside-options.php:87
+msgctxt "Option section name"
+msgid "Toolbar Options"
+msgstr ""
+
+#: class-clientside-options.php:109
+msgctxt "Option section name"
+msgid "Post Listing Options"
+msgstr ""
+
+#: class-clientside-options.php:130 class-clientside-options.php:158
+msgctxt "Option section name"
+msgid "Clientside Tools"
+msgstr ""
+
+#: class-clientside-options.php:145
+msgctxt "Option section name"
+msgid "Network Options"
+msgstr ""
+
+#: class-clientside-options.php:279
+msgctxt "Option title"
+msgid "Admin Dashboard button text"
+msgstr ""
+
+#: class-clientside-options.php:289
+msgctxt "Option title"
+msgid "Menu color scheme"
+msgstr ""
+
+#: class-clientside-options.php:305
+msgctxt "Option title"
+msgid "Enable Clientside"
+msgstr ""
+
+#: class-clientside-options.php:318
+msgctxt "Option title"
+msgid "Enable Clientside admin theming"
+msgstr ""
+
+#: class-clientside-options.php:331
+msgctxt "Option title"
+msgid "Enable Additional Plugin and Theme Support"
+msgstr ""
+
+#: class-clientside-options.php:343
+msgctxt "Option title"
+msgid "Floating Submenus (beta)"
+msgstr ""
+
+#: class-clientside-options.php:355
+msgctxt "Option title"
+msgid "Collapse menu by default"
+msgstr ""
+
+#: class-clientside-options.php:368
+msgctxt "Option title"
+msgid "Disable Google Fonts (Admin)"
+msgstr ""
+
+#: class-clientside-options.php:380
+msgctxt "Option title"
+msgid "Disable jQuery"
+msgstr ""
+
+#: class-clientside-options.php:392
+msgctxt "Option title"
+msgid "Disable jQuery Migrate"
+msgstr ""
+
+#: class-clientside-options.php:404
+msgctxt "Option title"
+msgid "Disable Embed Script"
+msgstr ""
+
+#: class-clientside-options.php:416
+msgctxt "Option title"
+msgid "Disable Emoji Script"
+msgstr ""
+
+#: class-clientside-options.php:428
+msgctxt "Option title"
+msgid "Enable Text Editor Theming"
+msgstr ""
+
+#: class-clientside-options.php:440
+msgctxt "Option title"
+msgid "Enable Metabox Close Buttons"
+msgstr ""
+
+#: class-clientside-options.php:453 class-clientside-options.php:465
+msgctxt "Option title"
+msgid "Menu Separators"
+msgstr ""
+
+#: class-clientside-options.php:478
+msgctxt "Option title"
+msgid "Menu item counters"
+msgstr ""
+
+#: class-clientside-options.php:490
+msgctxt "Option title"
+msgid "Hide update information (WP core, plugins, themes)"
+msgstr ""
+
+#: class-clientside-options.php:511
+msgctxt "Option title"
+msgid "Hide Site Toolbar"
+msgstr ""
+
+#: class-clientside-options.php:524
+msgctxt "Option title"
+msgid "Hide Screen Options"
+msgstr ""
+
+#: class-clientside-options.php:537
+msgctxt "Option title"
+msgid "Hide Help"
+msgstr ""
+
+#: class-clientside-options.php:550
+msgctxt "Option title"
+msgid "Hide User Role Changer"
+msgstr ""
+
+#: class-clientside-options.php:562
+msgctxt "Option title"
+msgid "Hide Date Filter"
+msgstr ""
+
+#: class-clientside-options.php:583
+msgctxt "Option title"
+msgid "Hide Category Filter"
+msgstr ""
+
+#: class-clientside-options.php:604
+msgctxt "Option title"
+msgid "Hide Comment Type Filter"
+msgstr ""
+
+#: class-clientside-options.php:616
+msgctxt "Option title"
+msgid "Hide Top Pager"
+msgstr ""
+
+#: class-clientside-options.php:629
+msgctxt "Option title"
+msgid "Hide Top Bulk Actions"
+msgstr ""
+
+#: class-clientside-options.php:642
+msgctxt "Option title"
+msgid "Hide Post Search"
+msgstr ""
+
+#: class-clientside-options.php:655
+msgctxt "Option title"
+msgid "Hide View Switch"
+msgstr ""
+
+#: class-clientside-options.php:668
+msgctxt "Option title"
+msgid "Hide Media Bulk Select"
+msgstr ""
+
+#: class-clientside-options.php:681
+msgctxt "Option title"
+msgid "Enable Notification Center"
+msgstr ""
+
+#: class-clientside-options.php:693
+msgctxt "Option title"
+msgid "Hide View Posts"
+msgstr ""
+
+#: class-clientside-options.php:706
+msgctxt "Option title"
+msgid "Hide New"
+msgstr ""
+
+#: class-clientside-options.php:719
+msgctxt "Option title"
+msgid "Hide Comments"
+msgstr ""
+
+#: class-clientside-options.php:732
+msgctxt "Option title"
+msgid "Hide Updates"
+msgstr ""
+
+#: class-clientside-options.php:745
+msgctxt "Option title"
+msgid "Hide Search"
+msgstr ""
+
+#: class-clientside-options.php:758
+msgctxt "Option title"
+msgid "Hide Customize"
+msgstr ""
+
+#: class-clientside-options.php:771
+msgctxt "Option title"
+msgid "Multisite: Hide \"My Sites\""
+msgstr ""
+
+#: class-clientside-options.php:784
+msgctxt "Option title"
+msgid "Login error hinting"
+msgstr ""
+
+#: class-clientside-options.php:796
+msgctxt "Option title"
+msgid "Remove WordPress version meta tag"
+msgstr ""
+
+#: class-clientside-options.php:808
+msgctxt "Option title"
+msgid "Enable Customizer theming"
+msgstr ""
+
+#: class-clientside-options.php:821
+msgctxt "Option title"
+msgid "Enable login/register page theming"
+msgstr ""
+
+#: class-clientside-options.php:833
+msgctxt "Option title"
+msgid "Themed toolbar while viewing the site"
+msgstr ""
+
+#: class-clientside-options.php:845
+msgctxt "Option title"
+msgid "Login logo image"
+msgstr ""
+
+#: class-clientside-options.php:856
+msgctxt "Option title"
+msgid "Menu logo image"
+msgstr ""
+
+#: class-clientside-options.php:867
+msgctxt "Option title"
+msgid "Hide menu logo"
+msgstr ""
+
+#: class-clientside-options.php:880
+msgctxt "Option title"
+msgid "Always Show View Site Button"
+msgstr ""
+
+#: class-clientside-options.php:893
+msgctxt "Option title"
+msgid "Hide the login logo"
+msgstr ""
+
+#: class-clientside-options.php:905
+msgctxt "Option title"
+msgid "Collapse rows"
+msgstr ""
+
+#: class-clientside-options.php:917
+msgctxt "Option title"
+msgid "Posts Per Page"
+msgstr ""
+
+#: class-clientside-options.php:928
+msgctxt "Option title"
+msgid "Disable File Editor"
+msgstr ""
+
+#: class-clientside-options.php:940
+msgctxt "Option title"
+msgid "Disable Quick Edit"
+msgstr ""
+
+#: class-clientside-options.php:953
+msgctxt "Option title"
+msgid "Disable Custom Error Handler"
+msgstr ""
+
+#: class-clientside-options.php:965
+msgctxt "Option title"
+msgid "Network Admins Only"
+msgstr ""
+
+#: class-clientside-options.php:978
+msgctxt "Option title"
+msgid "Hide Plugin Entry"
+msgstr ""
+
+#: class-clientside-options.php:991
+msgctxt "Option title"
+msgid "Hide Import/Export Tab"
+msgstr ""
+
+#: class-clientside-options.php:1003
+msgctxt "Option title"
+msgid "Hide Documentation Tab"
+msgstr ""
+
+#: class-clientside-options.php:1015
+msgctxt "Option title"
+msgid "Disable Admin Menu Editor Tool"
+msgstr ""
+
+#: class-clientside-options.php:1028
+msgctxt "Option title"
+msgid "Disable Admin Widget Manager Tool"
+msgstr ""
+
+#: class-clientside-options.php:1041
+msgctxt "Option title"
+msgid "Disable Admin Column Manager Tool"
+msgstr ""
+
+#: class-clientside-options.php:1054
+msgctxt "Option title"
+msgid "Disable Custom CSS/JS Tool"
+msgstr ""
+
+#: class-clientside-options.php:1067
+msgctxt "Option title"
+msgid "Enable Admin Menu Editor Tool"
+msgstr ""
+
+#: class-clientside-options.php:1079
+msgctxt "Option title"
+msgid "Enable Admin Widget Manager Tool"
+msgstr ""
+
+#: class-clientside-options.php:1091
+msgctxt "Option title"
+msgid "Enable Admin Column Manager Tool"
+msgstr ""
+
+#: class-clientside-options.php:1103
+msgctxt "Option title"
+msgid "Enable Custom CSS/JS Tool"
+msgstr ""
+
+#: class-clientside-options.php:1116
+msgctxt "Option title"
+msgid "Admin Menu"
+msgstr ""
+
+#: class-clientside-options.php:1147 class-clientside-options.php:1180
+msgctxt "Option title"
+msgid "CSS"
+msgstr ""
+
+#: class-clientside-options.php:1158 class-clientside-options.php:1191
+msgctxt "Option title"
+msgid "Javascript (header)"
+msgstr ""
+
+#: class-clientside-options.php:1169 class-clientside-options.php:1202
+msgctxt "Option title"
+msgid "Javascript (footer)"
+msgstr ""
+
+#: class-clientside-options.php:281
+msgctxt "Toolbar button text"
+msgid "Admin Dashboard"
+msgstr ""
+
+#: class-clientside-options.php:1830
+msgctxt "Upload button text"
+msgid "Choose"
+msgstr ""
+
+#: class-clientside-options.php:1831
+msgctxt "Upload field clear button text"
+msgid "Clear"
+msgstr ""
+
+#: class-clientside-pages.php:29 class-clientside-pages.php:41
+msgctxt "Page title in the menu"
+msgid "Admin Theme"
+msgstr ""
+
+#: class-clientside-pages.php:30
+msgctxt "Option tab title"
+msgid "Plugin Options"
+msgstr ""
+
+#: class-clientside-pages.php:31
+msgctxt "Option page title"
+msgid "Clientside Admin Theme Options"
+msgstr ""
+
+#: class-clientside-pages.php:42
+msgctxt "Option page title"
+msgid "Clientside Admin Theme Network Options"
+msgstr ""
+
+#: class-clientside-pages.php:54
+msgctxt "Option page title"
+msgid "Network Site Option Defaults"
+msgstr ""
+
+#: class-clientside-pages.php:65
+msgctxt "Option page title"
+msgid "Admin Widget Manager Defaults"
+msgstr ""
+
+#: class-clientside-pages.php:77
+msgctxt "Option page title"
+msgid "Admin Column Manager Defaults"
+msgstr ""
+
+#: class-clientside-pages.php:89
+msgctxt "Option page title"
+msgid "Custom CSS/JS Tool Defaults"
+msgstr ""
+
+#: class-clientside-pages.php:106
+msgctxt "Option page title"
+msgid "Admin Tools"
+msgstr ""
+
+#: class-clientside-pages.php:117
+msgctxt "Option page title"
+msgid "Import/Export Settings"
+msgstr ""
+
+#: class-clientside-pages.php:128
+msgctxt "Option page title"
+msgid "Documentation & Support"
+msgstr ""
+
+#: class-clientside-pages.php:139
+msgctxt "Tool page title"
+msgid "Admin Menu Editor"
+msgstr ""
+
+#: class-clientside-pages.php:153
+msgctxt "Tool page title"
+msgid "Admin Widget Manager"
+msgstr ""
+
+#: class-clientside-pages.php:167
+msgctxt "Tool page title"
+msgid "Admin Column Manager"
+msgstr ""
+
+#: class-clientside-pages.php:181
+msgctxt "Tool page title"
+msgid "Custom CSS/JS"
+msgstr ""
+
+#: class-clientside-setup.php:198
+msgctxt "missing menu item navigation label"
+msgid "(no label)"
+msgstr ""
+
+#: class-clientside-setup.php:200
+msgctxt "Title attribute for the Back to top button."
+msgid "Back to top"
+msgstr ""
+
+#: class-clientside-setup.php:201
+msgctxt "Confirmation message when reverting the Admin Menu Editor to default."
+msgid "Are you sure you want to remove all customizations and start from scratch?"
+msgstr ""
+
+#: class-clientside-user.php:25 class-clientside-user.php:87
+msgctxt "User role"
+msgid "Network Administrator"
+msgstr ""
+
+#: inc/dashboard-widget-status.php:5
+msgctxt "Site / server status"
+msgid "Debug mode"
+msgstr ""
+
+#: inc/dashboard-widget-status.php:14
+msgctxt "Site / server status"
+msgid "Post revisions"
+msgstr ""
+
+#: inc/dashboard-widget-status.php:23
+msgctxt "Site / server status"
+msgid "Theme/plugin file editor"
+msgstr ""
+
+#: inc/dashboard-widget-status.php:32
+msgctxt "Site / server status"
+msgid "WP Cron"
+msgstr ""
+
+#: inc/dashboard-widget-status.php:41
+msgctxt "Site / server status"
+msgid "Media folder writable"
+msgstr ""
+
+#: inc/dashboard-widget-status.php:58
+msgctxt "Site / server status"
+msgid "Max upload size"
+msgstr ""
+
+#: inc/dashboard-widget-status.php:67
+msgctxt "Site / server status"
+msgid "Max execution time"
+msgstr ""
+
+#: inc/dashboard-widget-status.php:76
+msgctxt "Site / server status"
+msgid "Gzip enabled"
+msgstr ""
+
+#: inc/dashboard-widget-status.php:85
+msgctxt "Site / server status"
+msgid "PHP version"
+msgstr ""
+
+#: inc/dashboard-widget-status.php:167
+msgctxt "Site / server status"
+msgid "Site Title"
+msgstr ""
+
+#: inc/dashboard-widget-status.php:184
+msgctxt "Site / server status"
+msgid "Site URL"
+msgstr ""
+
+#: inc/dashboard-widget-status.php:193
+msgctxt "Site / server status"
+msgid "Admin Email"
+msgstr ""
+
+#: inc/dashboard-widget-status.php:207
+msgctxt "Site / server status"
+msgid "Active Theme"
+msgstr ""
+
+#: inc/dashboard-widget-status.php:219
+msgctxt "Site / server status"
+msgid "Permalink Structure"
+msgstr ""
+
+#: inc/dashboard-widget-status.php:231
+msgctxt "Site / server status"
+msgid "WordPress version"
+msgstr ""
+
+#: inc/dashboard-widget-status.php:111
+msgctxt "User count"
+msgid "Users"
+msgstr ""
+
+#: inc/dashboard-widget-status.php:236
+msgctxt "Upgrade notice"
+msgid ""
+"Clientside needs a minimum WordPress version of 4.0 to perform. Please "
+"consider upgrading."
+msgstr ""
+
+#: inc/page-importexport.php:112
+msgctxt "Button text"
+msgid "Export"
+msgstr ""

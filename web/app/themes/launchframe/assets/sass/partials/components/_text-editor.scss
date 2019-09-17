@@ -1,0 +1,86 @@
+/* :: For any Rich Text editor
+{+} ---------------------------------- */
+.redactor {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+        @apply font-bold;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+        @apply mt-8 mb-6;
+    }
+
+    h1 {
+        @apply text-4xl leading-none tracking-tight;
+
+        @screen sm {
+            @apply text-5xl;
+        }
+
+        @screen lg {
+            @apply text-6xl;
+        }
+    }
+
+    h2 {
+        @apply text-3xl leading-tight tracking-tight;
+
+        @screen md {
+            @apply text-4xl;
+        }
+
+        @screen lg {
+            @apply text-5xl;
+        }
+    }
+
+    h3 {
+        @apply text-2xl leading-snug tracking-tight;
+
+        @screen sm {
+            @apply text-3xl;
+        }
+
+        @screen lg {
+            @apply text-4xl;
+        }
+    }
+
+    h4 {
+        @apply text-2xl leading-snug;
+
+        @screen md {
+            @apply text-3xl;
+        }
+    }
+
+    h5 {
+        @apply text-sm leading-snug tracking-widest uppercase;
+    }
+
+    h6 {
+        @apply text-2xl leading-snug tracking-tight;
+    }
+
+    p {
+        @apply font-light text-lg text-gray-800 mb-4;
+
+        @screen xl {
+            @apply text-xl;
+        }
+    }
+
+    a {
+        @apply text-red-500 underline;
+
+        @hover {
+            @apply text-red-300;
+        }
+    }
+}

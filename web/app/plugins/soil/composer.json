@@ -1,0 +1,38 @@
+{
+  "name": "roots/soil",
+  "type": "wordpress-plugin",
+  "license": "MIT",
+  "description": "A WordPress plugin which contains a collection of modules to apply theme-agnostic front-end modifications",
+  "homepage": "https://roots.io/plugins/soil/",
+  "authors": [
+    {
+      "name": "Ben Word",
+      "email": "ben@benword.com",
+      "homepage": "https://github.com/retlehs"
+    },
+    {
+      "name": "Scott Walkinshaw",
+      "email": "scott.walkinshaw@gmail.com",
+      "homepage": "https://github.com/swalkinshaw"
+    }
+  ],
+  "keywords": [
+    "wordpress"
+  ],
+  "support": {
+    "issues": "https://github.com/roots/soil/issues",
+    "forum": "https://discourse.roots.io/"
+  },
+  "require": {
+    "php": ">=5.4.0",
+    "composer/installers": "~1.0"
+  },
+  "require-dev": {
+    "squizlabs/php_codesniffer": "^2.5.1"
+  },
+  "scripts": {
+    "test": [
+      "vendor/bin/phpcs --extensions=php --ignore=vendor/ -n -s ."
+    ]
+  }
+}

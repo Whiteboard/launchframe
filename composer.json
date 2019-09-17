@@ -1,0 +1,69 @@
+{
+    "name": "whiteboard/launchframe",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Brett Bash",
+            "email": "brett@whiteboard.is",
+            "homepage": "https://whiteboard.is"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://wpackagist.org"
+        }
+    ],
+    "require": {
+        "php": ">=7.2",
+        "composer/installers": "^1.7",
+        "oscarotero/env": "^1.2.0",
+        "rareloop/lumberjack-core": "^4.3",
+        "roots/soil": "^3.8",
+        "roots/wordpress": "5.2.3",
+        "roots/wp-config": "1.0.0",
+        "roots/wp-password-bcrypt": "1.0.0",
+        "vlucas/phpdotenv": "^3.4.0",
+        "wpackagist-plugin/all-in-one-wp-migration": "^7.6",
+        "wpackagist-plugin/autodescription": "^4.0.1",
+        "wpackagist-plugin/disable-gutenberg": "^1.9",
+        "wpackagist-plugin/duplicate-post": "^3.2.2",
+        "wpackagist-plugin/goodbye-captcha": "^3.1.28",
+        "wpackagist-plugin/minify-html-markup": "^1.99",
+        "wpackagist-plugin/timber-library": "^1.9.5"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3.4.2",
+        "roave/security-advisories": "dev-master"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "extra": {
+        "installer-paths": {
+            "web/app/mu-plugins/{$name}/": [
+                "type:wordpress-muplugin"
+            ],
+            "web/app/plugins/{$name}/": [
+                "type:wordpress-plugin"
+            ],
+            "web/app/themes/{$name}/": [
+                "type:wordpress-theme"
+            ]
+        },
+        "wordpress-install-dir": "web/wp"
+    },
+    "scripts": {
+        "post-root-package-install": [
+            "php -r \"copy('.env.example', '.env');\""
+        ],
+        "test": [
+            "phpcs"
+        ]
+    }
+}

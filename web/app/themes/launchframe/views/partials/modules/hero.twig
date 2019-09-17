@@ -1,0 +1,58 @@
+<section id="hero" class="relative flex justify-center items-center w-screen max-w-full pt-40 pb-32 sm:py-48 xl:pt-64 overflow-hidden">
+        {# π ----
+        // :: BACKGROUND
+        // : ---------------------------------- #}
+        <div class="absolute inset-0 w-full h-full">
+
+            <div class="absolute inset-0 w-full h-full" data-hero-asset>
+
+                {# :: Image
+                {+} ---------------------------------- #}
+                {% if assetType == 'image' %}
+                    <picture>
+                        <source media="(min-width: 1200px)"
+                            srcset="{{ page.get_field('hero_image').url | resize(2400) }}">
+                        <source media="(min-width: 768px)"
+                            srcset="{{ page.get_field('hero_image').url | resize(1600) }}">
+                        <img class="w-full h-full object-cover {{ page.get_field('hero_focus') }}"
+                            src="{{ page.get_field('hero_image').url | resize(1200) }}"
+                            alt="{{ page.get_field('hero_image').alt }}">
+                    </picture>
+
+                {# :: Video
+                {+} ---------------------------------- #}
+                {% elseif assetType == 'video' %}
+                    <video
+                        class="absolute inset-0 w-full h-full object-cover"
+                        autoplay
+                        muted
+                        loop
+                        poster="{{ page.get_field('hero_poster') }}"
+                    >
+                        <source src="{{ page.get_field('hero_mp4') }}" type="video/mp4">
+
+                        {% if page.get_field('hero_webm') %}
+                            <source src="{{ page.get_field('hero_webm') }}" type="video/webm">
+                        {% endif %}
+
+                    </video>
+                {% endif %}
+
+            </div>
+        </div>
+
+
+
+        {# π ----
+        // :: CONTENT
+        // : ---------------------------------- #}
+        <div
+            class="relative container c-pad flex flex-col justify-center w-full items-center text-gray-800"
+            data-hero-content
+        >
+            <h1 class="max-w-5xl font-bold leading-none tracking-tight text-center">
+                {{ title }}
+            </h1>
+        </div>
+
+    </section>

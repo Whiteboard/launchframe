@@ -1,0 +1,17 @@
+<head>
+    <title>
+         {% if wp_title %}
+            {{ wp_title }}
+        {% else %}
+            {{ site.name }}
+        {% endif %}
+    </title>
+    <meta charset="{{ site.charset }}" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+    <link rel="pingback" href="{{ site.pingback_url }}" />
+
+    {{ function('wp_head') }}
+</head>

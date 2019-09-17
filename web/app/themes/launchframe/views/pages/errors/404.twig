@@ -1,0 +1,17 @@
+{% extends "layouts/base.twig" %}
+
+{% block content %}
+    <div class="container c-pad py-64">
+        <span class="text-6xl font-bold leading-none tracking-tight">
+            404
+        </span>
+
+        <h1 class="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold leading-tight tracking-tight mb-10">
+            Oops, <span class="text-red-500">page not found.</span>
+        </h1>
+
+        <p class="max-w-3xl mb-4">We are very sorry for the inconvenience. It looks like you are trying to access a page that either has been deleted or never existed.</p>
+
+        <a href="{{ site.url }}" class="text-red-500 hover:text-red-400 text-2xl font-bold underline transition-color">Go back home.</a>
+    </div>
+{% endblock %}

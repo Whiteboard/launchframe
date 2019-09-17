@@ -1,0 +1,23 @@
+{% extends "layouts/base.twig" %}
+
+{% block content %}
+    {# π ----
+    // :: HERO
+    // : ---------------------------------- #}
+    {% include 'partials/modules/hero.twig' %}
+
+    <main class="w-screen max-w-full">
+
+        {# π ----
+        // :: BLOCKS
+        // : ---------------------------------- #}
+        {% set blockID = 0 %}
+
+        {% for flex in page.get_field('blocks') %}
+            {% set blockID = blockID + 1 %}
+
+            {% include 'partials/blocks/' ~ flex.acf_fc_layout ~ '.twig' %}
+        {% endfor %}
+
+    </main>
+{% endblock %}

@@ -1,0 +1,11 @@
+// ::
+// IMAGES ---------------------------::
+// ____
+img {
+    @apply h-auto max-w-full float-left;
+    clear: both;
+}
+
+svg {
+    @apply fill-current;
+}
