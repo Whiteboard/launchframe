@@ -21,17 +21,17 @@
         "oscarotero/env": "^1.2.0",
         "rareloop/lumberjack-core": "^4.3",
         "roots/soil": "^3.8",
-        "roots/wordpress": "5.2.3",
+        "roots/wordpress": "5.2.4",
         "roots/wp-config": "1.0.0",
         "roots/wp-password-bcrypt": "1.0.0",
-        "vlucas/phpdotenv": "^3.4.0",
-        "wpackagist-plugin/all-in-one-wp-migration": "^7.6",
+        "vlucas/phpdotenv": "^3.6.0",
+        "wpackagist-plugin/all-in-one-wp-migration": "^7.9",
         "wpackagist-plugin/autodescription": "^4.0.1",
         "wpackagist-plugin/disable-gutenberg": "^1.9",
         "wpackagist-plugin/duplicate-post": "^3.2.2",
         "wpackagist-plugin/goodbye-captcha": "^3.1.28",
         "wpackagist-plugin/minify-html-markup": "^1.99",
-        "wpackagist-plugin/timber-library": "^1.9.5"
+        "wpackagist-plugin/timber-library": "^1.12.0"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "^3.4.2",
