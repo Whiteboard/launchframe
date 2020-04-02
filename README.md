@@ -26,8 +26,8 @@
 
 ### Build commands
 
--   `npm watch` — Compile assets when file changes are made, start Browsersync session
--   `npm dev` — Compile and optimize the files in your assets directory
+-   `npm run watch` — Compile assets when file changes are made, start Browsersync session
+-   `npm run dev` — Compile and optimize the files in your assets directory
 -   `npm run production` — Compile assets for production
 
 ### Partials Structures
