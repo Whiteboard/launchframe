@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "695c92a522a503c6e92cc036a6850fb3",
+    "content-hash": "ba52fccabd1aba8bf3034f915e4da4c8",
     "packages": [
         {
             "name": "altorouter/altorouter",
@@ -1622,15 +1622,15 @@
         },
         {
             "name": "roots/wordpress",
-            "version": "5.5.1",
+            "version": "5.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/WordPress/WordPress.git",
-                "reference": "5.5.1"
+                "reference": "5.5.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WordPress/WordPress/zipball/5.5.1"
+                "url": "https://api.github.com/repos/WordPress/WordPress/zipball/5.5.2"
             },
             "require": {
                 "php": ">=5.3.2",
@@ -1673,7 +1673,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2020-09-01T18:56:09+00:00"
+            "time": "2020-10-29T20:06:08+00:00"
         },
         {
             "name": "roots/wordpress-core-installer",

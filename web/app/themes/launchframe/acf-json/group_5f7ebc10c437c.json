@@ -19,7 +19,7 @@
             "acfe_repeater_stylised_button": 0,
             "collapsed": "field_5f7ebc246c97c",
             "min": 0,
-            "max": 1,
+            "max": 2,
             "layout": "block",
             "button_label": "Add Button",
             "sub_fields": [
@@ -73,7 +73,7 @@
     "acfe_form": 0,
     "acfe_meta": "",
     "acfe_note": "",
-    "modified": 1602141328,
+    "modified": 1604089624,
     "acfe_categories": {
         "component": "Component",
         "fieldset": "Fieldset"

@@ -21,7 +21,7 @@
                 {% if entries | length > 0 %}
 
                     {% for entry in entries %}
-                         {% include "components/entry-card.twig" with {
+                         {% include "components/entry_card.twig" with {
                              title: entry.title,
                              action: "entry",
                              entry: entry.link
