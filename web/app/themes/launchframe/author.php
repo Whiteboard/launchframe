@@ -28,6 +28,6 @@ class AuthorController extends Controller
             'author' => $author->ID
         ]);
 
-        return new TimberResponse('pages/posts.twig', $data);
+        return new TimberResponse('templates/archive.twig', $data);
     }
 }

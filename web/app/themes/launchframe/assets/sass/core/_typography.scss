@@ -1,7 +1,60 @@
-strong {
-    @apply font-bold;
+// π ----
+// :: SAOL ---------------------------::
+// ____
+@include font-face('Saol Display', '../../assets/fonts/SaolDisplay-Regular') {
+    font-weight: normal;
+    font-style: normal;
 }
 
-a {
-    @apply text-gray-800 no-underline;
+@include font-face('Saol Display', '../../assets/fonts/SaolDisplay-Light') {
+    font-weight: 300;
+    font-style: normal;
+}
+
+@include font-face('Saol Text', '../../assets/fonts/SaolText-Regular') {
+    font-weight: normal;
+    font-style: normal;
+}
+
+// π ----
+// :: GT AMERICA ---------------------------::
+// ____
+
+/* :: Extended
+{+} ---------------------------------- */
+@include font-face('GT America Extended', '../../assets/fonts/GTAmerica-ExtRg') {
+    font-weight: normal;
+    font-style: normal;
+}
+
+@include font-face('GT America Extended', '../../assets/fonts/GTAmerica-ExtRgIt') {
+    font-weight: normal;
+    font-style: italic;
+}
+
+@include font-face('GT America Extended', '../../assets/fonts/GTAmerica-ExtBd') {
+    font-weight: bold;
+    font-style: normal;
+}
+
+@include font-face('GT America Extended', '../../assets/fonts/GTAmerica-ExtBdIt') {
+    font-weight: bold;
+    font-style: italic;
+}
+
+/* :: Expanded
+{+} ---------------------------------- */
+@include font-face('GT America Expanded', '../../assets/fonts/GTAmerica-ExpMd') {
+    font-weight: 500;
+    font-style: normal;
+}
+
+@include font-face('GT America Expanded', '../../assets/fonts/GTAmerica-ExpBd') {
+    font-weight: bold;
+    font-style: normal;
+}
+
+@include font-face('GT America Expanded', '../../assets/fonts/GTAmerica-ExpBdIt') {
+    font-weight: bold;
+    font-style: italic;
 }

@@ -1,0 +1,23 @@
+// π  超メガ ----
+// :: カスケードスタイルシート ---------------------------::
+// ____
+
+/* :: Tailwind::Base
+{+} ---------------------------------- */
+@tailwind base;
+
+/* :: Tailwind::Components
+{+} ---------------------------------- */
+@tailwind components;
+
+/* :: Sass
+{+} ---------------------------------- */
+@import '~bourbon/core/_bourbon.scss';
+@import 'core/core';
+@import 'blocks/blocks';
+@import 'modules/modules';
+@import 'components/components';
+
+/* :: Tailwind::Utilities
+{+} ---------------------------------- */
+@tailwind utilities;

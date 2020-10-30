@@ -1,0 +1,41 @@
+/* :: Tailwind::Base
+{+} ---------------------------------- */
+@tailwind base;
+
+/* :: Tailwind::Components
+{+} ---------------------------------- */
+@tailwind components;
+
+:root {
+    --primary-light: theme(colors.red.500);
+    --primary: theme(colors.red.600);
+    --primary-dark: theme(colors.red.900);
+
+    --secondary-light: theme(colors.teal.400);
+    --secondary: theme(colors.teal.500);
+    --secondary-dark: theme(colors.teal.600);
+
+    --gray-light: theme(colors.gray.400);
+    --gray: theme(colors.gray.500);
+    --gray-dark: theme(colors.gray.600);
+    --gray-darkest: theme(colors.gray.700);
+
+    --charcoal-lightest: theme(colors.gray.700);
+    --charcoal-light: theme(colors.gray.800);
+    --charcoal: theme(colors.gray.900);
+    --charcoal-dark: theme(colors.black);
+}
+
+/* :: Sass
+{+} ---------------------------------- */
+@import '~bourbon/core/_bourbon.scss';
+@import 'admin/typography';
+@import 'admin/login';
+@import 'admin/menu';
+@import 'admin/content';
+@import 'admin/buttons';
+@import 'admin/toolbar';
+
+/* :: Tailwind::Utilities
+{+} ---------------------------------- */
+@tailwind utilities;

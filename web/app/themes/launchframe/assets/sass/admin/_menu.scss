@@ -1,0 +1,111 @@
+// π ----
+// :: BACKGROUND ---------------------------::
+// ____
+#adminmenuback,
+#adminmenuwrap,
+#adminmenu {
+    background: var(--charcoal-dark);
+}
+
+#adminmenu .wp-submenu {
+    @apply shadow-lg;
+    background: var(--charcoal-light);
+}
+
+// π ----
+// :: MENU ITEM ---------------------------::
+// ____
+
+/* :: Item Selected
+{+} ---------------------------------- */
+#adminmenu li.wp-has-current-submenu a.wp-has-current-submenu,
+#adminmenu li.current a.menu-top,
+.folded #adminmenu li.wp-has-current-submenu,
+.folded #adminmenu li.current.menu-top,
+#adminmenu .wp-menu-arrow,
+#adminmenu .wp-has-current-submenu .wp-submenu .wp-submenu-head,
+#adminmenu .wp-menu-arrow div {
+    background: var(--primary);
+}
+
+/* :: Item Hover
+{+} ---------------------------------- */
+#adminmenu li.menu-top,
+#adminmenu li.opensub > a.menu-top {
+    @apply transition duration-300 ease-out-quad;
+}
+
+#adminmenu li div.wp-menu-image:before,
+#adminmenu li a div.wp-menu-image:before,
+#adminmenu li.opensub div.wp-menu-image:before {
+    @apply transition duration-300 ease-out-quad;
+}
+
+#adminmenu li.menu-top:hover,
+#adminmenu li.opensub > a.menu-top,
+#adminmenu li > a.menu-top:focus {
+    background: var(--charcoal);
+}
+
+ul#adminmenu a.wp-has-current-submenu:after,
+ul#adminmenu > li.current > a.current:after {
+    border-right-color: #ebeef4;
+}
+
+#adminmenu li.menu-top:hover,
+#adminmenu li.opensub > a.menu-top,
+#adminmenu li > a.menu-top:focus,
+#adminmenu a:hover,
+#adminmenu li.menu-top > a:focus,
+#adminmenu .wp-submenu a:hover,
+#adminmenu .wp-submenu a:focus,
+#adminmenu li:hover div.wp-menu-image:before,
+#adminmenu li a:focus div.wp-menu-image:before,
+#adminmenu li.opensub div.wp-menu-image:before {
+    color: var(--primary-light);
+}
+
+// π ----
+// :: SUB-MENU ---------------------------::
+// ____
+#adminmenu .wp-submenu {
+    @apply tracking-tight;
+    font-family: $sub_font;
+}
+
+#adminmenu .wp-not-current-submenu li > a,
+.folded #adminmenu .wp-has-current-submenu li > a {
+    @apply transition duration-300 ease-out-quad;
+    background: var(--charcoal-light);
+
+    &:hover {
+        background: var(--charcoal-lightest);
+    }
+}
+
+#adminmenu li.wp-has-submenu.wp-not-current-submenu.opensub:hover:after {
+    border-right-color: var(--charcoal-light);
+}
+
+/* :: Selected
+{+} ---------------------------------- */
+#adminmenu .wp-has-current-submenu .wp-submenu,
+.no-js li.wp-has-current-submenu:hover .wp-submenu,
+#adminmenu a.wp-has-current-submenu:focus + .wp-submenu,
+#adminmenu .wp-has-current-submenu .wp-submenu.sub-open,
+#adminmenu .wp-has-current-submenu.opensub .wp-submenu {
+    background: var(--charcoal-light);
+}
+
+.toplevel_page_ai1wm_export > div.wp-menu-image:before {
+    @apply w-full h-full;
+}
+
+/* :: Menu Toggle
+{+} ---------------------------------- */
+#collapse-button {
+    &:hover,
+    &:focus {
+        color: var(--primary-light);
+    }
+}

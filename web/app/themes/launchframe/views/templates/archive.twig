@@ -1,0 +1,44 @@
+{% extends "layouts/base.twig" %}
+
+{% block content %}
+    {# π ----
+    // :: HERO
+    // : ---------------------------------- #}
+    <section class="flex items-end w-full min-h-screen pt-24 pb-16 bg-gray-900 text-white">
+        <div class="fluid-container">
+            {% include "typography/h1.twig" with {
+                content: title,
+                class: "max-w-xl lg:max-w-3xl xl:max-w-4xl"
+            } %}
+        </div>
+    </section>
+
+    <main class="relative w-full pt-20 pb-24">
+
+        <div class="container">
+            <div class="grid grid-cols-3 gap-4">
+
+                {% if entries | length > 0 %}
+
+                    {% for entry in entries %}
+                         {% include "components/entry-card.twig" with {
+                             title: entry.title,
+                             action: "entry",
+                             entry: entry.link
+                         } %}
+                    {% endfor %}
+
+                {% else %}
+                    <div class="col-span-4 py-24">
+                        {% include "typography/h3.twig" with {
+                            content: "Sorry, no results found.",
+                            color: "text-gray-300"
+                        } %}
+                    </div>
+                {% endif %}
+
+            </div>
+        </div>
+
+    </main>
+{% endblock %}

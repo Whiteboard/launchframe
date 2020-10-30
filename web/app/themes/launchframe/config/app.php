@@ -26,6 +26,7 @@ return [
 
         /* :: Application Providers ------------ */
         App\Providers\ThemeSupport::class,
+        App\Providers\Taxonomies::class,
         App\Providers\Globals::class,
         App\Providers\Assets::class
     ],

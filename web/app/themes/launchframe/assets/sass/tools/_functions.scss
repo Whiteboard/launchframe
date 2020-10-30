@@ -1,8 +1,0 @@
-/* :: Parent Selector
-{+} ---------------------------------- */
-@function p() {
-    $selector: str-slice(inspect(&), 2, -2);
-    $index: str-index($selector, '--') - 1;
-
-    @return str-slice($selector, 0, $index);
-}

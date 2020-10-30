@@ -1,0 +1,211 @@
+/* :: Tailwind override on an existing class from WP
+{+} ---------------------------------- */
+table.fixed {
+    @apply relative #{!important};
+}
+
+.wp-admin .inline {
+    @apply inline-block #{!important};
+}
+
+// π ----
+// :: BACKGROUNDS ---------------------------::
+// ____
+body {
+    @apply text-gray-900;
+    background: #ebeef4;
+}
+
+.postbox,
+table.widefat,
+.wp-editor-container,
+.stuffbox,
+p.popular-tags,
+.widgets-holder-wrap,
+.popular-tags,
+.feature-filter,
+.imgedit-group,
+.comment-ays,
+.striped > tbody > :nth-child(odd),
+ul.striped > :nth-child(odd),
+.acf-field-object,
+.alternate,
+.acf-table > tbody > tr > th,
+.acf-table > tbody > tr > td,
+.acf-table > thead > tr > th,
+.acf-table > thead > tr > td {
+    background: #fafafb !important;
+}
+
+.acf-field-object.open > .handle {
+    @apply border-0 #{!important};
+    background: var(--primary-dark);
+    text-shadow: none !important;
+}
+
+#major-publishing-actions,
+.acf-table tr.acf-field > td.acf-label,
+.acf-tfoot,
+.acf-input-prepend,
+.acf-input-append,
+.acf-input-wrap,
+.acf-fields.-left > .acf-field:before {
+    background: #f3f5f8 !important;
+}
+
+// π ----
+// :: TEXT ---------------------------::
+// ____
+#edit-slug-box,
+.subsubsub,
+th,
+tfoot,
+.column-date,
+.displaying-num,
+.acf-field-object > .handle .row-options,
+.row-actions {
+    @apply tracking-tight;
+    font-family: $sub_font;
+}
+
+.wp-list-table a {
+    @apply transition duration-300 ease-out-quad;
+}
+
+.row-actions {
+    color: var(--gray);
+}
+
+.acf-field .acf-label label {
+    @apply font-medium text-sm #{!important};
+}
+
+p.description,
+.post-attributes-help-text {
+    @apply text-xs;
+    color: var(--charcoal-lightest);
+}
+
+.acf-image-uploader {
+    @apply mt-6;
+
+    p {
+        @apply flex flex-col items-start text-xs font-mono;
+        color: var(--charcoal-lightest);
+
+        a {
+            @apply font-sans mt-4 #{!important};
+        }
+    }
+
+    .image-wrap img {
+        @apply border-0;
+    }
+}
+
+// π ----
+// :: FORMS ---------------------------::
+// ____
+.wp-core-ui select:focus {
+    @apply bg-transparent;
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+input[type='text'],
+input[type='password'],
+input[type='color'],
+input[type='date'],
+input[type='datetime'],
+input[type='datetime-local'],
+input[type='email'],
+input[type='month'],
+input[type='number'],
+input[type='search'],
+input[type='tel'],
+input[type='time'],
+input[type='url'],
+input[type='week'],
+input[type='checkbox'],
+input[type='radio'],
+select,
+textarea {
+    &:focus {
+        @apply shadow-none outline-none;
+        border-color: var(--primary);
+    }
+}
+
+/* :: Switch
+{+} ---------------------------------- */
+.acf-switch {
+    @apply border-0 text-white #{!important};
+    background: var(--charcoal-lightest) !important;
+
+    .acf-switch-slider {
+        @apply border-0 #{!important};
+    }
+
+    &.-on {
+        @apply border-0 #{!important};
+        background: var(--primary) !important;
+    }
+
+    .acf-switch-on {
+        text-shadow: none !important;
+    }
+}
+
+/* :: Button Group
+{+} ---------------------------------- */
+.acf-button-group label.selected {
+    background: var(--primary) !important;
+}
+
+// π ----
+// :: NOTIFICATIONS ---------------------------::
+// ____
+.notice-success,
+div.updated {
+    border-left-color: var(--primary);
+}
+
+.js .postbox .handlediv:focus .toggle-indicator:before {
+    @apply shadow-none;
+}
+
+.acf-tooltip {
+    @apply bg-gray-800;
+
+    .top:before {
+        border-bottom-color: var(--charcoal) !important;
+    }
+
+    &:before,
+    .bottom:before {
+        border-bottom-color: var(--charcoal) !important;
+    }
+}
+
+.acf-fc-popup a:hover {
+    background: var(--primary) !important;
+}
+
+// π ----
+// :: SEO ---------------------------::
+// ____
+.tsf-seo-bar-item {
+    text-shadow: none;
+}
+
+.tsf-seo-bar-good {
+    @apply bg-green-500;
+}
+
+.tsf-seo-bar-okay {
+    @apply bg-yellow-400 text-black;
+}
+
+.tsf-seo-bar-bad {
+    @apply bg-red-600;
+}

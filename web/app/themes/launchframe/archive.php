@@ -40,6 +40,6 @@ class ArchiveController extends Controller
         // TODO: Currently only works for posts, fix for custom post types
         $data['posts'] = Post::query();
 
-        return new TimberResponse('pages/posts.twig', $data);
+        return new TimberResponse('templates/archive.twig', $data);
     }
 }

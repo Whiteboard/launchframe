@@ -1,0 +1,143 @@
+// π ----
+// :: CLEAN UP ---------------------------::
+// ____
+a,
+button {
+    @apply outline-none select-none;
+
+    &:focus {
+        @apply outline-none shadow-none;
+    }
+}
+
+.wp-core-ui .button-link:focus {
+    @apply outline-none shadow-none;
+}
+
+// π ----
+// :: BASIC LINKS ---------------------------::
+// ____
+a {
+    &:hover {
+        color: var(--primary);
+    }
+}
+
+.wp-core-ui .button-link {
+    color: var(--primary);
+
+    &:hover {
+        color: var(--primary-dark);
+    }
+}
+
+/* :: Delete/Trash
+{+} ---------------------------------- */
+.row-actions span.delete a,
+.row-actions span.trash a,
+.row-actions span.spam a,
+.plugins a.delete,
+#all-plugins-table .plugins a.delete,
+#search-plugins-table .plugins a.delete,
+.submitbox .submitdelete,
+#media-items a.delete,
+#media-items a.delete-permanently,
+#nav-menu-footer .menu-delete,
+#delete-link a.delete {
+    color: var(--gray-dark);
+
+    &:hover {
+        color: var(--gray-darkest);
+    }
+}
+
+// π ----
+// :: TOP ACTION BUTTON ---------------------------::
+// ____
+.wrap .add-new-h2,
+.wrap .add-new-h2:active,
+.wrap .page-title-action,
+.wrap .page-title-action:active {
+    @apply border-0 text-white;
+
+    background: var(--primary);
+
+    &:hover {
+        @apply border-0 text-white;
+
+        background: var(--primary-dark);
+    }
+
+    &:focus {
+        @apply border-0 border-transparent shadow-none;
+    }
+}
+
+// π ----
+// :: PRIMARY ---------------------------::
+// ____
+.wp-core-ui .button {
+    @apply border-0 text-white;
+    background: var(--primary);
+
+    &:hover {
+        @apply border-0 text-white;
+        background: var(--primary-dark);
+    }
+
+    &:focus,
+    &:active {
+        @apply border-0 border-transparent text-white shadow-none;
+        background: var(--primary-dark);
+    }
+}
+
+.wp-core-ui .button.active,
+.wp-core-ui .button.active:hover,
+.wp-core-ui .button.active:focus,
+.wp-core-ui .button-primary.active,
+.wp-core-ui .button-primary.active:hover,
+.wp-core-ui .button-primary.active:focus,
+.wp-core-ui .button-primary:active {
+    @apply border-0 border-transparent text-white shadow-none;
+    background: var(--primary-dark);
+}
+
+/* :: Disabled
+{+} ---------------------------------- */
+.wp-core-ui .button-primary[disabled],
+.wp-core-ui .button-primary:disabled,
+.wp-core-ui .button-primary-disabled,
+.wp-core-ui .button-primary.disabled {
+    @apply border-0 border-transparent text-white shadow-none #{!important};
+    background: var(--charcoal-lightest) !important;
+}
+
+// π ----
+// :: SECONDARY ---------------------------::
+// ____
+.wp-core-ui .button-secondary {
+    @apply border-0 text-white;
+    background: var(--secondary);
+
+    &:hover {
+        @apply border-0 text-white;
+        background: var(--secondary-lightest);
+    }
+
+    &:focus,
+    &:active {
+        @apply border-0 border-transparent shadow-none;
+        background: var(--secondary-lightest);
+    }
+}
+
+.preview {
+    background: var(--gray-dark) !important;
+    color: #ffffff !important;
+
+    &:hover {
+        background: var(--charcoal-lightest) !important;
+        color: var(--gray-light) !important;
+    }
+}

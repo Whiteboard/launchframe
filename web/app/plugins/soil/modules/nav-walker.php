@@ -23,11 +23,10 @@ class NavWalker extends \Walker_Nav_Menu {
   private $archive; // Stores the archive page for current URL
 
   public function __construct() {
-    add_filter('nav_menu_css_class', array($this, 'cssClasses'), 10, 2);
-    add_filter('nav_menu_item_id', '__return_null');
-    $cpt           = get_post_type();
-    $this->cpt     = in_array($cpt, get_post_types(array('_builtin' => false)));
-    $this->archive = get_post_type_archive_link($cpt);
+    $cpt              = get_post_type();
+    $this->cpt        = in_array($cpt, get_post_types(array('_builtin' => false)));
+    $this->archive    = get_post_type_archive_link($cpt);
+    $this->is_search  = is_search();
   }
 
   public function checkCurrent($classes) {
@@ -48,7 +47,7 @@ class NavWalker extends \Walker_Nav_Menu {
 
     $element->is_active = (!empty($element->url) && strpos($this->archive, $element->url));
 
-    if ($element->is_active) {
+    if ($element->is_active && !$this->is_search) {
       $element->classes[] = 'active';
     }
 
@@ -63,7 +62,7 @@ class NavWalker extends \Walker_Nav_Menu {
     if ($this->cpt) {
       $classes = str_replace('current_page_parent', '', $classes);
 
-      if ($this->archive) {
+      if ($this->archive && !$this->is_search) {
         if (Utils\url_compare($this->archive, $item->url)) {
           $classes[] = 'active';
         }
@@ -90,6 +89,22 @@ class NavWalker extends \Walker_Nav_Menu {
 
     return array_filter($classes);
   }
+
+  public function walk($elements, $max_depth, ...$args) {
+    // Add filters
+    add_filter('nav_menu_css_class', array($this, 'cssClasses'), 10, 2);
+    add_filter('nav_menu_item_id', '__return_null');
+
+    // Perform usual walk
+    $output = call_user_func_array(['parent', 'walk'], func_get_args());
+
+    // Unregister filters
+    remove_filter('nav_menu_css_class', [$this, 'cssClasses']);
+    remove_filter('nav_menu_item_id', '__return_null');
+
+    // Return result
+    return $output;
+  }
 }
 
 /**
@@ -113,4 +128,3 @@ function nav_menu_args($args = '') {
   return array_merge($args, $nav_menu_args);
 }
 add_filter('wp_nav_menu_args', __NAMESPACE__ . '\\nav_menu_args');
-add_filter('nav_menu_item_id', '__return_null');

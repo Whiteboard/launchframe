@@ -1,0 +1,106 @@
+// @import '~flickity/css/flickity.css';
+
+// π ----
+// :: FLICKITY CORE SETUP ---------------------------::
+// ____
+.flickity-viewport {
+    @apply overflow-visible;
+}
+
+.flickity-slider {
+    .slide {
+        @apply opacity-0;
+    }
+
+    .is-selected {
+        @apply opacity-100;
+
+        ~ .slide {
+            @apply opacity-100;
+        }
+
+        &:focus {
+            @apply outline-none;
+        }
+    }
+}
+
+// π ----
+// :: CONTROLS ---------------------------::
+// ____
+
+/* :: Button
+{+} ---------------------------------- */
+.flickity-button {
+    @apply text-gray-800 transition-colors duration-300;
+
+    &:focus {
+        @apply shadow-none;
+    }
+
+    &:hover {
+        @apply text-blue-500;
+    }
+
+    &:disabled {
+        @apply text-gray-300 opacity-100;
+
+        &:hover {
+            @apply text-gray-300;
+        }
+    }
+}
+
+/* :: Dots
+{+} ---------------------------------- */
+.flickity-page-dots {
+    .dot {
+        @apply bg-gray-700 opacity-100 transition duration-300 transform;
+
+        &:hover {
+            @apply scale-125;
+        }
+
+        &.is-selected {
+            @apply bg-blue-500;
+        }
+    }
+}
+
+// π ----
+// :: CONTAINED LAYOUT ---------------------------::
+// ____
+/* Allows Overflow, but sets the opacity to 0 on both sides */
+.contained-slider {
+    .flickity-slider {
+        .is-selected {
+            @apply visible opacity-100;
+
+            ~ .slide {
+                @apply invisible opacity-0;
+
+                &.is-selected {
+                    @apply visible opacity-100;
+                }
+            }
+        }
+    }
+
+    /* :: Top Right Nav Position
+    {+} ---------------------------------- */
+    .flickity-prev-next-button {
+        @apply top-0 flex justify-center items-center w-5 h-5 bg-transparent transform -translate-y-full;
+
+        &.previous {
+            @apply left-auto right-0 mr-24;
+        }
+
+        &.next {
+            @apply right-0 mr-8;
+        }
+
+        .flickity-button-icon {
+            @apply relative inset-auto w-full h-full;
+        }
+    }
+}

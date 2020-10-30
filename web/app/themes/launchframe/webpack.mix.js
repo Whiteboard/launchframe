@@ -1,9 +1,5 @@
 const mix = require('laravel-mix');
 const tailwindcss = require('tailwindcss');
-const ImageminPlugin = require('imagemin-webpack-plugin').default;
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const imageminMozjpeg = require('imagemin-mozjpeg');
-require('laravel-mix-purgecss');
 
 const source = 'assets';
 const dist = 'dist';
@@ -12,82 +8,42 @@ const dist = 'dist';
 {+} ---------------------------------- */
 mix.webpackConfig({
     resolve: {
-        extensions: ['.js'],
         alias: {
-            TweenLite: 'gsap/src/uncompressed/TweenLite.js',
-            TweenMax: 'gsap/src/uncompressed/TweenMax.js',
-            TimelineLite: 'gsap/src/uncompressed/TimelineLite.js',
-            TimelineMax: 'gsap/src/uncompressed/TimelineMax.js',
-            ScrollMagic: 'scrollmagic/scrollmagic/uncompressed/ScrollMagic.js',
-            'animation.gsap': 'scrollmagic/scrollmagic/uncompressed/plugins/animation.gsap.js'
+            '@': path.resolve('assets/js')
         }
     }
 });
 
-mix.autoload({
-    jquery: ['$', 'window.jQuery', 'jQuery']
-});
-
 mix.setPublicPath(dist);
 
-/* :: Watch
-{+} ---------------------------------- */
 mix.browserSync({
     proxy: 'launchframe.test',
-    files: [`${dist}/js/*.js`, `${dist}/css/*.css`, `${dist}/images/**/*`, 'views/**/*.twig', '**/*.php'],
-    ghostMode: false
+    files: [`${dist}/js/*.js`, `${dist}/css/*.css`, `${source}/images/**/*`, 'views/**/*.twig', '**/*.php'],
+    ghostMode: false,
+    notify: false
 });
 
-/* :: Images
-{+} ---------------------------------- */
-mix.webpackConfig({
-    plugins: [
-        new CopyWebpackPlugin([
-            {
-                from: `${source}/images`,
-                to: 'images'
-            }
-        ]),
-        new ImageminPlugin({
-            test: /\.(jpe?g|png|gif|svg)$/i,
-            plugins: [
-                imageminMozjpeg({
-                    quality: 80
-                })
-            ]
-        })
-    ]
-});
+mix.js(`${source}/js/site.js`, `${dist}/js`).extract(['alpinejs', 'gsap']).sourceMaps();
 
-/* :: JS, Sass, & Css
-{+} ---------------------------------- */
-mix.js(`${source}/js/main.js`, `${dist}/js`)
-    .extract(['jquery', 'vue', 'gsap', 'scrollmagic'])
-    .sass(`${source}/sass/main.scss`, `${dist}/css`, {
-        outputStyle: mix.inProduction() ? 'compressed' : 'expanded'
-    })
+mix.sass(`${source}/sass/site.scss`, `${dist}/css`)
+    .sass(`${source}/sass/admin.scss`, `${dist}/css`)
     .options({
+        outputStyle: mix.inProduction() ? 'compressed' : 'expanded',
         processCssUrls: false,
+        // postCss: [require('postcss-import'), tailwindcss('tailwind.config.js'), require('postcss-nested')]
         postCss: [tailwindcss('tailwind.config.js')]
     })
     .sourceMaps();
 
-if (mix.inProduction()) {
-    mix.purgeCss({
-        enabled: true,
-        globs: [
-            path.join(__dirname, 'views/**/*.twig'),
-            path.join(__dirname, 'assets/js/**/*.js'),
-            path.join(__dirname, 'assets/js/views/**/*.vue'),
-            path.join(__dirname, 'assets/images/**/*.svg')
-            // path.join(__dirname, 'node_modules/slick-carousel/slick/**/*.js'),
-            // path.join(__dirname, 'node_modules/plyr/dist/*.js')
-        ],
-        extensions: ['twig', 'js', 'php', 'vue'],
-        whitelistPatterns: [/plyr/, /language/, /hljs/],
-        whitelistPatternsChildren: [/^markdown$/]
-    });
+/* mix.postCss(`${source}/sass/site.css`, `${dist}/css`, [
+    require('postcss-import'),
+    require('tailwindcss'),
+    require('postcss-nested'),
+    require('autoprefixer')
+]); */
 
+mix.version();
+
+if (mix.inProduction()) {
     mix.disableNotifications();
-    mix.version();
 }

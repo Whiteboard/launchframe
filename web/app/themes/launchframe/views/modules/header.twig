@@ -1,0 +1,20 @@
+<header class="absolute z-40 inset-x-0 top-0 w-full py-12">
+    <div class="relative flex justify-between items-center mx-auto w-full max-w-full px-24">
+        <a href="{{ site.link }}" class="block w-40 lg:w-64 text-white">
+            {{ source("assets/images/logo.svg") }}
+        </a>
+
+        <nav class="hidden lg:flex space-x-8">
+
+            {% for item in menu.items %}
+                <a
+                    class="relative text-white hover:text-teal-400 text-xs leading-none font-bold uppercase select-none transition duration-300 ease-in-out"
+                    href="{{ item.link }}"
+                >
+                    {{ item.title }}
+                </a>
+            {% endfor %}
+
+        </nav>
+    </div>
+</header>

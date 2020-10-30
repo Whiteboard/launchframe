@@ -1,0 +1,20 @@
+<a
+    {% if action == "url" %}
+        href="{{ url }}"
+    {% elseif action == "entry" %}
+        href="{{ entry }}"
+    {% endif %}
+    class="relative flex items-center w-full h-full p-6 md:p-10 text-xl group {{ class }}"
+>
+
+    <div class="absolute inset-0 w-full h-full bg-red-600 group-hover:bg-red-500 rounded transition duration-300 ease-in-out-quad transform group-hover:scale-90"></div>
+
+    {# :: Content ------------ #}
+    <div class="relative flex justify-center w-full text-white group-hover:text-red-100 transition-colors duration-300 ease-in-out-quad">
+        {# :: Title
+        {+} ---------------------------------- #}
+        {% include "typography/h5.twig" with {
+            content: title
+        } %}
+    </div>
+</a>

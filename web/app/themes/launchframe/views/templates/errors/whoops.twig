@@ -1,0 +1,29 @@
+{% extends "layouts/base.twig" %}
+
+{% block content %}
+    <section class="flex items-end w-full min-h-screen pt-24 pb-16 bg-gray-900 text-white">
+        <div class="container">
+            {% include "typography/h1.twig" with {
+                content: "500"
+            } %}
+
+            {% include "typography/h2.twig" with {
+                content: "Something went wrong.",
+                color: "text-red-600"
+            } %}
+
+            {% include "typography/paragraph.twig" with {
+                content: "Please try again in a few minutes, if the error persists contact us for support.",
+                size: "lg",
+                class: "mt-10 mb-8 max-w-lg"
+            } %}
+
+            {% include "components/button.twig" with {
+                action: "url",
+                url: site.url,
+                label: "Go Home",
+                color: "text-white"
+            } %}
+        </div>
+    </section>
+{% endblock %}

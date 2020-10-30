@@ -11,7 +11,8 @@ class Assets extends ServiceProvider
     // :: Register any app specific items into the container
     // : ---------------------------------- */
     public function register()
-    { }
+    {
+    }
 
     /* π ----
     // :: BOOT
@@ -19,19 +20,27 @@ class Assets extends ServiceProvider
     // : ---------------------------------- */
     public function boot()
     {
+        add_action('login_enqueue_scripts', function () {
+            wp_enqueue_style('admin-styles', self::version('css/admin.css', 'dist'), false);
+        });
+
+        add_action('admin_enqueue_scripts', function () {
+            wp_enqueue_style('admin-styles', self::version('css/admin.css', 'dist'), false);
+        });
+
         add_action('wp_enqueue_scripts', function () {
-            wp_enqueue_style('launchframe-styles', self::version('css/main.css', 'dist'), false);
-            wp_deregister_script('jquery');
+            wp_enqueue_style('launchframe-styles', self::version('css/site.css', 'dist'), false);
+            wp_deregister_script('jquery'); // Bye Felicia!
             wp_enqueue_script('manifest-scripts', self::version('js/manifest.js', 'dist'), array(), false, true);
             wp_enqueue_script('vendor-scripts', self::version('js/vendor.js', 'dist'), array(), false, true);
-            wp_enqueue_script('launchframe-scripts', self::version('js/main.js', 'dist'), array(), false, true);
+            wp_enqueue_script('launchframe-scripts', self::version('js/site.js', 'dist'), array(), false, true);
         }, 100);
     }
 
     /* π ----
     // :: LARAVEL MIX MANIFEST PROCESSING
     // : ---------------------------------- */
-    private function version($path, $manifestDirectory = '')
+    private static function version($path, $manifestDirectory = '')
     {
         static $manifest;
 

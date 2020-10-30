@@ -1,11 +1,9 @@
-// ::
-// IMAGES ---------------------------::
-// ____
-img {
-    @apply h-auto max-w-full float-left;
-    clear: both;
+/* :: Mobile Viewport Bug Fix
+{+} ---------------------------------- */
+body {
+    min-height: -webkit-fill-available;
 }
 
-svg {
-    @apply fill-current;
+html {
+    height: -webkit-fill-available;
 }

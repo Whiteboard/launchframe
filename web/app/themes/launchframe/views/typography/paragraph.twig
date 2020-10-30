@@ -1,0 +1,18 @@
+<{{ tag ? tag : "p" }}
+    class="{{ color ? color : 'text-inherit' }}
+
+    {% if size == 'sm' %}
+        text-sm
+    {% elseif size == 'lg' %}
+        text-lg
+    {% else %}
+        text-base
+    {% endif %}
+
+    {# :: Default Paragraph Margin ------------ #}
+    {{ m_reset ? '' : 'mt-0 mb-8 last:mb-0' }}
+
+    {{ class }}"
+>
+    {{ content }}
+</{{ tag ? tag : "p" }}>

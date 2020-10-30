@@ -14,17 +14,11 @@ class Globals extends ServiceProvider
     {
         if (function_exists('acf_add_options_page')) {
             acf_add_options_page(array(
-                'page_title'     => 'Globals Settings',
-                'menu_title'    => 'Globals',
-                'menu_slug'     => 'fieldset-globals',
-                'capability'    => 'edit_posts',
-                'redirect'        => false
-            ));
-
-            acf_add_options_sub_page(array(
-                'page_title'     => 'Footer Settings',
-                'menu_title'    => 'Footer',
-                'parent_slug'    => 'fieldset-globals',
+                'page_title' => 'Globals',
+                'menu_title' => 'Globals',
+                'menu_slug' => 'fieldset-globals',
+                'capability' => 'edit_posts',
+                'icon_url' => 'dashicons-admin-site-alt3'
             ));
         }
     }
@@ -34,5 +28,6 @@ class Globals extends ServiceProvider
     // :: Perform any additional boot required for this application
     // : ---------------------------------- */
     public function boot()
-    { }
+    {
+    }
 }

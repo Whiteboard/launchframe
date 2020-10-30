@@ -1,0 +1,28 @@
+{% extends "layouts/base.twig" %}
+
+{% block content %}
+    <section class="flex items-end w-full min-h-screen pt-24 pb-16 bg-gray-900 text-white">
+        <div class="container">
+            {% include "typography/h1.twig" with {
+                content: "404"
+            } %}
+
+            {% include "typography/h2.twig" with {
+                content: "Oops, <span class='text-red-600'>page not found.</span>"
+            } %}
+
+            {% include "typography/paragraph.twig" with {
+                content: "We are very sorry for the inconvenience. It looks like you are trying to access a page that either has been deleted or never existed.",
+                size: "lg",
+                class: "mt-10 mb-8 max-w-lg"
+            } %}
+
+            {% include "components/button.twig" with {
+                action: "url",
+                url: site.url,
+                label: "Go Home",
+                color: "text-white"
+            } %}
+        </div>
+    </section>
+{% endblock %}

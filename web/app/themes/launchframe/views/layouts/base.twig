@@ -1,27 +1,30 @@
 <!DOCTYPE html>
-<html {{ site.language_attributes }} class="w-screen max-w-full overflow-x-auto">
+<html {{ site.language_attributes }}>
 
-    {% include 'partials/modules/html-header.twig' %}
+    {% include 'modules/html-header.twig' %}
 
-    <body class="{{ body_class }} text-gray-800 font-sans text-base antialiased overflow-x-hidden">
-        {# Vue Root #}
-        <div id="launchframe-root">
+    <body
+        x-data="{}"
+        class="text-gray-800 text-base font-sans antialiased
+        {{ body_class }}
+        {{ environment == 'development' ? 'debug' : '' }}"
+    >
 
-            {# π ----
-            // :: HEADER
-            // : ---------------------------------- #}
-            {% include 'partials/modules/header.twig' %}
+        {# π ----
+        // :: HEADER
+        // : ---------------------------------- #}
+        {% include 'modules/header.twig' %}
 
-            {# π ----
-            // :: CONTENT
-            // : ---------------------------------- #}
-            {% block content %}
-                <p>Sorry, no content</p>
-            {% endblock %}
+        {# π ----
+        // :: CONTENT
+        // : ---------------------------------- #}
+        {% block content %}
+            <p>Sorry, no content</p>
+        {% endblock %}
 
-            {# π ----
-            // :: FOOTER
-            // : ---------------------------------- #}
-            {% include 'partials/modules/footer.twig' %}
+        {# π ----
+        // :: FOOTER
+        // : ---------------------------------- #}
+        {% include 'modules/footer.twig' %}
     </body>
 </html>

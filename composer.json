@@ -12,35 +12,37 @@
     "repositories": [
         {
             "type": "composer",
-            "url": "https://wpackagist.org"
+            "url": "https://wpackagist.org",
+            "only": ["wpackagist-plugin/*", "wpackagist-theme/*"]
         }
     ],
     "require": {
         "php": ">=7.2",
-        "composer/installers": "^1.7",
-        "oscarotero/env": "^1.2.0",
+        "composer/installers": "^1.8",
+        "oscarotero/env": "^2.1",
         "rareloop/lumberjack-core": "^4.3",
+        "roots/bedrock-autoloader": "^1.0",
         "roots/soil": "^3.8",
-        "roots/wordpress": "5.2.4",
+        "roots/wordpress": "5.5.1",
         "roots/wp-config": "1.0.0",
         "roots/wp-password-bcrypt": "1.0.0",
-        "vlucas/phpdotenv": "^3.6.0",
-        "wpackagist-plugin/all-in-one-wp-migration": "^7.9",
-        "wpackagist-plugin/autodescription": "^4.0.1",
-        "wpackagist-plugin/disable-gutenberg": "^1.9",
-        "wpackagist-plugin/duplicate-post": "^3.2.2",
-        "wpackagist-plugin/goodbye-captcha": "^3.1.28",
+        "vlucas/phpdotenv": "^4.1.8",
+        "wpackagist-plugin/acf-extended": "^0.8.7.3",
+        "wpackagist-plugin/autodescription": "^4.1.1",
+        "wpackagist-plugin/duplicate-post": "^3.2.6",
+        "wpackagist-plugin/goodbye-captcha": "^3.1.43",
         "wpackagist-plugin/minify-html-markup": "^1.99",
-        "wpackagist-plugin/timber-library": "^1.12.0"
+        "wpackagist-plugin/safe-redirect-manager": "^1.9.3",
+        "wpackagist-plugin/timber-library": "^1.18.2",
+        "wpackagist-plugin/wp-optimize": "^3.1.4"
     },
     "require-dev": {
-        "squizlabs/php_codesniffer": "^3.4.2",
+        "squizlabs/php_codesniffer": "^3.5.6",
         "roave/security-advisories": "dev-master"
     },
     "config": {
         "optimize-autoloader": true,
-        "preferred-install": "dist",
-        "sort-packages": true
+        "preferred-install": "dist"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,

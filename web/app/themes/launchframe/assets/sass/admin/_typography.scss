@@ -1,0 +1,83 @@
+// π ----
+// :: INTER ---------------------------::
+// ____
+@include font-face('Inter', '../../assets/fonts/admin/Inter-Regular') {
+    font-weight: 400;
+    font-style: normal;
+}
+
+@include font-face('Inter', '../../assets/fonts/admin/Inter-Italic') {
+    font-weight: 400;
+    font-style: italic;
+}
+
+@include font-face('Inter', '../../assets/fonts/admin/Inter-Bold') {
+    font-weight: 700;
+    font-style: normal;
+}
+
+@include font-face('Inter', '../../assets/fonts/admin/Inter-BoldItalic') {
+    font-weight: 700;
+    font-style: italic;
+}
+
+@include font-face('Inter', '../../assets/fonts/admin/Inter-SemiBold') {
+    font-weight: 600;
+    font-style: normal;
+}
+
+@include font-face('Inter', '../../assets/fonts/admin/Inter-SemiBoldItalic') {
+    font-weight: 600;
+    font-style: italic;
+}
+
+@include font-face('Inter', '../../assets/fonts/admin/Inter-Medium') {
+    font-weight: 500;
+    font-style: normal;
+}
+
+@include font-face('Inter', '../../assets/fonts/admin/Inter-MediumItalic') {
+    font-weight: 500;
+    font-style: italic;
+}
+
+@include font-face('Inter', '../../assets/fonts/admin/Inter-Light') {
+    font-weight: 300;
+    font-style: normal;
+}
+
+@include font-face('Inter', '../../assets/fonts/admin/Inter-LightItalic') {
+    font-weight: 300;
+    font-style: italic;
+}
+
+// π ----
+// :: NATIVE ---------------------------::
+// ____
+@include font-face('Native', '../../assets/fonts/admin/Native-Regular') {
+    font-weight: normal;
+    font-style: normal;
+}
+
+@include font-face('Native', '../../assets/fonts/admin/Native-Italic') {
+    font-weight: normal;
+    font-style: italic;
+}
+
+@include font-face('Native', '../../assets/fonts/admin/Native-Bold') {
+    font-weight: bold;
+    font-style: normal;
+}
+
+$sub_font: 'Native', monospace;
+
+html,
+body {
+    font-family: 'Inter';
+}
+
+a,
+button,
+input {
+    @apply transition duration-300 ease-out-quad;
+}

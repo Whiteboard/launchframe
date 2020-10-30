@@ -1,0 +1,35 @@
+{% extends "layouts/base.twig" %}
+
+{% block content %}
+    {# π ----
+    // :: HERO
+    // : ---------------------------------- #}
+    {% include "modules/hero.twig" with {
+        hero: page.get_field("hero")
+    } %}
+
+    <main class="relative w-full -mt-48 pt-20 pb-24">
+
+        <div class="container">
+            <div class="flex flex-wrap justify-center -m-4 md:-m-8">
+
+                {% if posts | length > 0 %}
+
+                    {% for post in posts %}
+                         {% include "components/entry-card.twig" %}
+                    {% endfor %}
+
+                {% else %}
+                    <div class="mt-32 py-24">
+                        <p class="text-2xl">Sorry, no results found.</p>
+                        {% include "typography/h3.twig" with {
+                            content: "Heading 03 is Awesome"
+                        } %}
+                    </div>
+                {% endif %}
+
+            </div>
+        </div>
+
+    </main>
+{% endblock %}

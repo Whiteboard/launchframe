@@ -1,71 +1,69 @@
+// 追い風 ----
+// :: TAILWIND CONFIGURATION ---------------------------::
+// ____
+/* Use the Tailwind configuration to completely define the current sites
+ * design system by adding and extending to Tailwinds default utility
+ * classes. Various aspects of the config are split in multiple files.
+ */
+
+const _ = require('lodash');
+const defaultTheme = require('tailwindcss/defaultTheme');
+const plugin = require('tailwindcss/plugin');
+
 module.exports = {
-    theme: {
-        /* :: Extending Tailwind
-        {+} ---------------------------------- */
-        extend: {
-            // π ----
-            // :: BREAKPOINTS ---------------------------::
-            // ____
-            screens: {
-                xxl: '1360px',
-                max: '1600px'
-            },
+    /* :: Config Files
+    {+} ---------------------------------- */
+    presets: [
+        require('tailwindcss/defaultConfig'),
+        require('./tailwind.config.core.js'),
+        require('./tailwind.config.site.js'),
+        require('./tailwind.config.typography.js'),
+        require('./tailwind.config.forms.js')
+    ],
 
-            // π ----
-            // :: CONTAINER ---------------------------::
-            // ____
-            container: {
-                center: true
-            },
+    /* :: Opt in to future Tailwind features
+    {+} ---------------------------------- */
+    future: {
+        applyComplexClasses: true,
+        purgeLayersByDefault: true,
+        standardFontWeights: true,
+        removeDeprecatedGapUtilities: true
+    },
 
-            // π ----
-            // :: TRANSITIONS ---------------------------::
-            // ____
-            transitionTimingFunction: {
-                quad: 'cubic-bezier(0.455, 0.03, 0.515, 0.955)',
-                circ: 'cubic-bezier(0.75, 0, 0.25, 1) 0.032s'
-            },
+    /* :: Dark Mode
+    {+} ---------------------------------- */
+    dark: 'media', // or 'class'
 
-            // π ----
-            // :: TRANSFORMS ---------------------------::
-            // ____
-            transform: {
-                none: 'none'
-            },
+    /* :: Experimental Features
+    {+} ---------------------------------- */
+    experimental: {
+        defaultLineHeights: true,
+        darkModeVariant: false,
+        extendedFontSizeScale: true,
+        extendedSpacingScale: true,
+        uniformColorPalette: true
+    },
 
-            translate: {
-                '-2': '-0.5rem',
-                '-4': '-1rem',
-                '-20': '-5rem',
-                '-1/4': '-25%',
-                '-1/2': '-50%',
-                '-full': '-100%',
-                '-over': '-104%',
-
-                '0': '0',
-                '2': '0.5rem',
-                '4': '1rem',
-                '10': '2.5rem',
-                '20': '5rem',
-                '1/4': '25%',
-                '1/2': '50%',
-                full: '100%',
-                over: '104%'
-            }
+    /* :: Purge CSS
+    {+} ---------------------------------- */
+    purge: {
+        content: ['./views/**/*.twig', './assets/images/**/*.svg', './assets/js/**/*.js', './assets/js/**/*.vue'],
+        options: {
+            whitelist: ['size-sm', 'size-md', 'size-lg', 'size-xl']
         }
     },
+
+    /* :: Define all variants available
+    {+} ---------------------------------- */
     variants: {
-        backgroundColor: ['responsive', 'hover', 'focus', 'group-hover'],
-        textColor: ['responsive', 'hover', 'focus', 'group-hover'],
-        borderColor: ['responsive', 'hover', 'focus', 'group-hover'],
         boxShadow: ['responsive', 'hover', 'focus', 'group-hover'],
-        opacity: ['responsive', 'hover', 'group-hover'],
-        zIndex: ['responsive', 'hover'],
-        transform: ['responsive', 'hover', 'group-hover'],
-        translate: ['responsive', 'hover', 'group-hover'],
-        scale: ['responsive', 'hover', 'group-hover'],
-        rotate: ['responsive', 'hover', 'group-hover'],
-        skew: ['responsive', 'hover', 'group-hover']
-    },
-    plugins: [require('tailwindcss-transitions')(), require('tailwindcss-transforms')()]
+        backgroundColor: ['responsive', 'hover', 'focus', 'group-hover'],
+        opacity: ['responsive', 'hover', 'focus', 'group-hover'],
+        scale: ['responsive', 'hover', 'focus', 'group-hover'],
+        skew: ['responsive', 'hover', 'focus', 'group-hover'],
+        rotate: ['responsive', 'hover', 'focus', 'group-hover'],
+        textColor: ['responsive', 'hover', 'focus', 'group-hover'],
+        translate: ['responsive', 'hover', 'focus', 'group-hover'],
+        visibility: ['responsive', 'hover', 'focus', 'group-hover']
+    }
 };

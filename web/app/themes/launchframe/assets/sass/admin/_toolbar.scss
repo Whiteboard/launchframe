@@ -1,0 +1,85 @@
+#wpadminbar {
+    background: var(--charcoal-dark);
+
+    #wp-admin-bar-my-account.with-avatar > a img {
+        @apply border-0 rounded-full ml-2;
+    }
+
+    &:not(.mobile) .ab-top-menu > li > .ab-item:focus,
+    &.nojq .quicklinks .ab-top-menu > li > .ab-item:focus,
+    &:not(.mobile) .ab-top-menu > li:hover > .ab-item,
+    .ab-top-menu > li.hover > .ab-item {
+        background: var(--charcoal-dark);
+        color: var(--primary-light);
+    }
+
+    .quicklinks .menupop ul li a:hover,
+    .quicklinks .menupop ul li a:focus,
+    .quicklinks .menupop ul li a:hover strong,
+    .quicklinks .menupop ul li a:focus strong,
+    .quicklinks .ab-sub-wrapper .menupop.hover > a,
+    .quicklinks .menupop.hover ul li a:hover,
+    .quicklinks .menupop.hover ul li a:focus,
+    .quicklinks .menupop.hover ul li div[tabindex]:hover,
+    .quicklinks .menupop.hover ul li div[tabindex]:focus,
+    &.nojs .quicklinks .menupop:hover ul li a:hover,
+    &.nojs .quicklinks .menupop:hover ul li a:focus,
+    li:hover .ab-icon:before,
+    li:hover .ab-item:before,
+    li a:focus .ab-icon:before,
+    li .ab-item:focus:before,
+    li .ab-item:focus .ab-icon:before,
+    li.hover .ab-icon:before,
+    li.hover .ab-item:before,
+    li:hover #adminbarsearch:before,
+    li #adminbarsearch.adminbar-focused:before,
+    #wp-toolbar li:hover span.ab-label,
+    #wp-toolbar li.hover span.ab-label,
+    #wp-toolbar a:focus span.ab-label {
+        color: var(--primary-light) !important;
+    }
+
+    a,
+    button,
+    input {
+        @apply transition duration-300 ease-out-quad;
+    }
+
+    /* :: Drop-Down
+    {+} ---------------------------------- */
+    .menupop .ab-sub-wrapper,
+    .shortlink-input,
+    .quicklinks .menupop ul.ab-sub-secondary,
+    .quicklinks .menupop ul.ab-sub-secondary .ab-submenu {
+        @apply shadow-lg;
+        background: var(--charcoal-dark);
+    }
+
+    #wp-admin-bar-my-sites .ab-sub-wrapper .hover .ab-sub-wrapper {
+        @apply hidden;
+    }
+
+    #wp-admin-bar-my-sites .wp-admin-bar-arrow,
+    .blavatar {
+        @apply hidden #{!important};
+    }
+
+    .menupop ul li .ab-item {
+        @apply tracking-tight;
+        font-family: $sub_font;
+    }
+
+    #wp-admin-bar-user-info {
+        .avatar {
+            @apply rounded-full;
+        }
+
+        .display-name {
+            @apply h-auto text-base leading-normal;
+        }
+
+        .username {
+            @apply font-mono h-auto leading-normal;
+        }
+    }
+}

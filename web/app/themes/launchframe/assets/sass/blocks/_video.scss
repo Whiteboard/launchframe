@@ -1,0 +1,95 @@
+$plyr-color-main: #00b7e3;
+$plyr-video-controls-bg: #231f20;
+$plyr-font-family: 'GT America Expanded', sans-serif;
+@import '~plyr/src/sass/plyr.scss';
+
+// π ----
+// :: PLYR STYLES ---------------------------::
+// ____
+
+.plyr--video {
+    @apply bg-transparent;
+
+    /* :: Default Center Button
+    {+} ---------------------------------- */
+    .plyr__control--overlaid {
+        @apply bg-white text-gray-800 shadow-none p-5 transform -translate-x-1/2 -translate-y-1/2;
+
+        @screen md {
+            @apply p-8;
+        }
+
+        svg {
+            @apply transition-transform duration-300 ease-out-expo transform;
+        }
+
+        &:hover,
+        &:focus {
+            @apply bg-white text-blue-500 shadow-none scale-110;
+
+            svg {
+                @apply scale-125;
+            }
+        }
+    }
+}
+
+// π ----
+// :: CONTROLS ---------------------------::
+// ____
+
+/* :: Play/Pause
+{+} ---------------------------------- */
+.plyr__controls .plyr__controls__item:first-child {
+    @apply flex justify-center items-center w-10 h-10 border-solid border border-transparent rounded-full ml-1 mr-2;
+
+    &:hover {
+        @apply bg-transparent border-transparent text-blue-500;
+    }
+
+    &.plyr__tab-focus {
+        @apply bg-transparent shadow-none border-blue-500;
+    }
+
+    .icon--not-pressed {
+        margin-left: 2px;
+    }
+}
+
+/* :: Progress
+{+} ---------------------------------- */
+.plyr--full-ui input[type='range'] {
+    @apply h-3;
+
+    // :: Track ------------ //
+    @mixin track {
+        height: 1px;
+    }
+
+    &::-webkit-slider-runnable-track {
+        @include track;
+    }
+
+    &::-moz-range-track {
+        @include track;
+    }
+
+    // :: Scrubber ------------ //
+    @mixin scrubber {
+        margin-top: -6px;
+    }
+
+    &::-webkit-slider-thumb {
+        @include scrubber;
+    }
+
+    &::-moz-range-thumb {
+        @include scrubber;
+    }
+}
+
+// :: Buffer ------------ //
+.plyr__progress__buffer {
+    margin-top: -1px;
+    height: 1px;
+}

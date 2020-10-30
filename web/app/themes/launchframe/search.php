@@ -18,12 +18,10 @@ class SearchController extends Controller
         $context = Timber::get_context();
         $searchQuery = get_search_query();
 
-        $context['title'] = '<div class="text-6xl">Search results for</div><div class="text-red-500">' . htmlspecialchars($searchQuery) . '</div>';
-        $context['posts'] = Post::query([
-            's' => $searchQuery,
-        ]);
+        $context['title'] = 'Search results for <span class="text-red-500">' . htmlspecialchars($searchQuery) . '</span>';
+        $context['search_term'] = htmlspecialchars($searchQuery);
+        $context['entries'] = Timber::get_posts();
 
-
-        return new TimberResponse('pages/posts.twig', $context);
+        return new TimberResponse('templates/archive.twig', $context);
     }
 }
