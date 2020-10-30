@@ -23,7 +23,7 @@
         "rareloop/lumberjack-core": "^4.3",
         "roots/bedrock-autoloader": "^1.0",
         "roots/soil": "^3.8",
-        "roots/wordpress": "5.5.2",
+        "roots/wordpress": "5.5.3",
         "roots/wp-config": "1.0.0",
         "roots/wp-password-bcrypt": "1.0.0",
         "vlucas/phpdotenv": "^4.1.8",
