@@ -1,0 +1,37 @@
+<div class= "w-1/3  md:px-10 lg:px-20 py-20 self-auto align-middle">
+<div class="relative md:px-10 lg:px-20 py-20 self-auto align-middle">
+    {% include 'components/background.twig' with {
+        asset_type: 'image',
+        image: card.image,
+    } %}
+    {% include 'overlays/primary.twig'%}
+</div>
+        {# π ----
+        // :: CONTENT
+        // : ---------------------------------- #}
+<div class="relative w-full px-8 md:px-10 lg:px-20 self-auto align-middle">
+            {# :: Heading
+            {+} ---------------------------------- #}
+            {% include 'typography/h5.twig' with {
+                content: card.heading,
+                class: 'max-w-lg xl:max-w-5xl'
+            } %}
+            {# :: Sub-Heading
+            {+} ---------------------------------- #}
+            {% if card.subheading %}
+                {% include 'typography/h6.twig' with {
+                    content: card.subheading,
+                    class: 'mb-3 max-w-lg'
+                } %}
+            {% endif %}
+            </div>
+            {# :: Buttons
+            {+} ---------------------------------- #}
+        <div class="relative px-10 md:px-10 lg:px-10 self-auto align-middle">
+             {% if card.buttons %}
+                    {% include "components/buttons.twig" with {
+                        buttons: card.buttons
+                    } %}
+            {% endif %}
+        </div>
+    </div>

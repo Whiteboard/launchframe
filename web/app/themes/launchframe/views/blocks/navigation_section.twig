@@ -1,0 +1,27 @@
+<section class="container">
+    <div class="relative flex items-end rounded w-full h-full pt-64 pb-8 md:pb-10 lg:pb-32 bg-gray-900 text-white overflow-hidden">
+        {# π ----
+        // :: CONTENT
+        // : ---------------------------------- #}
+        <div class="relative w-full px-8 md:px-10 lg:px-64 self-auto align-middle">
+            {# :: Heading
+            {+} ---------------------------------- #}
+            
+            <div class="flex-col px-20">
+                {% for column in blockset.navigation_column %}
+                    {% for item in blockset.navigation_items %}
+                        {% include 'components/buttons.twig' with blockset.navigation_items %}
+                    {% endfor %}
+                {% endfor %}
+            
+            {% if blockset.navigation_column %}
+                <div class=" relative flex mt-8 space-x-4">
+                    {% include 'components/buttons.twig' with {
+                        buttons: blockset.navigation_items
+                    } %}
+                </div>
+            {% endif %}
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,28 @@
+<section class="container">
+    <div class="relative flex items-end rounded w-full h-full pt-64 pb-8 md:pb-10 lg:pb-32 bg-gray-900 text-white overflow-hidden">
+        {# π ----
+        // :: CONTENT
+        // : ---------------------------------- #}
+        <div class="relative w-full px-8 md:px-10 lg:px-64 self-auto align-middle">
+            {# :: Heading
+            {+} ---------------------------------- #}
+            {% include 'typography/h2.twig' with {
+                content: blockset.menu_heading,
+                class: 'max-w-lg xl:max-w-5xl'
+            } %}
+            {% include 'typography/h2.twig' with {
+                content: blockset.menu_list.lable,
+                class: 'max-w-lg xl:max-w-5xl'
+            } %}
+            </div>
+            <div class="flex-col px-20">
+              {% if blockset.menu_items %}
+                <div class=" relative flex mt-8 space-x-4">
+                    {% include 'components/buttons.twig' with {
+                        buttons: blockset.menu_items
+                    } %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</section>

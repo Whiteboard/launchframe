@@ -1,4 +1,5 @@
 {% for button in buttons %}
+<div>
     {% include "components/button.twig" with {
         label: button.label,
         action: button.action,
@@ -8,4 +9,5 @@
         color: color,
         class: class
     } %}
+    </div>
 {% endfor %}

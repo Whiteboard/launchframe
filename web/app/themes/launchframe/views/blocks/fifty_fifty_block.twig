@@ -1,0 +1,67 @@
+<section class="container">
+    <div class="relative flex 
+    {% if blockset.image_side == "Left" %}
+    flex-row
+    {% else %}
+    flex-row-reverse
+    {% endif %}
+    items-end rounded w-full h-full pt-16 pb-8 md:pb-10 lg:pb-16 bg-gray-900 text-white overflow-hidden">
+        {# π ----
+        // :: BACKGROUND
+        // : ---------------------------------- #}
+        
+           <div class="relative flex min-h-lg w-1/2">
+            {% include "components/background.twig" with {
+            asset_type: blockset.media.asset_type,
+            image: blockset.media.image,
+            mp4: blockset.media.mp4,
+            webm: blockset.media.webm,
+            poster: blockset.media.poster
+        } %}
+        </div>
+        
+        
+        {# π ----
+        // :: CONTENT
+        // : ---------------------------------- #}
+        <div class="relative flex min-h-lg w-1/2 ">
+            <div class="relative w-full px-8 md:px-10 lg:px-16">
+             {# :: Heading
+                {+} ---------------------------------- #}
+                {% include "typography/h2.twig" with {
+                    content: blockset.heading,
+                    class: "max-w-lg xl:max-w-5xl"
+                } %}
+                {# :: Sub-Heading
+                {+} ---------------------------------- #}
+                {% if blockset.sub_heading %}
+                    {% include "typography/h6.twig" with {
+                        content: blockset.sub_heading,
+                        class: "mb-3 max-w-lg"
+                    } %}
+                {% endif %}
+
+                {# :: Description
+                {+} ---------------------------------- #}
+                {% if blockset.description %}
+                    {% include "typography/paragraph.twig" with {
+                        content: blockset.description,
+                        class: "mt-6 max-w-lg"
+                    } %}
+                {% endif %}
+
+                {# :: Buttons
+                {+} ---------------------------------- #}
+                {% if blockset.buttons %}
+                    <div class="relative flex mt-8 space-x-4">
+                        {% include "components/buttons.twig" with {
+                            buttons: blockset.buttons
+                        } %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        
+       
+    </div>
+</section>

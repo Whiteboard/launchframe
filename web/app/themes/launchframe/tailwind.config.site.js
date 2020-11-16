@@ -16,7 +16,15 @@ module.exports = {
             colors: {
                 black: '#060c18'
             },
-
+            minHeight: {
+                sm: '16rem',
+                md: '20rem',
+                lg: '32rem',
+                mdplus: '25rem',
+                lgplus: '36rem',
+                xl: '40rem',
+                'screen-80': '80vh'
+            },
             fontFamily: {
                 mono: [
                     // Use a custom mono font for this site by changing 'Anonymous' to the

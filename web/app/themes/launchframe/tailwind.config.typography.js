@@ -39,7 +39,9 @@ module.exports = {
                     'blockquote p:first-of-type::before': {
                         content: 'none'
                     },
-
+                    strong: {
+                        color: '#FF0000'
+                    },
                     blockquote: {
                         borderColor: theme('colors.gray.400')
                     },

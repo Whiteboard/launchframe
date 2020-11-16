@@ -1,0 +1,81 @@
+{
+    "key": "group_5fad8ca1678a4",
+    "title": "Email Capture",
+    "fields": [
+        {
+            "key": "field_5fad8cb8c50a0",
+            "label": "Lable",
+            "name": "lable",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "acfe_permissions": "",
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_5fad8cc28ca98",
+            "label": "Input",
+            "name": "input",
+            "type": "acfe_forms",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "acfe_permissions": "",
+            "forms": "",
+            "field_type": "checkbox",
+            "default_value": "",
+            "return_format": "name",
+            "layout": "vertical",
+            "toggle": 0,
+            "allow_custom": 0,
+            "post_type": [],
+            "multiple": 0,
+            "allow_null": 0,
+            "choices": [],
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "left",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "acfe_display_title": "",
+    "acfe_autosync": [
+        "json"
+    ],
+    "acfe_permissions": "",
+    "acfe_form": 0,
+    "acfe_meta": "",
+    "acfe_note": "",
+    "modified": 1605209701
+}

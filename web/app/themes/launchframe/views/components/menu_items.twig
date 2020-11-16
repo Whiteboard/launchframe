@@ -1,0 +1,13 @@
+<{{ tag ? tag : "a" }}
+    {{ attribute }}
+    class="inline-flex items-center rounded px-8 py-4 bg-red-600 hover:bg-red-500
+    {{ color ? color : 'text-white' }}
+    text-xs leading-none tracking-wider font-expanded font-bold uppercase select-none whitespace-no-wrap cursor-pointer transition duration-300 ease-in-out
+    {{ class }}"
+
+    {% if not faux %}
+        {% include "components/button_attributes.twig" %}
+    {% endif %}
+>
+    {{ label }}
+</{{ tag ? tag : "a" }}>

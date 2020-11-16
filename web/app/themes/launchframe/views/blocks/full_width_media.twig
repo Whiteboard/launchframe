@@ -1,0 +1,26 @@
+<section>
+    <div class="relative flex items-end rounded w-full h-full pt-64 pb-8 md:pb-10 lg:pb-80 bg-gray-900 text-white overflow-hidden">
+        {# π ----
+        // :: BACKGROUND
+        // : ---------------------------------- #}
+        {% include "components/background.twig" with {
+            asset_type: blockset.media.asset_type,
+            image: blockset.media.image,
+            mp4: blockset.media.mp4,
+            webm: blockset.media.webm,
+            poster: blockset.media.poster
+        } %}
+
+        {# :: Overlays
+        {+} ---------------------------------- #}
+        <div class="absolute inset-x-0 bottom-0 w-full h-1/2 bg-gradient-to-t from-black to-transparent opacity-50"></div>
+        <div class="absolute right-0 top-0 w-full h-full bg-gradient-to-bl from-black to-transparent opacity-25"></div>
+        <div class="absolute left-0 inset-y-0 w-1/3 h-full bg-gradient-to-r from-black to-transparent opacity-25"></div>
+
+        {# π ----
+        // :: CONTENT
+        // : ---------------------------------- 
+        What did you expect?#}
+        
+    </div>
+</section>
