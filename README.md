@@ -32,7 +32,7 @@ cp .env.example .env
 
 **3. WordPress Setup** - If you're using [Laravel Valet](https://laravel.com/docs/valet), your site should be available at `http://my-site.test`. You can access the control panel at `http://my-site.test/wp/wp-admin` and login with once you setup WordPress. Once setup and you are logged in, you will need activate plugins and set the theme to Launchframe. Once the theme is activated with the plugins, you will need to sync the Launchframe ACF fields.
 
-**4. Compile the fontend assets** - the [TailwindCSS](https://tailwindcss.com/) & [Alpine](https://github.com/alpinejs/alpine/) compiled assets aren't included in this repo. You need to compile it yourself. Compilation is configured in `webpack.mix.js`. Make sure you add your hostname to your `.env` file (`WP_HOME`) as it's being used for Browsersync in `webpack.mix.js`.
+**4. Compile the fontend assets** - the [TailwindCSS](https://tailwindcss.com/) & [Alpine](https://github.com/alpinejs/alpine/) compiled assets aren't included in this repo. You need to compile it yourself. Compilation is configured in `webpack.mix.js`. Make sure you add your hostname to your `.env` file (`WP_HOME`) as it's being used for Browsersync in `webpack.mix.js`. Run `cd web/app/themes/launchframe` .
 ```bash
 npm i && npm run watch (or npm run dev)
 ```
