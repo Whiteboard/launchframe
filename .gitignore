@@ -26,3 +26,4 @@ web/.htaccess
 
 # WP-CLI
 wp-cli.local.yml
+.DS_Store
