@@ -65,8 +65,14 @@ module.exports = {
 
                     // :: Set Default Font ------------ //
                     // fontFamily: theme('fontFamily.mono').join(', '),
-                    fontFamily: theme('fontFamily.sans').join(', ')
+                    // fontFamily: theme('fontFamily.sans').join(', ')
                     // fontFamily: theme('fontFamily.serif').join(', '),
+
+                    fontFamily: {
+                        mono: [...defaultTheme.fontFamily.mono],
+                        sans: [...defaultTheme.fontFamily.sans],
+                        serif: [...defaultTheme.fontFamily.serif]
+                    },
                 },
 
                 '::selection': {

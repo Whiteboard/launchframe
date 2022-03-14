@@ -18,17 +18,11 @@ module.exports = {
         require('./tailwind.config.core.js'),
         require('./tailwind.config.site.js'),
         require('./tailwind.config.typography.js'),
-        require('./tailwind.config.forms.js')
     ],
 
     /* :: Opt in to future Tailwind features
     {+} ---------------------------------- */
-    future: {
-        applyComplexClasses: true,
-        purgeLayersByDefault: true,
-        standardFontWeights: true,
-        removeDeprecatedGapUtilities: true
-    },
+    future: {},
 
     /* :: Dark Mode
     {+} ---------------------------------- */
@@ -37,11 +31,7 @@ module.exports = {
     /* :: Experimental Features
     {+} ---------------------------------- */
     experimental: {
-        defaultLineHeights: true,
-        darkModeVariant: false,
-        extendedFontSizeScale: true,
-        extendedSpacingScale: true,
-        uniformColorPalette: true
+        darkModeVariant: false
     },
 
     /* :: Purge CSS
@@ -49,21 +39,20 @@ module.exports = {
     purge: {
         content: ['./views/**/*.twig', './assets/images/**/*.svg', './assets/js/**/*.js', './assets/js/**/*.vue'],
         options: {
-            whitelist: ['size-sm', 'size-md', 'size-lg', 'size-xl']
+            whitelist: ['size-sm', 'size-md', 'size-lg', 'size-xl', 'sr-only']
         }
     },
 
-    /* :: Define all variants available
+    /* :: Extend Variants
     {+} ---------------------------------- */
     variants: {
-        boxShadow: ['responsive', 'hover', 'focus', 'group-hover'],
-        backgroundColor: ['responsive', 'hover', 'focus', 'group-hover'],
-        opacity: ['responsive', 'hover', 'focus', 'group-hover'],
-        scale: ['responsive', 'hover', 'focus', 'group-hover'],
-        skew: ['responsive', 'hover', 'focus', 'group-hover'],
-        rotate: ['responsive', 'hover', 'focus', 'group-hover'],
-        textColor: ['responsive', 'hover', 'focus', 'group-hover'],
-        translate: ['responsive', 'hover', 'focus', 'group-hover'],
-        visibility: ['responsive', 'hover', 'focus', 'group-hover']
+        extend: {
+            scale: ['group-hover'],
+            skew: ['group-hover'],
+            rotate: ['group-hover'],
+            translate: ['group-hover'],
+            visibility: ['group-hover'],
+            zIndex: ['hover']
+        }
     }
 };

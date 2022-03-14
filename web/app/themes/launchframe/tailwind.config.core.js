@@ -5,16 +5,26 @@
 
 const _ = require('lodash');
 const plugin = require('tailwindcss/plugin');
+const colors = require('tailwindcss/colors');
 
 module.exports = {
     /* :: Theme
     {+} ---------------------------------- */
     theme: {
         extend: {
+            colors: {
+                gray: colors.trueGray,
+                red: colors.red,
+                yellow: colors.yellow,
+                green: colors.green,
+                cyan: colors.cyan,
+                teal: colors.teal
+            },
+
             container: {
                 center: true,
                 padding: {
-                    default: '2rem',
+                    DEFAULT: '1rem',
                     md: '4rem',
                     xl: '6rem'
                 }
@@ -25,8 +35,11 @@ module.exports = {
                 video: '56.25%'
             },
 
+            scale: {
+                '-1': '-1'
+            },
+
             screens: {
-                '2xl': '1536px',
                 max: '1680px'
             },
 
@@ -72,6 +85,8 @@ module.exports = {
     /* :: Plugins
     {+} ---------------------------------- */
     plugins: [
+        require('@tailwindcss/aspect-ratio'),
+        require('@tailwindcss/forms'),
         require('tailwindcss-blend-mode')(),
 
         // π ----
@@ -93,19 +108,19 @@ module.exports = {
                     display: 'block',
                     position: 'fixed',
                     zIndex: '99',
-                    top: theme('spacing.1'),
                     right: theme('spacing.1'),
-                    padding: theme('spacing.1'),
-                    border: '1px',
-                    borderStyle: 'solid',
-                    borderColor: theme('colors.red.300'),
+                    bottom: theme('spacing.1'),
+                    border: '2px',
                     borderRadius: theme('borderRadius.full'),
-                    backgroundColor: theme('colors.red.200'),
+                    padding: '0.5em 0.75em',
+                    borderStyle: 'solid',
+                    color: theme('colors.yellow.500'),
+                    borderColor: theme('colors.indigo.300'),
+                    backgroundColor: theme('colors.purple.700'),
+                    fontSize: '0.75rem',
                     fontFamily: theme('fontFamily.mono'),
-                    fontSize: '.5rem',
-                    color: theme('colors.black'),
+                    lineHeight: '1em',
                     textTransform: 'uppercase',
-                    fontWeight: theme('fontWeight.bold'),
                     content: '"-"',
                     pointerEvents: 'none'
                 },
@@ -222,6 +237,10 @@ module.exports = {
                 '.break-decent': {
                     wordBreak: 'break-word'
                 },
+
+                '.no-scrollbar': { scrollbarWidth: 'none' },
+
+                '.no-scrollbar::-webkit-scrollbar': { display: 'none' },
 
                 /* :: Grid Sizing Utilities
                 {+} ---------------------------------- */
