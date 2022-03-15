@@ -63,15 +63,17 @@
     "label_placement": "left",
     "instruction_placement": "label",
     "hide_on_screen": "",
-    "active": true,
+    "active": false,
     "description": "",
     "acfe_display_title": "",
     "acfe_autosync": [
         "json"
     ],
-    "acfe_permissions": "",
     "acfe_form": 0,
     "acfe_meta": "",
     "acfe_note": "",
-    "modified": 1605224779
+    "modified": 1647354479,
+    "acfe_categories": {
+        "block": "Block"
+    }
 }

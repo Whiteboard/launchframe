@@ -1,6 +1,6 @@
 {
     "key": "group_5fa8a88784ba3",
-    "title": "Media Fullwidth",
+    "title": "Media Full Width",
     "fields": [
         {
             "key": "field_5fa8a8919c105",
@@ -60,18 +60,17 @@
     "label_placement": "left",
     "instruction_placement": "label",
     "hide_on_screen": "",
-    "active": true,
+    "active": false,
     "description": "",
     "acfe_display_title": "",
     "acfe_autosync": [
         "json"
     ],
-    "acfe_permissions": "",
     "acfe_form": 0,
     "acfe_meta": "",
     "acfe_note": "",
-    "modified": 1604889055,
+    "modified": 1647354431,
     "acfe_categories": {
-        "module": "Module"
+        "block": "Block"
     }
 }

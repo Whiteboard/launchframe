@@ -1,11 +1,11 @@
 <section class="container">
-    <div class="relative flex 
+    <div class="relative flex items-center
     {% if blockset.image_side == "Left" %}
     flex-row
     {% else %}
     flex-row-reverse
     {% endif %}
-    items-end rounded w-full h-full pt-16 pb-8 md:pb-10 lg:pb-16 bg-gray-900 text-white overflow-hidden">
+    ">
         {# π ----
         // :: BACKGROUND
         // : ---------------------------------- #}
@@ -24,7 +24,7 @@
         {# π ----
         // :: CONTENT
         // : ---------------------------------- #}
-        <div class="relative flex min-h-lg w-1/2 ">
+        <div class="relative flex w-1/2 ">
             <div class="relative w-full px-8 md:px-10 lg:px-16">
              {# :: Heading
                 {+} ---------------------------------- #}

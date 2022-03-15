@@ -1,0 +1,41 @@
+<div class= "flex justify-between">
+    
+    <div class="relative w-1/5 min-h-sm">
+        {% include 'components/background.twig' with {
+            asset_type: 'image',
+            image: card.image,
+        } %}
+    </div>
+
+    <div class="py-8 w-3/4 flex justify-between items-center">
+
+        <div class="w-3/4">
+            {% if card.heading %}
+                {% include 'typography/h4.twig' with {
+                    content: card.heading
+                } %}
+            {% endif %}
+            {% if card.subheading %}
+                {% include 'typography/h6.twig' with {
+                    content: card.subheading
+                } %}
+            {% endif %}
+            {% if card.description %}
+                {% include 'typography/paragraph.twig' with {
+                    content: card.description,
+                    m_reset: "true"
+                } %}
+            {% endif %}
+        </div>
+
+        {% if card.buttons %}
+            <div class="relative w-1/5">
+                {% include "components/buttons.twig" with {
+                    buttons: card.buttons
+                } %}
+                </div>
+        {% endif %}
+        
+    </div>
+                
+</div>

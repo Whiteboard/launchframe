@@ -1,9 +1,7 @@
 <section class="container">
-    <div class="relative flex mb-4 items-end w-full pt-8 pb-8 md:pb-10 lg:pb-10 bg-gray-900 text-white overflow-hidden">
-        <div class="relative flex flex-col md:px-10 lg:px-20 py-20 self-auto align-middle">
-        {% for card in blockset.cards %}
-        {% include 'components/description_card.twig' %}
-        {% endfor %}
-        </div>
+    <div class="space-y-10">
+    {% for card in blockset.cards %}
+    {% include 'components/card_two.twig' %}
+    {% endfor %}
     </div>
 </section>

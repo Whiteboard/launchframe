@@ -31,7 +31,7 @@ mix.js(`${source}/js/site.js`, `${dist}/js`).extract(['alpinejs', 'gsap']).sourc
 
 mix
     .sass(`${source}/sass/site.scss`, `${dist}/css`)
-    // .sass(`${source}/sass/admin.scss`, `${dist}/css`)
+    .sass(`${source}/sass/admin.scss`, `${dist}/css`)
     .options({
         outputStyle: mix.inProduction() ? 'compressed' : 'expanded',
         processCssUrls: false,

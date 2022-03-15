@@ -1,6 +1,6 @@
 {
     "key": "group_5facbb7bde48f",
-    "title": "Description Card",
+    "title": "Card",
     "fields": [
         {
             "key": "field_5facbcd0ff51d",
@@ -38,6 +38,25 @@
                 "id": ""
             },
             "acfe_permissions": "",
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_6230a2576b53c",
+            "label": "Subheading",
+            "name": "subheading",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
             "default_value": "",
             "placeholder": "",
             "prepend": "",
@@ -103,15 +122,17 @@
     "label_placement": "left",
     "instruction_placement": "label",
     "hide_on_screen": "",
-    "active": true,
+    "active": false,
     "description": "",
     "acfe_display_title": "",
     "acfe_autosync": [
         "json"
     ],
-    "acfe_permissions": "",
     "acfe_form": 0,
     "acfe_meta": "",
     "acfe_note": "",
-    "modified": 1605225017
+    "modified": 1647354463,
+    "acfe_categories": {
+        "component": "Component"
+    }
 }

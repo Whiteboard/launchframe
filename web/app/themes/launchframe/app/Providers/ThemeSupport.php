@@ -66,7 +66,7 @@ class ThemeSupport extends ServiceProvider
             echo '<span id="footer-thankyou">Built with ♥ by <a href="https://whiteboard.is" target="_blank">Whiteboard</a></span>';
         });
 
-        add_theme_support('post-formats');
+        // add_theme_support('post-formats');
         add_theme_support('post-thumbnails');
         add_theme_support('menus');
 

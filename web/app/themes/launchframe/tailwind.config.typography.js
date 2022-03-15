@@ -6,6 +6,7 @@
  * More info: https://github.com/tailwindcss/typography.
  */
 
+const { borderColor } = require('tailwindcss/defaultTheme');
 const plugin = require('tailwindcss/plugin');
 
 module.exports = {
@@ -18,10 +19,12 @@ module.exports = {
 
                         a: {
                             color: theme('colors.teal.500'),
+                            fontWeight: 'bold',
                             textDecoration: 'none',
 
                             '&:hover': {
-                                color: theme('colors.teal.800')
+                                color: theme('colors.teal.800'),
+                                textDecoration: 'underline'
                             }
                         },
 
@@ -41,7 +44,7 @@ module.exports = {
                             content: 'none'
                         },
                         strong: {
-                            color: '#FF0000'
+                            fontWeight: 'bold'
                         },
                         blockquote: {
                             borderColor: theme('colors.gray.400')
