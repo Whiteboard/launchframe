@@ -13,10 +13,10 @@ module.exports = {
     theme: {
         extend: {
             colors: {
-                gray: colors.trueGray,
                 red: colors.red,
-                yellow: colors.yellow,
-                green: colors.green,
+                yellow: colors.amber,
+                green: colors.emerald,
+                purple: colors.violet,
                 cyan: colors.cyan,
                 teal: colors.teal
             },

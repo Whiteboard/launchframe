@@ -55,7 +55,7 @@
 {+} ---------------------------------- */
 .flickity-page-dots {
     .dot {
-        @apply bg-gray-700 opacity-100 transition duration-300 transform;
+        @apply bg-gray-700 opacity-100 transition duration-300;
 
         &:hover {
             @apply scale-125;
@@ -89,7 +89,7 @@
     /* :: Top Right Nav Position
     {+} ---------------------------------- */
     .flickity-prev-next-button {
-        @apply top-0 flex justify-center items-center w-5 h-5 bg-transparent transform -translate-y-full;
+        @apply top-0 flex justify-center items-center w-5 h-5 bg-transparent -translate-y-full;
 
         &.previous {
             @apply left-auto right-0 mr-24;

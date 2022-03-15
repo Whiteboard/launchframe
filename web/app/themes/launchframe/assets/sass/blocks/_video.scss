@@ -13,14 +13,14 @@ $plyr-font-family: 'GT America Expanded', sans-serif;
     /* :: Default Center Button
     {+} ---------------------------------- */
     .plyr__control--overlaid {
-        @apply bg-white text-gray-800 shadow-none p-5 transform -translate-x-1/2 -translate-y-1/2;
+        @apply bg-white text-gray-800 shadow-none p-5 -translate-x-1/2 -translate-y-1/2;
 
         @screen md {
             @apply p-8;
         }
 
         svg {
-            @apply transition-transform duration-300 ease-out-expo transform;
+            @apply transition-transform duration-300 ease-out-expo;
         }
 
         &:hover,

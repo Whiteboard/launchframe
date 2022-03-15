@@ -14,7 +14,7 @@ module.exports = {
     theme: {
         extend: {
             colors: {
-                black: '#060c18'
+                current: 'currentColor'
             },
             minHeight: {
                 sm: '16rem',

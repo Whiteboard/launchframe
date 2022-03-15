@@ -34,25 +34,23 @@ module.exports = {
         darkModeVariant: false
     },
 
-    /* :: Purge CSS
+    /* :: Content Options
     {+} ---------------------------------- */
-    purge: {
-        content: ['./views/**/*.twig', './assets/images/**/*.svg', './assets/js/**/*.js', './assets/js/**/*.vue'],
-        options: {
-            whitelist: ['size-sm', 'size-md', 'size-lg', 'size-xl', 'sr-only']
-        }
-    },
+    
+    content: ['./views/**/*.twig', './assets/images/**/*.svg', './assets/js/**/*.js', './assets/js/**/*.vue'],
+    safelist: ['size-sm', 'size-md', 'size-lg', 'size-xl', 'sr-only']
+    
 
     /* :: Extend Variants
     {+} ---------------------------------- */
-    variants: {
-        extend: {
-            scale: ['group-hover'],
-            skew: ['group-hover'],
-            rotate: ['group-hover'],
-            translate: ['group-hover'],
-            visibility: ['group-hover'],
-            zIndex: ['hover']
-        }
-    }
+    // variants: {
+    //     extend: {
+    //         scale: ['group-hover'],
+    //         skew: ['group-hover'],
+    //         rotate: ['group-hover'],
+    //         translate: ['group-hover'],
+    //         visibility: ['group-hover'],
+    //         zIndex: ['hover']
+    //     }
+    // }
 };
