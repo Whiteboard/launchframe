@@ -1,0 +1,98 @@
+{% extends "layouts/base.twig" %}
+
+{% block content %}
+
+<!-- <div class="bg-brand-purple h-36 md:h-60"></div> -->
+
+    <main class="py-20 space-y-20 container">
+
+        {% include 'typography/h1.twig' with {
+          content: "Heading 1 - Cras Tristique Parturient Cursus Nibh.",
+        } %}
+
+        {% include 'typography/h2.twig' with {
+            content: "Heading 2 — Cras Tristique Parturient Cursus Nibh."
+        } %}
+
+
+        {% include 'typography/h3.twig' with {
+            content: "Heading 3 - Cras Tristique Parturient Cursus Nibh"
+        } %}
+
+        {% include 'typography/h4.twig' with {
+            content: "Heading 4 - Cras Tristique Parturient Cursus Nibh",
+        } %}
+
+        {% include 'typography/paragraph.twig' with {
+          content: "p large. Mollis sapien, at vitae id at vestibulum nulla iaculis fames. Turpis a turpis in in urna arcu, lacus nunc. Diam pellentesque consequat maecenas eget at. Mollis sapien, at vitae id at vestibulum nulla iaculis fames. Turpis a turpis in in urna arcu, lacus nunc. Diam pellentesque consequat maecenas eget at.",
+          size: "lg",
+          m_reset: "true"
+      } %}
+
+        {% include 'typography/paragraph.twig' with {
+            content: "p regular. Mollis sapien, at vitae id at vestibulum nulla iaculis fames. Turpis a turpis in in urna arcu, lacus nunc. Diam pellentesque consequat maecenas eget at. Mollis sapien, at vitae id at vestibulum nulla iaculis fames. Turpis a turpis in in urna arcu, lacus nunc. Diam pellentesque consequat maecenas eget at.",
+            m_reset: "true"
+        } %}
+
+        {% include 'typography/paragraph.twig' with {
+            content: "p small. Mollis sapien, at vitae id at vestibulum nulla iaculis fames. Turpis a turpis in in urna arcu, lacus nunc. Diam pellentesque consequat maecenas eget at. Mollis sapien, at vitae id at vestibulum nulla iaculis fames. Turpis a turpis in in urna arcu, lacus nunc. Diam pellentesque consequat maecenas eget at.",
+            size: "sm",
+            m_reset: "true"
+        } %}
+
+        {% include 'typography/paragraph.twig' with {
+          content: "p extra-small. Mollis sapien, at vitae id at vestibulum nulla iaculis fames. Turpis a turpis in in urna arcu, lacus nunc. Diam pellentesque consequat maecenas eget at. Mollis sapien, at vitae id at vestibulum nulla iaculis fames. Turpis a turpis in in urna arcu, lacus nunc. Diam pellentesque consequat maecenas eget at.",
+          size: "xs",
+          m_reset: "true"
+      } %}
+
+        {% include 'typography/paragraph.twig' with {
+          content: "p label. Euismod Parturient Ultricies Sem Vehicula",
+          style: "label"
+      } %}
+
+        <div class="flex flex-col items-center md:flex-row md:px-4 space-y-4 md:space-y-0 md:space-x-6">
+        {% include "components/button.twig" with {
+            label: "Button Primary",
+            action: "url",
+            url: "#",
+            class: class
+        } %}
+        {% include "components/button.twig" with {
+          label: "Button Secondary",
+          action: "url",
+          url: "#",
+          style: "secondary",
+          class: class
+        } %}
+        </div>
+
+        <div class="flex flex-col items-center md:flex-row p-4 space-y-4 md:space-y-0 md:space-x-4 bg-black text-white">
+          {% include "components/button.twig" with {
+            label: "Button Primary",
+            action: "url",
+            url: "#",
+            class: class
+          } %}
+          {% include "components/button.twig" with {
+              label: "Button Secondary",
+              action: "url",
+              url: "#",
+              style: "secondary",
+              color: "text-white",
+              border: "border-white",
+              class: class
+          } %}
+          </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+
+            <div class="bg-black p-8 text-white">
+              black
+            </div>
+
+        </div>
+
+    </main>
+
+{% endblock %}

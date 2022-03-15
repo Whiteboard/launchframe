@@ -1,12 +1,19 @@
 <{{ tag ? tag : "p" }}
-    class="{{ color ? color : 'text-inherit' }}
+    {{ attribute }}
+    class="{{ color ? color : 'text-current' }}
 
-    {% if size == 'sm' %}
+    {% if size == 'xs' %}
+        text-xs
+    {% elseif size == 'sm' %}
         text-sm
     {% elseif size == 'lg' %}
         text-lg
     {% else %}
         text-base
+    {% endif %}
+
+    {% if style == 'label' %}
+        font-bold uppercase tracking-wide
     {% endif %}
 
     {# :: Default Paragraph Margin ------------ #}

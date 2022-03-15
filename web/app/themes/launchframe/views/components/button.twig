@@ -1,8 +1,14 @@
 <{{ tag ? tag : "a" }}
     {{ attribute }}
-    class="inline-flex items-center rounded px-8 py-4 bg-red-600 hover:bg-red-500
-    {{ color ? color : 'text-white' }}
-    text-xs leading-none tracking-wider font-expanded font-bold uppercase select-none whitespace-no-wrap cursor-pointer transition duration-300 ease-in-out
+    class="inline-flex items-center rounded px-8 py-4
+    text-xs leading-none tracking-wider font-expanded font-bold uppercase select-none whitespace-no-wrap cursor-pointer transition duration-300 ease-in-out hover:scale-105
+
+    {% if style == 'secondary' %}
+    border-2 {{ border ? border : 'border-red-600' }} {{ color ? color : 'text-red-600' }}
+    {% else %}
+    bg-red-600 {{ color ? color : 'text-white' }}
+    {% endif %}
+
     {{ class }}"
 
     {% if not faux %}
@@ -11,3 +17,4 @@
 >
     {{ label }}
 </{{ tag ? tag : "a" }}>
+
