@@ -24,6 +24,8 @@
         {% include "components/image.twig" with {
             image: Image(image).src,
             alt: Image(image).alt,
+            loading: loading,
+            size: size
         } %}
     {% endif %}
 </div>

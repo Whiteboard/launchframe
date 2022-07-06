@@ -1,25 +1,44 @@
 {% if image %}
-    {% if size == "1:1" %}
+
+    {% if size == "small" %}
         <picture>
             <source
                 srcset="
-                    {{ image | resize(2500, 2500) }} 2500w,
-                    {{ image | resize(1920, 1920) }} 1920w,
-                    {{ image | resize(1600, 1600) }} 1600w,
-                    {{ image | resize(1440, 1440) }} 1440w,
-                    {{ image | resize(1320, 1320) }} 1320w,
-                    {{ image | resize(1200, 1200) }} 1200w,
-                    {{ image | resize(1024, 1024) }} 1024w,
-                    {{ image | resize(800, 800) }} 800w,
-                    {{ image | resize(600, 600) }} 600w,
-                    {{ image | resize(375, 375) }} 375w"
+                    {{ image | resize(1024) }} 1024w,
+                    {{ image | resize(800) }} 800w,
+                    {{ image | resize(600) }} 600w,
+                    {{ image | resize(375) }} 375w"
                 sizes="auto"
             >
             <img
-                src="{{ image | resize(800, 800) }}"
+                class="absolute inset-0 w-full h-full {{ objectFit ? objectFit : 'object-cover'}} {{ imageClass }}"
+                src="{{ image | resize(800) }}"
                 alt="{{ alt }}"
+                loading="{{ loading ? loading : 'lazy' }}"
             >
         </picture>
+
+    {% elseif size == "medium" %}
+        <picture>
+            <source
+                srcset="
+                    {{ image | resize(1440) }} 1440w,
+                    {{ image | resize(1320) }} 1320w,
+                    {{ image | resize(1200) }} 1200w,
+                    {{ image | resize(1024) }} 1024w,
+                    {{ image | resize(800) }} 800w,
+                    {{ image | resize(600) }} 600w,
+                    {{ image | resize(375) }} 375w"
+                sizes="auto"
+            >
+            <img
+                class="absolute inset-0 w-full h-full {{ objectFit ? objectFit : 'object-cover'}} {{ imageClass }}"
+                src="{{ image | resize(800) }}"
+                alt="{{ alt }}"
+                loading="{{ loading ? loading : 'lazy' }}"
+            >
+        </picture>
+
 
     {% else %}
         <picture>
@@ -41,7 +60,9 @@
                 class="absolute inset-0 w-full h-full object-cover"
                 src="{{ image | resize(800) }}"
                 alt="{{ alt }}"
+                loading="{{ loading ? loading : 'lazy' }}"
             >
         </picture>
     {% endif %}
+
 {% endif %}
