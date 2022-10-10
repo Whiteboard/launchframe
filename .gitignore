@@ -1,7 +1,6 @@
 # Application
 web/app/plugins/*
 !web/app/plugins/.gitkeep
-!web/app/plugins/Clientside
 !web/app/plugins/advanced-custom-fields-pro
 !web/app/plugins/soil
 web/app/mu-plugins/*/

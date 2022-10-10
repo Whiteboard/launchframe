@@ -1,47 +1,40 @@
 {
     "name": "whiteboard/launchframe",
-    "type": "project",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Brett Bash",
-            "email": "brett@whiteboard.is",
-            "homepage": "https://whiteboard.is"
-        }
-    ],
+
     "repositories": [
         {
             "type": "composer",
-            "url": "https://wpackagist.org"
+            "url": "https://wpackagist.org",
+             "only": ["wpackagist-plugin/*", "wpackagist-theme/*"]
         }
     ],
+
     "require": {
-        "php": ">=7.2",
-        "composer/installers": "^1.7",
-        "oscarotero/env": "^1.2.0",
-        "rareloop/lumberjack-core": "^4.3",
-        "roots/soil": "^3.8",
-        "roots/wordpress": "5.2.4",
+        "php": ">=8.0",
+        "composer/installers": "^2.2",
+        "roots/soil": "^4.1.1",
+        "roots/wordpress": "6.0.2",
         "roots/wp-config": "1.0.0",
-        "roots/wp-password-bcrypt": "1.0.0",
-        "vlucas/phpdotenv": "^3.6.0",
-        "wpackagist-plugin/all-in-one-wp-migration": "^7.9",
-        "wpackagist-plugin/autodescription": "^4.0.1",
-        "wpackagist-plugin/disable-gutenberg": "^1.9",
-        "wpackagist-plugin/duplicate-post": "^3.2.2",
-        "wpackagist-plugin/goodbye-captcha": "^3.1.28",
-        "wpackagist-plugin/minify-html-markup": "^1.99",
-        "wpackagist-plugin/timber-library": "^1.12.0"
+        "roots/wp-password-bcrypt": "1.1.0",
+        "vlucas/phpdotenv": "^5.4",
+        "wpackagist-plugin/all-in-one-wp-migration": "^7.65",
+        "wpackagist-plugin/autodescription": "^4.2.5",
+        "wpackagist-plugin/duplicate-post": "^4.5",
+        "wpackagist-plugin/goodbye-captcha": "^3.1.43",
+        "wpackagist-plugin/minify-html-markup": "^2.02"
     },
+
     "require-dev": {
         "squizlabs/php_codesniffer": "^3.4.2",
         "roave/security-advisories": "dev-master"
     },
+
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
         "sort-packages": true
     },
+
     "minimum-stability": "dev",
     "prefer-stable": true,
     "extra": {
