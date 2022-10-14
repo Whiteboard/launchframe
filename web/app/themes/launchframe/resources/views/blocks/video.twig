@@ -1,0 +1,74 @@
+<section
+  class="max-w-5xl mx-auto px-6"
+  x-ref="container"
+  x-data
+>
+  <div
+    class="relative h-80 md:h-120 overflow-hidden flex flex-col justify-end p-10"
+    x-data="fadeIn()"
+    x-cloak
+    x-init="
+        translate = 'y';
+        yStart = 10;
+        start = 'top 90%';
+        scrollTrigger = true;
+        $nextTick(() => {
+            trigger = $refs.container;
+            mounted();
+        });
+    "
+    x-ref="element"
+    >
+    {% include "components/background.twig" with {
+      asset_type: blockset.background.asset_type,
+      image: blockset.background.image,
+      mp4: blockset.background.mp4,
+      webm: blockset.background.webm,
+      poster: blockset.background.poster,
+    } %}
+    <div class="absolute inset-x-0 bottom-0 w-full h-1/2 bg-gradient-to-t from-black to-transparent opacity-50"></div>
+    <div class="absolute right-0 top-0 w-full h-full bg-gradient-to-bl from-black to-transparent opacity-25"></div>
+    <div class="absolute left-0 inset-y-0 w-1/3 h-full bg-gradient-to-r from-black to-transparent opacity-25"></div>
+    <div
+      x-ref="videoSection"
+      x-data
+    >
+    </div>
+    {% include "typography/h4.twig" with {
+      content: blockset.video_title,
+      color: "text-white",
+      class: "hidden md:block relative z-10 max-w-xl",
+      tag: "h2"
+    }%}
+    {% include "typography/h4.twig" with {
+      content: blockset.video_title,
+      color: "text-white",
+      class: "md:hidden relative z-10 max-w-xl",
+      tag: "h2",
+    }%}
+
+        <div
+            class="absolute w-full h-full inset-0 flex justify-center items-center"
+        >
+
+            <div
+                x-data="magnetic()"
+                x-ref="element"
+                @mousemove="magnetize($event, $el, $refs.element)"
+                @mouseleave="demagnetize($refs.element)"
+                class="flex"
+            >
+
+                {% include "components/button_play.twig" with {
+                    tag: "button",
+                    action: "video",
+                    video_source: blockset.video_type,
+                    video_mp4: blockset.local.url,
+                    video_poster: blockset.poster,
+                    video_id: blockset.video_id
+                } %}
+            </div>
+
+        </div>
+    </div>
+</section>

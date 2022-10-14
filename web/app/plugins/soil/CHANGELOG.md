@@ -1,3 +1,43 @@
+### 4.1.1: August 1st, 2022
+* Fix version number
+
+### 4.1.0: August 1st, 2022
+* Fix: XSS vulnerability on `language_attributes`
+* Fix: Clean up - re-add disabling extra RSS feeds
+* Fix: Nav walker - CPT items active classes
+* Fix: PHP 8.1 notices
+* Add: WPCS security and compatibility checks
+
+### 4.0.5: July 27th, 2021
+* Fix fallback autoloader compatibility with similarly named class names in other namespaces
+* Google Analytics module: support checking production environment type via `wp_get_environment_type()`
+
+### 4.0.4: September 10th, 2020
+* Fix Google Analytics options: correctly support non-array default option
+
+### 4.0.3: September 8th, 2020
+* Relative URLs module: Ensure `srcset` value is array
+
+### 4.0.2: September 8th, 2020
+* Cleanup module: Fix notice for self-closing tags on site icon meta
+
+### 4.0.1: August 31st, 2020
+* Add fallback autoloader when Composer isn't present
+
+### 4.0.0: August 29th, 2020
+* BREAKING CHANGE - Refactor entire code base
+* Add options support for modules
+* Remove oEmbed wrapper due to incompatibility with Gutenberg
+
+### 3.9.0: December 7th, 2019
+* Enable beacon tracking for Google Analytics ([#243](https://github.com/roots/soil/pull/243))
+* Add support for GitHub Updater plugin ([#241](https://github.com/roots/soil/pull/241))
+* Add AJAX support for relative URLs module ([#215](https://github.com/roots/soil/pull/236))
+* Fix script cleanup error with single quotes (this was causing JS errors in the WP customizer) ([#224](https://github.com/roots/soil/pull/224))
+* Check if is a search page before adding active class to menu item ([#223](https://github.com/roots/soil/pull/223))
+* Move addition/removal of nav filters to walk function ([#236](https://github.com/roots/soil/pull/2236))
+* Add Google Optimize support for Google Analytics module ([#215](https://github.com/roots/soil/pull/215))
+
 ### 3.8.1: May 23rd, 2019
 * Update version in plugin headers correctly ([#231](https://github.com/roots/soil/pull/231))
 

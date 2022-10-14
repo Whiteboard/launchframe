@@ -1,0 +1,12 @@
+{% for button in buttons %}
+    <div>
+        {% include "components/button.twig" with {
+            label: button.label,
+            action: button.action,
+            url: button.url,
+            entry: button.entry,
+            new_window: button.new_window,
+            class: class,
+        } %}
+    </div>
+{% endfor %}

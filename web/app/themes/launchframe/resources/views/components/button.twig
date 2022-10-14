@@ -1,0 +1,31 @@
+{% if not no_magnetic %}
+    <div
+        x-data="magnetic()"
+        x-ref="element"
+        @mousemove="magnetize($event, $el, $refs.element)"
+        @mouseleave="demagnetize($refs.element)"
+        class="relative inline-flex hover:z-10"
+    >
+{% endif %}
+
+<{{ as ? as : "a" }}
+    {{ attribute }}
+    class="
+        inline-flex items-center justify-between
+        leading-none select-none whitespace-no-wrap cursor-pointer hover:text-primary
+        transition group
+        {{ class }}
+    "
+
+    {% if not faux %}
+        {% include "components/button_attributes.twig" %}
+    {% endif %}
+>
+
+    {{ label }}
+
+</{{ as ? as : "a" }}>
+
+{% not no_magnetic %}
+    </div>
+{% endif %}

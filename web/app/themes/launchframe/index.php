@@ -22,6 +22,6 @@ class IndexController extends Controller
         $context = Timber::get_context();
         $context['posts'] = Post::all();
 
-        return new TimberResponse('pages/posts.twig', $context);
+        return new TimberResponse('templates/posts.twig', $context);
     }
 }

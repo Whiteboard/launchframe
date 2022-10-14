@@ -1,0 +1,26 @@
+@import 'tailwindcss/base';
+@import 'custom';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* / π ----
+// :: LOCAL FONTS ---------------------------::
+// ____ */
+
+/* @font-face {
+    font-family: 'GT America Mono';
+    src: url('../fonts/GTAmericaMono-RegularItalic.woff2') format('woff2'),
+        url('../fonts/GTAmericaMono-RegularItalic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'GT America Mono';
+    src: url('../fonts/GTAmericaMono-Regular.woff2') format('woff2'),
+        url('../fonts/GTAmericaMono-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+} */

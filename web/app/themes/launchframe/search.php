@@ -8,7 +8,6 @@ namespace App;
 
 use App\Http\Controllers\Controller;
 use Rareloop\Lumberjack\Http\Responses\TimberResponse;
-use Rareloop\Lumberjack\Post;
 use Timber\Timber;
 
 class SearchController extends Controller
@@ -18,12 +17,21 @@ class SearchController extends Controller
         $context = Timber::get_context();
         $searchQuery = get_search_query();
 
-        $context['title'] = '<div class="text-6xl">Search results for</div><div class="text-red-500">' . htmlspecialchars($searchQuery) . '</div>';
-        $context['posts'] = Post::query([
-            's' => $searchQuery,
-        ]);
+        $context['title'] = 'Search Results';
 
+        $context['query'] = htmlspecialchars($searchQuery);
 
-        return new TimberResponse('pages/posts.twig', $context);
+        global $wp_query;
+        $count = $wp_query->found_posts;
+
+        if($count == 1) {
+            $context['result'] = 'We found ' . $count . ' result for ' . htmlspecialchars($searchQuery) . '</span>';
+        } else {
+            $context['result'] = 'We found ' . $count . ' results for ' . htmlspecialchars($searchQuery) . '</span>';
+        }
+
+        $context['entries'] = Timber::get_posts();
+
+        return new TimberResponse('templates/search.twig', $context);
     }
 }

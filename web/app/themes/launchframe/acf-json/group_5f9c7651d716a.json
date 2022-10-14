@@ -1,0 +1,148 @@
+{
+    "key": "group_5f9c7651d716a",
+    "title": "CTA",
+    "fields": [
+        {
+            "key": "field_5f9c7651da2b3",
+            "label": "Subtitle",
+            "name": "babytitle",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_5f9c7651da2ac",
+            "label": "Title",
+            "name": "title",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_5f9c7651da2b9",
+            "label": "Buttons",
+            "name": "buttons",
+            "type": "clone",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "acfe_permissions": "",
+            "clone": [
+                "group_5f7ebc10c437c"
+            ],
+            "display": "seamless",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 0,
+            "acfe_seamless_style": 0,
+            "acfe_clone_modal": 0,
+            "acfe_clone_modal_close": 0,
+            "acfe_clone_modal_button": "",
+            "acfe_clone_modal_size": "large"
+        },
+        {
+            "key": "field_5f9c7651da2be",
+            "label": "Media",
+            "name": "media",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "acfe_repeater_stylised_button": 1,
+            "layout": "block",
+            "pagination": 0,
+            "min": 0,
+            "max": 1,
+            "collapsed": "field_6348f63cbae73",
+            "button_label": "Add Media",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_6348f63cbae73",
+                    "label": "Background",
+                    "name": "background",
+                    "type": "clone",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "clone": [
+                        "group_5f5bc683a468d"
+                    ],
+                    "display": "seamless",
+                    "layout": "block",
+                    "prefix_label": 0,
+                    "prefix_name": 0,
+                    "acfe_seamless_style": 0,
+                    "acfe_clone_modal": 0,
+                    "acfe_clone_modal_close": 0,
+                    "acfe_clone_modal_button": "",
+                    "acfe_clone_modal_size": "large",
+                    "parent_repeater": "field_5f9c7651da2be"
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "!=",
+                "value": "all"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "left",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": false,
+    "description": "",
+    "show_in_rest": 0,
+    "acfe_display_title": "",
+    "acfe_autosync": [
+        "json"
+    ],
+    "acfe_form": 0,
+    "acfe_meta": "",
+    "acfe_note": "",
+    "modified": 1665726237
+}

@@ -1,0 +1,11 @@
+<div
+    x-data="cursor()"
+    x-init="start()"
+    x-ref="cursorContainer"
+    class="absolute z-50 inset-0 w-0 h-0 invisible pointer-events-none"
+>
+    {% include "components/cursor/layers/bottom-layer.twig" %}
+    {% include "components/cursor/layers/middle-layer.twig" %}
+    {% include "components/cursor/layers/top-layer.twig" %}
+    {% include "components/cursor/layers/cursor-layer.twig" %}
+</div>

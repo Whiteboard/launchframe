@@ -1,0 +1,55 @@
+<header class="fixed z-30 top-0 w-full pt-6">
+
+    <a class="skip-link" href="#maincontent">
+        Skip to content
+    </a>
+
+    <div class="fluid-container">
+        <div class="relative flex justify-between items-center p-2 bg-neutral-100 text-neutral-800 rounded-full">
+
+            <div
+                x-data="fadeIn()"
+                x-init="
+                    scrollTrigger = false;
+                    delay = $store.enterDelay + 0.2;
+                    mounted();
+                "
+                x-cloak
+                x-ref="element"
+                class=""
+            >
+                {% include "components/logo.twig" %}
+            </div>
+
+            <div class="flex items-center space-x-6 lg:space-x-12">
+
+                <div
+                    x-data="fadeIn()"
+                    x-init="
+                        scrollTrigger = false;
+                        delay = $store.enterDelay + 0.4;
+                        mounted();
+                    "
+                    x-cloak
+                    x-ref="element"
+                    class=""
+                >
+
+                    <button
+                        @click.prevent="$store.navigator.toggle()"
+                        class="block text-current transition duration-300 ease-in-out hover:text-brand-orange focus:text-brand-orange"
+                    >
+                        <div class="flex flex-col justify-center w-16 h-16 p-4 space-y-[4px] bg-white rounded-full">
+                            <div class="w-full h-[2px] bg-primary"></div>
+                            <div class="w-full h-[2px] bg-primary"></div>
+                            <div class="w-full h-[2px] bg-primary"></div>
+                        </div>
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</header>

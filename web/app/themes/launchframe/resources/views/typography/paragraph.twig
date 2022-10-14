@@ -1,0 +1,10 @@
+<{{ as ? as : "p" }}
+    {{ attribute }}
+    class="
+        {{ color ? color : "text-current" }}
+        {{ margins ? margins : "mt-0 mb-8 last:mb-0" }}
+        {{ class }}
+    "
+>
+    {{ content }}
+</{{ as ? as : "p" }}>

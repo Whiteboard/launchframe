@@ -1,0 +1,39 @@
+<!doctype html>
+<html {{ site.language_attributes }}>
+    {% include "modules/html_header.twig" %}
+
+    <body
+        data-portal="realm"
+        class="
+            text-base antialiased
+            {{ environment == "development" ? "debug" : "" }}
+        "
+    >
+
+        {% include "modules/loaders.twig" %}
+        {% include "modules/lightbox_video.twig" %}
+        {% include "components/toolbar.twig" %}
+
+        <div
+            data-portal="destination"
+            data-portal-namespace="primary"
+            class="{{ body_class }}"
+        >
+
+            {% include "modules/header.twig" %}
+            {# {% include "modules/nav_overlay.twig" %} #}
+
+            <div id="maincontent"></div>
+
+            {% block content %}
+            {% endblock %}
+
+            {% include "modules/footer.twig" %}
+        </div>
+
+        {# {% include "components/cursor.twig" %} #}
+
+        {{ function("wp_footer") }}
+        {% include "snippets/browser_sync.twig" %}
+    </body>
+</html>

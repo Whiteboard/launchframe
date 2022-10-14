@@ -1,0 +1,13 @@
+{% extends "layouts/base.twig" %}
+
+{% block content %}
+    {% include "modules/hero.twig" with {
+        hero: page.get_field("hero")
+    }%}
+
+    <main>
+        {% for blockset in page.get_field("blocks").sets %}
+            {% include "blocks/#{blockset.acf_fc_layout}.twig" %}
+        {% endfor %}
+    </main>
+{% endblock %}

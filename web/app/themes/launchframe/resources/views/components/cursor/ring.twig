@@ -1,0 +1,14 @@
+<div class="absolute left-0 top-0 {{ size ? size : "w-10 h-10" }} transform -translate-x-1/2 -translate-y-1/2">
+
+    <div
+        x-ref="{{ ref ? ref : "ring" }}"
+        class="
+            w-full h-full
+            {{ border_size ? border_size : "border" }}
+            {{ border_color }}
+            rounded-full {{ class }}
+        "
+    >
+    </div>
+
+</div>

@@ -1,0 +1,23 @@
+<div
+    x-ref="layerBottom"
+    class="fixed z-50 top-0 left-0"
+>
+    {# :: Default Cursor Hover
+    {+} ---------------------------------- #}
+    {% include "components/cursor/ring.twig" with {
+        size: "w-16 h-16",
+        border_color: "border-brand-orange",
+        class: "opacity-0"
+    } %}
+
+    {# :: Click -------------- #}
+    {% include "components/cursor/dot.twig" with {
+        ref: "pulse",
+        size: "w-16 h-16"
+    } %}
+
+    {% include "components/cursor/text-spin.twig" with {
+        ref: "loaderCursor"
+    } %}
+
+</div>

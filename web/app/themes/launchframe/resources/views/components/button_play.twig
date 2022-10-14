@@ -1,0 +1,13 @@
+<{{ tag ? tag : "button" }}
+    class="relative flex justify-center items-center w-24 h-24 group"
+    title="Play"
+    {% include "components/button_attributes.twig" %}
+>
+
+    <span class="absolute inset-0 w-full h-full rounded-full bg-brand-orange group-hover:scale-110 transition duration-300 ease-out-expo"></span>
+
+    <svg class="relative ml-1 w-4 text-brand-cream group-hover:text-white group-hover:scale-125 transition duration-300 ease-out-expo" viewBox="0 0 21 26">
+        <path d="M0 0V26L20.4286 13L0 0Z" fill="currentColor" />
+    </svg>
+
+</{{ tag ? tag : "a" }}>

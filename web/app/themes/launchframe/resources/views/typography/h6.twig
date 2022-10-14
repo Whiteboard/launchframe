@@ -1,0 +1,10 @@
+<{{ as ? as : "h6" }}
+    {{ attribute }}
+    class="
+        {{ color ? color : "text-inherit" }}
+        font-sans text-lg lg:text-xl leading-tight
+        {{ class }}
+    "
+>
+    {{ content }}
+</{{ as ? as : "h6" }}>

@@ -20,16 +20,14 @@ class Assets extends ServiceProvider
     public function boot()
     {
         add_action('wp_enqueue_scripts', function () {
-            wp_enqueue_style('launchframe-styles', self::version('css/main.css', 'dist'), false);
+            wp_enqueue_style('launchframe-styles', self::version('css/site.css', 'public/'), false);
             wp_deregister_script('jquery');
-            wp_enqueue_script('manifest-scripts', self::version('js/manifest.js', 'dist'), array(), false, true);
-            wp_enqueue_script('vendor-scripts', self::version('js/vendor.js', 'dist'), array(), false, true);
-            wp_enqueue_script('launchframe-scripts', self::version('js/main.js', 'dist'), array(), false, true);
+            wp_enqueue_script('launchframe-scripts', self::version('js/site.js', 'public/'), array(), false, true);
         }, 100);
     }
 
     /* π ----
-    // :: LARAVEL MIX MANIFEST PROCESSING
+    // :: VITE MANIFEST PROCESSING
     // : ---------------------------------- */
     private function version($path, $manifestDirectory = '')
     {
@@ -49,7 +47,7 @@ class Assets extends ServiceProvider
 
         if (!$manifest) {
             if (!file_exists($manifestPath = get_stylesheet_directory() . $manifestDirectory . '/mix-manifest.json')) {
-                throw new \Exception('The Mix manifest does not exist.');
+                throw new \Exception('The Vite manifest does not exist.');
             }
 
             $manifest = json_decode(file_get_contents($manifestPath), true);
@@ -57,8 +55,8 @@ class Assets extends ServiceProvider
 
         if (!array_key_exists($path, $manifest)) {
             throw new \Exception(
-                "Unable to locate Mix file: {$path}. Please check your " .
-                    'webpack.mix.js output paths and try again.'
+                "Unable to locate Vite file: {$path}. Please check your " .
+                    'vite.config.js output paths and try again.'
             );
         }
 

@@ -1,0 +1,22 @@
+<div
+    class="
+        {{ size ? size : "w-24 h-24" }}
+        {{ color ? color : "text-brand-orange" }}
+        absolute left-0 top-0
+        transform -translate-x-1/2 -translate-y-1/2
+    "
+>
+
+    <div class="relative w-full h-full overflow-hidden">
+        <div
+            x-ref="{{ ref ? ref : "logoCursor" }}"
+            class="
+                w-full h-full fill-current
+                {{ class }}
+            "
+        >
+            {{ source("assets/images/logomark.svg") }}
+        </div>
+    </div>
+
+</div>

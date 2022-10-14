@@ -1,0 +1,20 @@
+<div
+    class="absolute left-0 top-0 {{ size ? size : "w-3 h-3" }} transform -translate-x-1/2 -translate-y-1/2"
+>
+    <div
+        x-ref="{{ ref ? ref : "dot" }}"
+        class="
+            w-full h-full
+            {{ background ? background : "bg-white" }}
+
+            {% if border %}
+                {{ border_size ? border_size : "border" }}
+                {{ border_color ? border_color : "border-white" }}
+            {% endif %}
+
+            rounded-full {{ opacity ? opacity : "opacity-0" }}
+        "
+    >
+        {{ slot }}
+    </div>
+</div>

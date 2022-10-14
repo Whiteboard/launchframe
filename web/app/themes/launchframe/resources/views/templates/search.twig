@@ -1,0 +1,17 @@
+{% extends "layouts/base.twig" %}
+
+{% block content %}
+    <main>
+
+        {% include "modules/hero.twig" with {
+            headline: title,
+        }%}
+
+        <div class="fluid-container grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-x-6 gap-y-10">
+            {% for entry in entries %}
+                    <div class="p-8 bg-neutral-100 text-neutral rounded-lg">{{ entry.title }}</div>
+            {% endfor %}
+        </div>
+
+    </main>
+{% endblock %}

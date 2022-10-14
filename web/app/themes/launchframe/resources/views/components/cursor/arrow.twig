@@ -1,0 +1,17 @@
+<div
+    class="absolute left-0 top-0 {{ size ? size : "w-16 h-16" }} transform -translate-x-1/2 -translate-y-1/2"
+    {% if color_style == "light" %}
+        :class="$store.bike.make === 'indian' ? 'text-maroon-300' : 'text-orange-300'"
+    {% else %}
+        :class="$store.bike.make === 'indian' ? 'text-maroon' : 'text-orange'"
+    {% endif %}
+>
+    <div
+        x-ref="{{ ref ? ref : "arrowRight" }}"
+        class="w-full {{ color ? color : "text-inherit" }} opacity-0"
+    >
+        <div class="w-full {{ direction == "left" ? "transform -scale-1" : "" }}">
+            {# {{ svg:visuals/arrow-right class="w-full stroke-current transition-colors" }} #}
+        </div>
+    </div>
+</div>

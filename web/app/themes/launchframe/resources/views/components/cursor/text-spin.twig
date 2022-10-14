@@ -1,0 +1,12 @@
+<div
+    class="absolute left-0 top-0 {{ size ? size : "w-24 h-24" }} transform -translate-x-1/2 -translate-y-1/2"
+>
+    <div
+        x-ref="{{ ref ? ref : "loaderCursor" }}"
+        class="w-full h-full {{ color ? color : "text-brand-tan" }} w-full transition-colors opacity-0"
+    >
+        <div class="w-full h-full animate-spin-slow">
+            {{ source("assets/images/loading.svg") }}
+        </div>
+    </div>
+</div>

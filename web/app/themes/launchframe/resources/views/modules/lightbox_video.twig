@@ -1,0 +1,63 @@
+<div
+    x-data="lightboxVideo()"
+    x-show="$store.lightboxVideo.open"
+    x-trap="$store.lightboxVideo.open"
+    @keydown.window.escape="close()"
+    x-cloak
+    class="dialog fixed z-50 inset-0 flex w-full h-screen overflow-hidden py-12"
+>
+    {# π ----
+    // :: BACKGROUND
+    // : ---------------------------------- #}
+    <div x-ref="background" class="absolute inset-0 flex w-full h-full bg-brand-cream"></div>
+
+    {# :: Content
+    {+} ---------------------------------- #}
+    <div class="fluid-container relative flex w-full justify-center items-center overflow-y-auto">
+        <div class="relative w-full max-w-7xl mx-auto">
+            <div class="relative w-full select-none">
+
+                {# π ----
+                // :: PLAYER CONTAINER
+                // : ---------------------------------- #}
+                <div x-ref="screen" class="relative w-full opacity-0">
+                    {# :: Custom Player
+                    {+} ---------------------------------- #}
+                    <video
+                        x-show="$store.lightboxVideo.source !== 'vimeo'"
+                        id="video-lightbox"
+                    ></video>
+
+                    {# :: Vimeo Player
+                    {+} ---------------------------------- #}
+                    <div
+                        x-show="$store.lightboxVideo.source === 'vimeo'"
+                        x-ref="player"
+                        class="aspect-w-16 aspect-h-9"
+                    ></div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    {# :: Close Button
+    {+} ---------------------------------- #}
+    <div
+        x-ref="button"
+        class="absolute right-8 top-8 opacity-0 invisible"
+    >
+        <div
+            class="flex"
+        >
+            <button
+                @click="close()"
+                class="text-brand-umber w-8 h-8 transform hover:scale-125 transition-transform duration-500 ease-in-out-circ"
+                aria-label="Close"
+            >
+                {{ source("resources/images/close.svg") }}
+            </button>
+        </div>
+    </div>
+</div>

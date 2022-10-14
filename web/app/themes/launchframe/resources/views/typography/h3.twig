@@ -1,0 +1,10 @@
+<{{ as ? as : "h3" }}
+    {{ attribute }}
+    class="
+        {{ color ? color : "text-inherit" }}
+        font-sans text-3xl md:text-4xl lg:text-5xl leading-none
+        {{ class }}
+    "
+>
+    {{ content }}
+</{{ as ? as : "h3" }}>

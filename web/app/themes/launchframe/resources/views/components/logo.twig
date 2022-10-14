@@ -1,0 +1,15 @@
+{% if attribute %}
+    <div {{ attribute }}>
+{% endif %}
+
+    <a
+        href="{{ site.link }}"
+        class="flex justify-center items-center w-16 h-16 p-3 bg-primary text-white rounded-full"
+        aria-label="{{ site.name }}"
+    >
+        {{ source("resources/images/logo.svg") }}
+    </a>
+
+{% if attribute %}
+    </div>
+{% endif %}
