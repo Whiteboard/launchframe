@@ -5,7 +5,13 @@
         hero: page.get_field("hero")
     }%}
 
-    <main>
+    <main
+        class="
+            relative outer-grid overflow-hidden
+            {{ not page.get_field("blocks").spacing_top ? "!pt-0" : "" }}
+            {{ not page.get_field("blocks").spacing_bottom ? "!pb-0" : "" }}
+        "
+    >
         {% for blockset in page.get_field("blocks").sets %}
             {% include "blocks/#{blockset.acf_fc_layout}.twig" %}
         {% endfor %}

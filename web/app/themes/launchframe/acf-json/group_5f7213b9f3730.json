@@ -6,6 +6,7 @@
             "key": "field_5f7213ba03e1f",
             "label": "Sets",
             "name": "sets",
+            "aria-label": "",
             "type": "flexible_content",
             "instructions": "",
             "required": 0,
@@ -27,6 +28,7 @@
                             "key": "field_62e4419eaf48f",
                             "label": "Block",
                             "name": "block",
+                            "aria-label": "",
                             "type": "clone",
                             "instructions": "",
                             "required": 0,
@@ -71,6 +73,7 @@
                             "key": "field_628d161bd736d",
                             "label": "Block",
                             "name": "block",
+                            "aria-label": "",
                             "type": "clone",
                             "instructions": "",
                             "required": 0,
@@ -132,6 +135,7 @@
                             "key": "field_6298bfdb96282",
                             "label": "Block",
                             "name": "block",
+                            "aria-label": "",
                             "type": "clone",
                             "instructions": "",
                             "required": 0,
@@ -193,6 +197,46 @@
                 "acfe_flexible_modal_col": "4",
                 "acfe_flexible_modal_categories": false
             }
+        },
+        {
+            "key": "field_6351c7e58c7c4",
+            "label": "Spacing Top",
+            "name": "spacing_top",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 1,
+            "ui_on_text": "",
+            "ui_off_text": "",
+            "ui": 1
+        },
+        {
+            "key": "field_6351c80f8c7c5",
+            "label": "Spacing Bottom",
+            "name": "spacing_bottom",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 1,
+            "ui_on_text": "",
+            "ui_off_text": "",
+            "ui": 1
         }
     ],
     "location": [
@@ -226,5 +270,5 @@
     "acfe_form": 0,
     "acfe_meta": "",
     "acfe_note": "",
-    "modified": 1665726154
+    "modified": 1666304026
 }

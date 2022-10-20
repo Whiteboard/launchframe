@@ -1,0 +1,8 @@
+{#
+	@name No Block Spacing
+	@desc Removes the top spacing from a block (only if there is a sibling block above)
+#}
+
+{% if blockset.set_top_padding == false and loop.index != 1 %}
+    -mt-12 md:-mt-16 lg:-mt-24 2xl:-mt-32
+{% endif %}

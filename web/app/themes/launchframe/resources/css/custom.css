@@ -9,13 +9,20 @@
 @layer utilities {
 }
 
-/* :: Slider
-{+} ---------------------------------- */
-/* .flickity-viewport {
-    cursor: inherit !important;
-    overflow: visible !important;
+.plyr--video {
+    @apply bg-transparent;
 }
 
-.flickity-slider {
-    display: flex;
-} */
+.plyr__control--overlaid {
+    @apply p-5 md:p-8 bg-white text-neutral-900 opacity-100 shadow-none transform -translate-x-1/2 -translate-y-1/2;
+}
+
+.plyr__control--overlaid:focus,
+.plyr__control--overlaid:hover {
+    @apply !bg-primary shadow-none scale-110;
+}
+
+.plyr__control--overlaid:focus svg,
+.plyr__control--overlaid:hover svg {
+    @apply scale-125;
+}

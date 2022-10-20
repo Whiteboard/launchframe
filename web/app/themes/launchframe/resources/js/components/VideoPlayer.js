@@ -11,11 +11,13 @@ export default () => {
 
         mounted() {
             let player;
+
             if (this.source === 'vimeo') {
                 player = new Player(this.$refs.player, {
                     title: false,
                     color: 'A88D64'
                 });
+
             } else {
                 player = new Plyr(this.$refs.player, {
                     controls: ['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'fullscreen']

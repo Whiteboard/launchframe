@@ -16,7 +16,7 @@
         "roots/bedrock-autoloader": "^1.0.4",
         "rareloop/lumberjack-core": "^5.0.1",
         "roots/soil": "^4.1.1",
-        "roots/wordpress": "6.0.2",
+        "roots/wordpress": "6.0.3",
         "roots/wp-config": "1.0.0",
         "roots/wp-password-bcrypt": "1.1.0",
         "timber/timber": "^1.21",
