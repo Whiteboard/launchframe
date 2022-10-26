@@ -1,0 +1,52 @@
+{
+    "key": "group_635980c4ad3fb",
+    "title": "Block Spacing",
+    "fields": [
+        {
+            "key": "field_635980c5b3cae",
+            "label": "Top Padding",
+            "name": "set_top_padding",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Adds a top padding to the block (enabled by default). Only adds padding if the block is __not__ the first in the set.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 1,
+            "ui_on_text": "On",
+            "ui_off_text": "Off",
+            "ui": 1
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "current_user",
+                "operator": "!=",
+                "value": "logged_in"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "left",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": false,
+    "description": "",
+    "show_in_rest": 0,
+    "acfe_display_title": "",
+    "acfe_autosync": [
+        "json"
+    ],
+    "acfe_form": 0,
+    "acfe_meta": "",
+    "acfe_note": "",
+    "modified": 1666812352
+}

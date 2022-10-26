@@ -1,1 +1,19 @@
-<div class="spacer h-12 md:h-20 xl:h-32"></div>
+{#
+	@name Spacer
+	@desc Adds spacing between blocks
+#}
+
+<div
+    class="
+        flex w-full
+        {% include "snippets/no_block_spacing.twig" %}
+
+        {% if blockset.size == "lg" %}
+            pt-10 md:pt-16 lg:pt-24
+        {% elseif blockset.size == "md" %}
+            pt-8 md:pt-12 lg:pt-16
+        {% else %}
+            pt-6 md:pt-10 lg:pt-12
+        {% endif %}
+    "
+></div>

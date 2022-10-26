@@ -1,3 +1,8 @@
+{#
+	@name Hero
+	@desc Primary Hero
+#}
+
 <section
     class="
         {% if hero.background %}
@@ -26,8 +31,7 @@
                 {% include "components/background.twig" with {
                     asset_type: media.asset_type,
                     image: media.image,
-                    mp4: media.mp4,
-                    webm: media.webm,
+                    video: media.video,
                     poster: media.poster,
                     attribute: "x-ref='background'"
                 } %}

@@ -22,7 +22,7 @@
         "timber/timber": "^1.21",
         "vlucas/phpdotenv": "^5.4",
         "wpackagist-plugin/acf-extended": "^0.8.8.10",
-        "wpackagist-plugin/all-in-one-wp-migration": "^7.66",
+        "wpackagist-plugin/all-in-one-wp-migration": "^7.67",
         "wpackagist-plugin/autodescription": "^4.2.5",
         "wpackagist-plugin/duplicate-post": "^4.5",
         "wpackagist-plugin/goodbye-captcha": "^3.1.43",

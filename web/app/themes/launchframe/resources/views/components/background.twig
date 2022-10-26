@@ -1,3 +1,8 @@
+{#
+	@name Background
+	@desc Used to add cover backgrounds in elements
+#}
+
 <div
     {{ attribute }}
     class="absolute inset-0 w-full h-full {{ class }}"
@@ -10,12 +15,11 @@
             autoplay
             muted
             loop
-            poster="{{ poster }}">
-
-            <source src="{{ mp4 }}" type="video/mp4" />
-            {% if webm %}
-                <source src="{{ webm }}" type="video/webm" />
+            {% if poster %}
+                poster="{{ poster }}"
             {% endif %}
+        >
+            <source src="{{ video }}" />
         </video>
 
     {# :: Image
@@ -26,8 +30,5 @@
             alt: Image(image).alt,
             loading: loading
         } %}
-    {% endif %}
-    {% if overlay != 'hide' %}
-    <div class="absolute inset-x-0 bottom-0 w-full h-full texture-overlay"></div>
     {% endif %}
 </div>

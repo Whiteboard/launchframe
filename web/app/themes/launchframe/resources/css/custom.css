@@ -9,6 +9,9 @@
 @layer utilities {
 }
 
+/* / π ----
+// :: PLYR STYLES ---------------------------::
+// ____ */
 .plyr--video {
     @apply bg-transparent;
 }
@@ -25,4 +28,21 @@
 .plyr__control--overlaid:focus svg,
 .plyr__control--overlaid:hover svg {
     @apply scale-125;
+}
+
+.plyr__control:hover,
+.plyr__control[aria-expanded=true] {
+    @apply !bg-primary;
+}
+
+.plyr__control.plyr__tab-focus {
+    @apply !bg-primary !shadow-none !border-none outline-primary;
+}
+
+.plyr--full-ui input[type=range] {
+    @apply !text-primary;
+}
+
+.plyr--full-ui input[type=range].plyr__tab-focus {
+    @apply !text-primary !bg-transparent !border-none !outline-none;
 }
