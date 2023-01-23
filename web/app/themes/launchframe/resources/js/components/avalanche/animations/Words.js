@@ -1,50 +1,101 @@
-export default () => {
-    return {
-        delay: false,
-        scrollTrigger: true,
-        scrollSettings: false,
-        yPercent: 101,
-        duration: 0.5,
-        start: 'top 85%',
-        end: 'bottom top',
-        toggleActions: 'play none play none',
-        wordClass: '-mt-2 py-1',
-        trigger: null,
-        markers: false,
+export default () => ({
+    // π ----
+    // :: SETTINGS ---------------------------::
+    // ____
+    x: {
+        start: 0,
+        end: 0,
+    },
 
-        mounted() {
-            if (!this.trigger) {
-                this.trigger = this.$refs.element;
-            }
+    y: {
+        start: 101,
+        end: 0,
+    },
 
-            if (this.scrollTrigger) {
-                this.scrollSettings = {
-                    start: this.start,
-                    end: this.end,
-                    toggleActions: this.toggleActions,
-                    trigger: this.trigger,
-                    markers: this.markers,
-                };
-            }
+    opacity: {
+        start: 1,
+        end: 1,
+    },
 
-            this.animate();
-        },
+    splitText:{
+        type: 'words, lines',
+        linesClass: 'overflow-hidden',
+        wordsClass: 'mt-0 md:-mt-6 pt-2 md:pt-0 pb-5 md:pb-4',
+    },
 
-        animate() {
-            const split = new SplitText(this.$refs.element, {
-                type: 'words, lines',
-                linesClass: 'overflow-hidden',
-                wordsClass: this.wordClass,
-            });
+    duration: 0.8,
+    stagger: 0.06,
+    delay: false,
 
-            gsap.from(split.words, {
-                yPercent: this.yPercent,
-                duration: this.duration,
-                stagger: 0.08,
-                delay: this.delay,
-                ease: 'quint.out',
-                scrollTrigger: this.scrollSettings
-            });
+    /* :: Easing
+    {+} ---------------------------------- */
+    ease: 'quint.out',
+
+    /* :: ScrollTrigger
+    {+} ---------------------------------- */
+    scrollTrigger: true,
+    scrollSettings: false,
+    start: 'top 85%',
+    end: 'bottom top',
+    toggleActions: 'play none play none',
+    trigger: null,
+    markers: false,
+
+    // π ----
+    // :: SETUP ---------------------------::
+    // ____
+    mounted() {
+        if (!this.$refs.element) {
+            // avalancheError.element('Words');
+            return;
         }
-    };
-};
+
+        if (!this.trigger && this.scrollTrigger) {
+            if (!this.$refs.container) {
+                // avalancheError.trigger('Words');
+                return;
+            }
+
+            this.trigger = this.$refs.container;
+        }
+
+        if (this.scrollTrigger) {
+            this.scrollSettings = {
+                start: this.start,
+                end: this.end,
+                toggleActions: this.toggleActions,
+                trigger: this.trigger,
+                markers: this.markers,
+            };
+        }
+
+        this.animate();
+    },
+
+    // π ----
+    // :: ANIMATE ---------------------------::
+    // ____
+    animate() {
+        const split = new SplitText(this.$refs.element, this.splitText);
+
+        gsap.fromTo(split.words,
+            {
+                opacity: this.opacity.start,
+                xPercent: this.x.start,
+                yPercent: this.y.start,
+            },
+            {
+                opacity: this.opacity.end,
+                xPercent: this.x.end,
+                yPercent: this.y.end,
+
+                duration: this.duration,
+                stagger: this.stagger,
+                delay: this.delay,
+                ease: this.ease,
+                scrollTrigger: this.scrollSettings
+            }
+        );
+
+    }
+})

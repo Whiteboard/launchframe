@@ -16,7 +16,27 @@
                 "class": "",
                 "id": ""
             },
-            "acfe_flexible_advanced": 0,
+            "acfe_flexible_advanced": 1,
+            "acfe_flexible_stylised_button": 1,
+            "acfe_flexible_layouts_templates": 0,
+            "acfe_flexible_layouts_placeholder": 0,
+            "acfe_flexible_layouts_thumbnails": 0,
+            "acfe_flexible_layouts_settings": 0,
+            "acfe_flexible_async": [],
+            "acfe_flexible_add_actions": [],
+            "acfe_flexible_remove_button": [],
+            "acfe_flexible_layouts_state": "collapse",
+            "acfe_flexible_modal_edit": {
+                "acfe_flexible_modal_edit_enabled": "0",
+                "acfe_flexible_modal_edit_size": "large"
+            },
+            "acfe_flexible_modal": {
+                "acfe_flexible_modal_enabled": "0",
+                "acfe_flexible_modal_title": false,
+                "acfe_flexible_modal_size": "full",
+                "acfe_flexible_modal_col": "4",
+                "acfe_flexible_modal_categories": false
+            },
             "layouts": {
                 "layout_628d160fd736c": {
                     "key": "layout_628d160fd736c",
@@ -157,29 +177,9 @@
             "min": "",
             "max": "",
             "button_label": "Add Block",
-            "acfe_flexible_stylised_button": false,
             "acfe_flexible_hide_empty_message": false,
             "acfe_flexible_empty_message": "",
-            "acfe_flexible_layouts_templates": false,
-            "acfe_flexible_layouts_previews": false,
-            "acfe_flexible_layouts_placeholder": false,
-            "acfe_flexible_layouts_thumbnails": false,
-            "acfe_flexible_layouts_settings": false,
-            "acfe_flexible_async": [],
-            "acfe_flexible_add_actions": [],
-            "acfe_flexible_remove_button": [],
-            "acfe_flexible_layouts_state": false,
-            "acfe_flexible_modal_edit": {
-                "acfe_flexible_modal_edit_enabled": false,
-                "acfe_flexible_modal_edit_size": "large"
-            },
-            "acfe_flexible_modal": {
-                "acfe_flexible_modal_enabled": false,
-                "acfe_flexible_modal_title": false,
-                "acfe_flexible_modal_size": "full",
-                "acfe_flexible_modal_col": "4",
-                "acfe_flexible_modal_categories": false
-            }
+            "acfe_flexible_layouts_previews": false
         },
         {
             "key": "field_6351c7e58c7c4",
@@ -253,5 +253,5 @@
     "acfe_form": 0,
     "acfe_meta": "",
     "acfe_note": "",
-    "modified": 1666813108
+    "modified": 1666826058
 }

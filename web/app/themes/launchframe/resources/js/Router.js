@@ -16,10 +16,6 @@ export default () => {
         mouse.set(elements);
     });
 
-    barba.hooks.beforeEnter(() => {
-        Alpine.start();
-    });
-
     barba.hooks.enter(() => {
         setTimeout(() => {
             ScrollTrigger.refresh();

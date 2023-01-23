@@ -1,13 +1,16 @@
 export default () => ({
     axis: 'y', // or 'x'
+
     x: {
         start: 25,
         end: -25,
     },
+
     y: {
         start: 25,
         end: -25,
     },
+
     scope: null,
     start: 'top bottom',
     end: 'bottom top',
@@ -79,5 +82,5 @@ export default () => ({
         } else if (this.fade === 'out') {
             animation.to(this.$refs.element, { opacity: 0 }, 'start');
         }
-    },
+    }
 })

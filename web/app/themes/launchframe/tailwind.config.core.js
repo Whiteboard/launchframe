@@ -1,10 +1,7 @@
-//--------------------------------------------------------------------------
-// Tailwind custom Peak configuration
-//--------------------------------------------------------------------------
-//
-// Here we define base styles, components and utilities used by Peak.
-//
-
+// π ----
+// :: TAILWIND LAUNCHFRAME CONFIGURATION ---------------------------::
+// ____
+// Here we define base styles, components, & utilities used by Launchframe
 const plugin = require('tailwindcss/plugin')
 const colors = require('tailwindcss/colors')
 
@@ -82,6 +79,9 @@ module.exports = {
             strategy: 'base',
         }),
 
+        // π ----
+        // :: BASE STYLES ---------------------------::
+        // ____
         plugin(function({ addBase, theme }) {
             addBase({
                 ':root': {
@@ -92,7 +92,14 @@ module.exports = {
                     minHeight: '0vw',
                 },
 
-                body: { height: '100dvh' },
+                html: {
+                    height: '100dvh',
+                },
+
+                ':where(html)': {
+                    display: 'grid',
+                    height: '100vh',
+                },
 
                 // Used to hide alpine elements before being rendered.
                 '[x-cloak]': {
@@ -132,14 +139,14 @@ module.exports = {
                     outline: 'none !important',
                 },
 
-                // Sizing utilities for sets in our bard (long form content).
-                // On small devices they're full width.
+                /* :: Grid Sizing Utilities
+                {+} ---------------------------------- */
+                /* Sizing utilities for sets in the article module/block. */
                 '.size-md, .size-lg, .size-xl': {
                     gridColumn: 'span 12 / span 12',
                 },
 
                 '@media screen(md)': {
-                    // Sizing utilities for sets in our bard (long form content).
                     // On larger devices they go from medium to extra large.
                     // (E.g. an image wider then text in an article.)
                     '.size-md': {
@@ -157,7 +164,6 @@ module.exports = {
                 },
 
                 '@media screen(lg)': {
-                    // Sizing utilities for sets in our bard (long form content).
                     // On larger devices they go from medium to extra large.
                     '.size-md': {
                         gridColumn: 'span 6 / span 6',
@@ -175,7 +181,7 @@ module.exports = {
             })
         }),
 
-        // Render screen names in the breakpoint display.
+
         plugin(function({ addBase, theme}) {
             const breakpoints = Object.entries(theme('screens'))
                 .filter(value => typeof value[1] == 'string')
@@ -197,9 +203,13 @@ module.exports = {
             addBase(breakpoints)
         }),
 
+        // π ----
+        // :: COMPONENTS ---------------------------::
+        // ____
         plugin(function({ addComponents, theme }) {
             const components = {
-                // The main wrapper for all sections on our website. Has a max width and is centered.
+                /* :: Fluid Container
+                {+} ---------------------------------- */
                 '.fluid-container': {
                     width: '100%',
                     maxWidth: theme('screens.3xl'),
@@ -210,17 +220,25 @@ module.exports = {
                     paddingRight: `calc(env(safe-area-inset-right, 0rem) + ${theme('padding.8')})`,
                 },
 
-                // The outer grid where all block builder blocks are a child of. Spreads out all blocks
-                // vertically with a uniform space between them.
+                /* :: No Scroll
+                {+} ---------------------------------- */
+                // When a modal is open. Should be used on the <body>
+                '.no-scroll': {
+                    height: '100%',
+                    overflow: 'hidden'
+                },
+
+                /* :: Outer Grid
+                {+} ---------------------------------- */
+                /* The outer grid where all our blocks are a child of. Spreads out all blocks vertically
+                with a uniform space between them. */
                 '.outer-grid': {
                     width: '100%',
                     display: 'grid',
                     rowGap: theme('spacing.12'),
                     paddingTop: theme('spacing.12'),
                     paddingBottom: theme('spacing.12'),
-                    // If the last child of the outer grid is full width (e.g. when it has a full width
-                    // colored background), give it negative margin bottom to get it flush to your
-                    // sites footer.
+                    /* If the last child of the outer grid is full width (e.g. when it has a full width color background), give it negative margin bottom to get it flush to your site's footer. */
                     '& > *:last-child.w-full': {
                         marginBottom: `-${theme('spacing.12')}`,
                     },
@@ -277,12 +295,22 @@ module.exports = {
             addComponents(components)
         }),
 
+        // π ----
+        // :: UTILITIES ---------------------------::
+        // ____
         plugin(function({ addUtilities, theme, variants }) {
             const newUtilities = {
+                // Break words only when needed.
+                '.break-decent': { wordBreak: 'break-word' },
+
                 // Fill icons that have a fill defined within their paths. For example coming from an asset container.
                 '.fill-current-cascade *': {
                     fill: 'currentColor',
                 },
+
+                '.no-scrollbar': { scrollbarWidth: 'none' },
+
+                '.no-scrollbar::-webkit-scrollbar': { display: 'none' }
             }
             addUtilities(newUtilities)
         }),

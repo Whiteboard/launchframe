@@ -2,9 +2,6 @@ export default () => ({
     delay: false,
     scrollTrigger: true,
     scrollSettings: false,
-    duration: 0.8,
-    opacity: 0,
-    yPercent: 60,
     stagger: 0.015,
     start: 'top 85%',
     end: 'bottom top',
@@ -27,24 +24,23 @@ export default () => ({
             };
         }
 
-        if (!this.delay) {
-            this.delay = this.$store.animationDelay;
-        }
-
         this.animate();
     },
 
     animate() {
         const split = new SplitText(this.$refs.element, {
             type: 'chars, words, lines',
-            wordsClass: '-mt-2 py-1',
+            wordsClass: 'py-1',
             linesClass: 'overflow-hidden'
         });
 
         gsap.from(split.chars, {
-            opacity: this.opacity,
-            yPercent: this.yPercent,
-            duration: this.duration,
+            opacity: 0,
+            xPercent: -15,
+            yPercent: 30,
+            scale: 0.9,
+            rotate: '5deg',
+            duration: 0.8,
             stagger: this.stagger,
             delay: this.delay,
             ease: 'expo.out',

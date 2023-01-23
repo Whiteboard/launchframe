@@ -9,10 +9,10 @@ export default {
   ],
 
 
-  root: '',
-  base: process.env.NODE_ENV === 'development'
-    ? '/'
-    : '/dist/',
+    root: '',
+    base: process.env.NODE_ENV === 'development'
+        ? '/'
+        : '/dist/',
 
     build: {
         outDir: resolve(__dirname, './public'),

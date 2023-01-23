@@ -1,6 +1,6 @@
 {
     "key": "group_5f9c7651d716a",
-    "title": "CTA",
+    "title": "Block: CTA",
     "fields": [
         {
             "key": "field_5f9c7651da2b3",
@@ -196,12 +196,12 @@
     "active": false,
     "description": "",
     "show_in_rest": 0,
-    "acfe_display_title": "",
+    "acfe_display_title": "CTA",
     "acfe_autosync": [
         "json"
     ],
     "acfe_form": 0,
     "acfe_meta": "",
     "acfe_note": "",
-    "modified": 1666812542
+    "modified": 1666826854
 }
