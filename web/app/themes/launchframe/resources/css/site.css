@@ -1,5 +1,6 @@
 @import 'plyr/dist/plyr.css';
 @import 'tailwindcss/base';
+@import 'plyr';
 @import 'custom';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';

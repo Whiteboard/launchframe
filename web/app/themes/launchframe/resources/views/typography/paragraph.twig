@@ -4,6 +4,17 @@
         {{ color ? color : "text-current" }}
         {{ margins ? margins : "mt-0 mb-8 last:mb-0" }}
         {{ class }}
+        {% if style == 'overline' %}
+            text-xs font-bold uppercase
+        {% elseif size == 'xl' %}
+            text-xl lg:text-2xl
+        {% elseif size == 'lg' %}
+            text-lg 
+        {% elseif size == 'sm' %}
+            text-sm 
+        {% else %}
+            text-base 
+        {% endif %}
     "
 >
     {{ content }}

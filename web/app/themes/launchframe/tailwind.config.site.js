@@ -17,14 +17,15 @@ module.exports = {
             white:  '#ffffff',
 
             primary: {
-                // 400: '#FF6358',
-                DEFAULT: '#FC3A2D'
-                // 600: '#E82A1D',
+                '400': '#5DC9F0',
+                DEFAULT: '#0D4F84',
+                '600': '#0B2254'
             },
 
             secondary: {
-                DEFAULT: colors.indigo['500'],
-                ...colors.indigo
+                '400': '#F25C96',
+                DEFAULT: '#D23D77',
+                '600': '#9B2F59'
             },
 
             /*

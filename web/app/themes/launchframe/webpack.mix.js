@@ -25,7 +25,7 @@ mix.postCss(`${source}/css/site.css`, `${dist}/css/site.css`, [
 mix.options({ cssNano: { minifyFontValues: false } });
 
 mix.browserSync({
-    proxy: process.env.WP_HOME,
+    proxy: 'http://launchframe.test',
     files: [`${source}/views/**/*.twig`, `${dist}/**/*.(css|js)`, '**/*.php'],
     // Option to open in non default OS browser.
     // browser: "firefox",

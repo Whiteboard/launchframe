@@ -1,0 +1,203 @@
+{% extends "layouts/base.twig" %}
+
+{% block content %}
+
+    <main class="{{ is_front_page or is_archive ? 'py-48 md:py-60' : 'py-24 md:py-36' }} space-y-10 md:space-y-20 fluid-container">
+
+        {% include 'typography/h1.twig' with {
+          content: "H1. Cras Tristique Parturient Cursus Nibh.",
+        } %}
+
+        {% include 'typography/h2.twig' with {
+            content: "H2. Cras Tristique Parturient Cursus Nibh."
+        } %}
+
+
+        {% include 'typography/h3.twig' with {
+            content: "H3. Cras Tristique Parturient Cursus Nibh"
+        } %}
+
+        {% include 'typography/h4.twig' with {
+            content: "H4. Cras Tristique Parturient Cursus Nibh",
+        } %}
+
+        {% include 'typography/paragraph.twig' with {
+            content: "p Overline",
+            style: "overline",
+            margins: " "
+        } %}
+
+        {% include 'typography/paragraph.twig' with {
+            content: "p xl. Mollis sapien, at vitae id at vestibulum nulla iaculis fames. Turpis a turpis in in urna arcu, lacus nunc. Diam pellentesque consequat maecenas eget at. Mollis sapien, at vitae id at vestibulum nulla iaculis fames. Turpis a turpis in in urna arcu, lacus nunc. Diam pellentesque consequat maecenas eget at.",
+            size: "xl",
+            margins: " "
+          } %}
+        
+        {% include 'typography/paragraph.twig' with {
+          content: "p lg. Mollis sapien, at vitae id at vestibulum nulla iaculis fames. Turpis a turpis in in urna arcu, lacus nunc. Diam pellentesque consequat maecenas eget at. Mollis sapien, at vitae id at vestibulum nulla iaculis fames. Turpis a turpis in in urna arcu, lacus nunc. Diam pellentesque consequat maecenas eget at.",
+          size: "lg",
+          margins: " "
+        } %}
+
+        {% include 'typography/paragraph.twig' with {
+            content: "p. Mollis sapien, at vitae id at vestibulum nulla iaculis fames. Turpis a turpis in in urna arcu, lacus nunc. Diam pellentesque consequat maecenas eget at. Mollis sapien, at vitae id at vestibulum nulla iaculis fames. Turpis a turpis in in urna arcu, lacus nunc. Diam pellentesque consequat maecenas eget at.",
+            margins: " "
+        } %}
+
+        {% include 'typography/paragraph.twig' with {
+            content: "p sm. Mollis sapien, at vitae id at vestibulum nulla iaculis fames. Turpis a turpis in in urna arcu, lacus nunc. Diam pellentesque consequat maecenas eget at. Mollis sapien, at vitae id at vestibulum nulla iaculis fames. Turpis a turpis in in urna arcu, lacus nunc. Diam pellentesque consequat maecenas eget at.",
+            size: "sm",
+            margins: " "
+        } %}
+
+        <div class="flex flex-col items-center md:flex-row md:px-4 space-y-4 md:space-y-0 md:space-x-6 lg:space-x-10">
+            {% include "components/button.twig" with {
+                label: "Default",
+                action: "url",
+                url: "#"
+            } %}
+            {% include "components/button.twig" with {
+                label: "Outline",
+                action: "url",
+                url: "#",
+                style: "outline"
+            } %}
+            {% include "components/button.twig" with {
+                label: "Arrow",
+                action: "url",
+                url: "#",
+                style: "arrow"
+            } %}
+            {% include "components/button.twig" with {
+                label: "Line",
+                action: "url",
+                url: "#",
+                style: "line"
+            } %}
+        </div>
+
+        <div class="flex flex-col items-center md:flex-row p-4 space-y-4 md:space-y-0 md:space-x-4 lg:space-x-10 bg-black text-white">
+            {% include "components/button.twig" with {
+                label: "Default",
+                action: "url",
+                url: "#",
+                no_magnetic: true
+            } %}
+            {% include "components/button.twig" with {
+                label: "Outline",
+                action: "url",
+                url: "#",
+                style: "outline",
+                hoverColor: "hover:text-secondary-400 hover:border-secondary-400",
+                no_magnetic: true
+            } %}
+            {% include "components/button.twig" with {
+                label: "Arrow",
+                action: "url",
+                url: "#",
+                style: "arrow",
+                no_magnetic: true
+            } %}
+            {% include "components/button.twig" with {
+                label: "Line",
+                action: "url",
+                url: "#",
+                style: "line",
+                no_magnetic: true
+            } %}
+          </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-8">
+
+            <div class="bg-primary p-8 text-white">
+              primary
+            </div>
+            <div class="bg-primary-400 p-8">
+                primary-400
+            </div>
+            <div class="bg-primary-600 p-8 text-white">
+                primary-600
+            </div>
+            <div class="bg-secondary p-8 text-white">
+                secondary
+            </div>
+            <div class="bg-secondary-400 p-8 text-white">
+                secondary-400
+            </div>
+            <div class="bg-secondary-600 p-8 text-white">
+                secondary-600
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+            {% include "components/cards/card.twig" with {
+                image: page.thumbnail,
+                overline: "Overline here",
+                heading: "Standard Card",
+                text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Commodo orci dolor amet facilisi neque, quis sociis. Aliquam, dignissim mollis viverra non.",
+                link: "https://google.com",
+            }%}
+            {% include "components/cards/card.twig" with {
+                image: page.thumbnail,
+                overline: "Overline here",
+                heading: "Standard Card",
+                text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Commodo orci dolor amet facilisi neque, quis sociis. Aliquam, dignissim mollis viverra non.",
+                link: "https://google.com",
+            }%}
+            {% include "components/cards/card.twig" with {
+                image: page.thumbnail,
+                overline: "Overline here",
+                heading: "Standard Card",
+                text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Commodo orci dolor amet facilisi neque, quis sociis. Aliquam, dignissim mollis viverra non.",
+                link: "https://google.com",
+            }%}
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
+            {% include "components/cards/card.twig" with {
+                image: page.thumbnail,
+                heading: "Savannah Wallace",
+                text: "Director of Operations",
+                size: "tall"
+            }%}
+            {% include "components/cards/card.twig" with {
+                image: page.thumbnail,
+                heading: "Savannah Wallace",
+                text: "Director of Operations",
+                size: "tall"
+            }%}
+            {% include "components/cards/card.twig" with {
+                image: page.thumbnail,
+                heading: "Savannah Wallace",
+                text: "Director of Operations",
+                size: "tall"
+            }%}
+            {% include "components/cards/card.twig" with {
+                image: page.thumbnail,
+                heading: "Savannah Wallace",
+                text: "Director of Operations",
+                size: "tall"
+            }%}
+        </div>
+
+        <form class="max-w-4xl grid grid-cols-2 gap-4">
+            <div class="">
+                <label for="text-field">Text Input</label>
+                <input type="text" id="text-field" />
+            </div>
+            <div class="">
+                <label for="email-field">Email Input</label>
+                <input type="email" id="email-field" />
+            </div>
+            <div class="col-span-2">
+                <label for="textarea-field">Textarea</label>
+                <textarea id="textarea-field"></textarea>
+            </div>
+            <div>
+                <input type="submit" value="Submit" />
+            </div>
+        </form>
+
+    </main>
+
+{% endblock %}
