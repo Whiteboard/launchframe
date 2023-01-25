@@ -4,7 +4,7 @@
 
     <a
         href="{{ site.link }}"
-        class="flex justify-center items-center w-16 h-16 p-3 bg-primary text-white rounded-full"
+        class="flex justify-center items-center p-3 bg-primary text-white rounded-full {{ size ? size : 'w-20 h-20' }}"
         aria-label="{{ site.name }}"
     >
         {{ source("resources/images/logo.svg") }}

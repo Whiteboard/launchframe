@@ -18,6 +18,10 @@ class Launchframe extends Lumberjack
 
         $context['menu'] = new Menu('main-nav');
         $context['overlay_menu'] = new Menu('overlay-nav');
+        $context['footer_menu_one'] = new Menu('footer-1');
+        $context['footer_menu_two'] = new Menu('footer-2');
+        $context['footer_menu_three'] = new Menu('footer-3');
+        $context['footer_menu_four'] = new Menu('footer-4');
 
         return $context;
     }
