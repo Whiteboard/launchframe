@@ -25,12 +25,12 @@
                 margins: "mb-2"
             }%}
         {% endif %}
-        {% if link %}<a href="{{ link }}" class="hover:text-brand-red">{% endif %}
+        {% if link %}<a href="{{ link }}" class="transition hover:text-secondary">{% endif %}
         {% if heading %}
             {% include 'typography/h4.twig' with {
                 content: heading,
                 as: "p",
-                class: link ? "transition hover:text-secondary mb-4" : "mb-4"
+                class: "mb-4"
             } %}
         {% endif %}
         {% if link %}</a>{% endif %}

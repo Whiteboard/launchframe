@@ -17,6 +17,7 @@ class Launchframe extends Lumberjack
         $context['globals'] = get_fields('option');
 
         $context['menu'] = new Menu('main-nav');
+        $context['overlay_menu'] = new Menu('overlay-nav');
 
         return $context;
     }

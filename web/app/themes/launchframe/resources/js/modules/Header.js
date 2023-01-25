@@ -1,4 +1,6 @@
-export default () => ({
+export default () => {
+    return {
+        
     sticky: false,
 
     init() {
@@ -8,10 +10,14 @@ export default () => ({
             end: 'bottom bottom',
             onEnter: () => {
                 this.sticky = true;
+                console.log('scrolled');
             },
             onLeaveBack: () => {
                 this.sticky = false;
+                console.log('not scrolled');
             }
         });
     }
-})
+
+    }
+}
