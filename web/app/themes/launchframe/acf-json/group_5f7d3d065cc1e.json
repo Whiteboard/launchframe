@@ -3,6 +3,31 @@
     "title": "Hero",
     "fields": [
         {
+            "key": "field_63d1a3661921c",
+            "label": "Hero Style",
+            "name": "hero_style",
+            "aria-label": "",
+            "type": "button_group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "one": "Primary",
+                "two": "Secondary",
+                "three": "Simple",
+                "none": "No Hero"
+            },
+            "default_value": "",
+            "return_format": "value",
+            "allow_null": 0,
+            "layout": "horizontal"
+        },
+        {
             "key": "field_63458e140f331",
             "label": "Headline",
             "name": "headline",
@@ -10,7 +35,15 @@
             "type": "text",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_63d1a3661921c",
+                        "operator": "!=",
+                        "value": "none"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -27,10 +60,18 @@
             "label": "Text",
             "name": "text",
             "aria-label": "",
-            "type": "textarea",
+            "type": "text",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_63d1a3661921c",
+                        "operator": "!=",
+                        "value": "none"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -38,29 +79,43 @@
             },
             "default_value": "",
             "maxlength": "",
-            "rows": "",
             "placeholder": "",
-            "new_lines": "",
-            "acfe_textarea_code": 0
+            "prepend": "",
+            "append": ""
         },
         {
-            "key": "field_6344ca34afab7",
-            "label": "Buttons",
-            "name": "buttons",
+            "key": "field_63458e310f332",
+            "label": "Image",
+            "name": "background",
             "aria-label": "",
             "type": "clone",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_63d1a3661921c",
+                        "operator": "==",
+                        "value": "one"
+                    }
+                ],
+                [
+                    {
+                        "field": "field_63d1a3661921c",
+                        "operator": "==",
+                        "value": "two"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
                 "id": ""
             },
             "clone": [
-                "group_5f7ebc10c437c"
+                "group_5f5bc683a468d"
             ],
-            "display": "seamless",
+            "display": "group",
             "layout": "block",
             "prefix_label": 0,
             "prefix_name": 0,
@@ -71,57 +126,39 @@
             "acfe_clone_modal_size": "large"
         },
         {
-            "key": "field_63458e310f332",
-            "label": "Background",
-            "name": "background",
+            "key": "field_6344ca34afab7",
+            "label": "Buttons",
+            "name": "buttons",
             "aria-label": "",
-            "type": "repeater",
+            "type": "clone",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_63d1a3661921c",
+                        "operator": "!=",
+                        "value": "none"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
                 "id": ""
             },
-            "acfe_repeater_stylised_button": 1,
-            "layout": "block",
-            "pagination": 0,
-            "min": 0,
-            "max": 1,
-            "collapsed": "field_5f7d3d0663431",
-            "button_label": "Add Background",
-            "rows_per_page": 20,
-            "sub_fields": [
-                {
-                    "key": "field_5f7d3d0663431",
-                    "label": "Background",
-                    "name": "background",
-                    "aria-label": "",
-                    "type": "clone",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "clone": [
-                        "group_5f5bc683a468d"
-                    ],
-                    "display": "seamless",
-                    "layout": "block",
-                    "prefix_label": 0,
-                    "prefix_name": 0,
-                    "acfe_seamless_style": 0,
-                    "acfe_clone_modal": 0,
-                    "acfe_clone_modal_close": 0,
-                    "acfe_clone_modal_button": "",
-                    "acfe_clone_modal_size": "large",
-                    "parent_repeater": "field_63458e310f332"
-                }
-            ]
+            "clone": [
+                "group_5f7ebc10c437c"
+            ],
+            "display": "seamless",
+            "layout": "row",
+            "prefix_label": 0,
+            "prefix_name": 0,
+            "acfe_seamless_style": 0,
+            "acfe_clone_modal": 0,
+            "acfe_clone_modal_close": 0,
+            "acfe_clone_modal_button": "",
+            "acfe_clone_modal_size": "large"
         }
     ],
     "location": [
@@ -149,5 +186,5 @@
     "acfe_form": 0,
     "acfe_meta": "",
     "acfe_note": "",
-    "modified": 1666812294
+    "modified": 1674762556
 }

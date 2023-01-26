@@ -20,7 +20,7 @@ export default () => ({
     splitText:{
         type: 'words, lines',
         linesClass: 'overflow-hidden',
-        wordsClass: 'mt-0 md:-mt-6 pt-2 md:pt-0 pb-5 md:pb-4',
+        wordsClass: '-mt-6 pt-2 md:pt-0 pb-5 md:pb-4',
     },
 
     duration: 0.8,

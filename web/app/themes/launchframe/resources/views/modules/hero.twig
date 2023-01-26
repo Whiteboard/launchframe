@@ -1,72 +1,7 @@
-{#
-	@name Hero
-	@desc Primary Hero
-#}
-
-<section
-    class="
-        {% if hero.background %}
-            bg-neutral-800 text-white
-        {% else %}
-            bg-neutral text-primary
-        {% endif %}
-        relative flex items-center w-full min-h-screen overflow-hidden
-    "
->
-    {% if hero.background %}
-
-        <div
-            x-data="parallaxBackground()"
-            x-init="
-                yStart = 0;
-                start = 'top top';
-                trigger = $refs.container;
-                mounted();
-            "
-            x-ref="container"
-            class="absolute inset-0 w-full h-full overflow-hidden"
-        >
-
-            {% for media in hero.background %}
-                {% include "components/background.twig" with {
-                    asset_type: media.asset_type,
-                    image: media.image,
-                    video: media.video,
-                    poster: media.poster,
-                    attribute: "x-ref='background'"
-                } %}
-            {% endfor %}
-
-        </div>
-
-        <div class="absolute inset-0 w-full h-full bg-black opacity-40"></div>
-
-    {% endif %}
-
-    <div
-        class="relative flex items-center w-full min-h-screen pt-20 pb-16"
-    >
-
-        <div
-            class="
-                relative fluid-container flex flex-col
-            "
-        >
-
-            {% include 'typography/h1.twig' with {
-                content: hero.headline ? hero.headline : title,
-
-                attribute: "
-                    x-data='words()'
-                    x-init='
-                        scrollTrigger = false;
-                        delay = $store.enterDelay;
-                        mounted();
-                    '
-                    x-ref='element'
-                "
-            } %}
-
-        </div>
-    </div>
-</section>
+{% if hero.hero_style == 'one' %}
+    {% include "modules/heroes/hero_one.twig" %}
+{% elseif hero.hero_style == 'two' %}
+    {% include "modules/heroes/hero_two.twig" %}
+{% elseif hero.hero_style == 'three' %}
+    {% include "modules/heroes/hero_three.twig" %}
+{% endif %}

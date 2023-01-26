@@ -1,8 +1,8 @@
 <header 
-    class="fixed z-30 top-0 w-full py-6 transition"
+    class="z-30 top-0 w-full py-6 transition {{ page.get_field('hero').hero_style == 'one' ? 'text-white fixed' : 'sticky mb-10' }}"
     x-data="header()"
     x-int="mounted()"
-    :class="sticky ? 'bg-neutral-50' : ''"
+    :class="sticky ? 'bg-neutral-50 text-neutral-800' : ''"
 >
 
     <a class="skip-link" href="#maincontent">
@@ -73,9 +73,9 @@
                         class="text-current transition duration-300 ease-in-out group"
                     >
                         <div class="flex flex-col justify-center w-8 space-y-[4px]">
-                            <div class="w-full h-[2px] bg-primary group-hover:bg-secondary group-focus:bg-secondary transition"></div>
-                            <div class="w-full h-[2px] bg-primary group-hover:bg-secondary group-focus:bg-secondary transition"></div>
-                            <div class="w-full h-[2px] bg-primary group-hover:bg-secondary group-focus:bg-secondary transition"></div>
+                            <div class="w-full h-[2px] bg-current group-hover:bg-secondary group-focus:bg-secondary transition"></div>
+                            <div class="w-full h-[2px] bg-current group-hover:bg-secondary group-focus:bg-secondary transition"></div>
+                            <div class="w-full h-[2px] bg-current group-hover:bg-secondary group-focus:bg-secondary transition"></div>
                         </div>
                     </button>
 

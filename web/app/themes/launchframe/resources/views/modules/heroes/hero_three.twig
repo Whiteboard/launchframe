@@ -1,0 +1,46 @@
+
+
+        <div class="relative fluid-container flex flex-col text-center">
+
+            {% include 'typography/h1.twig' with {
+                content: hero.headline ? hero.headline : title,
+
+                attribute: "
+                    x-data='words()'
+                    x-init='
+                        scrollTrigger = false;
+                        delay = $store.enterDelay;
+                        mounted();
+                    '
+                    x-ref='element'
+                "
+            } %}
+
+            {% if hero.text %}
+                {% include "typography/paragraph.twig" with {
+                    content: hero.text,
+                    size: "lg",
+                    margins: "mt-6",
+                    class: "max-w-2xl mx-auto",
+                    attribute: "
+                    x-data='fadeIn()'
+                    x-init='
+                        scrollTrigger = false;
+                        delay = $store.enterDelay + 0.2;
+                        mounted();
+                    '
+                    x-ref='element'
+                    "
+                } %}
+            {% endif %}
+
+            {% if hero.buttons|length > 0 %}
+                <div class="flex flex-col md:flex-row justify-center items-center gap-6 mt-10">
+                    {% include "components/buttons.twig" with {
+                        buttons: hero.buttons,
+                        style: hero.buttons.style
+                    } %}
+                </div>
+            {% endif %}
+
+        </div>
