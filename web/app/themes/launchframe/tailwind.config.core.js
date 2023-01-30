@@ -235,23 +235,23 @@ module.exports = {
                 '.outer-grid': {
                     width: '100%',
                     display: 'grid',
-                    rowGap: theme('spacing.12'),
-                    paddingTop: theme('spacing.12'),
-                    paddingBottom: theme('spacing.12'),
+                    rowGap: theme('spacing.20'),
+                    paddingTop: theme('spacing.20'),
+                    paddingBottom: theme('spacing.20'),
                     /* If the last child of the outer grid is full width (e.g. when it has a full width color background), give it negative margin bottom to get it flush to your site's footer. */
                     '& > *:last-child.w-full': {
-                        marginBottom: `-${theme('spacing.12')}`,
+                        marginBottom: `-${theme('spacing.20')}`,
                     },
                 },
 
                 '@media screen(md)': {
                     // Larger vertical spacing between blocks on larger screens.
                     '.outer-grid': {
-                        rowGap: theme('spacing.16'),
-                        paddingTop: theme('spacing.16'),
-                        paddingBottom: theme('spacing.16'),
+                        rowGap: theme('spacing.24'),
+                        paddingTop: theme('spacing.24'),
+                        paddingBottom: theme('spacing.24'),
                         '& > *:last-child.w-full': {
-                            marginBottom: `-${theme('spacing.16')}`,
+                            marginBottom: `-${theme('spacing.24')}`,
                         },
                     },
                 },
@@ -285,9 +285,9 @@ module.exports = {
 
                     // Larger vertical spacing between blocks on larger screens.
                     '.outer-grid': {
-                        rowGap: theme('spacing.32'),
-                        paddingTop: theme('spacing.32'),
-                        paddingBottom: theme('spacing.32')
+                        rowGap: theme('spacing.40'),
+                        paddingTop: theme('spacing.40'),
+                        paddingBottom: theme('spacing.40')
                     }
                 }
             }

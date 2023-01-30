@@ -21,6 +21,7 @@
         "focus-visible": "^5.2.0",
         "gsap": "npm:@gsap/shockingly@^3.11.4",
         "plyr": "^3.7.3",
+        "swiper": "^8.4.6",
         "tailwindcss": "^3.2.4",
         "tailwindcss-blend-mode": "^1.0.0"
     },

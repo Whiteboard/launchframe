@@ -49,6 +49,10 @@ module.exports = {
             transitionTimingFunction: {
                 DEFAULT: 'cubic-bezier(0.455, 0.03, 0.515, 0.955)',
             },
+
+            minHeight: {
+                'screen-50': '50vh'
+            }
         },
 
         fontFamily: {

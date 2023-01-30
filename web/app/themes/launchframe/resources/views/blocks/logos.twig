@@ -6,11 +6,11 @@
         }%}
     {% endif %}
     {% if blockset.logos|length > 0 %}
-        <div class="flex justify-center items-center flex-wrap xl:flex-nowrap gap-10">
+        <div class="flex justify-center items-center flex-wrap xl:flex-nowrap gap-6 md:gap-10">
             {% for logo in blockset.logos %}
             <div>
                 {% if logo.link %}<a href="{{ logo.link }}" target="_blank" class="transition hover:scale-105 block">{% endif %}
-                <img src="{{ Image(logo.logo_image).src | towebp | resize(300) }}" class="max-h-8" />
+                <img src="{{ Image(logo.logo_image).src | towebp | resize(300) }}" class="max-h-8" alt="{{ Image(logo.logo_image).alt }}" />
                 {% if logo.link %}</a>{% endif %}
             </div>
             {% endfor %}

@@ -1,0 +1,81 @@
+{# This starter block assumes the testimonials are NOT their own post type. If you need the ability to re-use testimonials throughout the site, this will need to be reworked to pull from a CPT. #}
+
+<div 
+    class="md:fluid-container" 
+    x-data="sliders()" 
+    x-init="mounted()"
+>
+
+    {% if blockset.title %}
+        {% include "typography/h2.twig" with {
+            content: blockset.title,
+            class: "text-center mb-8 md:mb-16 px-6"
+        }%}
+    {% endif %}
+
+{% if blockset.testimonials|length > 1 %}
+<div class="md:hidden flex justify-center gap-4 mb-8">
+    <button class="testimonial-slider-prev w-12 h-12 transition hover:scale-110 hover:text-secondary rotate-180" title="Previous">
+        {{ source("resources/images/arrow-circle.svg") }}
+    </button>
+    <button class="testimonial-slider-next w-12 h-12 transition hover:scale-110 hover:text-secondary" title="Next">
+        {{ source("resources/images/arrow-circle.svg") }}
+    </button>
+</div>
+{% endif %}
+
+<div class="md:flex justify-between items-start px-6 md:px-0 w-full max-w-full min-h-0 min-w-0">
+
+    {% if blockset.testimonials|length > 1 %}
+    <button class="hidden md:block testimonial-slider-prev w-12 h-12 transition hover:scale-110 hover:text-secondary rotate-180" title="Previous">
+        {{ source("resources/images/arrow-circle.svg") }}
+    </button>
+    {% endif %}
+
+    <div class="swiper testimonial-slider max-w-xs md:max-w-lg xl:max-w-2xl mx-auto">
+        <div class="swiper-wrapper">
+            {% for item in blockset.testimonials %}
+            <div class="swiper-slide">
+                {% if item.testimonial_text %}
+                    {% include "typography/paragraph.twig" with {
+                        content: item.testimonial_text,
+                        size: "lg",
+                        as: "blockquote",
+                        class: "text-center"
+                    }%}
+                {% endif %}
+                <div class="flex justify-center items-center">
+                    {% if item.image %}
+                    <img src="{{ Image(item.image).src | towebp | resize(300,300) }}" class="w-20 h-20 rounded-full" alt="{{ Image(item.image).alt }}" />
+                    {% endif %}
+                    <cite class="not-italic ml-6">
+                        {% if item.name %}
+                            {% include "typography/paragraph.twig" with {
+                                content: item.name,
+                                class: "font-bold",
+                                margins: "mb-0"
+                            }%}
+                        {% endif %}
+                        {% if item.subtitle %}
+                            {% include "typography/paragraph.twig" with {
+                                content: item.subtitle,
+                                size: "sm",
+                                margins: "mb-0"
+                            }%}
+                        {% endif %}
+                    </cite>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    {% if blockset.testimonials|length > 1 %}
+    <button class="hidden md:block testimonial-slider-next w-12 h-12 transition hover:scale-110 hover:text-secondary" title="Next">
+        {{ source("resources/images/arrow-circle.svg") }}
+    </button>
+    {% endif %}
+
+</div>
+
+</div>

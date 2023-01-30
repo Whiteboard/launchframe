@@ -1,6 +1,7 @@
 import lightboxVideo from '@modules/LightboxVideo';
 import navigation from '@modules/Navigation';
 import header from '@modules/Header';
+import sliders from '@modules/Sliders';
 
 import avalanche from '@components/avalanche/Avalanche';
 import cursor from '@components/Cursor';
@@ -12,6 +13,7 @@ export default () => {
     Alpine.data('navigation', navigation);
     Alpine.data('header', header);
     Alpine.data('cursor', cursor);
+    Alpine.data('sliders', sliders);
     window.mouse = mouse;
     Alpine.data('videoPlayer', videoPlayer);
 

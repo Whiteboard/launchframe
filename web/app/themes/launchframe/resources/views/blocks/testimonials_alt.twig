@@ -1,0 +1,85 @@
+{# This starter block assumes the testimonials are NOT their own post type. If you need the ability to re-use testimonials throughout the site, this will need to be reworked to pull from a CPT.  #}
+
+<div 
+    class="fluid-container" 
+    x-data="sliders()" 
+    x-init="mounted()"
+>
+
+    {% if blockset.title %}
+        {% include "typography/paragraph.twig" with {
+            content: blockset.title,
+            style: "overline",
+            as: "h2",
+            class: "md:hidden"
+        }%}
+    {% endif %}
+
+    <div class="swiper testimonial-slider max-w-[80vw] lg:max-w-[90vw] mx-auto">
+
+        <div class="swiper-wrapper">
+
+            {% for item in blockset.testimonials %}
+
+            <div class="swiper-slide md:flex justify-between">
+
+                <div class="md:w-1/2 lg:w-2/5 bg-primary relative h-80 md:h-auto mb-6 md:mb-0">
+                    {% include "components/background.twig" with {
+                        asset_type: "image",
+                        image: item.image,
+                        size: "small",
+                        class: 'transition-all hover:scale-110 duration-200'
+                    } %}
+                </div>
+
+                <div class="md:w-2/5 lg:w-1/2 xl:pt-16 xl:pb-8">
+                    {% if blockset.title %}
+                        {% include "typography/paragraph.twig" with {
+                            content: blockset.title,
+                            style: "overline",
+                            as: "h2",
+                            class: "hidden md:block"
+                        }%}
+                    {% endif %}
+                    {% include "typography/paragraph.twig" with {
+                        content: item.testimonial_text,
+                        size: "xl",
+                        as: "blockquote"
+                    }%}
+                    <cite class="not-italic ml-6">
+                        {% if item.name %}
+                            {% include "typography/paragraph.twig" with {
+                                content: item.name,
+                                class: "font-bold",
+                                margins: "mb-0"
+                            }%}
+                        {% endif %}
+                        {% if item.subtitle %}
+                            {% include "typography/paragraph.twig" with {
+                                content: item.subtitle,
+                                size: "sm",
+                                margins: "mb-0"
+                            }%}
+                        {% endif %}
+                    </cite>
+                    {% if blockset.testimonials|length > 1 %}
+                        <div class="flex gap-6 mt-12 lg:mt-24">
+                            <button class="testimonial-slider-prev w-12 h-12 transition hover:scale-110 hover:text-secondary rotate-180" title="Previous">
+                                {{ source("resources/images/arrow-circle.svg") }}
+                            </button>
+                            <button class="testimonial-slider-next w-12 h-12 transition hover:scale-110 hover:text-secondary" title="Next">
+                                {{ source("resources/images/arrow-circle.svg") }}
+                            </button>
+                        </div>
+                    {% endif %}
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</div>
