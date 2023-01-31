@@ -1,6 +1,6 @@
 {
     "key": "group_5f7d3d065cc1e",
-    "title": "Hero",
+    "title": "Module: Hero",
     "fields": [
         {
             "key": "field_63d1a3661921c",
@@ -186,5 +186,5 @@
     "acfe_form": 0,
     "acfe_meta": "",
     "acfe_note": "",
-    "modified": 1674762556
+    "modified": 1675195839
 }

@@ -1,6 +1,7 @@
 /* / π ----
 // :: PLYR STYLES ---------------------------::
 // ____ */
+
 .plyr--video {
     @apply bg-transparent;
 }
@@ -35,3 +36,7 @@
 .plyr--full-ui input[type=range].plyr__tab-focus {
     @apply !text-primary !bg-transparent !border-none !outline-none;
 }
+
+.plyr__poster {
+    background-size: cover;
+  }

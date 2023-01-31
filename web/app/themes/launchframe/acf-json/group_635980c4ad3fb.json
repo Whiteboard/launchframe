@@ -1,14 +1,14 @@
 {
     "key": "group_635980c4ad3fb",
-    "title": "Block Spacing",
+    "title": "Setting: Block Spacing",
     "fields": [
         {
             "key": "field_635980c5b3cae",
-            "label": "Top Padding",
-            "name": "set_top_padding",
+            "label": "Adjust Spacing",
+            "name": "set_top_spacing",
             "aria-label": "",
             "type": "true_false",
-            "instructions": "Adds a top padding to the block (enabled by default). Only adds padding if the block is __not__ the first in the set.",
+            "instructions": "Turn this on to remove the space between this block and the one above it. (Will only take effect if the block is not the first on the page).",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -17,7 +17,7 @@
                 "id": ""
             },
             "message": "",
-            "default_value": 1,
+            "default_value": 0,
             "ui_on_text": "On",
             "ui_off_text": "Off",
             "ui": 1
@@ -48,5 +48,5 @@
     "acfe_form": 0,
     "acfe_meta": "",
     "acfe_note": "",
-    "modified": 1666812352
+    "modified": 1675196710
 }

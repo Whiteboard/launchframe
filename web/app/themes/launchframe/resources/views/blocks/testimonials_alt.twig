@@ -1,7 +1,7 @@
 {# This starter block assumes the testimonials are NOT their own post type. If you need the ability to re-use testimonials throughout the site, this will need to be reworked to pull from a CPT.  #}
 
 <div 
-    class="fluid-container" 
+    class="fluid-container {% include "snippets/no_block_spacing.twig" %}" 
     x-data="sliders()" 
     x-init="mounted()"
 >
