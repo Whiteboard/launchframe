@@ -1,0 +1,49 @@
+<div class="fluid-container">
+    {% if blockset.overline or blockset.title or blockset.subtitle %}
+    <div class="mb-16 text-center">
+        {% if blockset.overline %}
+            {% include "typography/paragraph.twig" with {
+                content: blockset.overline,
+                style: "overline",
+                margins: "mb-6"
+            }%}
+        {% endif %}
+        {% if blockset.title %}
+            {% include "typography/h2.twig" with {
+                content: blockset.title
+            }%}
+        {% endif %}
+        {% if blockset.subtitle %}
+            {% include "typography/paragraph.twig" with {
+                content: blockset.subtitle,
+                margins: "mt-6",
+                class: "max-w-xl mx-auto"
+            }%}
+        {% endif %}
+    </div>
+    {% endif %}
+    {% if blockset.buckets|length > 0 %}
+    <div class="flex flex-wrap gap-y-10">
+        {% for item in blockset.buckets %}
+        <div class="basis-full md:basis-1/2 xl:basis-1/4 flex-grow text-center space-y-4 px-6">
+            <img src="{{ Image(item.icon).src | towebp | resize(300) }}" class="h-8 mx-auto" alt="{{ Image(item.icon).alt }}" />
+            {% include "typography/h4.twig" with {
+                content: item.title,
+                as: "h3"
+            }%}
+            {% include "typography/paragraph.twig" with {
+                content: item.text
+            }%}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% if blockset.buttons|length > 0 %}
+        <div class="flex flex-col justify-center items-center gap-6 mt-16">
+            {% include "components/buttons.twig" with {
+                buttons: blockset.buttons,
+                style: blockset.buttons.style
+            } %}
+        </div>
+    {% endif %}
+</div>
