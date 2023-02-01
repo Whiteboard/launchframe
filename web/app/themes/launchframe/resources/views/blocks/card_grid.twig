@@ -1,0 +1,57 @@
+{# This includes only custom cards as a source. On a production site, you will likely give the option to additionally choose posts or a feed of posts, and update the code below accordingly. #}
+
+{#
+	@name Block: Card Grid
+	@desc A collection of cards arranged in a grid with an option for how many cards per row
+#}
+
+{% if blockset.columns == 'two' %}
+    {% set grid = 'grid-cols-1 md:grid-cols-2' %}
+{% elseif blockset.columns == 'three' %}
+    {% set grid = 'grid-cols-1 md:grid-cols-3' %}
+{% elseif blockset.columns == 'four' %}
+    {% set grid = 'grid-cols-1 md:grid-cols-2 lg:grid-cols-4' %}
+{% elseif blockset.columns == 'five' %}
+    {% set grid = 'grid-cols-1 md:grid-cols-3 lg:grid-cols-5' %}
+{% endif %}
+
+{% set source = 'custom' %}
+
+{% if source == 'custom' %}
+{% set cards = blockset.cards %}
+{% endif %}
+
+<div class="fluid-container {% include "snippets/no_block_spacing.twig" %}">
+    
+    {% include "components/intro.twig" with {
+        overline: blockset.overline,
+        title: blockset.title,
+        subtitle: blockset.subtitle
+    }%}
+
+    {% if cards|length > 0 %}
+    <div class="grid gap-10 {{ grid }}">
+        {% for card in cards %}
+            {% include "components/cards/card.twig" with {
+                asset_type: card.media.asset_type,
+                image: card.media.image,
+                video: card.media.video,
+                overline: card.overline,
+                heading: card.title,
+                text: card.text,
+                link: card.link,
+            }%}
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    {% if blockset.buttons|length > 0 %}
+        <div class="flex justify-center items-center gap-6 mt-16">
+            {% include "components/buttons.twig" with {
+                buttons: blockset.buttons,
+                style: blockset.buttons.style
+            } %}
+        </div>
+    {% endif %}
+
+</div>

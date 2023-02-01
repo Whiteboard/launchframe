@@ -56,41 +56,6 @@
             "mime_types": "mp4"
         },
         {
-            "key": "field_5f5bc77ab2d17",
-            "label": "Poster",
-            "name": "poster",
-            "aria-label": "",
-            "type": "image",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_5f5bc683a9357",
-                        "operator": "==",
-                        "value": "video"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "50",
-                "class": "",
-                "id": ""
-            },
-            "uploader": "wp",
-            "acfe_thumbnail": 0,
-            "return_format": "url",
-            "library": "all",
-            "min_width": "",
-            "min_height": "",
-            "min_size": "",
-            "max_width": "",
-            "max_height": "",
-            "max_size": "",
-            "mime_types": "",
-            "preview_size": "medium"
-        },
-        {
             "key": "field_5f5bc7e0b2d18",
             "label": "Image",
             "name": "image",
@@ -152,5 +117,5 @@
     "acfe_form": 0,
     "acfe_meta": "",
     "acfe_note": "",
-    "modified": 1675195808
+    "modified": 1675204044
 }

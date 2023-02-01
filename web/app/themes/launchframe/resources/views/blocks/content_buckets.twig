@@ -1,27 +1,9 @@
 <div class="fluid-container {% include "snippets/no_block_spacing.twig" %}">
-    {% if blockset.overline or blockset.title or blockset.subtitle %}
-    <div class="mb-16 text-center">
-        {% if blockset.overline %}
-            {% include "typography/paragraph.twig" with {
-                content: blockset.overline,
-                style: "overline",
-                margins: "mb-6"
-            }%}
-        {% endif %}
-        {% if blockset.title %}
-            {% include "typography/h2.twig" with {
-                content: blockset.title
-            }%}
-        {% endif %}
-        {% if blockset.subtitle %}
-            {% include "typography/paragraph.twig" with {
-                content: blockset.subtitle,
-                margins: "mt-6",
-                class: "max-w-xl mx-auto"
-            }%}
-        {% endif %}
-    </div>
-    {% endif %}
+    {% include "components/intro.twig" with {
+        overline: blockset.overline,
+        title: blockset.title,
+        subtitle: blockset.subtitle
+    }%}
     {% if blockset.buckets|length > 0 %}
     <div class="flex flex-wrap gap-y-10">
         {% for item in blockset.buckets %}
