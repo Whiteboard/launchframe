@@ -20,6 +20,14 @@
                 subtitle: blockset.subtitle,
                 class: "text-center xl:text-left mb-6"
             }%}
+            {% if blockset.buttons|length > 0 %}
+                <div class="flex justify-center xl:justify-start items-center gap-6 my-8">
+                    {% include "components/buttons.twig" with {
+                        buttons: blockset.buttons,
+                        style: blockset.buttons.style
+                    } %}
+                </div>
+            {% endif %}
             {% if cards|length > 1 %}
                 <div class="flex justify-center xl:justify-start gap-6">
                     <button class="card-slider-prev w-12 h-12 transition hover:scale-110 hover:text-secondary rotate-180" title="Previous">
