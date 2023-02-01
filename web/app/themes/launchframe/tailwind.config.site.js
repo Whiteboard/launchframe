@@ -41,20 +41,6 @@ module.exports = {
             },
         },
 
-        extend: {
-            transitionDuration: {
-                DEFAULT: '300ms',
-            },
-
-            transitionTimingFunction: {
-                DEFAULT: 'cubic-bezier(0.455, 0.03, 0.515, 0.955)',
-            },
-
-            minHeight: {
-                'screen-50': '50vh'
-            }
-        },
-
         fontFamily: {
             mono: [
                 // 'Anonymous',
@@ -80,6 +66,25 @@ module.exports = {
             bold: 700,
             // extrabold: 800,
             // black: 900,
+        },
+
+        extend: {
+            transitionDuration: {
+                DEFAULT: '300ms',
+            },
+
+            transitionTimingFunction: {
+                DEFAULT: 'cubic-bezier(0.455, 0.03, 0.515, 0.955)',
+            },
+
+            minHeight: {
+                'screen-50': '50vh'
+            },
+
+            screens: {
+                '3xl': '1792px',
+                '4xl': '2048px'
+            }
         },
     },
 

@@ -1,34 +1,9 @@
 {
-    "key": "group_63d98d9266069",
-    "title": "Block: Card Grid",
+    "key": "group_63da91ea3b3fe",
+    "title": "Block: Card Slider",
     "fields": [
         {
-            "key": "field_63d98f4f390a5",
-            "label": "Columns",
-            "name": "columns",
-            "aria-label": "",
-            "type": "button_group",
-            "instructions": "How many cards should appear per row?",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "choices": {
-                "two": "Two",
-                "three": "Three",
-                "four": "Four",
-                "five": "Five"
-            },
-            "default_value": "four",
-            "return_format": "value",
-            "allow_null": 0,
-            "layout": "horizontal"
-        },
-        {
-            "key": "field_63d98d9221796",
+            "key": "field_63da91ea3e7b5",
             "label": "Overline",
             "name": "overline",
             "aria-label": "",
@@ -48,7 +23,7 @@
             "append": ""
         },
         {
-            "key": "field_63d98da021797",
+            "key": "field_63da91ea3e7bb",
             "label": "Title",
             "name": "title",
             "aria-label": "",
@@ -68,7 +43,7 @@
             "append": ""
         },
         {
-            "key": "field_63d98da521798",
+            "key": "field_63da91ea3e7c1",
             "label": "Subtitle",
             "name": "subtitle",
             "aria-label": "",
@@ -88,7 +63,7 @@
             "append": ""
         },
         {
-            "key": "field_63d98dad21799",
+            "key": "field_63da91ea3e7c7",
             "label": "Cards",
             "name": "cards",
             "aria-label": "",
@@ -111,7 +86,7 @@
             "rows_per_page": 20,
             "sub_fields": [
                 {
-                    "key": "field_63d98dc82179a",
+                    "key": "field_63da91ea433de",
                     "label": "Media",
                     "name": "media",
                     "aria-label": "",
@@ -136,10 +111,10 @@
                     "acfe_clone_modal_close": 0,
                     "acfe_clone_modal_button": "",
                     "acfe_clone_modal_size": "large",
-                    "parent_repeater": "field_63d98dad21799"
+                    "parent_repeater": "field_63da91ea3e7c7"
                 },
                 {
-                    "key": "field_63d98de32179b",
+                    "key": "field_63da91ea433f4",
                     "label": "Overline",
                     "name": "overline",
                     "aria-label": "",
@@ -157,10 +132,10 @@
                     "placeholder": "",
                     "prepend": "",
                     "append": "",
-                    "parent_repeater": "field_63d98dad21799"
+                    "parent_repeater": "field_63da91ea3e7c7"
                 },
                 {
-                    "key": "field_63d98ded2179c",
+                    "key": "field_63da91ea433fa",
                     "label": "Title",
                     "name": "title",
                     "aria-label": "",
@@ -178,10 +153,10 @@
                     "placeholder": "",
                     "prepend": "",
                     "append": "",
-                    "parent_repeater": "field_63d98dad21799"
+                    "parent_repeater": "field_63da91ea3e7c7"
                 },
                 {
-                    "key": "field_63d98df22179d",
+                    "key": "field_63da91ea433ff",
                     "label": "Text",
                     "name": "text",
                     "aria-label": "",
@@ -199,10 +174,10 @@
                     "placeholder": "",
                     "prepend": "",
                     "append": "",
-                    "parent_repeater": "field_63d98dad21799"
+                    "parent_repeater": "field_63da91ea3e7c7"
                 },
                 {
-                    "key": "field_63d98df82179e",
+                    "key": "field_63da91ea43405",
                     "label": "Link",
                     "name": "link",
                     "aria-label": "",
@@ -220,12 +195,12 @@
                     "placeholder": "",
                     "prepend": "",
                     "append": "",
-                    "parent_repeater": "field_63d98dad21799"
+                    "parent_repeater": "field_63da91ea3e7c7"
                 }
             ]
         },
         {
-            "key": "field_63d98e182179f",
+            "key": "field_63da91ea3e7cc",
             "label": "Buttons",
             "name": "buttons",
             "aria-label": "",
@@ -252,7 +227,7 @@
             "acfe_clone_modal_size": "large"
         },
         {
-            "key": "field_63d98e2b217a0",
+            "key": "field_63da91ea3e7d2",
             "label": "Spacing",
             "name": "spacing",
             "aria-label": "",
@@ -304,5 +279,5 @@
     "acfe_form": 0,
     "acfe_meta": "",
     "acfe_note": "",
-    "modified": 1675268582
+    "modified": 1675268610
 }

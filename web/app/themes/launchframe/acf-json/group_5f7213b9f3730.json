@@ -83,6 +83,51 @@
                     "acfe_flexible_modal_edit_size": false,
                     "acfe_flexible_category": false
                 },
+                "layout_63da92125902d": {
+                    "key": "layout_63da92125902d",
+                    "name": "card_slider",
+                    "label": "Card Slider",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_63da92175902f",
+                            "label": "Block",
+                            "name": "block",
+                            "aria-label": "",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "clone": [
+                                "group_63da91ea3b3fe"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0,
+                            "acfe_seamless_style": 0,
+                            "acfe_clone_modal": 0,
+                            "acfe_clone_modal_close": 0,
+                            "acfe_clone_modal_button": "",
+                            "acfe_clone_modal_size": "large"
+                        }
+                    ],
+                    "min": "",
+                    "max": "",
+                    "acfe_flexible_render_template": false,
+                    "acfe_flexible_render_style": false,
+                    "acfe_flexible_render_script": false,
+                    "acfe_flexible_thumbnail": false,
+                    "acfe_flexible_settings": false,
+                    "acfe_flexible_settings_size": "medium",
+                    "acfe_flexible_modal_edit_size": false,
+                    "acfe_flexible_category": false
+                },
                 "layout_63d95d632acdc": {
                     "key": "layout_63d95d632acdc",
                     "name": "content_buckets",
@@ -433,5 +478,5 @@
     "acfe_form": 0,
     "acfe_meta": "",
     "acfe_note": "",
-    "modified": 1675202522
+    "modified": 1675268648
 }
