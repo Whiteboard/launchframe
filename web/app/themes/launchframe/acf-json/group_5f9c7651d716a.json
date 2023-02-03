@@ -3,9 +3,32 @@
     "title": "Block: CTA",
     "fields": [
         {
+            "key": "field_63dd389e7d9bf",
+            "label": "Style",
+            "name": "style",
+            "aria-label": "",
+            "type": "button_group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "centered": "Centered",
+                "left": "Left-Aligned"
+            },
+            "default_value": "",
+            "return_format": "value",
+            "allow_null": 0,
+            "layout": "horizontal"
+        },
+        {
             "key": "field_5f9c7651da2b3",
-            "label": "Subtitle",
-            "name": "babytitle",
+            "label": "Overline",
+            "name": "overline",
             "aria-label": "",
             "type": "text",
             "instructions": "",
@@ -43,6 +66,26 @@
             "maxlength": ""
         },
         {
+            "key": "field_63dd31c1e095b",
+            "label": "Subtitle",
+            "name": "subtitle",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
             "key": "field_5f9c7651da2b9",
             "label": "Buttons",
             "name": "buttons",
@@ -71,59 +114,6 @@
             "acfe_clone_modal_size": "large"
         },
         {
-            "key": "field_5f9c7651da2be",
-            "label": "Media",
-            "name": "media",
-            "aria-label": "",
-            "type": "repeater",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "acfe_repeater_stylised_button": 1,
-            "layout": "block",
-            "pagination": 0,
-            "min": 0,
-            "max": 1,
-            "collapsed": "field_6348f63cbae73",
-            "button_label": "Add Media",
-            "rows_per_page": 20,
-            "sub_fields": [
-                {
-                    "key": "field_6348f63cbae73",
-                    "label": "Background",
-                    "name": "background",
-                    "aria-label": "",
-                    "type": "clone",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "clone": [
-                        "group_5f5bc683a468d"
-                    ],
-                    "display": "seamless",
-                    "layout": "block",
-                    "prefix_label": 0,
-                    "prefix_name": 0,
-                    "acfe_seamless_style": 0,
-                    "acfe_clone_modal": 0,
-                    "acfe_clone_modal_close": 0,
-                    "acfe_clone_modal_button": "",
-                    "acfe_clone_modal_size": "large",
-                    "parent_repeater": "field_5f9c7651da2be"
-                }
-            ]
-        },
-        {
             "key": "field_635988d51547e",
             "label": "Spacing",
             "name": "spacing",
@@ -139,33 +129,6 @@
             },
             "clone": [
                 "group_635980c4ad3fb"
-            ],
-            "display": "seamless",
-            "layout": "block",
-            "prefix_label": 0,
-            "prefix_name": 0,
-            "acfe_seamless_style": 0,
-            "acfe_clone_modal": 0,
-            "acfe_clone_modal_close": 0,
-            "acfe_clone_modal_button": "",
-            "acfe_clone_modal_size": "large"
-        },
-        {
-            "key": "field_635988fa1547f",
-            "label": "Anchor",
-            "name": "anchor",
-            "aria-label": "",
-            "type": "clone",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "clone": [
-                "group_62e441540eac9"
             ],
             "display": "seamless",
             "layout": "block",
@@ -203,5 +166,5 @@
     "acfe_form": 0,
     "acfe_meta": "",
     "acfe_note": "",
-    "modified": 1666826854
+    "modified": 1675442366
 }

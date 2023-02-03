@@ -1,23 +1,23 @@
 {% if overline or title or subtitle %}
-    <div class="{{ class ? class : 'mb-16 text-center' }}">
+    <div class="{{ sectionClass ? sectionClass : 'mb-16 text-center' }}">
         {% if overline %}
             {% include "typography/paragraph.twig" with {
                 content: overline,
                 style: "overline",
-                margins: "mb-6"
+                margins: "mb-6",
             }%}
         {% endif %}
         {% if title %}
             {% include "typography/h2.twig" with {
                 content: title,
-                as: titleTag ? titleTag : "h2"
+                as: titleTag ? titleTag : "h2",
             }%}
         {% endif %}
         {% if subtitle %}
             {% include "typography/paragraph.twig" with {
                 content: subtitle,
                 margins: "mt-6",
-                class: "max-w-xl mx-auto"
+                class: textClass ? textClass : "max-w-xl mx-auto"
             }%}
         {% endif %}
     </div>

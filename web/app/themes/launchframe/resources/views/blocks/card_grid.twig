@@ -46,10 +46,9 @@
     {% endif %}
 
     {% if blockset.buttons|length > 0 %}
-        <div class="flex justify-center items-center gap-6 mt-16">
+        <div class="flex justify-center items-center flex-wrap gap-6 mt-16">
             {% include "components/buttons.twig" with {
                 buttons: blockset.buttons,
-                style: blockset.buttons.style
             } %}
         </div>
     {% endif %}
