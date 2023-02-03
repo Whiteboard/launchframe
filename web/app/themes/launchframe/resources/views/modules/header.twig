@@ -1,5 +1,5 @@
 <header 
-    class="z-30 top-0 w-full py-6 transition {{ page.get_field('hero').hero_style == 'one' ? 'text-white fixed' : 'sticky mb-10' }}"
+    class="z-30 top-0 w-full py-6 transition {{ hero_style == 'one' ? 'text-white fixed' : 'sticky mb-10' }}"
     x-data="header()"
     x-int="mounted()"
     :class="sticky ? 'bg-neutral-50 text-neutral-800' : ''"

@@ -9,7 +9,8 @@
         {% endif %}
         {% if title %}
             {% include "typography/h2.twig" with {
-                content: title
+                content: title,
+                as: titleTag ? titleTag : "h2"
             }%}
         {% endif %}
         {% if subtitle %}

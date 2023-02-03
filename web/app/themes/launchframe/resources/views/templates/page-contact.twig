@@ -1,0 +1,65 @@
+{% extends "layouts/base.twig" %}
+
+{% block content %}
+
+    <main class="relative outer-grid overflow-hidden pt-0">
+
+        <div class="fluid-container">
+
+        {% include "components/intro.twig" with {
+            overline: page.overline,
+            title: title,
+            subtitle: page.subtitle,
+            titleTag: "h1"
+        }%}
+
+        <div class="md:flex justify-center xl:px-48">
+            {% if page.hide_sections|length < 3 %}
+                <div class="md:w-1/3 space-y-10 md:pr-10 mb-10 md:mb-0">
+                {% if 'email' not in page.hide_sections %}
+                    <div class="bg-neutral-100 p-6 rounded-xl">
+                        {% include "typography/h4.twig" with {
+                            content: "Email",
+                            class: "mb-2"
+                        }%}
+                        <a href="mailto:{{globals.email_address}}" class="text-neutral-600 text-sm transition-all hover:underline">
+                            {{ globals.email_address }}
+                        </a>
+                    </div>
+                {% endif %}
+                {% if 'phone' not in page.hide_sections %}
+                    <div class="bg-neutral-100 p-6 rounded-xl">
+                        {% include "typography/h4.twig" with {
+                            content: "Phone",
+                            class: "mb-2"
+                        }%}
+                        <a href="tel:{{globals.phone_number}}" class="text-neutral-600 text-sm transition-all hover:underline">
+                            {{ globals.phone_number }}
+                        </a>
+                    </div>
+                {% endif %}
+                {% if 'address' not in page.hide_sections %}
+                <div class="bg-neutral-100 p-6 rounded-xl">
+                    {% include "typography/h4.twig" with {
+                        content: "Address",
+                        class: "mb-2"
+                    }%}
+                    <a href="https://www.google.com/maps/search/?api=1&query={{globals.address | striptags | url_encode}}" target="_blank" class="text-neutral-600 text-sm transition-all hover:underline">
+                        {{ globals.address }}
+                    </a>
+                </div>
+                {% endif %}
+                </div>
+            {% endif %}
+            <div class="md:w-2/3">
+                <div class="bg-neutral-100 p-10 rounded-xl">
+                    {{ shortcode(page.form_shortcode) }}
+                </div>
+            </div>
+        </div>
+
+
+        </div>
+
+    </main>
+{% endblock %}

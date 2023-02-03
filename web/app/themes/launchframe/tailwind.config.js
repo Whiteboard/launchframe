@@ -13,5 +13,10 @@ module.exports = {
         './resources/js/**/*.js',
         './resources/js/**/*.vue',
     ],
-    safelist: []
+    safelist: [
+         'wpcf7-list-item',
+         'wpcf7-checkbox',
+         'wpcf7-radio',
+         'wpcf7-form-control-wrap'
+    ]
 }

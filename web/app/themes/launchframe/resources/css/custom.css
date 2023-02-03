@@ -4,19 +4,22 @@
 
     label {
         @apply font-bold;
-        @apply text-sm;
+        @apply text-xs;
         @apply block;
-        @apply my-2;
+        @apply mb-2;
         @apply transition;
     }
-    input[type="text"], input[type="email"], textarea {
+    input[type="text"], input[type="email"], textarea, select {
         @apply w-full;
-        @apply border-neutral;
+        @apply border-neutral-700;
         @apply transition;
+        @apply mb-4;
+        @apply bg-transparent;
+        @apply rounded;
         &:focus {
             @apply outline-0;
             @apply ring-0;
-            @apply border-primary-400;
+            @apply border-secondary;
         }
     }
     input[type="submit"] {
@@ -41,6 +44,27 @@
     }
     .contact-form input[type="submit"] {
         @apply mt-6;
+    }
+    .wpcf7-list-item {
+        @apply m-0;
+    }
+    .wpcf7-list-item label {
+        @apply font-normal;
+    }
+    .wpcf7-checkbox, .wpcf7-radio {
+        @apply grid;
+        @apply grid-cols-1;
+        @apply gap-y-1;
+        @apply gap-x-2;
+    }
+    .wpcf7-form-control-wrap {
+        @apply mb-4;
+        @apply block;
+    }
+    @media (min-width: 768px) {
+        .wpcf7-checkbox, .wpcf7-radio {
+            @apply grid-cols-2;
+        }
     }
 
 }
