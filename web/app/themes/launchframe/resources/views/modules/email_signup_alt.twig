@@ -1,10 +1,10 @@
-<div class="bg-neutral-100 rounded-xl p-6 md:p-12 xl:px-12 xl:py-20 lg:flex justify-between items-center gap-10 xl:gap-20">
+<div class="bg-neutral-100 rounded-xl p-6 md:p-12 xl:px-12 xl:py-20">
     {% include "typography/h3.twig" with {
         content: globals.email_signup_text ? globals.email_signup_text : 'Subscribe to our newsletter',
         as: "h2",
-        class: "mb-6 lg:mb-0"
+        class: "mb-6 text-center"
     }%}
-    <form class="flex items-center flex-col md:flex-row flex-grow gap-6">
+    <form class="flex items-center flex-col md:flex-row flex-grow gap-6 max-w-lg mx-auto">
         <label for="email-address" class="sr-only">Email Address</label>
         <input type="email" name="email-address" placeholder="Enter email address" class="flex-grow" />
         <input type="submit" value="{{ globals.email_signup_button_text ? globals.email_signup_button_text : 'Submit' }}" />

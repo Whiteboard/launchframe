@@ -13,7 +13,6 @@
         @apply w-full;
         @apply border-neutral-700;
         @apply transition;
-        @apply mb-4;
         @apply bg-transparent;
         @apply rounded;
         &:focus {
@@ -58,7 +57,7 @@
         @apply gap-x-2;
     }
     .wpcf7-form-control-wrap {
-        @apply mb-4;
+        @apply mb-6;
         @apply block;
     }
     @media (min-width: 768px) {
