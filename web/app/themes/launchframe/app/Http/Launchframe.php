@@ -4,6 +4,7 @@ namespace App\Http;
 
 use Rareloop\Lumberjack\Http\Lumberjack;
 use App\Menu\Menu;
+use Timber\Timber;
 
 class Launchframe extends Lumberjack
 {
@@ -22,6 +23,14 @@ class Launchframe extends Lumberjack
         $context['footer_menu_two'] = new Menu('footer-2');
         $context['footer_menu_three'] = new Menu('footer-3');
         $context['footer_menu_four'] = new Menu('footer-4');
+
+        $context['people'] = Timber::get_posts( [
+            'post_type' => 'person',
+            'order'     => 'ASC',
+            'meta_key' => 'last_name',
+            'orderby'   => 'meta_value',
+            'posts_per_page' => -1
+        ] );
 
         return $context;
     }

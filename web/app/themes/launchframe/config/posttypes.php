@@ -6,5 +6,6 @@ return [
      * automatically register with WordPress as part of the bootstrap process.
      */
     'register' => [
+        App\PostTypes\Person::class
     ],
 ];
