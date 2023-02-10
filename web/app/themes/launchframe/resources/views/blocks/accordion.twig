@@ -1,0 +1,82 @@
+{#
+	@name Block: Accordion
+	@desc Using alpine, a collection of items that can be open and closed for more details
+#}
+
+{% set style = blockset.style %}
+
+
+<div 
+    class="
+    fluid-container 
+    {{ style == 'side' ? 'lg:flex lg:justify-between' : '' }}
+    {% include "snippets/no_block_spacing.twig" %}" 
+    x-data="{ accordionItem: 0 }"
+>
+
+    {% include "components/intro.twig" with {
+        overline: blockset.overline,
+        title: blockset.title,
+        subtitle: blockset.subtitle,
+        sectionClass: style == 'side' ? 'lg:w-2/5 lg:pr-20 mb-8 lg:mb-0 text-center lg:text-left' : 'mb-16 text-center',
+        textClass: style == 'side' ? 'w-full' : 'max-w-xl mx-auto'
+    }%}
+
+    <div 
+        class="{{ style == 'side' ? 'lg:w-3/5' : 'max-w-4xl mx-auto' }}"
+        x-data="fadeIn()"
+        x-cloak
+        x-init="
+            translate = 'y';
+            yStart = 10;
+            start = 'top 85%';
+            delay = 0.25 * {{ loop.index }};
+            scrollTrigger = true;
+            $nextTick(() => {
+                trigger = $refs.content_container;
+                mounted();
+            });
+        "
+        x-ref="element"
+    >
+
+    {% for item in blockset.items %}
+        <div class="py-6 relative w-full border-neutral-300 border-b last:border-b-0">
+            <button @click="accordionItem !== {{ loop.index }} ? accordionItem = {{ loop.index }} : accordionItem = null" class="flex justify-between gap-6 items-center relative w-full">
+                {% include "typography/h4.twig" with {
+                    content: item.title,
+                    tag: "h3",
+                    class: "text-left max-w-[85%]"
+                } %}
+                <div class="w-4 h-4">
+                    <span class="text-black" x-show="accordionItem !== {{ loop.index }}" x-cloak>
+                        {{ source('resources/images/open.svg') }}
+                    </span> 
+                    <span class="text-black" x-show="accordionItem === {{ loop.index }} " x-cloak>
+                        {{ source('resources/images/close.svg') }}
+                    </span> 
+                </div>
+            </button>
+            <div 
+                class="py-6 transition duration-700 ease-in-out-expo"
+                x-ref="container{{ loop.index }}" 
+                x-show="accordionItem == {{ loop.index }}" 
+                x-cloak
+                x-transition:enter.duration.500ms
+                x-transition:leave.duration.200ms 
+            >
+                <div class="prose max-w-none">{{ item.text }}</div>
+                {% if item.buttons|length > 0 %}
+                    <div class="flex items-center flex-wrap gap-6 mt-6">
+                        {% include "components/buttons.twig" with {
+                            buttons: item.buttons,
+                        } %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+
+    </div>
+
+</div>
