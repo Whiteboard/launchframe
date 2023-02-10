@@ -1,6 +1,6 @@
 {
     "key": "group_62e441540eac9",
-    "title": "Anchor",
+    "title": "Setting: Anchor",
     "fields": [
         {
             "key": "field_62e441564b5d8",
@@ -8,7 +8,7 @@
             "name": "anchor",
             "aria-label": "",
             "type": "text",
-            "instructions": "Allows button linking to this area using the ID",
+            "instructions": "Allows linking to this area using the ID; use only letters, numbers, hyphens and underscores (no spaces or capital letters)",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -36,7 +36,7 @@
     "position": "normal",
     "style": "default",
     "label_placement": "left",
-    "instruction_placement": "label",
+    "instruction_placement": "field",
     "hide_on_screen": "",
     "active": false,
     "description": "",
@@ -48,5 +48,5 @@
     "acfe_form": 0,
     "acfe_meta": "",
     "acfe_note": "",
-    "modified": 1666812265
+    "modified": 1676058542
 }

@@ -3,7 +3,7 @@
 	@desc The standalone video player block.
 #}
 
-<section
+<div
     x-data
     x-title="Block: Video"
     x-ref="container"
@@ -11,6 +11,7 @@
         fluid-container grid grid-cols-12
         {% include "snippets/no_block_spacing.twig" %}
     "
+    id="{{ id }}"
 >
         <div
             class="
@@ -24,18 +25,11 @@
             "
         >
 
-            {% if blockset.title %}
-                <div class="relative flex justify-center mb-10 w-full text-center">
-                    {% include "typography/h2.twig" with {
-                        content: blockset.title,
-                        attribute: "
-                            x-data='words()'
-                            x-init='mounted()'
-                            x-ref='element'
-                        ",
-                    } %}
-                </div>
-            {% endif %}
+            {% include "components/intro.twig" with {
+                overline: blockset.overline,
+                title: blockset.title,
+                subtitle: blockset.subtitle
+            }%}
 
             {% for video in blockset.videos %}
                 <div
@@ -61,4 +55,4 @@
             {% endfor %}
 
         </div>
-</section>
+</div>

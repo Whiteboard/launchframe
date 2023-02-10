@@ -12,6 +12,7 @@
     {{ style == 'side' ? 'lg:flex lg:justify-between' : '' }}
     {% include "snippets/no_block_spacing.twig" %}" 
     x-data="{ accordionItem: 0 }"
+    id="{{ id }}"
 >
 
     {% include "components/intro.twig" with {

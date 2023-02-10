@@ -13,7 +13,9 @@
         "
     >
         {% for blockset in page.get_field("blocks").sets %}
-            {% include "blocks/#{blockset.acf_fc_layout}.twig" %}
+            {% include "blocks/#{blockset.acf_fc_layout}.twig" with {
+                id: blockset.anchor ? blockset.anchor : ' '
+            }%}
         {% endfor %}
     </main>
 {% endblock %}

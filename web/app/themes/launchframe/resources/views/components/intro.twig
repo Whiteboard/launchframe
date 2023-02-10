@@ -4,19 +4,24 @@
             {% include "typography/paragraph.twig" with {
                 content: overline,
                 style: "overline",
-                margins: "mb-6",
+                margins: "mb-4",
             }%}
         {% endif %}
         {% if title %}
             {% include "typography/h2.twig" with {
                 content: title,
                 as: titleTag ? titleTag : "h2",
+                attribute: "
+                    x-data='words()'
+                    x-init='mounted()'
+                    x-ref='element'
+                ",
             }%}
         {% endif %}
         {% if subtitle %}
             {% include "typography/paragraph.twig" with {
                 content: subtitle,
-                margins: "mt-6",
+                margins: "mt-4",
                 class: textClass ? textClass : "max-w-xl mx-auto"
             }%}
         {% endif %}

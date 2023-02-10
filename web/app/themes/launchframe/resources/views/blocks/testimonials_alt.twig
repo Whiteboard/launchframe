@@ -4,6 +4,7 @@
     class="fluid-container {% include "snippets/no_block_spacing.twig" %}" 
     x-data="sliders()" 
     x-init="mounted()"
+    id="{{ id }}"
 >
 
     {% if blockset.title %}
