@@ -1,30 +1,59 @@
 {% extends "layouts/base.twig" %}
 
 {% block content %}
-    {# π ----
-    // :: HERO
-    // : ---------------------------------- #}
-    {% include 'partials/modules/hero.twig' %}
+    
+    <main class="fluid-container pb-24">
 
-    <main class="relative w-screen max-w-full -mt-48 pt-20 pb-24">
+        {% include "components/intro.twig" with {
+            overline: overline,
+            title: title,
+        }%}
+        
+        {% if posts|length > 0 %}
 
-        <div class="container c-pad">
-            <div class="flex flex-wrap justify-center -m-4 md:-m-8 opacity-0" data-fadein-up="1">
+            <ul class="flex justify-center lg:justify-start flex-wrap text-sm mb-8 gap-1">
+                <li class="block px-4 py-1 rounded-xl transition-all {{ is_home ? 'bg-secondary text-white hover:text-white' : 'hover:text-secondary' }}"><a href="{{ blog_link }}">All</a></li>
+                {% for cat in blog_categories %}
+                <li class="block px-4 py-1 rounded-xl transition-all {{ cat.slug == slug ? 'bg-secondary text-white' : 'hover:text-secondary' }}"><a href="{{ cat.link }}" class="">{{ cat.name }}</a></li>
+                {% endfor %}
+            </ul>
 
-                {% if posts|length > 0 %}
+            <div class="grid gap-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
 
-                    {% for post in posts %}
-                         {% include 'partials/components/post-card.twig' %}
-                    {% endfor %}
-
-                {% else %}
-                    <div class="mt-32 py-24">
-                        <p class="text-2xl">Sorry, no results found.</p>
-                    </div>
-                {% endif %}
+                {% for post in posts %}
+                    {% include 'components/cards/card.twig' with {
+                        image: post.thumbnail ? post.thumbnail : globals.fallback_image,
+                        overline: post.date,
+                        heading: post.title,
+                        text: post.preview.length(20).read_more(false),
+                        link: post.link,
+                    }%}
+                {% endfor %}
 
             </div>
-        </div>
+
+            {% if pagination.pages > 1 %}
+                <div class="mt-12 flex justify-center gap-8">
+                    {% if pagination.prev %}
+                    <a href="{{ pagination.prev.link }}" class="group flex items-center font-bold">
+                        <span class="mr-2 w-3 transition rotate-180 group-hover:-translate-x-2 group-hover:text-secondary">{{ source("resources/images/arrow.svg") }}</span>
+                        <span>Previous</span>
+                    </a>
+                    {% endif %}
+                    {% if pagination.next %}
+                    <a href="{{ pagination.next.link }}" class="group flex items-center font-bold">
+                        <span>Next</span>
+                        <span class="ml-2 w-3 transition group-hover:translate-x-2 group-hover:text-secondary">{{ source("resources/images/arrow.svg") }}</span>
+                    </a>
+                    {% endif %}
+                </div>
+            {% endif %}
+
+        {% else %}
+            <p class="text-2xl">Sorry, no results found.</p>
+        {% endif %}
+
 
     </main>
+
 {% endblock %}

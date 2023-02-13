@@ -1,5 +1,5 @@
 {% if overline or title or subtitle %}
-    <div class="{{ sectionClass ? sectionClass : 'mb-16 text-center' }}">
+    <div class="{{ sectionClass ? sectionClass : 'mb-8 md:mb-16 text-center' }}">
         {% if overline %}
             {% include "typography/paragraph.twig" with {
                 content: overline,

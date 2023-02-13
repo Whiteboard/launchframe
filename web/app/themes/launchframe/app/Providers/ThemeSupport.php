@@ -36,7 +36,7 @@ class ThemeSupport extends ServiceProvider
         show_admin_bar(false);
 
         add_action('admin_menu', function () {
-            remove_menu_page('edit.php'); // Hides the Default WP Posts
+            // remove_menu_page('edit.php'); // Hides the Default WP Posts
             remove_menu_page('edit-comments.php');
             remove_menu_page('jetpack');
 

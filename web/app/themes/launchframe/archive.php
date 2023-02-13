@@ -20,26 +20,30 @@ class ArchiveController extends Controller
 {
     public function handle()
     {
-        $data = Timber::get_context();
-        $data['title'] = 'Archive';
+        $context = Timber::get_context();
+        $context['title'] = 'Archive';
+
+        $term = get_queried_object();
 
         if (is_day()) {
-            $data['title'] = 'Archive: ' . get_the_date('D M Y');
+            $context['title'] = 'Archive: ' . get_the_date('D M Y');
         } elseif (is_month()) {
-            $data['title'] = 'Archive: ' . get_the_date('M Y');
+            $context['title'] = 'Archive: ' . get_the_date('M Y');
         } elseif (is_year()) {
-            $data['title'] = 'Archive: ' . get_the_date('Y');
+            $context['title'] = 'Archive: ' . get_the_date('Y');
         } elseif (is_tag()) {
-            $data['title'] = single_tag_title('', false);
+            $context['title'] = single_tag_title('', false);
         } elseif (is_category()) {
-            $data['title'] = single_cat_title('', false);
+            $context['title'] = single_cat_title('', false);
+            $context['slug'] = $term->slug;
+            $context['overline'] = get_bloginfo( 'name' );
         } elseif (is_post_type_archive()) {
-            $data['title'] = post_type_archive_title('', false);
+            $context['title'] = post_type_archive_title('', false);
         }
 
-        // TODO: Currently only works for posts, fix for custom post types
-        $data['posts'] = Post::query();
+        $context['posts'] = Timber::get_posts();
+        $context['pagination'] = Timber::get_pagination();
 
-        return new TimberResponse('templates/posts.twig', $data);
+        return new TimberResponse('templates/posts.twig', $context);
     }
 }

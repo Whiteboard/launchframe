@@ -218,7 +218,7 @@
         },
         {
             "key": "field_63e4012a143b3",
-            "label": "Email Signup",
+            "label": "Misc",
             "name": "",
             "aria-label": "",
             "type": "tab",
@@ -272,6 +272,33 @@
             "placeholder": "",
             "prepend": "",
             "append": ""
+        },
+        {
+            "key": "field_63eab3f3f6fc9",
+            "label": "Fallback Image",
+            "name": "fallback_image",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "If a post is missing an image, this will display in places where an image is required",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "uploader": "",
+            "acfe_thumbnail": 0,
+            "return_format": "array",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "",
+            "preview_size": "medium",
+            "library": "all"
         }
     ],
     "location": [
@@ -299,5 +326,5 @@
     "acfe_form": 0,
     "acfe_meta": "",
     "acfe_note": "",
-    "modified": 1675886947
+    "modified": 1676325956
 }

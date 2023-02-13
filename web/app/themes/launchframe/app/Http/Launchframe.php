@@ -32,6 +32,11 @@ class Launchframe extends Lumberjack
             'posts_per_page' => -1
         ] );
 
+        $context['blog_categories'] = Timber::get_terms('category', array(
+            'hide_empty' => true,
+        ));
+        $context['blog_link'] = get_post_type_archive_link( 'post' );
+
         return $context;
     }
 }
