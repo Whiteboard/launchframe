@@ -16,22 +16,23 @@ class SearchController extends Controller
     {
         $context = Timber::get_context();
         $searchQuery = get_search_query();
-
-        $context['title'] = 'Search Results';
-
-        $context['query'] = htmlspecialchars($searchQuery);
+        $query = htmlspecialchars($searchQuery);
 
         global $wp_query;
         $count = $wp_query->found_posts;
 
         if($count == 1) {
-            $context['result'] = 'We found ' . $count . ' result for ' . htmlspecialchars($searchQuery) . '</span>';
+            $context['title'] = 'We found ' . $count . ' result for "' . $query . '"';
         } else {
-            $context['result'] = 'We found ' . $count . ' results for ' . htmlspecialchars($searchQuery) . '</span>';
+            $context['title'] = 'We found ' . $count . ' results for "' . $query . '"';
         }
 
-        $context['entries'] = Timber::get_posts();
+        $context['posts'] = Timber::get_posts();
 
-        return new TimberResponse('templates/search.twig', $context);
+        $context['overline'] = 'Search Results';
+        $context['is_search'] = true;
+        $context['pagination'] = Timber::get_pagination();
+
+        return new TimberResponse('templates/posts.twig', $context);
     }
 }

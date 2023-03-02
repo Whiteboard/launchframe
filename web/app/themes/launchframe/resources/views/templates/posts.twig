@@ -11,21 +11,30 @@
         
         {% if posts|length > 0 %}
 
+            {% if not is_search %}
             <ul class="flex justify-center lg:justify-start flex-wrap text-sm mb-8 gap-1">
                 <li class="block px-4 py-1 rounded-xl transition-all {{ is_home ? 'bg-secondary text-white hover:text-white' : 'hover:text-secondary' }}"><a href="{{ blog_link }}">All</a></li>
                 {% for cat in blog_categories %}
                 <li class="block px-4 py-1 rounded-xl transition-all {{ cat.slug == slug ? 'bg-secondary text-white' : 'hover:text-secondary' }}"><a href="{{ cat.link }}" class="">{{ cat.name }}</a></li>
                 {% endfor %}
             </ul>
+            {% endif %}
 
             <div class="grid gap-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
 
                 {% for post in posts %}
+                    {% if post.post_type == 'page' %}
+                        {% set text = post.get_field('hero').text %}
+                        {% set image = post.get_field('hero').background.image ? post.get_field('hero').background.image : globals.fallback_image  %}
+                    {% else %}
+                        {% set text = post.preview.length(20).read_more(false) %}
+                        {% set image = post.thumbnail ? post.thumbnail : globals.fallback_image %}
+                    {% endif %}
                     {% include 'components/cards/card.twig' with {
-                        image: post.thumbnail ? post.thumbnail : globals.fallback_image,
-                        overline: post.date,
+                        image: image,
+                        overline: is_search ? '' : post.date,
                         heading: post.title,
-                        text: post.preview.length(20).read_more(false),
+                        text: text,
                         link: post.link,
                     }%}
                 {% endfor %}

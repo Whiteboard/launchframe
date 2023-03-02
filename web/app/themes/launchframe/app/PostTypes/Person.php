@@ -32,6 +32,7 @@ class Person extends Post
             'supports' => array('title', 'thumbnail', 'editor'),
             'menu_icon' => 'dashicons-admin-users',
             'rewrite' => $rewrite,
+            'exclude_from_search' => true,
             'show_in_rest' => true
         ];
     }
