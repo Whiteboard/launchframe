@@ -77,6 +77,13 @@ module.exports = {
                 DEFAULT: 'cubic-bezier(0.455, 0.03, 0.515, 0.955)',
             },
 
+            height: {
+                'screen-25': '25vh',
+                'screen-40': '40vh',
+                'screen-50': '50vh',
+                'screen-75': '75vh'
+            },
+
             minHeight: {
                 'screen-50': '50vh'
             },

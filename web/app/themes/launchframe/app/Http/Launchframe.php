@@ -37,6 +37,10 @@ class Launchframe extends Lumberjack
         ));
         $context['blog_link'] = get_post_type_archive_link( 'post' );
 
+        $protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+        $url = $protocol . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+        $context['url'] = $url;
+
         return $context;
     }
 }

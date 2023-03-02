@@ -22,6 +22,14 @@ class SingleController extends Controller
         $context['title'] = $post->title;
         $context['content'] = $post->content;
 
-        return new TimberResponse('templates/page.twig', $context);
+        $related_posts = Timber::get_posts([
+            'post_type' => $post->post_type, 
+            'post__not_in' => array( $post->ID ),
+            'category_name' => $post->category,
+            'posts_per_page' => 3,
+        ]);
+        $context['related'] = $related_posts;
+
+        return new TimberResponse('templates/single.twig', $context);
     }
 }

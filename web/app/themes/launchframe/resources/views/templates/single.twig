@@ -1,0 +1,110 @@
+{% extends "layouts/base.twig" %}
+
+{% block content %}
+
+    <main class="pb-24">
+        
+        <div class="fluid-container">
+
+            <ul class="flex justify-start items-center flex-wrap text-sm mb-8 gap-3 md:gap-6">
+                <li class="block px-4 py-1 rounded-xl bg-black text-white">{{ page.date }}</li>
+                {% for cat in page.terms %}
+                <li class="block transition-all hover:text-secondary"><a href="{{ cat.link }}" class="">{{ cat.name }}</a></li>
+                {% endfor %}
+                <li class="block transition-all hover:text-secondary"><a href="{{ page.author.link }}" class="">By {{ page.author.name }}</a></li>
+            </ul>
+
+            <div class="max-w-3xl mb-12">
+                {% include "typography/h2.twig" with {
+                    content: page.title,
+                    as: "h1",
+                    class: "mb-2"
+                }%}
+                {% if page.thumbnail %}
+                    {% include "typography/paragraph.twig" with {
+                        content: page.preview.length(20).read_more(false)
+                    }%}
+                {% endif %}
+            </div>
+
+        </div>
+
+        {% if page.thumbnail %}
+        <div class="mb-12">
+            <div class="w-full h-screen-25 md:h-screen-40 lg:h-screen-50 xl:h-screen-75 bg-primary relative">
+                {% include "components/background.twig" with {
+                    asset_type: "image",
+                    image: page.thumbnail,
+                } %}
+            </div>
+            <div class="fluid-container mt-2">
+                {% include "typography/paragraph.twig" with {
+                    content: page.thumbnail.caption,
+                    size: "sm",
+                    color: "text-neutral-500"
+                } %}
+            </div>
+        </div>
+        {% endif %}
+
+        <div class="fluid-container lg:flex justify-between">
+
+            <div class="lg:w-2/3 prose max-w-none mb-8 lg:mb-0">
+                {{ page.content }}
+            </div>
+
+            <div class="lg:w-1/4 space-y-8 lg:space-y-16">
+
+                <div class="flex items-center">
+                    <img src="{{ Image(page.author.image).src | towebp | resize(300,300) }}" class="h-16 mr-3 rounded-full" alt="{{ Image(page.author.image).alt }}" />
+                    <p class="leading-tight">
+                        <span class="text-lg font-bold">{{ page.author.name }}</span><br>
+                        <span class="text-sm">{{ page.author.subtitle }}</span>
+                    </p>
+                </div>
+
+                <div class="">
+                    {% include "typography/paragraph.twig" with {
+                        content: "Share",
+                        style: "overline",
+                        class: "border-b border-neutral-300 pb-1",
+                        margins: "mb-3"
+                    }%}
+                    {% include "modules/sharing.twig" %}
+                </div>
+
+                <div class="">
+                    {% include "typography/paragraph.twig" with {
+                        content: "More Articles",
+                        style: "overline",
+                        class: "border-b border-neutral-300 pb-1",
+                        margins: "mb-3"
+                    }%}
+                    <div class="grid grid-cols-1 gap-6">
+                        {% for post in related %}
+                            <a class="group" href="{{ post.link }}">
+                                {% include "typography/paragraph.twig" with {
+                                    content: post.title,
+                                    size: "lg",
+                                    margins: "mb-0",
+                                    class: "group-hover:text-secondary"
+                                }%}
+                                {% include "typography/paragraph.twig" with {
+                                    content: post.date,
+                                    size: "sm",
+                                    margins: "mb-0",
+                                    class: "opacity-80"
+                                }%}
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+{% endblock %}
+

@@ -1,0 +1,48 @@
+<ul class="flex items-center space-x-5 text-brand-primary">
+    <li>
+        <a
+          href="https://www.linkedin.com/sharing/share-offsite/?url={{ url }}"
+          title="Share on LinkedIn"
+          class="inline-block transition duration-300 transform hover:scale-125 hover:text-secondary"
+          onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=400,width=700'); return false;"
+        >
+          <span class="w-4 block">{{ source("resources/images/social-linkedin.svg") }}</span>
+        </a>
+      </li>
+  <li>
+    <a
+      href="https://www.facebook.com/sharer/sharer.php?u={{ url }}"
+      title="Share on Facebook"
+      class="inline-block transition duration-300 transform hover:scale-125 hover:text-secondary"
+      onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=400,width=700'); return false;"
+    >
+      <span class="w-2 block">{{ source("resources/images/social-facebook.svg") }}</span>
+    </a>
+  </li>
+  <li>
+    <a
+      href="http://twitter.com/share?url={{ url }}"
+      title="Share on Twitter"
+      class="inline-block transition duration-300 transform hover:scale-125 hover:text-secondary"
+      onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=400,width=700'); return false;"
+  >
+    <span class="w-4 block">{{ source("resources/images/social-twitter.svg") }}</span>
+  </a>
+  </li>
+  <li class="relative">
+    <button class="share-link copy-btn inline-block transition duration-300 transform hover:scale-125 hover:text-secondary" data-clipboard-text="{{ url }}">
+        <span class="w-4 block">{{ source("resources/images/link.svg") }}</span>
+    </button>
+    <div id="copied-success" class="top-0 absolute px-2 py-1 text-center bg-secondary text-white rounded text-xs hidden whitespace-nowrap">Link copied</div>
+  </li>
+</ul>
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script>
+<script>
+  var clipboard = new ClipboardJS('.copy-btn');
+  clipboard.on('success', function() {
+      success = document.getElementById('copied-success');
+      success.classList.remove('hidden');
+      setTimeout(() => {  success.classList.add('hidden'); }, 1200);
+  });
+</script>
