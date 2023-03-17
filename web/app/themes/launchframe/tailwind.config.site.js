@@ -10,65 +10,53 @@ const plugin = require('tailwindcss/plugin')
 const colors = require('tailwindcss/colors')
 
 module.exports = {
-    presets: [],
     theme: {
-        colors: {
-            black:   '#000000',
-            white:  '#ffffff',
-
-            primary: {
-                '400': '#5DC9F0',
-                DEFAULT: '#0D4F84',
-                '600': '#0B2254'
-            },
-
-            secondary: {
-                '400': '#F25C96',
-                DEFAULT: '#D23D77',
-                '600': '#9B2F59'
-            },
-
-            /*
-            tertiary: {
-                DEFAULT: colors.yellow['500'],
-                ...colors.yellow
-            },
-            */
-
-            neutral: {
-                DEFAULT: colors.neutral['200'],
-                ...colors.neutral
-            },
-        },
-
-        fontFamily: {
-            mono: [
-                // 'Anonymous',
-                ...defaultTheme.fontFamily.mono,
-            ],
-            sans: [
-                // 'Gaultier',
-                ...defaultTheme.fontFamily.sans,
-            ],
-            serif: [
-                // 'Lavigne',
-                ...defaultTheme.fontFamily.serif,
-            ],
-        },
-
-        fontWeight: {
-            // hairline: 100,
-            // thin: 200,
-            // light: 300,
-            normal: 400,
-            // medium: 500,
-            // semibold: 600,
-            bold: 700,
-            // extrabold: 800,
-            // black: 900,
-        },
-
         extend: {
+            colors: {
+                primary: {
+                    '400': '#5DC9F0',
+                    DEFAULT: '#0D4F84',
+                    '600': '#0B2254'
+                },
+
+                secondary: {
+                    '400': '#F25C96',
+                    DEFAULT: '#D23D77',
+                    '600': '#9B2F59'
+                },
+
+                /*
+                tertiary: {
+                    DEFAULT: colors.yellow['500'],
+                    ...colors.yellow
+                },
+                */
+
+                neutral: {
+                    DEFAULT: colors.neutral['200'],
+                    ...colors.neutral
+                },
+
+                black: '#000000',
+                white: '#ffffff',
+
+            },
+
+            fontFamily: {
+                mono: [
+                    `'GT America Mono'`,
+                    ...defaultTheme.fontFamily.mono,
+                ],
+                sans: [
+                    // `'Blender'`,
+                    ...defaultTheme.fontFamily.sans,
+                ],
+                serif: [
+                    // `'Lavigne'`,
+                    ...defaultTheme.fontFamily.serif,
+                ],
+            },
+
             transitionDuration: {
                 DEFAULT: '300ms',
             },
@@ -76,28 +64,32 @@ module.exports = {
             transitionTimingFunction: {
                 DEFAULT: 'cubic-bezier(0.455, 0.03, 0.515, 0.955)',
             },
-
-            height: {
-                'screen-25': '25vh',
-                'screen-40': '40vh',
-                'screen-50': '50vh',
-                'screen-75': '75vh'
-            },
-
-            minHeight: {
-                'screen-50': '50vh'
-            },
-
-            screens: {
-                '3xl': '1792px',
-                '4xl': '2048px'
-            }
         },
     },
 
     plugins: [
         plugin(function({ addBase, theme }) {
             addBase({
+                /* :: Fonts
+                {+} ---------------------------------- */
+                '@font-face': {
+                    fontFamily: 'GT America Mono',
+                    src: `url('../../resources/fonts/GTAmericaMono-Regular.woff2') format('woff2'),
+                        url('../../resources/fonts/GTAmericaMono-Regular.woff') format('woff');`,
+                    fontWeight: 'normal',
+                    fontStyle: 'normal',
+                    fontDisplay: 'swap',
+                },
+
+                '@font-face': {
+                    fontFamily: 'GT America Mono',
+                    src: `url('../../resources/fonts/GTAmericaMono-RegularItalic.woff2') format('woff2'),
+                        url('../../resources/fonts/GTAmericaMono-RegularItalic.woff') format('woff');`,
+                    fontWeight: 'normal',
+                    fontStyle: 'italic',
+                    fontDisplay: 'swap',
+                },
+
                 // Default color transition on links unless user prefers reduced motion.
                 '@media (prefers-reduced-motion: no-preference)': {
                     'a': {
@@ -114,6 +106,16 @@ module.exports = {
                         // fontFamily: theme('fontFamily.mono'),
                         fontFamily: theme('fontFamily.sans'),
                         // fontFamily: theme('fontFamily.serif'),
+                },
+
+                '                ::selection': {
+                    backgroundColor: theme('colors.primary.DEFAULT'),
+                    color: theme('colors.black')
+                },
+
+                '::-moz-selection': {
+                    backgroundColor: theme('colors.primary.DEFAULT'),
+                    color: theme('colors.black')
                 },
 
                 'mark': {

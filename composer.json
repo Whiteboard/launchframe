@@ -26,7 +26,7 @@
         "wpackagist-plugin/autodescription": "^4.2.7.1",
         "wpackagist-plugin/duplicate-post": "^4.5",
         "wpackagist-plugin/goodbye-captcha": "^3.1.43",
-        "wpackagist-plugin/minify-html-markup": "^2.02"
+        "wpackagist-plugin/minify-html-markup": "^2.1.7"
     },
 
     "require-dev": {

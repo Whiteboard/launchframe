@@ -20,19 +20,38 @@ module.exports = {
             },
 
             colors: {
-                current: 'currentColor',
-                transparent: 'transparent',
-                // Gray colors.
                 gray: colors.slate,
-                // Error styling colors.
                 red: colors.red,
-                // Notice styling colors.
                 yellow: colors.amber,
-                // Success styling colors.
                 green: colors.green,
             },
 
-            cursor: { none: 'none' },
+            minHeight: {
+                '3xs': '12rem',
+                '2xs': '16rem',
+                xs: '20rem',
+                sm: '24rem',
+                md: '28rem',
+                lg: '32rem',
+                xl: '36rem',
+                '2xl': '42rem',
+                '3xl': '48rem',
+                '4xl': '56rem',
+                '5xl': '64rem',
+                '6xl': '72rem',
+                'screen-50': '50vh',
+                'screen-75': '75vh',
+                'screen-80': '80vh',
+                'screen-90': '90vh'
+            },
+
+            minWidth: theme => ({
+                ...theme('spacing'),
+                min: 'min-content',
+                max: 'max-content'
+            }),
+
+            // cursor: { none: 'none' },
 
             screens: { '3xl': '1680px' },
 

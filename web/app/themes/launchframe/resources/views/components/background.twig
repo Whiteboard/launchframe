@@ -12,12 +12,15 @@
     {% if asset_type == 'video' %}
         <video
             class="absolute inset-0 w-full h-full object-cover"
+            x-data=""
+            x-ref="video"
+            x-init="$refs.video.play()"
+            class="absolute inset-0 w-full h-full object-cover"
             autoplay
             muted
             loop
-            {% if poster %}
-                poster="{{ poster }}"
-            {% endif %}
+            playsinline
+            poster="{{ poster }}"
         >
             <source src="{{ video }}" />
         </video>
