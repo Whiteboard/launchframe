@@ -59,12 +59,11 @@
                 </div>
             </button>
             <div 
-                class="py-6 transition duration-700 ease-in-out-expo"
+                class="py-6"
                 x-ref="container{{ loop.index }}" 
                 x-show="accordionItem == {{ loop.index }}" 
                 x-cloak
-                x-transition:enter.duration.500ms
-                x-transition:leave.duration.200ms 
+                x-transition:enter.duration.700ms
             >
                 <div class="prose max-w-none">{{ item.text }}</div>
                 {% if item.buttons|length > 0 %}
