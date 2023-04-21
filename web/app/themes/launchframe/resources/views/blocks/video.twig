@@ -1,35 +1,46 @@
 {#
 	@name Block: Video
-	@desc The standalone video player block.
+	@desc The standalone video lightbox or inline player block.
 #}
-
-<div
-    x-data
-    x-title="Block: Video"
-    x-ref="container"
-    class="
-        fluid-container grid grid-cols-12
-        {% include "snippets/no_block_spacing.twig" %}
-    "
-    id="{{ id }}"
->
+{% if blockset.videos %}
+    <div
+        x-data
+        x-title="Block: Video"
+        x-ref="container"
+        class="
+            fluid-container overflow-hidden grid grid-cols-12
+            {% include "snippets/no_block_spacing.twig" %}
+        "
+        id="{{ id }}"
+    >
         <div
             class="
-                {% if blockset.size == "lg" %}
-                    col-span-12
-                {% elseif blockset.size == "sm" %}
-                    size-lg
+                {% if blockset.player_style == 'player' %}
+                    {% if blockset.size == "lg" %}
+                        col-span-12
+                    {% elseif blockset.size == "md" %}
+                        size-lg
+                    {% else %}
+                        size-md
+                    {% endif %}
                 {% else %}
-                    size-xl
+                    {% if blockset.size == "lg" %}
+                        col-span-12
+                    {% elseif blockset.size == "sm" %}
+                        size-lg
+                    {% else %}
+                        size-xl
+                    {% endif %}
                 {% endif %}
             "
         >
-
-            {% include "components/intro.twig" with {
-                overline: blockset.overline,
-                title: blockset.title,
-                subtitle: blockset.subtitle
-            }%}
+            {% if blockset.player_style == 'player' %}
+                {% include "components/intro.twig" with {
+                    overline: blockset.overline,
+                    title: blockset.title,
+                    subtitle: blockset.subtitle
+                }%}
+            {% endif %}
 
             {% for video in blockset.videos %}
                 <div
@@ -41,18 +52,31 @@
                     x-ref="element"
                     class="relative w-full"
                 >
-
-                    {% include "components/video_player.twig" with {
-                        autoplay: true,
-                        source: video.source,
-                        video: video.video,
-                        poster: video.poster,
-                        youtube: video.youtube,
-                        vimeo: video.vimeo,
-                    } %}
-
+                    {% if blockset.player_style == 'player' %}
+                        {% include "components/video_player.twig" with {
+                            source: video.source,
+                            video: video.video,
+                            poster: video.poster,
+                            youtube: video.youtube,
+                            vimeo: video.vimeo,
+                        } %}
+                    {% else %}
+                        {% for video in blockset.videos %}
+                            {% include "modules/video_preview.twig" with {
+                                video_source : video.source,
+                                video_mp4 : video.video.url,
+                                video_poster : video.poster.url,
+                                video_cover_image : video.source == "local" ? video.poster : video.cover_image,
+                                video_id : video.source == "youtube" ? video.youtube : video.vimeo,
+                                video_overline : blockset.overline,
+                                video_title : blockset.title,
+                                video_subtitle : blockset.subtitle,
+                                hidePlayButtonText : true
+                            }%}
+                        {% endfor %}
+                    {% endif %}
                 </div>
             {% endfor %}
-
         </div>
-</div>
+    </div>
+{% endif %}

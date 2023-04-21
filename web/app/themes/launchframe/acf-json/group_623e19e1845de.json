@@ -63,6 +63,29 @@
             "append": ""
         },
         {
+            "key": "field_6442d5e6be1cb",
+            "label": "Player Style",
+            "name": "player_style",
+            "aria-label": "",
+            "type": "button_group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "lightbox": "Lightbox",
+                "player": "Inline Player"
+            },
+            "default_value": "lightbox",
+            "return_format": "value",
+            "allow_null": 0,
+            "layout": "horizontal"
+        },
+        {
             "key": "field_6351c8b920c49",
             "label": "Size",
             "name": "size",
@@ -219,5 +242,5 @@
     "acfe_form": 0,
     "acfe_meta": "",
     "acfe_note": "",
-    "modified": 1676065712
+    "modified": 1682101844
 }

@@ -78,8 +78,43 @@
                 "id": ""
             },
             "uploader": "",
-            "acfe_thumbnail": 0,
             "return_format": "array",
+            "acfe_thumbnail": 0,
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "",
+            "preview_size": "medium",
+            "library": "all"
+        },
+        {
+            "key": "field_6442d6c731b1f",
+            "label": "Cover Image",
+            "name": "cover_image",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "If empty, defaults to video thumbnail.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_6234d581e6402",
+                        "operator": "!=",
+                        "value": "local"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "uploader": "",
+            "return_format": "array",
+            "acfe_thumbnail": 0,
             "min_width": "",
             "min_height": "",
             "min_size": "",
@@ -172,5 +207,5 @@
     "acfe_form": 0,
     "acfe_meta": "",
     "acfe_note": "",
-    "modified": 1675195667
+    "modified": 1682103667
 }
