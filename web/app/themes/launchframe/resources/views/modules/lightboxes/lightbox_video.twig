@@ -20,7 +20,7 @@
                 {# π ----
                 // :: PLAYER CONTAINER
                 // : ---------------------------------- #}
-                <div x-ref="screen" class="relative w-full opacity-0">
+                <div x-ref="screen" class="relative w-full opacity-0" :class="$store.lightboxVideo.source === 'vimeo' ? 'flex items-center justify-center' : ''">
                     {# :: Custom Player
                     {+} ---------------------------------- #}
                     <video

@@ -60,8 +60,10 @@ export default () => {
         },
 
         vimeoInit() {
+            let size = window.innerWidth * 0.8;
             const options = {
-                id: this.$store.lightboxVideo.videoID
+                id: this.$store.lightboxVideo.videoID,
+                width: size
             };
 
             this.player = new Player(this.$refs.player, options);
