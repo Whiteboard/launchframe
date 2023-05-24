@@ -50,7 +50,8 @@
             "choices": {
                 "entry": "Entry",
                 "url": "URL",
-                "asset": "File"
+                "asset": "File",
+                "anchor": "Anchor"
             },
             "default_value": false,
             "return_format": "value",
@@ -176,6 +177,35 @@
             "library": "all"
         },
         {
+            "key": "field_646d54c3a872f",
+            "label": "Anchor",
+            "name": "anchor",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5f5bc31e52bdd",
+                        "operator": "==",
+                        "value": "anchor"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "acfe_save_meta": 0,
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
             "key": "field_5f5bc5b552be1",
             "label": "New Window",
             "name": "new_window",
@@ -221,5 +251,5 @@
     "acfe_form": 0,
     "acfe_meta": "",
     "acfe_note": "",
-    "modified": 1684886491
+    "modified": 1684886743
 }
