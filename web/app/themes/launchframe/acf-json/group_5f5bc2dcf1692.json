@@ -51,7 +51,9 @@
                 "entry": "Entry",
                 "url": "URL",
                 "asset": "File",
-                "anchor": "Anchor"
+                "anchor": "Anchor",
+                "email": "Email",
+                "phone": "Phone"
             },
             "default_value": false,
             "return_format": "value",
@@ -206,6 +208,64 @@
             "append": ""
         },
         {
+            "key": "field_64835fae04eb3",
+            "label": "Email",
+            "name": "email",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5f5bc31e52bdd",
+                        "operator": "==",
+                        "value": "email"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "acfe_save_meta": 0,
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_64835fbc04eb4",
+            "label": "Phone",
+            "name": "phone",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5f5bc31e52bdd",
+                        "operator": "==",
+                        "value": "phone"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "acfe_save_meta": 0,
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
             "key": "field_5f5bc5b552be1",
             "label": "New Window",
             "name": "new_window",
@@ -251,5 +311,5 @@
     "acfe_form": 0,
     "acfe_meta": "",
     "acfe_note": "",
-    "modified": 1684886743
+    "modified": 1686331343
 }
