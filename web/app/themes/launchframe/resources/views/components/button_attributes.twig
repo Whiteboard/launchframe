@@ -3,11 +3,13 @@
 {% elseif action == "entry" %}
     href="{{ entry }}"
 {% elseif action == "email" %}
-    href="mailto:{{ emaIl }}"
+    href="mailto:{{ email }}"
 {% elseif action == "phone" %}
     href="tel:{{ phone }}"
 {% elseif action == "asset" %}
     href="{{ asset }}" download
+{% elseif action == "anchor" %}
+    onclick="document.getElementById('{{ anchor }}')?.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' })"
 
 {% elseif action == "video" and video_source %}
     @click="() => {

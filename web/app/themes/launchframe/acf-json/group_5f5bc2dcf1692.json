@@ -46,10 +46,14 @@
                 "class": "",
                 "id": ""
             },
+            "acfe_save_meta": 0,
             "choices": {
                 "entry": "Entry",
                 "url": "URL",
-                "file": "File"
+                "asset": "File",
+                "anchor": "Anchor",
+                "email": "Email",
+                "phone": "Phone"
             },
             "default_value": false,
             "return_format": "value",
@@ -123,7 +127,7 @@
             "label": "URL",
             "name": "url",
             "aria-label": "",
-            "type": "text",
+            "type": "url",
             "instructions": "",
             "required": 0,
             "conditional_logic": [
@@ -133,12 +137,31 @@
                         "operator": "==",
                         "value": "url"
                     }
-                ],
+                ]
+            ],
+            "wrapper": {
+                "width": "67",
+                "class": "",
+                "id": ""
+            },
+            "acfe_save_meta": 0,
+            "default_value": "",
+            "placeholder": ""
+        },
+        {
+            "key": "field_646d528045d06",
+            "label": "File",
+            "name": "asset",
+            "aria-label": "",
+            "type": "file",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
                 [
                     {
                         "field": "field_5f5bc31e52bdd",
                         "operator": "==",
-                        "value": "file"
+                        "value": "asset"
                     }
                 ]
             ],
@@ -147,11 +170,100 @@
                 "class": "",
                 "id": ""
             },
+            "acfe_save_meta": 0,
+            "uploader": "",
+            "return_format": "array",
+            "min_size": "",
+            "max_size": "",
+            "mime_types": "",
+            "library": "all"
+        },
+        {
+            "key": "field_646d54c3a872f",
+            "label": "Anchor",
+            "name": "anchor",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5f5bc31e52bdd",
+                        "operator": "==",
+                        "value": "anchor"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "acfe_save_meta": 0,
             "default_value": "",
+            "maxlength": "",
             "placeholder": "",
             "prepend": "",
-            "append": "",
-            "maxlength": ""
+            "append": ""
+        },
+        {
+            "key": "field_64835fae04eb3",
+            "label": "Email",
+            "name": "email",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5f5bc31e52bdd",
+                        "operator": "==",
+                        "value": "email"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "acfe_save_meta": 0,
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_64835fbc04eb4",
+            "label": "Phone",
+            "name": "phone",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5f5bc31e52bdd",
+                        "operator": "==",
+                        "value": "phone"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "acfe_save_meta": 0,
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         },
         {
             "key": "field_5f5bc5b552be1",
@@ -199,5 +311,5 @@
     "acfe_form": 0,
     "acfe_meta": "",
     "acfe_note": "",
-    "modified": 1674684719
+    "modified": 1686331343
 }
