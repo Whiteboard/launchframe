@@ -58,16 +58,17 @@
                     </span> 
                 </div>
             </button>
-            <div 
-                class="py-6"
+            <div
+                {# Note: Vertical padding or vertical margin cannot be applied on this element with Alpine Collapse. #}
                 x-ref="container{{ loop.index }}" 
                 x-show="accordionItem == {{ loop.index }}" 
+                x-collapse.duration.700ms
                 x-cloak
-                x-transition:enter.duration.700ms
             >
-                <div class="prose max-w-none">{{ item.text }}</div>
-                {% if item.buttons|length > 0 %}
-                    <div class="flex items-center flex-wrap gap-6 mt-6">
+                {% set buttonsPresent = item.buttons|length > 0 %}
+                <div class="prose max-w-none {{ buttonsPresent ? 'mt-6' : 'my-6' }}">{{ item.text }}</div>
+                {% if buttonsPresent %}
+                    <div class="flex items-center flex-wrap gap-6 my-6">
                         {% include "components/buttons.twig" with {
                             buttons: item.buttons,
                         } %}
