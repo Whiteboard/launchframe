@@ -1,6 +1,7 @@
 import Alpine from 'alpinejs';
 import focus from '@alpinejs/focus';
 import persist from '@alpinejs/persist';
+import collapse from '@alpinejs/collapse';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText } from 'gsap/SplitText';
@@ -11,6 +12,7 @@ import router from '@/Router';
 
 Alpine.plugin(persist);
 Alpine.plugin(focus);
+Alpine.plugin(collapse);
 window.Alpine = Alpine;
 
 gsap.registerPlugin(ScrollTrigger, SplitText);

@@ -9,7 +9,7 @@
         "production": "mix --production"
     },
     "dependencies": {
-        "@alpinejs/collapse": "^3.11.1",
+        "@alpinejs/collapse": "^3.12.3",
         "@alpinejs/focus": "^3.11.1",
         "@alpinejs/persist": "^3.11.1",
         "@barba/core": "^2.9.7",
