@@ -9,10 +9,10 @@
 >
     {# :: Video
     {+} ---------------------------------- #}
-    {% if asset_type == 'video' %}
+    {% if asset_type == 'video' or asset_type == 'remote_video' %}
         <video
             class="absolute inset-0 w-full h-full object-cover"
-            x-data=""
+            x-data
             x-ref="video"
             x-init="$refs.video.play()"
             class="absolute inset-0 w-full h-full object-cover"
@@ -22,7 +22,7 @@
             playsinline
             poster="{{ poster }}"
         >
-            <source src="{{ video }}" />
+            <source src="{{ asset_type == 'video' ? video : remote_mp4 }}" />
         </video>
 
     {# :: Image

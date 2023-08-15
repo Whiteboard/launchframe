@@ -49,15 +49,16 @@
                 <div class="swiper-wrapper">
                     {% for card in cards %}
                         <div class="swiper-slide">
-                                {% include "components/cards/card.twig" with {
-                                    asset_type: card.media.asset_type,
-                                    image: card.media.image,
-                                    video: card.media.video,
-                                    overline: card.overline,
-                                    heading: card.title,
-                                    text: card.text,
-                                    link: card.link,
-                                }%}
+                            {% include "components/cards/card.twig" with {
+                                asset_type: card.media.asset_type,
+                                image: card.media.image,
+                                video: card.media.video,
+                                remote_mp4: card.media.remote_mp4,
+                                overline: card.overline,
+                                heading: card.title,
+                                text: card.text,
+                                link: card.link,
+                            }%}
                         </div>
                     {% endfor %}
                 </div>
