@@ -50,10 +50,16 @@ export default () => {
         Alpine.store('enterDelay', 0.5);
     });
 
+    // :: GOOGLE ANALYTICS
+    // {+} ----------------------------------
+
     barba.hooks.after(() => {
-        ga('set', 'page', window.location.pathname);
-        ga('send', 'pageview');
-    });
+        gtag('event', 'page_view', {
+            'page_title': document.title,
+            'page_location': location.href,
+            'page_path': location.pathname,
+        });
+    })
 
     if (history.scrollRestoration) {
         history.scrollRestoration = 'manual';

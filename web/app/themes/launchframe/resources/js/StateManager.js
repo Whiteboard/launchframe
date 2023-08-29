@@ -14,6 +14,16 @@ export default () => {
         }
     });
 
+    Alpine.store('googleAnalytics', {
+        tagID: 'none',
+        setTagID(id) {
+            this.tagID = id.toString();
+            gtag('config', this.tagID, {
+                send_page_view: false,
+            });
+        },
+    })
+
     Alpine.store('search', {
         open: false,
     });

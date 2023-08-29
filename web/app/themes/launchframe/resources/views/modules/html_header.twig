@@ -13,4 +13,9 @@
     <link rel="pingback" href="{{ site.pingback_url }}" />
 
     {{ function("wp_head") }}
+
+    {% if globals.google_analytics_snippet and globals.google_tag_id %}
+        {{ globals.google_analytics_snippet }}
+        <template x-data x-init="$store.googleAnalytics.setTagID('{{ globals.google_tag_id }}')"></template>
+    {% endif %}
 </head>
