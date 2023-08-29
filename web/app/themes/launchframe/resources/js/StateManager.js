@@ -22,7 +22,7 @@ export default () => {
                 send_page_view: false,
             });
         },
-    })
+    });
 
     Alpine.store('search', {
         open: false,

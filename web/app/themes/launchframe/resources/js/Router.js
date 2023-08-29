@@ -59,7 +59,7 @@ export default () => {
             'page_location': location.href,
             'page_path': location.pathname,
         });
-    })
+    });
 
     if (history.scrollRestoration) {
         history.scrollRestoration = 'manual';
