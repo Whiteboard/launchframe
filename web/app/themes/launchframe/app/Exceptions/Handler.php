@@ -4,12 +4,12 @@ namespace App\Exceptions;
 
 use Exception;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 use Rareloop\Lumberjack\Exceptions\Handler as LumberjackHandler;
 use Rareloop\Lumberjack\Facades\Config;
 use Rareloop\Lumberjack\Facades\Log;
 use Rareloop\Lumberjack\Http\Responses\TimberResponse;
 use Timber\Timber;
-use Psr\Http\Message\ServerRequestInterface;
 
 class Handler extends LumberjackHandler
 {

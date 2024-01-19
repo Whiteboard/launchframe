@@ -1,12 +1,12 @@
 <?php
 
-use Rareloop\Lumberjack\Application;
 use App\Exceptions\Handler;
+use Rareloop\Lumberjack\Application;
 use Rareloop\Lumberjack\Exceptions\HandlerInterface;
 
-$autoloader = require_once('autoload.php');
+$autoloader = require_once 'autoload.php';
 
-$autoloader('App\\', dirname(__DIR__) . '/app/');
+$autoloader('App\\', dirname(__DIR__).'/app/');
 
 $app = new Application(dirname(__DIR__));
 

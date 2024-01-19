@@ -28,7 +28,7 @@ return [
         App\Providers\ThemeSupport::class,
         App\Providers\Globals::class,
         // App\Providers\Vite::class,
-        App\Providers\Assets::class
+        App\Providers\Assets::class,
     ],
 
     'aliases' => [

@@ -23,8 +23,8 @@ class SingleController extends Controller
         $context['content'] = $post->content;
 
         $related_posts = Timber::get_posts([
-            'post_type' => $post->post_type, 
-            'post__not_in' => array( $post->ID ),
+            'post_type' => $post->post_type,
+            'post__not_in' => [$post->ID],
             'category_name' => $post->category,
             'posts_per_page' => 3,
         ]);

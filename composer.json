@@ -1,14 +1,15 @@
 {
     "name": "whiteboard/launchframe",
-
     "repositories": [
         {
             "type": "composer",
             "url": "https://wpackagist.org",
-             "only": ["wpackagist-plugin/*", "wpackagist-theme/*"]
+            "only": [
+                "wpackagist-plugin/*",
+                "wpackagist-theme/*"
+            ]
         }
     ],
-
     "require": {
         "php": ">=8.0",
         "composer/installers": "^2.2",
@@ -16,24 +17,21 @@
         "roots/bedrock-autoloader": "^1.0.4",
         "rareloop/lumberjack-core": "dev-add-php-81-support",
         "roots/soil": "^4.1.1",
-        "roots/wordpress": "6.1.1",
+        "roots/wordpress": "6.4.2",
         "roots/wp-config": "1.0.0",
         "roots/wp-password-bcrypt": "1.1.0",
         "timber/timber": "^1.21",
         "vlucas/phpdotenv": "^5.4",
-        "wpackagist-plugin/acf-extended": "^0.8.9",
-        "wpackagist-plugin/all-in-one-wp-migration": "^7.70",
-        "wpackagist-plugin/autodescription": "^4.2.7.1",
+        "wpackagist-plugin/acf-extended": "^0.8.9.5",
+        "wpackagist-plugin/all-in-one-wp-migration": "^7.79",
+        "wpackagist-plugin/autodescription": "^5.0.2",
         "wpackagist-plugin/duplicate-post": "^4.5",
-        "wpackagist-plugin/goodbye-captcha": "^3.1.43",
-        "wpackagist-plugin/minify-html-markup": "^2.1.7"
+        "wpackagist-plugin/minify-html-markup": "^2.1.9"
     },
-
     "require-dev": {
         "squizlabs/php_codesniffer": "^3.7.1",
         "roave/security-advisories": "dev-latest"
     },
-
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
@@ -42,23 +40,26 @@
             "roots/wordpress-core-installer": true
         }
     },
-
     "minimum-stability": "dev",
     "prefer-stable": true,
     "extra": {
         "installer-paths": {
-            "web/app/mu-plugins/{$name}/": ["type:wordpress-muplugin"],
-            "web/app/plugins/{$name}/": ["type:wordpress-plugin"],
-            "web/app/themes/{$name}/": ["type:wordpress-theme"]
+            "web/app/mu-plugins/{$name}/": [
+                "type:wordpress-muplugin"
+            ],
+            "web/app/plugins/{$name}/": [
+                "type:wordpress-plugin"
+            ],
+            "web/app/themes/{$name}/": [
+                "type:wordpress-theme"
+            ]
         },
         "wordpress-install-dir": "web/wp"
     },
-
     "scripts": {
         "post-root-package-install": [
             "php -r \"copy('.env.example', '.env');\""
         ],
-
         "test": [
             "phpcs"
         ]

@@ -13,7 +13,6 @@ namespace App;
 
 use App\Http\Controllers\Controller;
 use Rareloop\Lumberjack\Http\Responses\TimberResponse;
-use Rareloop\Lumberjack\Post;
 use Timber\Timber;
 
 class ArchiveController extends Controller
@@ -26,17 +25,17 @@ class ArchiveController extends Controller
         $term = get_queried_object();
 
         if (is_day()) {
-            $context['title'] = 'Archive: ' . get_the_date('D M Y');
+            $context['title'] = 'Archive: '.get_the_date('D M Y');
         } elseif (is_month()) {
-            $context['title'] = 'Archive: ' . get_the_date('M Y');
+            $context['title'] = 'Archive: '.get_the_date('M Y');
         } elseif (is_year()) {
-            $context['title'] = 'Archive: ' . get_the_date('Y');
+            $context['title'] = 'Archive: '.get_the_date('Y');
         } elseif (is_tag()) {
             $context['title'] = single_tag_title('', false);
         } elseif (is_category()) {
             $context['title'] = single_cat_title('', false);
             $context['slug'] = $term->slug;
-            $context['overline'] = get_bloginfo( 'name' );
+            $context['overline'] = get_bloginfo('name');
         } elseif (is_post_type_archive()) {
             $context['title'] = post_type_archive_title('', false);
         }

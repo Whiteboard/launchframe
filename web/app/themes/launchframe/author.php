@@ -22,10 +22,10 @@ class AuthorController extends Controller
         $author = new TimberUser($wp_query->query_vars['author']);
 
         $data['author'] = $author;
-        $data['title'] = 'Author Archives: ' . $author->name();
+        $data['title'] = 'Author Archives: '.$author->name();
 
         $data['posts'] = Post::query([
-            'author' => $author->ID
+            'author' => $author->ID,
         ]);
 
         return new TimberResponse('templates/posts.twig', $data);

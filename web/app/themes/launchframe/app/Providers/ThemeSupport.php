@@ -27,10 +27,10 @@ class ThemeSupport extends ServiceProvider
 
             $my_account = $wp_admin_bar->get_node('my-account');
             $title = str_replace('Howdy,', '', $my_account->title);
-            $wp_admin_bar->add_node(array(
+            $wp_admin_bar->add_node([
                 'id' => 'my-account',
                 'title' => $title,
-            ));
+            ]);
         }, 999);
 
         show_admin_bar(false);
@@ -54,7 +54,6 @@ class ThemeSupport extends ServiceProvider
             remove_meta_box('dashboard_right_now', 'dashboard', 'normal');
             remove_meta_box('dashboard_activity', 'dashboard', 'normal');
 
-
             /* :: Remove Taxonomy Meta Boxes (Using ACF Instead) ------------ */
             // remove_meta_box('tagsdiv', ['article'], 'side');
         });
@@ -63,8 +62,8 @@ class ThemeSupport extends ServiceProvider
         {+} ---------------------------------- */
         /* :: Clean Up WYSIWYG ------------ */
         add_filter('acf/fields/wysiwyg/toolbars', function ($toolbars) {
-            $toolbars['Bard'] = array();
-            $toolbars['Bard'][1] = array('formatselect', 'bold', 'italic', 'underline', 'strikethrough', 'bullist', 'numlist', 'alignleft', 'aligncenter', 'alignright', 'blockquote', 'link', 'clear', 'fullscreen');
+            $toolbars['Bard'] = [];
+            $toolbars['Bard'][1] = ['formatselect', 'bold', 'italic', 'underline', 'strikethrough', 'bullist', 'numlist', 'alignleft', 'aligncenter', 'alignright', 'blockquote', 'link', 'clear', 'fullscreen'];
 
             unset($toolbars['Basic']);
             unset($toolbars['Full']);
@@ -74,7 +73,7 @@ class ThemeSupport extends ServiceProvider
 
         /* :: Disable Guttenburg
         {+} ---------------------------------- */
-        add_filter("use_block_editor_for_post_type", function () {
+        add_filter('use_block_editor_for_post_type', function () {
             return false;
         });
 

@@ -13,19 +13,19 @@ class Globals extends ServiceProvider
     public function register()
     {
         if (function_exists('acf_add_options_page')) {
-            acf_add_options_page(array(
-                'page_title'     => 'Globals Settings',
-                'menu_title'    => 'Globals',
-                'menu_slug'     => 'fieldset-globals',
-                'capability'    => 'edit_posts',
-                'redirect'        => false
-            ));
+            acf_add_options_page([
+                'page_title' => 'Globals Settings',
+                'menu_title' => 'Globals',
+                'menu_slug' => 'fieldset-globals',
+                'capability' => 'edit_posts',
+                'redirect' => false,
+            ]);
 
-            acf_add_options_sub_page(array(
-                'page_title'     => 'Footer Settings',
-                'menu_title'    => 'Footer',
-                'parent_slug'    => 'fieldset-globals',
-            ));
+            acf_add_options_sub_page([
+                'page_title' => 'Footer Settings',
+                'menu_title' => 'Footer',
+                'parent_slug' => 'fieldset-globals',
+            ]);
         }
     }
 
@@ -34,5 +34,6 @@ class Globals extends ServiceProvider
     // :: Perform any additional boot required for this application
     // : ---------------------------------- */
     public function boot()
-    { }
+    {
+    }
 }

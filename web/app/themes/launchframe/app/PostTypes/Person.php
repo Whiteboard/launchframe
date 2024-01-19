@@ -14,12 +14,12 @@ class Person extends Post
     protected static function getPostTypeConfig()
     {
         return [
-            $rewrite = array(
+            $rewrite = [
                 'slug' => 'people',
                 'with_front' => true,
                 'pages' => true,
                 'feeds' => true,
-            ),
+            ],
             'labels' => [
                 'name' => __('People'),
                 'singular_name' => __('Person'),
@@ -29,11 +29,11 @@ class Person extends Post
             'publicly_queryable' => false,
             'has_archive' => false,
             'show_in_nav_menus' => false,
-            'supports' => array('title', 'thumbnail', 'editor'),
+            'supports' => ['title', 'thumbnail', 'editor'],
             'menu_icon' => 'dashicons-admin-users',
             'rewrite' => $rewrite,
             'exclude_from_search' => true,
-            'show_in_rest' => true
+            'show_in_rest' => true,
         ];
     }
 }

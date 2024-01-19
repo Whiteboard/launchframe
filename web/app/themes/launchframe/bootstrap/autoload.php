@@ -10,7 +10,7 @@ return function ($prefix, $baseDir) {
      *
      *      new \Foo\Bar\Baz\Qux;
      *
-     * @param string $class The fully-qualified class name.
+     * @param  string  $class  The fully-qualified class name.
      * @return void
      */
     spl_autoload_register(function ($class) use ($prefix, $baseDir) {
@@ -28,7 +28,7 @@ return function ($prefix, $baseDir) {
         // replace the namespace prefix with the base directory, replace namespace
         // separators with directory separators in the relative class name, append
         // with .php
-        $file = $baseDir . str_replace('\\', '/', $relativeClass) . '.php';
+        $file = $baseDir.str_replace('\\', '/', $relativeClass).'.php';
 
         // if the file exists, require it
         if (file_exists($file)) {

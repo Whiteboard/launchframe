@@ -21,10 +21,10 @@ class SearchController extends Controller
         global $wp_query;
         $count = $wp_query->found_posts;
 
-        if($count == 1) {
-            $context['title'] = 'We found ' . $count . ' result for "' . $query . '"';
+        if ($count == 1) {
+            $context['title'] = 'We found '.$count.' result for "'.$query.'"';
         } else {
-            $context['title'] = 'We found ' . $count . ' results for "' . $query . '"';
+            $context['title'] = 'We found '.$count.' results for "'.$query.'"';
         }
 
         $context['posts'] = Timber::get_posts();

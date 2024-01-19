@@ -2,8 +2,8 @@
 
 namespace App\Http;
 
-use Rareloop\Lumberjack\Http\Lumberjack;
 use App\Menu\Menu;
+use Rareloop\Lumberjack\Http\Lumberjack;
 use Timber\Timber;
 
 class Launchframe extends Lumberjack
@@ -24,21 +24,21 @@ class Launchframe extends Lumberjack
         $context['footer_menu_three'] = new Menu('footer-3');
         $context['footer_menu_four'] = new Menu('footer-4');
 
-        $context['people'] = Timber::get_posts( [
+        $context['people'] = Timber::get_posts([
             'post_type' => 'person',
-            'order'     => 'ASC',
+            'order' => 'ASC',
             'meta_key' => 'last_name',
-            'orderby'   => 'meta_value',
-            'posts_per_page' => -1
-        ] );
+            'orderby' => 'meta_value',
+            'posts_per_page' => -1,
+        ]);
 
-        $context['blog_categories'] = Timber::get_terms('category', array(
+        $context['blog_categories'] = Timber::get_terms('category', [
             'hide_empty' => true,
-        ));
-        $context['blog_link'] = get_post_type_archive_link( 'post' );
+        ]);
+        $context['blog_link'] = get_post_type_archive_link('post');
 
-        $protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
-        $url = $protocol . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+        $protocol = ((! empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERVER['SERVER_PORT'] == 443) ? 'https://' : 'http://';
+        $url = $protocol.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
         $context['url'] = $url;
 
         return $context;

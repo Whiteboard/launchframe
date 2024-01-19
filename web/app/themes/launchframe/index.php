@@ -12,7 +12,6 @@ namespace App;
 
 use App\Http\Controllers\Controller;
 use Rareloop\Lumberjack\Http\Responses\TimberResponse;
-use Rareloop\Lumberjack\Post;
 use Timber\Timber;
 
 class IndexController extends Controller
@@ -24,7 +23,7 @@ class IndexController extends Controller
         $context['posts'] = Timber::get_posts();
         $context['pagination'] = Timber::get_pagination();
 
-        $context['overline'] = get_bloginfo( 'name' );
+        $context['overline'] = get_bloginfo('name');
         $context['title'] = 'Blog Articles';
 
         return new TimberResponse('templates/posts.twig', $context);

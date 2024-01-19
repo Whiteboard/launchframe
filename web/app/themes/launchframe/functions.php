@@ -5,7 +5,7 @@ use App\Http\Launchframe;
 /* :: Create App Controller
 {+} ---------------------------------- */
 
-$app = require_once('bootstrap/app.php');
+$app = require_once 'bootstrap/app.php';
 
 /* :: Bootstrap Launchframe from the Container
 {+} ---------------------------------- */
@@ -14,7 +14,7 @@ $launchframe->bootstrap();
 
 /* :: Import our routes file
 {+} ---------------------------------- */
-require_once('routes.php');
+require_once 'routes.php';
 
 /* :: Set global params in the Timber context
 {+} ---------------------------------- */
@@ -22,4 +22,4 @@ add_filter('timber_context', [$launchframe, 'addToContext']);
 
 /* :: Custom functions
 {+} ---------------------------------- */
-include_once('functions/admin_area.php');
+include_once 'functions/admin_area.php';
