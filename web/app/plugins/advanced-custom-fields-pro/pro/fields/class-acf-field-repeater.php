@@ -25,10 +25,15 @@ if ( ! class_exists( 'acf_field_repeater' ) ) :
 		 * @since 5.0.0
 		 */
 		public function initialize() {
-			$this->name     = 'repeater';
-			$this->label    = __( 'Repeater', 'acf' );
-			$this->category = 'layout';
-			$this->defaults = array(
+			$this->name          = 'repeater';
+			$this->label         = __( 'Repeater', 'acf' );
+			$this->category      = 'layout';
+			$this->description   = __( 'Allows you to select and display existing fields. It does not duplicate any fields in the database, but loads and displays the selected fields at run-time. The Clone field can either replace itself with the selected fields or display the selected fields as a group of subfields.', 'acf' );
+			$this->preview_image = acf_get_url() . '/assets/images/field-type-previews/field-preview-repeater.png';
+			$this->doc_url       = acf_add_url_utm_tags( 'https://www.advancedcustomfields.com/resources/repeater/', 'docs', 'field-type-selection' );
+			$this->tutorial_url  = acf_add_url_utm_tags( 'https://www.advancedcustomfields.com/resources/repeater/how-to-use-the-repeater-field/', 'docs', 'field-type-selection' );
+			$this->pro           = true;
+			$this->defaults      = array(
 				'sub_fields'    => array(),
 				'min'           => 0,
 				'max'           => 0,
@@ -58,7 +63,7 @@ if ( ! class_exists( 'acf_field_repeater' ) ) :
 		public function input_admin_enqueue_scripts() {
 			acf_localize_text(
 				array(
-					'Minimum rows reached ({min} rows)' => __( 'Minimum rows reached ({min} rows)', 'acf' ),
+					'Minimum rows not reached ({min} rows)' => __( 'Minimum rows not reached ({min} rows)', 'acf' ),
 					'Maximum rows reached ({max} rows)' => __( 'Maximum rows reached ({max} rows)', 'acf' ),
 					'Error loading page'                => __( 'Error loading page', 'acf' ),
 					'Order will be assigned upon save'  => __( 'Order will be assigned upon save', 'acf' ),
@@ -82,7 +87,7 @@ if ( ! class_exists( 'acf_field_repeater' ) ) :
 
 			if ( $sub_fields ) {
 				$field['sub_fields'] = array_map(
-					function( $sub_field ) use ( $field ) {
+					function ( $sub_field ) use ( $field ) {
 						$sub_field['parent_repeater'] = $field['key'];
 						return $sub_field;
 					},
@@ -160,7 +165,7 @@ if ( ! class_exists( 'acf_field_repeater' ) ) :
 				<div class="acf-input acf-input-sub">
 					<?php
 
-					acf_get_view( 'field-group-fields', $args );
+					acf_get_view( 'acf-field-group/fields', $args );
 
 					?>
 				</div>
@@ -357,19 +362,19 @@ if ( ! class_exists( 'acf_field_repeater' ) ) :
 		}
 
 		/**
-		 * This filter is applied to the $value after it is loaded from the db,
-		 * and before it is returned to the template.
+		 * This filter is appied to the $value after it is loaded from the db and before it is returned to the template
 		 *
+		 * @type  filter
 		 * @since 3.6
-		 * @date  23/01/13
 		 *
-		 * @param mixed $value   The value which was loaded from the database.
-		 * @param mixed $post_id The $post_id from which the value was loaded.
-		 * @param array $field   The field array holding all the field options.
+		 * @param mixed   $value       The value which was loaded from the database.
+		 * @param mixed   $post_id     The $post_id from which the value was loaded.
+		 * @param array   $field       The field array holding all the field options.
+		 * @param boolean $escape_html Should the field return a HTML safe formatted value.
 		 *
 		 * @return array $value The modified value.
 		 */
-		function format_value( $value, $post_id, $field ) {
+		public function format_value( $value, $post_id, $field, $escape_html = false ) {
 			// bail early if no value
 			if ( empty( $value ) ) {
 				return false;
@@ -406,7 +411,7 @@ if ( ! class_exists( 'acf_field_repeater' ) ) :
 					$sub_field['name'] = "{$field['name']}_{$i}_{$sub_field['name']}";
 
 					// format value
-					$sub_value = acf_format_value( $sub_value, $post_id, $sub_field );
+					$sub_value = acf_format_value( $sub_value, $post_id, $sub_field, $escape_html );
 
 					// append to $row
 					$value[ $i ][ $sub_field['_name'] ] = $sub_value;
@@ -455,7 +460,7 @@ if ( ! class_exists( 'acf_field_repeater' ) ) :
 			if ( empty( $field['pagination'] ) && $min && $count < $min ) {
 
 				// create error
-				$error = __( 'Minimum rows reached ({min} rows)', 'acf' );
+				$error = __( 'Minimum rows not reached ({min} rows)', 'acf' );
 				$error = str_replace( '{min}', $min, $error );
 
 				// return
@@ -698,7 +703,7 @@ if ( ! class_exists( 'acf_field_repeater' ) ) :
 					}
 
 					$this->update_row( $row, $new_row_num, $field, $post_id );
-					$new_row_num++;
+					++$new_row_num;
 				}
 
 				// Calculate the total number of rows that will be saved after this update.
@@ -707,7 +712,7 @@ if ( ! class_exists( 'acf_field_repeater' ) ) :
 				$i = -1;
 
 				foreach ( $value as $row ) {
-					$i++;
+					++$i;
 
 					// Bail early if no row.
 					if ( ! is_array( $row ) ) {
@@ -715,7 +720,7 @@ if ( ! class_exists( 'acf_field_repeater' ) ) :
 					}
 
 					$this->update_row( $row, $i, $field, $post_id );
-					$new_value++;
+					++$new_value;
 				}
 			}
 
@@ -995,7 +1000,7 @@ if ( ! class_exists( 'acf_field_repeater' ) ) :
 		 */
 		public function get_field_name_from_input_name( $input_name ) {
 			$parts = array();
-			preg_match_all( '/\[([^\]]*)\]/', $input_name, $parts );
+			preg_match_all( '/\[([^\]]*)\]/', is_null( $input_name ) ? '' : $input_name, $parts );
 
 			if ( ! isset( $parts[1] ) ) {
 				return false;
@@ -1094,7 +1099,6 @@ if ( ! class_exists( 'acf_field_repeater' ) ) :
 
 			wp_send_json_success( $response );
 		}
-
 	}
 
 	// initialize

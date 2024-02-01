@@ -61,7 +61,7 @@ if ( ! class_exists( 'ACF_Form_User' ) ) :
 		function admin_enqueue_scripts() {
 
 			// bail early if not valid screen
-			if ( ! acf_is_screen( array( 'profile', 'user', 'user-edit' ) ) ) {
+			if ( ! acf_is_screen( array( 'profile', 'user', 'user-edit', 'profile-network', 'user-network', 'user-edit-network' ) ) ) {
 				return;
 			}
 
@@ -301,7 +301,6 @@ if ( ! class_exists( 'ACF_Form_User' ) ) :
 })(jQuery);	
 </script>
 			<?php
-
 		}
 
 
@@ -383,7 +382,6 @@ if ( ! class_exists( 'ACF_Form_User' ) ) :
 
 	// instantiate
 	acf_new_instance( 'ACF_Form_User' );
-
 endif; // class_exists check
 
 ?>

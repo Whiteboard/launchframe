@@ -21,14 +21,16 @@ if ( ! class_exists( 'acf_field_password' ) ) :
 		function initialize() {
 
 			// vars
-			$this->name     = 'password';
-			$this->label    = __( 'Password', 'acf' );
-			$this->defaults = array(
+			$this->name          = 'password';
+			$this->label         = __( 'Password', 'acf' );
+			$this->description   = __( 'An input for providing a password using a masked field.', 'acf' );
+			$this->preview_image = acf_get_url() . '/assets/images/field-type-previews/field-preview-password.png';
+			$this->doc_url       = acf_add_url_utm_tags( 'https://www.advancedcustomfields.com/resources/password/', 'docs', 'field-type-selection' );
+			$this->defaults      = array(
 				'placeholder' => '',
 				'prepend'     => '',
 				'append'      => '',
 			);
-
 		}
 
 
@@ -47,7 +49,6 @@ if ( ! class_exists( 'acf_field_password' ) ) :
 		function render_field( $field ) {
 
 			acf_get_field_type( 'text' )->render_field( $field );
-
 		}
 
 		/*
@@ -105,13 +106,9 @@ if ( ! class_exists( 'acf_field_password' ) ) :
 				)
 			);
 		}
-
 	}
 
 
 	// initialize
 	acf_register_field_type( 'acf_field_password' );
-
 endif; // class_exists check
-
-

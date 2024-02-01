@@ -1171,7 +1171,6 @@
       // the field which we query against
       rule: {} // the rule [field, operator, value]
     },
-
     events: {
       change: 'change',
       keyup: 'change',
@@ -1456,6 +1455,13 @@
         suppressFilters: true
       });
     }
+    if (!fields.length && $('#acf-basic-settings').length) {
+      fields = acf.getFields({
+        key: key,
+        parent: $('#acf-basic-settings'),
+        suppressFilters: true
+      });
+    }
 
     // return
     if (fields.length) {
@@ -1531,7 +1537,6 @@
       // Reference used during "change" event.
       groups: [] // The groups of condition instances.
     },
-
     setup: function (field) {
       // data
       this.data.field = field;
@@ -2001,6 +2006,7 @@
     onClickAdd: function (e, $el) {
       var html = '<li><input class="acf-checkbox-custom" type="checkbox" checked="checked" /><input type="text" name="' + this.getInputName() + '[]" /></li>';
       $el.parent('li').before(html);
+      $el.parent('li').parent().find('input[type="text"]').last().focus();
     },
     onClickToggle: function (e, $el) {
       // Vars.
@@ -3678,7 +3684,8 @@
       'click .choices-list .acf-rel-item': 'onClickAdd',
       'keypress .choices-list .acf-rel-item': 'onKeypressFilter',
       'keypress .values-list .acf-rel-item': 'onKeypressFilter',
-      'click [data-name="remove_item"]': 'onClickRemove'
+      'click [data-name="remove_item"]': 'onClickRemove',
+      'touchstart .values-list .acf-rel-item': 'onTouchStartValues'
     },
     $control: function () {
       return this.$('.acf-relationship');
@@ -3849,6 +3856,10 @@
 
       // trigger change
       this.$input().trigger('change');
+    },
+    onTouchStartValues: function (e, $el) {
+      $(this.$listItems('values')).removeClass('relationship-hover');
+      $el.addClass('relationship-hover');
     },
     maybeFetch: function () {
       // vars
@@ -4087,12 +4098,34 @@
       duplicateField: 'onDuplicate'
     },
     findFields: function () {
-      let filter = '.acf-field';
-      if (this.get('key') === 'acf_field_settings_tabs') {
-        filter = '.acf-field-settings-main';
-      }
-      if (this.get('key') === 'acf_field_group_settings_tabs') {
-        filter = '.field-group-settings-tab';
+      let filter;
+
+      /**
+       * Tabs in the admin UI that can be extended by third
+       * parties have the child settings wrapped inside an extra div,
+       * so we need to look for that instead of an adjacent .acf-field.
+       */
+      switch (this.get('key')) {
+        case 'acf_field_settings_tabs':
+          filter = '.acf-field-settings-main';
+          break;
+        case 'acf_field_group_settings_tabs':
+          filter = '.field-group-settings-tab';
+          break;
+        case 'acf_browse_fields_tabs':
+          filter = '.acf-field-types-tab';
+          break;
+        case 'acf_post_type_tabs':
+          filter = '.acf-post-type-advanced-settings';
+          break;
+        case 'acf_taxonomy_tabs':
+          filter = '.acf-taxonomy-advanced-settings';
+          break;
+        case 'acf_ui_options_page_tabs':
+          filter = '.acf-ui-options-page-advanced-settings';
+          break;
+        default:
+          filter = '.acf-field';
       }
       return this.$el.nextUntil('.acf-field-tab', filter);
     },
@@ -4517,8 +4550,8 @@
 
       // loop
       this.getTabs().map(function (group) {
-        // Do not save selected tab on field settings when unloading
-        if (group.$el.children('.acf-field-settings-tab-bar').length) {
+        // Do not save selected tab on field settings, or an acf-advanced-settings when unloading
+        if (group.$el.children('.acf-field-settings-tab-bar').length || group.$el.parents('#acf-advanced-settings.postbox').length) {
           return true;
         }
         var active = group.hasActive() ? group.getActive().index() : 0;
@@ -7808,7 +7841,7 @@
     wait: 'prepare',
     initialize: function () {
       // Bail early if not Gutenberg.
-      if (!acf.isGutenberg()) {
+      if (!acf.isGutenbergPostEditor()) {
         return;
       }
 
@@ -7982,7 +8015,11 @@
       },
       ajaxResults: function (json) {
         return json;
-      }
+      },
+      templateSelection: false,
+      templateResult: false,
+      dropdownCssClass: '',
+      suppressFilters: false
     });
 
     // initialize
@@ -8239,6 +8276,10 @@
         allowClear: this.get('allowNull'),
         placeholder: this.get('placeholder'),
         multiple: this.get('multiple'),
+        templateSelection: this.get('templateSelection'),
+        templateResult: this.get('templateResult'),
+        dropdownCssClass: this.get('dropdownCssClass'),
+        suppressFilters: this.get('suppressFilters'),
         data: [],
         escapeMarkup: function (markup) {
           if (typeof markup !== 'string') {
@@ -8248,14 +8289,30 @@
         }
       };
 
+      // Clear empty templateSelections, templateResults, or dropdownCssClass.
+      if (!options.templateSelection) {
+        delete options.templateSelection;
+      }
+      if (!options.templateResult) {
+        delete options.templateResult;
+      }
+      if (!options.dropdownCssClass) {
+        delete options.dropdownCssClass;
+      }
+
       // Only use the template if SelectWoo is not loaded to work around https://github.com/woocommerce/woocommerce/pull/30473
       if (!acf.isset(window, 'jQuery', 'fn', 'selectWoo')) {
-        options.templateSelection = function (selection) {
-          var $selection = $('<span class="acf-selection"></span>');
-          $selection.html(acf.escHtml(selection.text));
-          $selection.data('element', selection.element);
-          return $selection;
-        };
+        if (!options.templateSelection) {
+          options.templateSelection = function (selection) {
+            var $selection = $('<span class="acf-selection"></span>');
+            $selection.html(acf.escHtml(selection.text));
+            $selection.data('element', selection.element);
+            return $selection;
+          };
+        }
+      } else {
+        delete options.templateSelection;
+        delete options.templateResult;
       }
 
       // multiple
@@ -8287,9 +8344,10 @@
       }
 
       // filter for 3rd party customization
-      //options = acf.applyFilters( 'select2_args', options, $select, this );
-      var field = this.get('field');
-      options = acf.applyFilters('select2_args', options, $select, this.data, field || false, this);
+      if (!options.suppressFilters) {
+        var field = this.get('field');
+        options = acf.applyFilters('select2_args', options, $select, this.data, field || false, this);
+      }
 
       // add select2
       $select.select2(options);
@@ -8343,7 +8401,9 @@
       }
 
       // action for 3rd party customization
-      acf.doAction('select2_init', $select, options, this.data, field || false, this);
+      if (!options.suppressFilters) {
+        acf.doAction('select2_init', $select, options, this.data, field || false, this);
+      }
     },
     mergeOptions: function () {
       // vars
@@ -9385,6 +9445,11 @@
         this.set('notice', notice);
       }
 
+      // If in a modal, don't try to scroll.
+      if (this.$el.parents('.acf-popup-box').length) {
+        return;
+      }
+
       // if no $scrollTo, set to message
       if (!$scrollTo) {
         $scrollTo = this.get('notice').$el;
@@ -9790,6 +9855,18 @@
 
     // front end form
     var $wrap = $form.find('.acf-form-submit');
+    if ($wrap.length) {
+      return $wrap;
+    }
+
+    // ACF 6.2 options page modal
+    var $wrap = $('#acf-create-options-page-form .acf-actions');
+    if ($wrap.length) {
+      return $wrap;
+    }
+
+    // ACF 6.0+ headerbar submit
+    var $wrap = $('.acf-headerbar-actions');
     if ($wrap.length) {
       return $wrap;
     }
@@ -10241,7 +10318,7 @@
           }
         }).then(function () {
           return savePost.apply(_this, _args);
-        }).catch(function (err) {
+        }, err => {
           // Nothing to do here, user is alerted of validation issues.
         });
       };

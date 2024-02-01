@@ -21,13 +21,15 @@ if ( ! class_exists( 'acf_field_url' ) ) :
 		function initialize() {
 
 			// vars
-			$this->name     = 'url';
-			$this->label    = __( 'Url', 'acf' );
-			$this->defaults = array(
+			$this->name          = 'url';
+			$this->label         = __( 'URL', 'acf' );
+			$this->description   = __( 'A text input specifically designed for storing web addresses.', 'acf' );
+			$this->preview_image = acf_get_url() . '/assets/images/field-type-previews/field-preview-url.png';
+			$this->doc_url       = acf_add_url_utm_tags( 'https://www.advancedcustomfields.com/resources/url/', 'docs', 'field-type-selection' );
+			$this->defaults      = array(
 				'default_value' => '',
 				'placeholder'   => '',
 			);
-
 		}
 
 
@@ -75,7 +77,6 @@ if ( ! class_exists( 'acf_field_url' ) ) :
 
 			// return
 			echo $html;
-
 		}
 
 
@@ -141,28 +142,21 @@ if ( ! class_exists( 'acf_field_url' ) ) :
 
 			// bail early if empty
 			if ( empty( $value ) ) {
-
 				return $valid;
-
 			}
 
 			if ( strpos( $value, '://' ) !== false ) {
 
 				// url
-
 			} elseif ( strpos( $value, '//' ) === 0 ) {
 
 				// protocol relative url
-
 			} else {
-
 				$valid = __( 'Value must be a valid URL', 'acf' );
-
 			}
 
 			// return
 			return $valid;
-
 		}
 
 		/**
@@ -177,13 +171,9 @@ if ( ! class_exists( 'acf_field_url' ) ) :
 
 			return $schema;
 		}
-
 	}
 
 
 	// initialize
 	acf_register_field_type( 'acf_field_url' );
-
 endif; // class_exists check
-
-

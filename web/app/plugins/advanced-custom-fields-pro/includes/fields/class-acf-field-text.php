@@ -21,16 +21,18 @@ if ( ! class_exists( 'acf_field_text' ) ) :
 		function initialize() {
 
 			// vars
-			$this->name     = 'text';
-			$this->label    = __( 'Text', 'acf' );
-			$this->defaults = array(
+			$this->name          = 'text';
+			$this->label         = __( 'Text', 'acf' );
+			$this->description   = __( 'A basic text input, useful for storing single string values.', 'acf' );
+			$this->preview_image = acf_get_url() . '/assets/images/field-type-previews/field-preview-text.png';
+			$this->doc_url       = acf_add_url_utm_tags( 'https://www.advancedcustomfields.com/resources/text/', 'docs', 'field-type-selection' );
+			$this->defaults      = array(
 				'default_value' => '',
 				'maxlength'     => '',
 				'placeholder'   => '',
 				'prepend'       => '',
 				'append'        => '',
 			);
-
 		}
 
 
@@ -68,6 +70,13 @@ if ( ! class_exists( 'acf_field_text' ) ) :
 					$input_attrs[ $k ] = $field[ $k ];
 				}
 			}
+
+			if ( isset( $field['input-data'] ) && is_array( $field['input-data'] ) ) {
+				foreach ( $field['input-data'] as $name => $attr ) {
+					$input_attrs[ 'data-' . $name ] = $attr;
+				}
+			}
+
 			$html .= '<div class="acf-input-wrap">' . acf_get_text_input( acf_filter_attrs( $input_attrs ) ) . '</div>';
 
 			// Display.
@@ -204,7 +213,4 @@ if ( ! class_exists( 'acf_field_text' ) ) :
 
 	// initialize
 	acf_register_field_type( 'acf_field_text' );
-
 endif; // class_exists check
-
-

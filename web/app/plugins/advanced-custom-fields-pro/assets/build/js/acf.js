@@ -309,6 +309,34 @@
     onClickClose: function (e, $el) {
       e.preventDefault();
       this.close();
+    },
+    /**
+     * Places focus within the popup.
+     */
+    focus: function () {
+      this.$el.find('.acf-icon').first().trigger('focus');
+    },
+    /**
+     * Locks focus within the modal.
+     *
+     * @param {boolean} locked True to lock focus, false to unlock.
+     */
+    lockFocusToModal: function (locked) {
+      let inertElement = $('#wpwrap');
+      if (!inertElement.length) {
+        return;
+      }
+      inertElement[0].inert = locked;
+      inertElement.attr('aria-hidden', locked);
+    },
+    /**
+     * Returns focus to the element that opened the popup
+     * if it still exists in the DOM.
+     */
+    returnFocusToOrigin: function () {
+      if (this.data.openedBy instanceof $ && this.data.openedBy.closest('body').length > 0) {
+        this.data.openedBy.trigger('focus');
+      }
     }
   });
 
@@ -1315,13 +1343,25 @@
     wait: 'prepare',
     priority: 1,
     initialize: function () {
-      // vars
-      var $notice = $('.acf-admin-notice');
-
-      // move to avoid WP flicker
-      if ($notice.length) {
-        $('h1:first').after($notice);
-      }
+      const $notices = $('.acf-admin-notice');
+      $notices.each(function () {
+        if ($(this).data('persisted')) {
+          let dismissed = acf.getPreference('dismissed-notices');
+          if (dismissed && typeof dismissed == 'object' && dismissed.includes($(this).data('persist-id'))) {
+            $(this).remove();
+          } else {
+            $(this).show();
+            $(this).on('click', '.notice-dismiss', function (e) {
+              dismissed = acf.getPreference('dismissed-notices');
+              if (!dismissed || typeof dismissed != 'object') {
+                dismissed = [];
+              }
+              dismissed.push($(this).closest('.acf-admin-notice').data('persist-id'));
+              acf.setPreference('dismissed-notices', dismissed);
+            });
+          }
+        }
+      });
     }
   });
 })(jQuery);
@@ -3150,6 +3190,18 @@
     $el2.removeClass('acf-clone');
     $el2.find('.ui-sortable').removeClass('ui-sortable');
 
+    // remove any initialised select2s prevent the duplicated object stealing the previous select2.
+    $el2.find('[data-select2-id]').removeAttr('data-select2-id');
+    $el2.find('.select2').remove();
+
+    // subfield select2 renames happen after init and contain a duplicated ID. force change those IDs to prevent this.
+    $el2.find('.acf-is-subfields select[data-ui="1"]').each(function () {
+      $(this).prop('id', $(this).prop('id').replace('acf_fields', acf.uniqid('duplicated_') + '_acf_fields'));
+    });
+
+    // remove tab wrapper to ensure proper init
+    $el2.find('.acf-field-settings > .acf-tab-wrap').remove();
+
     // after
     // - allow acf to modify DOM
     args.after($el, $el2);
@@ -3909,14 +3961,25 @@
    *
    *  Returns true if the Gutenberg editor is being used.
    *
-   *  @date	14/11/18
    *  @since	5.8.0
    *
-   *  @param	vois
    *  @return	bool
    */
   acf.isGutenberg = function () {
     return !!(window.wp && wp.data && wp.data.select && wp.data.select('core/editor'));
+  };
+
+  /**
+   *  acf.isGutenbergPostEditor
+   *
+   *  Returns true if the Gutenberg post editor is being used.
+   *
+   *  @since	6.2.2
+   *
+   *  @return	bool
+   */
+  acf.isGutenbergPostEditor = function () {
+    return !!(window.wp && wp.data && wp.data.select && wp.data.select('core/edit-post'));
   };
 
   /**
@@ -4188,6 +4251,19 @@
     //$el.on('acfFocus', onFocus);
     $el.on('focus', 'input, select, textarea', onFocus);
     //$el.data('acf.onFocus', true);
+  };
+
+  /**
+   * Disable form submit buttons
+   *
+   * @since 6.2.3
+   *
+   * @param event e
+   * @returns void
+   */
+  acf.disableForm = function (e) {
+    // Disable submit button.
+    if (e.submitter) e.submitter.classList.add('disabled');
   };
 
   /*

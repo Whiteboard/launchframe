@@ -21,9 +21,12 @@ if ( ! class_exists( 'acf_field_range' ) ) :
 		function initialize() {
 
 			// vars
-			$this->name     = 'range';
-			$this->label    = __( 'Range', 'acf' );
-			$this->defaults = array(
+			$this->name          = 'range';
+			$this->label         = __( 'Range', 'acf' );
+			$this->description   = __( 'An input for selecting a numerical value within a specified range using a range slider element.', 'acf' );
+			$this->preview_image = acf_get_url() . '/assets/images/field-type-previews/field-preview-range.png';
+			$this->doc_url       = acf_add_url_utm_tags( 'https://www.advancedcustomfields.com/resources/range/', 'docs', 'field-type-selection' );
+			$this->defaults      = array(
 				'default_value' => '',
 				'min'           => '',
 				'max'           => '',
@@ -31,7 +34,6 @@ if ( ! class_exists( 'acf_field_range' ) ) :
 				'prepend'       => '',
 				'append'        => '',
 			);
-
 		}
 
 
@@ -272,14 +274,9 @@ if ( ! class_exists( 'acf_field_range' ) ) :
 		public function format_value_for_rest( $value, $post_id, array $field ) {
 			return acf_format_numerics( $value );
 		}
-
-
 	}
 
 
 	// initialize
 	acf_register_field_type( 'acf_field_range' );
-
 endif; // class_exists check
-
-

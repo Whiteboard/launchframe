@@ -21,10 +21,13 @@ if ( ! class_exists( 'acf_field_image' ) ) :
 		function initialize() {
 
 			// vars
-			$this->name     = 'image';
-			$this->label    = __( 'Image', 'acf' );
-			$this->category = 'content';
-			$this->defaults = array(
+			$this->name          = 'image';
+			$this->label         = __( 'Image', 'acf' );
+			$this->category      = 'content';
+			$this->description   = __( 'Uses the native WordPress media picker to upload, or choose images.', 'acf' );
+			$this->preview_image = acf_get_url() . '/assets/images/field-type-previews/field-preview-image.png';
+			$this->doc_url       = acf_add_url_utm_tags( 'https://www.advancedcustomfields.com/resources/image/', 'docs', 'field-type-selection' );
+			$this->defaults      = array(
 				'return_format' => 'array',
 				'preview_size'  => 'medium',
 				'library'       => 'all',
@@ -39,7 +42,6 @@ if ( ! class_exists( 'acf_field_image' ) ) :
 
 			// filters
 			add_filter( 'get_media_item_args', array( $this, 'get_media_item_args' ) );
-
 		}
 
 
@@ -310,7 +312,7 @@ if ( ! class_exists( 'acf_field_image' ) ) :
 			acf_render_field_setting(
 				$field,
 				array(
-					'label'        => __( 'Allowed file types', 'acf' ),
+					'label'        => __( 'Allowed File Types', 'acf' ),
 					'instructions' => __( 'Comma separated list. Leave blank for all types', 'acf' ),
 					'type'         => 'text',
 					'name'         => 'mime_types',
@@ -372,18 +374,13 @@ if ( ! class_exists( 'acf_field_image' ) ) :
 
 			// format
 			if ( $field['return_format'] == 'url' ) {
-
 				return wp_get_attachment_url( $value );
-
 			} elseif ( $field['return_format'] == 'array' ) {
-
 				return acf_get_attachment( $value );
-
 			}
 
 			// return
 			return $value;
-
 		}
 
 
@@ -404,7 +401,6 @@ if ( ! class_exists( 'acf_field_image' ) ) :
 
 			$vars['send'] = true;
 			return( $vars );
-
 		}
 
 
@@ -427,7 +423,6 @@ if ( ! class_exists( 'acf_field_image' ) ) :
 		function update_value( $value, $post_id, $field ) {
 
 			return acf_get_field_type( 'file' )->update_value( $value, $post_id, $field );
-
 		}
 
 
@@ -481,13 +476,11 @@ if ( ! class_exists( 'acf_field_image' ) ) :
 		public function format_value_for_rest( $value, $post_id, array $field ) {
 			return acf_format_numerics( $value );
 		}
-
 	}
 
 
 	// initialize
 	acf_register_field_type( 'acf_field_image' );
-
 endif; // class_exists check
 
 ?>

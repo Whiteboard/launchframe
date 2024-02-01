@@ -93,7 +93,7 @@ function acf_get_raw_field( $id = 0 ) {
 	}
 
 	// Unserialize post_content.
-	$field = (array) maybe_unserialize( $post->post_content );
+	$field = (array) acf_maybe_unserialize( $post->post_content );
 
 	// update attributes
 	$field['ID']         = $post->ID;
@@ -309,7 +309,6 @@ function acf_translate_field( $field = array() ) {
 
 	// Translate field settings if textdomain is set.
 	if ( $l10n && $l10n_textdomain ) {
-
 		$field['label']        = acf_translate( $field['label'] );
 		$field['instructions'] = acf_translate( $field['instructions'] );
 
@@ -470,7 +469,7 @@ function acf_get_field_count( $parent ) {
 	 * @since   5.0.0
 	 *
 	 * @param   int $count The number of fields.
-	  * @param  array $parent The field group or field array.
+	 * @param  array $parent The field group or field array.
 	 */
 	return apply_filters( 'acf/get_field_count', count( $raw_fields ), $parent );
 }
@@ -604,7 +603,6 @@ function acf_render_fields( $fields, $post_id = 0, $el = 'div', $instruction = '
 	// Loop over and render fields.
 	if ( $fields ) {
 		foreach ( $fields as $field ) {
-
 			$field = apply_filters( 'acf/pre_render_field', $field, $post_id );
 
 			// Load value if not already loaded.
@@ -695,6 +693,14 @@ function acf_render_field_wrap( $field, $element = 'div', $instruction = 'label'
 		$wrapper['data-required'] = 1;
 	}
 
+	// Support custom attributes.
+	if ( ! empty( $field['data'] ) && is_array( $field['data'] ) ) {
+		foreach ( $field['data'] as $name => $attr ) {
+			$wrapper[ 'data-' . $name ] = $attr;
+		}
+		unset( $field['data'] );
+	}
+
 	// Clean up class attribute.
 	$wrapper['class'] = str_replace( '_', '-', $wrapper['class'] );
 	$wrapper['class'] = str_replace( 'field-field-', 'field-', $wrapper['class'] );
@@ -739,7 +745,7 @@ function acf_render_field_wrap( $field, $element = 'div', $instruction = 'label'
 	}
 
 	// Vars for render.
-	$attributes_html = acf_esc_attr( $wrapper );
+	$attributes_html = acf_esc_attrs( $wrapper );
 
 	// Render HTML
 	echo "<$element $attributes_html>" . "\n";
@@ -834,7 +840,7 @@ function acf_render_field_label( $field ) {
  *
  * @param   array  $field The field array.
  * @param   string $context The output context (admin).
- * @return  void
+ * @return  string The field label in HTML format.
  */
 function acf_get_field_label( $field, $context = '' ) {
 
@@ -1315,7 +1321,6 @@ function acf_get_sub_field( $id, $field ) {
 
 	// return
 	return $sub_field;
-
 }
 
 // Register variation.
@@ -1580,7 +1585,7 @@ function acf_prepare_fields_for_import( $fields = array() ) {
 		}
 
 		// Iterate.
-		$i++;
+		++$i;
 	}
 
 	/**

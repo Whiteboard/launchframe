@@ -21,10 +21,13 @@ if ( ! class_exists( 'acf_field_file' ) ) :
 		function initialize() {
 
 			// vars
-			$this->name     = 'file';
-			$this->label    = __( 'File', 'acf' );
-			$this->category = 'content';
-			$this->defaults = array(
+			$this->name          = 'file';
+			$this->label         = __( 'File', 'acf' );
+			$this->category      = 'content';
+			$this->description   = __( 'Uses the native WordPress media picker to upload, or choose files.', 'acf' );
+			$this->preview_image = acf_get_url() . '/assets/images/field-type-previews/field-preview-file.png';
+			$this->doc_url       = acf_add_url_utm_tags( 'https://www.advancedcustomfields.com/resources/file/', 'docs', 'field-type-selection' );
+			$this->defaults      = array(
 				'return_format' => 'array',
 				'library'       => 'all',
 				'min_size'      => 0,
@@ -106,7 +109,6 @@ if ( ! class_exists( 'acf_field_file' ) ) :
 
 			// has value?
 			if ( $field['value'] ) {
-
 				$attachment = acf_get_attachment( $field['value'] );
 				if ( $attachment ) {
 
@@ -187,7 +189,6 @@ if ( ! class_exists( 'acf_field_file' ) ) :
 	</div>
 </div>
 			<?php
-
 		}
 
 		/*
@@ -251,7 +252,6 @@ if ( ! class_exists( 'acf_field_file' ) ) :
 			);
 
 			foreach ( $clear as $k ) {
-
 				if ( empty( $field[ $k ] ) ) {
 					$field[ $k ] = '';
 				}
@@ -284,7 +284,7 @@ if ( ! class_exists( 'acf_field_file' ) ) :
 			acf_render_field_setting(
 				$field,
 				array(
-					'label' => __( 'Allowed file types', 'acf' ),
+					'label' => __( 'Allowed File Types', 'acf' ),
 					'hint'  => __( 'Comma separated list. Leave blank for all types', 'acf' ),
 					'type'  => 'text',
 					'name'  => 'mime_types',
@@ -325,11 +325,8 @@ if ( ! class_exists( 'acf_field_file' ) ) :
 
 			// format
 			if ( $field['return_format'] == 'url' ) {
-
 				return wp_get_attachment_url( $value );
-
 			} elseif ( $field['return_format'] == 'array' ) {
-
 				return acf_get_attachment( $value );
 			}
 
@@ -355,7 +352,6 @@ if ( ! class_exists( 'acf_field_file' ) ) :
 
 			$vars['send'] = true;
 			return( $vars );
-
 		}
 
 
@@ -537,13 +533,11 @@ if ( ! class_exists( 'acf_field_file' ) ) :
 		public function format_value_for_rest( $value, $post_id, array $field ) {
 			return acf_format_numerics( $value );
 		}
-
 	}
 
 
 	// initialize
 	acf_register_field_type( 'acf_field_file' );
-
 endif; // class_exists check
 
 ?>

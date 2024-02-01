@@ -76,7 +76,7 @@ if ( ! class_exists( 'ACF_Admin_Upgrade' ) ) :
 		 */
 		function network_admin_menu() {
 			$network_upgrade_needed = get_site_transient( $this->network_upgrade_needed_transient );
-			
+
 			// No transient value exists, so run the upgrade check.
 			if ( $network_upgrade_needed === false ) {
 				$network_upgrade_needed = $this->check_for_network_upgrades();
@@ -103,7 +103,7 @@ if ( ! class_exists( 'ACF_Admin_Upgrade' ) ) :
 		/**
 		 * Checks if an ACF database upgrade is required on any site in the
 		 * multisite network.
-		 * 
+		 *
 		 * Stores the result in `$this->network_upgrade_needed_transient`,
 		 * which is version-linked to ACF_UPGRADE_VERSION: the highest ACF
 		 * version that requires an upgrade function to run. Bumping
@@ -119,7 +119,7 @@ if ( ! class_exists( 'ACF_Admin_Upgrade' ) ) :
 		public function check_for_network_upgrades() {
 			$network_upgrade_needed = 'no';
 
-			$sites = get_sites( 
+			$sites = get_sites(
 				array(
 					'number' => 0,
 					'fields' => 'ids', // Reduces PHP memory usage.
@@ -168,6 +168,8 @@ if ( ! class_exists( 'ACF_Admin_Upgrade' ) ) :
 		 */
 		function admin_load() {
 
+			add_action( 'admin_body_class', array( $this, 'admin_body_class' ) );
+
 			// remove prompt
 			remove_action( 'admin_notices', array( $this, 'admin_notices' ) );
 
@@ -188,11 +190,26 @@ if ( ! class_exists( 'ACF_Admin_Upgrade' ) ) :
 		 */
 		function network_admin_load() {
 
+			add_action( 'admin_body_class', array( $this, 'admin_body_class' ) );
+
 			// remove prompt
 			remove_action( 'network_admin_notices', array( $this, 'network_admin_notices' ) );
 
 			// Enqueue core script.
 			acf_enqueue_script( 'acf' );
+		}
+
+		/**
+		 * Modifies the admin body class.
+		 *
+		 * @since 6.0.0
+		 *
+		 * @param string $classes Space-separated list of CSS classes.
+		 * @return string
+		 */
+		public function admin_body_class( $classes ) {
+			$classes .= ' acf-admin-page';
+			return $classes;
 		}
 
 		/**
@@ -216,7 +233,7 @@ if ( ! class_exists( 'ACF_Admin_Upgrade' ) ) :
 			);
 
 			// view
-			acf_get_view( 'html-notice-upgrade', $view );
+			acf_get_view( 'upgrade/notice', $view );
 		}
 
 		/**
@@ -240,7 +257,7 @@ if ( ! class_exists( 'ACF_Admin_Upgrade' ) ) :
 			);
 
 			// view
-			acf_get_view( 'html-notice-upgrade', $view );
+			acf_get_view( 'upgrade/notice', $view );
 		}
 
 		/**
@@ -255,7 +272,7 @@ if ( ! class_exists( 'ACF_Admin_Upgrade' ) ) :
 		 *  @return  void
 		 */
 		function admin_html() {
-			acf_get_view( 'html-admin-page-upgrade' );
+			acf_get_view( 'upgrade/upgrade' );
 		}
 
 		/**
@@ -270,11 +287,10 @@ if ( ! class_exists( 'ACF_Admin_Upgrade' ) ) :
 		 *  @return  void
 		 */
 		function network_admin_html() {
-			acf_get_view( 'html-admin-page-upgrade-network' );
+			acf_get_view( 'upgrade/network' );
 		}
 	}
 
 	// instantiate
 	acf_new_instance( 'ACF_Admin_Upgrade' );
-
 endif; // class_exists check

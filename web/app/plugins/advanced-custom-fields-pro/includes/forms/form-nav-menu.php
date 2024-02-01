@@ -32,7 +32,6 @@ if ( ! class_exists( 'acf_form_nav_menu' ) ) :
 			// filters
 			add_filter( 'wp_get_nav_menu_items', array( $this, 'wp_get_nav_menu_items' ), 10, 3 );
 			add_filter( 'wp_edit_nav_menu_walker', array( $this, 'wp_edit_nav_menu_walker' ), 10, 2 );
-
 		}
 
 
@@ -62,7 +61,6 @@ if ( ! class_exists( 'acf_form_nav_menu' ) ) :
 
 			// actions
 			add_action( 'admin_footer', array( $this, 'admin_footer' ), 1 );
-
 		}
 
 
@@ -163,7 +161,6 @@ if ( ! class_exists( 'acf_form_nav_menu' ) ) :
 
 			// save nav menu items
 			$this->update_nav_menu_items( $menu_id );
-
 		}
 
 
@@ -190,9 +187,7 @@ if ( ! class_exists( 'acf_form_nav_menu' ) ) :
 			$posted_values = acf_sanitize_request_args( $_POST['menu-item-acf'] );
 
 			foreach ( $posted_values as $post_id => $values ) {
-
 				acf_save_post( $post_id, $values );
-
 			}
 			// phpcs:enable WordPress.Security.NonceVerification.Missing
 		}
@@ -233,12 +228,6 @@ if ( ! class_exists( 'acf_form_nav_menu' ) ) :
 			// update data (needed for ajax location rules to work)
 			acf_set_data( 'nav_menu_id', $menu_id );
 
-			// Use custom walker class to inject "wp_nav_menu_item_custom_fields" action prioir to WP 5.4.
-			if ( acf_version_compare( 'wp', '<', '5.3.99' ) ) {
-				acf_include( 'includes/walkers/class-acf-walker-nav-menu-edit.php' );
-				return 'ACF_Walker_Nav_Menu_Edit';
-			}
-
 			// Return class.
 			return $class;
 		}
@@ -273,10 +262,8 @@ if ( ! class_exists( 'acf_form_nav_menu' ) ) :
 
 				// validate
 				acf_validate_values( $values, $prefix );
-
 			}
 			// phpcs:enable // phpcs:disable WordPress.Security.NonceVerification.Missing
-
 		}
 
 		/*
@@ -323,7 +310,6 @@ if ( ! class_exists( 'acf_form_nav_menu' ) ) :
 
 				// loop
 				foreach ( $field_groups as $field_group ) {
-
 					$fields = acf_get_fields( $field_group );
 
 					echo '<div class="acf-menu-settings -' . $field_group['style'] . '">';
@@ -337,7 +323,6 @@ if ( ! class_exists( 'acf_form_nav_menu' ) ) :
 					echo '</div>';
 
 					echo '</div>';
-
 				}
 			}
 
@@ -392,12 +377,9 @@ if ( ! class_exists( 'acf_form_nav_menu' ) ) :
 })(jQuery);	
 </script>
 			<?php
-
 		}
-
 	}
 
 	acf_new_instance( 'acf_form_nav_menu' );
-
 endif;
 ?>

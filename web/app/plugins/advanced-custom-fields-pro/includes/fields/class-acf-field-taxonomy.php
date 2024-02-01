@@ -8,34 +8,30 @@ if ( ! class_exists( 'acf_field_taxonomy' ) ) :
 		var $save_post_terms = array();
 
 
-		/*
-		*  __construct
-		*
-		*  This function will setup the field type data
-		*
-		*  @type    function
-		*  @date    5/03/2014
-		*  @since   5.0.0
-		*
-		*  @param   n/a
-		*  @return  n/a
-		*/
-
-		function initialize() {
-
-			// vars
-			$this->name     = 'taxonomy';
-			$this->label    = __( 'Taxonomy', 'acf' );
-			$this->category = 'relational';
-			$this->defaults = array(
-				'taxonomy'      => 'category',
-				'field_type'    => 'checkbox',
-				'multiple'      => 0,
-				'allow_null'    => 0,
-				'return_format' => 'id',
-				'add_term'      => 1, // 5.2.3
-				'load_terms'    => 0, // 5.2.7
-				'save_terms'    => 0, // 5.2.7
+		/**
+		 *  This function will setup the field type data
+		 *
+		 *  @type    function
+		 *  @date    5/03/2014
+		 *  @since   5.0.0
+		 */
+		public function initialize() {
+			$this->name          = 'taxonomy';
+			$this->label         = __( 'Taxonomy', 'acf' );
+			$this->category      = 'relational';
+			$this->description   = __( 'Allows the selection of one or more taxonomy terms based on the criteria and options specified in the fields settings.', 'acf' );
+			$this->preview_image = acf_get_url() . '/assets/images/field-type-previews/field-preview-taxonomy.png';
+			$this->doc_url       = acf_add_url_utm_tags( 'https://www.advancedcustomfields.com/resources/taxonomy/', 'docs', 'field-type-selection' );
+			$this->defaults      = array(
+				'taxonomy'             => 'category',
+				'field_type'           => 'checkbox',
+				'multiple'             => 0,
+				'allow_null'           => 0,
+				'return_format'        => 'id',
+				'add_term'             => 1, // 5.2.3
+				'load_terms'           => 0, // 5.2.7
+				'save_terms'           => 0, // 5.2.7
+				'bidirectional_target' => array(),
 			);
 
 			// Register filter variations.
@@ -49,7 +45,6 @@ if ( ! class_exists( 'acf_field_taxonomy' ) ) :
 
 			// actions
 			add_action( 'acf/save_post', array( $this, 'save_post' ), 15, 1 );
-
 		}
 
 
@@ -78,7 +73,6 @@ if ( ! class_exists( 'acf_field_taxonomy' ) ) :
 
 			// return
 			acf_send_ajax_results( $response );
-
 		}
 
 
@@ -136,10 +130,8 @@ if ( ! class_exists( 'acf_field_taxonomy' ) ) :
 			// pagination
 			// - don't bother for hierarchial terms, we will need to load all terms anyway
 			if ( $is_pagination && ! $is_hierarchical ) {
-
 				$args['number'] = $limit;
 				$args['offset'] = $offset;
-
 			}
 
 			// search
@@ -151,7 +143,6 @@ if ( ! class_exists( 'acf_field_taxonomy' ) ) :
 				// update vars
 				$args['search'] = $s;
 				$is_search      = true;
-
 			}
 
 			// filters
@@ -179,17 +170,13 @@ if ( ! class_exists( 'acf_field_taxonomy' ) ) :
 
 					// check for empty array (possible if parent did not exist within original data)
 					if ( ! empty( $ordered_terms ) ) {
-
 						$terms = $ordered_terms;
-
 					}
 				}
 
 				// fake pagination
 				if ( $is_pagination ) {
-
 					$terms = array_slice( $terms, $offset, $limit );
-
 				}
 			}
 
@@ -201,7 +188,6 @@ if ( ! class_exists( 'acf_field_taxonomy' ) ) :
 					'id'   => $term->term_id,
 					'text' => $this->get_term_title( $term, $field, $options['post_id'] ),
 				);
-
 			}
 
 			// vars
@@ -212,7 +198,6 @@ if ( ! class_exists( 'acf_field_taxonomy' ) ) :
 
 			// return
 			return $response;
-
 		}
 
 		/**
@@ -243,7 +228,7 @@ if ( ! class_exists( 'acf_field_taxonomy' ) ) :
 			 * @param   array $field The field settings.
 			 * @param   (int|string) $post_id The post_id being edited.
 			 */
-			 return apply_filters( 'acf/fields/taxonomy/result', $title, $term, $field, $post_id );
+			return apply_filters( 'acf/fields/taxonomy/result', $title, $term, $field, $post_id );
 		}
 
 
@@ -264,7 +249,6 @@ if ( ! class_exists( 'acf_field_taxonomy' ) ) :
 
 			// load terms in 1 query to save multiple DB calls from following code
 			if ( count( $value ) > 1 ) {
-
 				$terms = acf_get_terms(
 					array(
 						'taxonomy'   => $taxonomy,
@@ -272,14 +256,11 @@ if ( ! class_exists( 'acf_field_taxonomy' ) ) :
 						'hide_empty' => false,
 					)
 				);
-
 			}
 
 			// update value to include $post
 			foreach ( array_keys( $value ) as $i ) {
-
 				$value[ $i ] = get_term( $value[ $i ], $taxonomy );
-
 			}
 
 			// filter out null values
@@ -340,93 +321,74 @@ if ( ! class_exists( 'acf_field_taxonomy' ) ) :
 
 				// sort
 				if ( ! empty( $value ) ) {
-
 					$order = array();
 
 					foreach ( $term_ids as $i => $v ) {
-
 						$order[ $i ] = array_search( $v, $value );
-
 					}
 
 					array_multisort( $order, $term_ids );
-
 				}
 
 				// update value
 				$value = $term_ids;
-
 			}
 
 			// convert back from array if neccessary
 			if ( $field['field_type'] == 'select' || $field['field_type'] == 'radio' ) {
-
 				$value = array_shift( $value );
-
 			}
 
 			// return
 			return $value;
-
 		}
 
 
-		/*
-		*  update_value()
-		*
-		*  This filter is appied to the $value before it is updated in the db
-		*
-		*  @type    filter
-		*  @since   3.6
-		*  @date    23/01/13
-		*
-		*  @param   $value - the value which will be saved in the database
-		*  @param   $field - the field array holding all the field options
-		*  @param   $post_id - the $post_id of which the value will be saved
-		*
-		*  @return  $value - the modified value
-		*/
+		/**
+		 * Filters the field value before it is saved into the database.
+		 *
+		 * @since 3.6
+		 *
+		 * @param mixed $value The value which will be saved in the database.
+		 * @param int   $post_id The post_id of which the value will be saved.
+		 * @param array $field The field array holding all the field options.
+		 *
+		 * @return mixed $value The modified value.
+		 */
+		public function update_value( $value, $post_id, $field ) {
 
-		function update_value( $value, $post_id, $field ) {
-
-			// vars
 			if ( is_array( $value ) ) {
-
 				$value = array_filter( $value );
-
 			}
 
-			// save_terms
+			acf_update_bidirectional_values( acf_get_array( $value ), $post_id, $field, 'term' );
+
+			// save_terms if enabled.
 			if ( $field['save_terms'] ) {
 
 				// vars
 				$taxonomy = $field['taxonomy'];
 
-				// force value to array
+				// force value to array.
 				$term_ids = acf_get_array( $value );
 
-				// convert to int
+				// convert to int.
 				$term_ids = array_map( 'intval', $term_ids );
 
-				// get existing term id's (from a previously saved field)
+				// get existing term id's (from a previously saved field).
 				$old_term_ids = isset( $this->save_post_terms[ $taxonomy ] ) ? $this->save_post_terms[ $taxonomy ] : array();
 
 				// append
 				$this->save_post_terms[ $taxonomy ] = array_merge( $old_term_ids, $term_ids );
 
-				// if called directly from frontend update_field()
+				// if called directly from frontend update_field().
 				if ( ! did_action( 'acf/save_post' ) ) {
-
 					$this->save_post( $post_id );
-
 					return $value;
-
 				}
 			}
 
-			// return
 			return $value;
-
 		}
 
 		/**
@@ -497,19 +459,15 @@ if ( ! class_exists( 'acf_field_taxonomy' ) ) :
 
 				// get posts
 				$value = $this->get_terms( $value, $field['taxonomy'] );
-
 			}
 
 			// convert back from array if neccessary
 			if ( $field['field_type'] == 'select' || $field['field_type'] == 'radio' ) {
-
 				$value = array_shift( $value );
-
 			}
 
 			// return
 			return $value;
-
 		}
 
 
@@ -557,31 +515,22 @@ if ( ! class_exists( 'acf_field_taxonomy' ) ) :
 	endif;
 
 			if ( $field['field_type'] == 'select' ) {
-
 				$field['multiple'] = 0;
 
 				$this->render_field_select( $field );
-
 			} elseif ( $field['field_type'] == 'multi_select' ) {
-
 				$field['multiple'] = 1;
 
 				$this->render_field_select( $field );
-
 			} elseif ( $field['field_type'] == 'radio' ) {
-
 				$this->render_field_checkbox( $field );
-
 			} elseif ( $field['field_type'] == 'checkbox' ) {
-
 				$this->render_field_checkbox( $field );
-
 			}
 
 			?>
 </div>
 			<?php
-
 		}
 
 
@@ -613,7 +562,6 @@ if ( ! class_exists( 'acf_field_taxonomy' ) ) :
 
 				// set choices
 				if ( ! empty( $terms ) ) {
-
 					foreach ( array_keys( $terms ) as $i ) {
 
 						// vars
@@ -621,14 +569,12 @@ if ( ! class_exists( 'acf_field_taxonomy' ) ) :
 
 						// append to choices
 						$field['choices'][ $term->term_id ] = $this->get_term_title( $term, $field );
-
 					}
 				}
 			}
 
 			// render select
 			acf_render_field( $field );
-
 		}
 
 
@@ -651,9 +597,7 @@ if ( ! class_exists( 'acf_field_taxonomy' ) ) :
 
 			// checkbox saves an array.
 			if ( $field['field_type'] == 'checkbox' ) {
-
 				$field['name'] .= '[]';
-
 			}
 
 			// taxonomy.
@@ -683,7 +627,6 @@ if ( ! class_exists( 'acf_field_taxonomy' ) ) :
 	</ul>
 </div>
 			<?php
-
 		}
 
 
@@ -783,7 +726,7 @@ if ( ! class_exists( 'acf_field_taxonomy' ) ) :
 			acf_render_field_setting(
 				$field,
 				array(
-					'label'        => __( 'Allow Null?', 'acf' ),
+					'label'        => __( 'Allow Null', 'acf' ),
 					'instructions' => '',
 					'name'         => 'allow_null',
 					'type'         => 'true_false',
@@ -795,6 +738,18 @@ if ( ! class_exists( 'acf_field_taxonomy' ) ) :
 					),
 				)
 			);
+		}
+
+		/**
+		 * Renders the field settings used in the "Advanced" tab.
+		 *
+		 * @since 6.2
+		 *
+		 * @param array $field The field settings array.
+		 * @return void
+		 */
+		public function render_field_advanced_settings( $field ) {
+			acf_render_bidirectional_field_settings( $field );
 		}
 
 		/*
@@ -898,7 +853,6 @@ if ( ! class_exists( 'acf_field_taxonomy' ) ) :
 						'term_parent' => $term->parent,
 					)
 				);
-
 			}
 
 			?>
@@ -914,16 +868,12 @@ if ( ! class_exists( 'acf_field_taxonomy' ) ) :
 			);
 
 			if ( is_taxonomy_hierarchical( $field['taxonomy'] ) ) {
-
 				$choices  = array();
 				$response = $this->get_ajax_query( $args );
 
 				if ( $response ) {
-
 					foreach ( $response['results'] as $v ) {
-
 						$choices[ $v['id'] ] = $v['text'];
-
 					}
 				}
 
@@ -937,7 +887,6 @@ if ( ! class_exists( 'acf_field_taxonomy' ) ) :
 						'choices'    => $choices,
 					)
 				);
-
 			}
 
 			?>
@@ -948,7 +897,6 @@ if ( ! class_exists( 'acf_field_taxonomy' ) ) :
 
 		// die
 		die;
-
 		}
 
 		/**
@@ -1012,13 +960,11 @@ if ( ! class_exists( 'acf_field_taxonomy' ) ) :
 
 			return $links;
 		}
-
 	}
 
 
 	// initialize
 	acf_register_field_type( 'acf_field_taxonomy' );
-
 endif; // class_exists check
 
 ?>

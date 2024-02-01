@@ -21,10 +21,13 @@ if ( ! class_exists( 'acf_field__accordion' ) ) :
 		function initialize() {
 
 			// vars
-			$this->name     = 'accordion';
-			$this->label    = __( 'Accordion', 'acf' );
-			$this->category = 'layout';
-			$this->defaults = array(
+			$this->name          = 'accordion';
+			$this->label         = __( 'Accordion', 'acf' );
+			$this->category      = 'layout';
+			$this->description   = __( 'Allows you to group and organize custom fields into collapsable panels that are shown while editing content. Useful for keeping large datasets tidy.', 'acf' );
+			$this->preview_image = acf_get_url() . '/assets/images/field-type-previews/field-preview-accordion.png';
+			$this->doc_url       = acf_add_url_utm_tags( 'https://www.advancedcustomfields.com/resources/accordion/', 'docs', 'field-type-selection' );
+			$this->defaults      = array(
 				'open'         => 0,
 				'multi_expand' => 0,
 				'endpoint'     => 0,
@@ -57,7 +60,6 @@ if ( ! class_exists( 'acf_field__accordion' ) ) :
 			?>
 		<div <?php echo acf_esc_attrs( $atts ); ?>></div>
 			<?php
-
 		}
 
 
@@ -89,7 +91,7 @@ if ( ! class_exists( 'acf_field__accordion' ) ) :
 			acf_render_field_setting(
 				$field,
 				array(
-					'label'        => __( 'Multi-expand', 'acf' ),
+					'label'        => __( 'Multi-Expand', 'acf' ),
 					'instructions' => __( 'Allow this accordion to open without closing others.', 'acf' ),
 					'name'         => 'multi_expand',
 					'type'         => 'true_false',
@@ -138,7 +140,6 @@ if ( ! class_exists( 'acf_field__accordion' ) ) :
 			// return
 			return $field;
 		}
-
 	}
 
 
