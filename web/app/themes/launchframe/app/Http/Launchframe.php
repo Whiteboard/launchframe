@@ -2,7 +2,6 @@
 
 namespace App\Http;
 
-use App\Menu\Menu;
 use Rareloop\Lumberjack\Http\Lumberjack;
 use Timber\Timber;
 
@@ -17,12 +16,13 @@ class Launchframe extends Lumberjack
 
         $context['globals'] = get_fields('option');
 
-        $context['menu'] = new Menu('main-nav');
-        $context['overlay_menu'] = new Menu('overlay-nav');
-        $context['footer_menu_one'] = new Menu('footer-1');
-        $context['footer_menu_two'] = new Menu('footer-2');
-        $context['footer_menu_three'] = new Menu('footer-3');
-        $context['footer_menu_four'] = new Menu('footer-4');
+        $context['menu'] = Timber::get_menu('main-nav');
+        $context['overlay_menu'] = Timber::get_menu('overlay-nav');
+        $context['overlay_menu'] = Timber::get_menu('overlay-nav');
+        $context['footer_menu_one'] = Timber::get_menu('footer-1');
+        $context['footer_menu_two'] = Timber::get_menu('footer-2');
+        $context['footer_menu_three'] = Timber::get_menu('footer-3');
+        $context['footer_menu_four'] = Timber::get_menu('footer-4');
 
         $context['people'] = Timber::get_posts([
             'post_type' => 'person',
