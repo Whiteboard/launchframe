@@ -10,7 +10,7 @@ class Globals extends ServiceProvider
     // :: REGISTER
     // :: Register any app specific items into the container
     // : ---------------------------------- */
-    public function register()
+    public function register(): void
     {
         if (function_exists('acf_add_options_page')) {
             acf_add_options_page([
@@ -33,7 +33,7 @@ class Globals extends ServiceProvider
     // :: BOOT
     // :: Perform any additional boot required for this application
     // : ---------------------------------- */
-    public function boot()
+    public function boot(): void
     {
     }
 }

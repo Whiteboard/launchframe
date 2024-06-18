@@ -1,0 +1,24 @@
+{#
+    @name Nav Primary Dropdown
+    @desc Dropdown menu used with a Primary Nav Item
+    @type component
+#}
+
+{% if item.get_children %}
+    <ul
+        x-show="dropdown"
+        x-transition:enter="transition duration-200 ease-in-out-circ"
+        x-transition:enter-start="opacity-0 scale-[0.96] translate-y-3"
+        x-transition:enter-end="opacity-100 scale-100 translate-y-0"
+        x-transition:leave="transition duration-200 delay-75 ease-in-out-circ"
+        x-transition:leave-start="opacity-100"
+        x-transition:leave-end="opacity-0"
+        class="absolute top-0 pt-8 origin-top"
+    >
+        <div class="bg-white border border-neutral pt-1 text-neutral-900">
+            {% for child in item.get_children %}
+                {% include "components/navigation/nav_primary_dropdown_item.twig" %}
+            {% endfor %}
+        </div>
+    </ul>
+{% endif %}

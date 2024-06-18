@@ -4,35 +4,35 @@ const mouse = {
             /* So if we want to manually call these events
              * (great for dynamically pulled in content after page load) */
             if (element.hasAttribute('data-mouse-manual')) {
-                return;
+                return
             }
 
             element.addEventListener('mouseenter', () => {
-                this.createEvent('cursorEnter');
-            });
+                this.createEvent('cursorEnter')
+            })
 
             element.addEventListener('mouseleave', () => {
-                this.createEvent('cursorLeave');
-            });
+                this.createEvent('cursorLeave')
+            })
 
             element.addEventListener('click', () => {
-                this.createEvent('cursorClick');
-            });
-        });
+                this.createEvent('cursorClick')
+            })
+        })
     },
 
     createEvent(name) {
-        const event = new Event(name, { bubbles: true });
-        window.dispatchEvent(event);
+        const event = new Event(name, { bubbles: true })
+        window.dispatchEvent(event)
     },
 
     remove(elements) {
         elements.forEach(element => {
-            element.removeEventListener('mouseenter');
-            element.removeEventListener('mouseleave');
-            element.removeEventListener('click');
-        });
-    }
-};
+            element.removeEventListener('mouseenter')
+            element.removeEventListener('mouseleave')
+            element.removeEventListener('click')
+        })
+    },
+}
 
-export default mouse;
+export default mouse

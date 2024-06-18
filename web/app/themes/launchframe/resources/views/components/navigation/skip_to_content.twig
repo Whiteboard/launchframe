@@ -1,0 +1,21 @@
+{#
+    @name Skip to content button
+    @desc The first button that pops up when a user tabs. This enables them to skip directly to the content.
+    @type component
+#}
+
+<a
+    class="
+        fixed top-4 left-8 z-50
+        px-4 py-2
+        bg-primary rounded-lg text-white
+        text-sm
+        opacity-0 focus-visible:opacity-100
+        focus:outline-none focus-visible:ring-2 ring-primary
+        -translate-y-24 focus-visible:translate-y-0
+        motion-safe:transition-transform
+    "
+    href="#maincontent"
+>
+    Skip to Content
+</a>

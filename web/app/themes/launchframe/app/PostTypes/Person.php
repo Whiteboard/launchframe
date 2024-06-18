@@ -6,12 +6,12 @@ use Rareloop\Lumberjack\Post;
 
 class Person extends Post
 {
-    public static function getPostType()
+    public static function getPostType(): string
     {
         return 'person';
     }
 
-    protected static function getPostTypeConfig()
+    protected static function getPostTypeConfig(): array
     {
         return [
             $rewrite = [

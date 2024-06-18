@@ -108,7 +108,7 @@ module.exports = {
                         // fontFamily: theme('fontFamily.serif'),
                 },
 
-                '                ::selection': {
+                '::selection': {
                     backgroundColor: theme('colors.primary.DEFAULT'),
                     color: theme('colors.black')
                 },

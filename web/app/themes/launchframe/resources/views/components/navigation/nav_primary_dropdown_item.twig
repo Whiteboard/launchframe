@@ -1,0 +1,14 @@
+{#
+    @name Nav Primary Dropdown Item
+    @desc Nav item used in the primary navigation dropdown in the header
+    @type component
+#}
+
+<li class="w-full whitespace-nowrap py-3 pl-6 pr-8 first:pt-6 last:pb-6 last:border-b-0">
+    <a
+        class="flex items-center w-full relative text-xs leading-none transition duration-200 ease-in-out lg:hover:text-primary"
+        href="{{ child.link }}"
+    >
+        {{ child.title }}
+    </a>
+</li>

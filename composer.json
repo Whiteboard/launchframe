@@ -27,10 +27,15 @@
         "timber/timber": "1.24.1",
         "vlucas/phpdotenv": "^5.4",
         "wpackagist-plugin/acf-extended": "^0.9.0.5",
+        "wpackagist-plugin/admin-menu-editor": "^1.12.1",
         "wpackagist-plugin/autodescription": "^5.0.6",
+        "wpackagist-plugin/dark-mode-for-wp-dashboard": "^1.2.3",
         "wpackagist-plugin/duplicate-post": "^4.5",
+        "wpackagist-plugin/html-forms": "^1.3.32",
         "wpackagist-plugin/minify-html-markup": "^2.1.9",
+        "wpackagist-plugin/safe-svg": "^2.2",
         "wpengine/advanced-custom-fields-pro": "^6.3"
+
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "^3.7.1",

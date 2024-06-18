@@ -1,0 +1,32 @@
+{#
+    @name Nav Primary Item
+    @desc Nav item used in the primary navigation in the header
+    @type component
+#}
+
+<li
+    x-data="{
+        dropdown: false,
+    }"
+    @mouseenter="dropdown = true"
+    @mouseleave="dropdown = false"
+    class="relative"
+>
+    <div class="relative z-10 overflow-hidden">
+        <div data-nav-item>
+            <a
+                class="
+                    relative
+                    hover:text-secondary
+                    text-sm font-bold leading-none
+                    transition duration-300 ease-in-out
+                "
+                href="{{ item.link }}"
+            >
+                {{ item.title }}
+            </a>
+        </div>
+    </div>
+
+    {% include "components/navigation/nav_primary_dropdown.twig" %}
+</li>

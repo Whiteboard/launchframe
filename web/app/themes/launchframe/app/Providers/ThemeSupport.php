@@ -10,14 +10,14 @@ class ThemeSupport extends ServiceProvider
     // :: REGISTER
     // :: Register any app specific items into the container
     // : ---------------------------------- */
-    public function register()
+    public function register(): void
     {
     }
 
     // :: BOOT
     // :: Perform any additional boot required for this application
     // : ---------------------------------- */
-    public function boot()
+    public function boot(): void
     {
         add_action('admin_bar_menu', function ($wp_admin_bar) {
             $wp_admin_bar->remove_node('wp-logo');
@@ -36,6 +36,16 @@ class ThemeSupport extends ServiceProvider
         show_admin_bar(false);
 
         add_action('admin_menu', function () {
+            global $menu;
+            $new_acf_label = __('Fields', 'your-textdomain');
+
+            foreach ($menu as $key => $value) {
+                if ($value[2] === 'edit.php?post_type=acf-field-group') {
+                    $menu[$key][0] = $new_acf_label;
+                    break;
+                }
+            }
+
             // remove_menu_page('edit.php'); // Hides the Default WP Posts
             remove_menu_page('edit-comments.php');
             remove_menu_page('jetpack');
@@ -91,7 +101,7 @@ class ThemeSupport extends ServiceProvider
                 'clean-up', // Cleaner WordPress markup
                 'disable-asset-versioning', // Remove asset versioning
                 'disable-trackbacks', // Disable trackbacks
-                'google-analytics' => 'UA-XXXXX-Y', // Google Analytics
+                // 'google-analytics' => 'UA-XXXXX-Y', // Google Analytics
                 'js-to-footer', // Move JS to footer
                 'nav-walker', // Clean up nav menu markup
                 'nice-search', // Redirect /?s=query to /search/query
