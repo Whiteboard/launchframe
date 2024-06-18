@@ -5,19 +5,16 @@ if ( ! class_exists( 'acf_field_clone' ) ) :
 	class acf_field_clone extends acf_field {
 
 
-		/*
-		*  __construct
-		*
-		*  This function will setup the field type data
-		*
-		*  @type    function
-		*  @date    5/03/2014
-		*  @since   5.0.0
-		*
-		*  @param   n/a
-		*  @return  n/a
-		*/
-
+		/**
+		 * This function will setup the field type data
+		 *
+		 * @type    function
+		 * @date    5/03/2014
+		 * @since   5.0.0
+		 *
+		 * @param   n/a
+		 * @return  n/a
+		 */
 		function initialize() {
 
 			// vars
@@ -52,39 +49,33 @@ if ( ! class_exists( 'acf_field_clone' ) ) :
 		}
 
 
-		/*
-		*  is_enabled
-		*
-		*  This function will return true if acf_local functionality is enabled
-		*
-		*  @type    function
-		*  @date    14/07/2016
-		*  @since   5.4.0
-		*
-		*  @param   n/a
-		*  @return  n/a
-		*/
-
+		/**
+		 * This function will return true if acf_local functionality is enabled
+		 *
+		 * @type    function
+		 * @date    14/07/2016
+		 * @since   5.4.0
+		 *
+		 * @param   n/a
+		 * @return  n/a
+		 */
 		function is_enabled() {
 
 			return acf_is_filter_enabled( 'clone' );
 		}
 
 
-		/*
-		*  load_field()
-		*
-		*  This filter is appied to the $field after it is loaded from the database
-		*
-		*  @type    filter
-		*  @since   3.6
-		*  @date    23/01/13
-		*
-		*  @param   $field - the field array holding all the field options
-		*
-		*  @return  $field - the field array holding all the field options
-		*/
-
+		/**
+		 * This filter is appied to the $field after it is loaded from the database
+		 *
+		 * @type    filter
+		 * @since   3.6
+		 * @date    23/01/13
+		 *
+		 * @param   $field - the field array holding all the field options
+		 *
+		 * @return  $field - the field array holding all the field options
+		 */
 		function load_field( $field ) {
 
 			// bail early if not enabled
@@ -101,20 +92,17 @@ if ( ! class_exists( 'acf_field_clone' ) ) :
 		}
 
 
-		/*
-		*  acf_get_fields
-		*
-		*  This function will hook into the 'acf/get_fields' filter and inject/replace seamless clones fields
-		*
-		*  @type    function
-		*  @date    17/06/2016
-		*  @since   5.3.8
-		*
-		*  @param   $fields (array)
-		*  @param   $parent (array)
-		*  @return  $fields
-		*/
-
+		/**
+		 * This function will hook into the 'acf/get_fields' filter and inject/replace seamless clones fields
+		 *
+		 * @type    function
+		 * @date    17/06/2016
+		 * @since   5.3.8
+		 *
+		 * @param   $fields (array)
+		 * @param   $parent (array)
+		 * @return  $fields
+		 */
 		function acf_get_fields( $fields, $parent ) {
 
 			// bail early if empty
@@ -164,20 +152,17 @@ if ( ! class_exists( 'acf_field_clone' ) ) :
 		}
 
 
-		/*
-		*  get_cloned_fields
-		*
-		*  This function will return an array of fields for a given clone field
-		*
-		*  @type    function
-		*  @date    28/06/2016
-		*  @since   5.3.8
-		*
-		*  @param   $field (array)
-		*  @param   $parent (array)
-		*  @return  (array)
-		*/
-
+		/**
+		 * This function will return an array of fields for a given clone field
+		 *
+		 * @type    function
+		 * @date    28/06/2016
+		 * @since   5.3.8
+		 *
+		 * @param   $field (array)
+		 * @param   $parent (array)
+		 * @return  (array)
+		 */
 		function get_cloned_fields( $field ) {
 
 			// vars
@@ -241,21 +226,18 @@ if ( ! class_exists( 'acf_field_clone' ) ) :
 		}
 
 
-		/*
-		*  acf_clone_field
-		*
-		*  This function is run when cloning a clone field
-		*  Important to run the acf_clone_field function on sub fields to pass on settings such as 'parent_layout'
-		*
-		*  @type    function
-		*  @date    28/06/2016
-		*  @since   5.3.8
-		*
-		*  @param   $field (array)
-		*  @param   $clone_field (array)
-		*  @return  $field
-		*/
-
+		/**
+		 * This function is run when cloning a clone field
+		 * Important to run the acf_clone_field function on sub fields to pass on settings such as 'parent_layout'
+		 *
+		 * @type    function
+		 * @date    28/06/2016
+		 * @since   5.3.8
+		 *
+		 * @param   $field (array)
+		 * @param   $clone_field (array)
+		 * @return  $field
+		 */
 		function acf_clone_field( $field, $clone_field ) {
 
 			// bail early if this field is being cloned by some other kind of field (future proof)
@@ -322,22 +304,19 @@ if ( ! class_exists( 'acf_field_clone' ) ) :
 		}
 
 
-		/*
-		*  acf_clone_clone_field
-		*
-		*  This function is run when cloning a clone field
-		*  Important to run the acf_clone_field function on sub fields to pass on settings such as 'parent_layout'
-		*  Do not delete! Removing this logic causes major issues with cloned clone fields within a flexible content layout.
-		*
-		*  @type    function
-		*  @date    28/06/2016
-		*  @since   5.3.8
-		*
-		*  @param   $field (array)
-		*  @param   $clone_field (array)
-		*  @return  $field
-		*/
-
+		/**
+		 * This function is run when cloning a clone field
+		 * Important to run the acf_clone_field function on sub fields to pass on settings such as 'parent_layout'
+		 * Do not delete! Removing this logic causes major issues with cloned clone fields within a flexible content layout.
+		 *
+		 * @type    function
+		 * @date    28/06/2016
+		 * @since   5.3.8
+		 *
+		 * @param   $field (array)
+		 * @param   $clone_field (array)
+		 * @return  $field
+		 */
 		function acf_clone_clone_field( $field, $clone_field ) {
 
 			// modify the $clone_field name
@@ -367,19 +346,16 @@ if ( ! class_exists( 'acf_field_clone' ) ) :
 		}
 
 
-		/*
-		*  prepare_field_for_db
-		*
-		*  description
-		*
-		*  @type    function
-		*  @date    4/11/16
-		*  @since   5.5.0
-		*
-		*  @param   $post_id (int)
-		*  @return  $post_id (int)
-		*/
-
+		/**
+		 * description
+		 *
+		 * @type    function
+		 * @date    4/11/16
+		 * @since   5.5.0
+		 *
+		 * @param   $post_id (int)
+		 * @return  $post_id (int)
+		 */
 		function prepare_field_for_db( $field ) {
 
 			// bail early if no sub fields
@@ -408,7 +384,6 @@ if ( ! class_exists( 'acf_field_clone' ) ) :
 			// acf_log('== prepare_field_for_db ==');
 			// acf_log('- clone name:', $field['name']);
 			// acf_log('- clone _name:', $field['_name']);
-
 			// loop
 			foreach ( $field['sub_fields'] as &$sub_field ) {
 				$sub_field['name'] = $prefix . $sub_field['name'];
@@ -419,21 +394,18 @@ if ( ! class_exists( 'acf_field_clone' ) ) :
 		}
 
 
-		/*
-		*  load_value()
-		*
-		*  This filter is applied to the $value after it is loaded from the db
-		*
-		*  @type    filter
-		*  @since   3.6
-		*  @date    23/01/13
-		*
-		*  @param   $value (mixed) the value found in the database
-		*  @param   $post_id (mixed) the $post_id from which the value was loaded
-		*  @param   $field (array) the field array holding all the field options
-		*  @return  $value
-		*/
-
+		/**
+		 * This filter is applied to the $value after it is loaded from the db
+		 *
+		 * @type    filter
+		 * @since   3.6
+		 * @date    23/01/13
+		 *
+		 * @param   $value (mixed) the value found in the database
+		 * @param   $post_id (mixed) the post_id from which the value was loaded
+		 * @param   $field (array) the field array holding all the field options
+		 * @return  $value
+		 */
 		function load_value( $value, $post_id, $field ) {
 
 			// bail early if no sub fields
@@ -469,7 +441,6 @@ if ( ! class_exists( 'acf_field_clone' ) ) :
 		 * @param mixed   $post_id     The $post_id from which the value was loaded.
 		 * @param array   $field       The field array holding all the field options.
 		 * @param boolean $escape_html Should the field return a HTML safe formatted value.
-		 *
 		 * @return mixed $value The modified value.
 		 */
 		public function format_value( $value, $post_id, $field, $escape_html = false ) {
@@ -502,9 +473,9 @@ if ( ! class_exists( 'acf_field_clone' ) ) :
 		/**
 		 * Apply basic formatting to prepare the value for default REST output.
 		 *
-		 * @param mixed      $value
-		 * @param string|int $post_id
-		 * @param array      $field
+		 * @param mixed          $value
+		 * @param string|integer $post_id
+		 * @param array          $field
 		 * @return mixed
 		 */
 		public function format_value_for_rest( $value, $post_id, array $field ) {
@@ -531,22 +502,19 @@ if ( ! class_exists( 'acf_field_clone' ) ) :
 			return $value;
 		}
 
-		/*
-		*  update_value()
-		*
-		*  This filter is appied to the $value before it is updated in the db
-		*
-		*  @type    filter
-		*  @since   3.6
-		*  @date    23/01/13
-		*
-		*  @param   $value - the value which will be saved in the database
-		*  @param   $field - the field array holding all the field options
-		*  @param   $post_id - the $post_id of which the value will be saved
-		*
-		*  @return  $value - the modified value
-		*/
-
+		/**
+		 * This filter is appied to the $value before it is updated in the db
+		 *
+		 * @type    filter
+		 * @since   3.6
+		 * @date    23/01/13
+		 *
+		 * @param   $value - the value which will be saved in the database
+		 * @param   $field - the field array holding all the field options
+		 * @param   $post_id - the post_id of which the value will be saved
+		 *
+		 * @return  $value - the modified value
+		 */
 		function update_value( $value, $post_id, $field ) {
 
 			// bail early if no value
@@ -595,18 +563,15 @@ if ( ! class_exists( 'acf_field_clone' ) ) :
 		}
 
 
-		/*
-		*  render_field()
-		*
-		*  Create the HTML interface for your field
-		*
-		*  @param   $field - an array holding all the field's data
-		*
-		*  @type    action
-		*  @since   3.6
-		*  @date    23/01/13
-		*/
-
+		/**
+		 * Create the HTML interface for your field
+		 *
+		 * @param   $field - an array holding all the field's data
+		 *
+		 * @type    action
+		 * @since   3.6
+		 * @date    23/01/13
+		 */
 		function render_field( $field ) {
 
 			// bail early if no sub fields
@@ -649,26 +614,23 @@ if ( ! class_exists( 'acf_field_clone' ) ) :
 		}
 
 
-		/*
-		*  render_field_block
-		*
-		*  description
-		*
-		*  @type    function
-		*  @date    12/07/2016
-		*  @since   5.4.0
-		*
-		*  @param   $post_id (int)
-		*  @return  $post_id (int)
-		*/
-
+		/**
+		 * description
+		 *
+		 * @type    function
+		 * @date    12/07/2016
+		 * @since   5.4.0
+		 *
+		 * @param   $post_id (int)
+		 * @return  $post_id (int)
+		 */
 		function render_field_block( $field ) {
 
 			// vars
 			$label_placement = $field['layout'] == 'block' ? 'top' : 'left';
 
 			// html
-			echo '<div class="acf-clone-fields acf-fields -' . $label_placement . ' -border">';
+			echo '<div class="acf-clone-fields acf-fields -' . esc_attr( $label_placement ) . ' -border">';
 
 			foreach ( $field['sub_fields'] as $sub_field ) {
 				acf_render_field_wrap( $sub_field );
@@ -678,19 +640,16 @@ if ( ! class_exists( 'acf_field_clone' ) ) :
 		}
 
 
-		/*
-		*  render_field_table
-		*
-		*  description
-		*
-		*  @type    function
-		*  @date    12/07/2016
-		*  @since   5.4.0
-		*
-		*  @param   $post_id (int)
-		*  @return  $post_id (int)
-		*/
-
+		/**
+		 * description
+		 *
+		 * @type    function
+		 * @date    12/07/2016
+		 * @since   5.4.0
+		 *
+		 * @param   $post_id (int)
+		 * @return  $post_id (int)
+		 */
 		function render_field_table( $field ) {
 
 			?>
@@ -742,19 +701,16 @@ if ( ! class_exists( 'acf_field_clone' ) ) :
 		}
 
 
-		/*
-		*  render_field_settings()
-		*
-		*  Create extra options for your field. This is rendered when editing a field.
-		*  The value of $field['name'] can be used (like bellow) to save extra data to the $field
-		*
-		*  @param   $field  - an array holding all the field's data
-		*
-		*  @type    action
-		*  @since   3.6
-		*  @date    23/01/13
-		*/
-
+		/**
+		 * Create extra options for your field. This is rendered when editing a field.
+		 * The value of $field['name'] can be used (like bellow) to save extra data to the $field
+		 *
+		 * @param   $field  - an array holding all the field's data
+		 *
+		 * @type    action
+		 * @since   3.6
+		 * @date    23/01/13
+		 */
 		function render_field_settings( $field ) {
 
 			// temp enable 'local' to allow .json fields to be displayed
@@ -845,19 +801,16 @@ if ( ! class_exists( 'acf_field_clone' ) ) :
 		}
 
 
-		/*
-		*  get_clone_setting_choices
-		*
-		*  This function will return an array of choices data for Select2
-		*
-		*  @type    function
-		*  @date    17/06/2016
-		*  @since   5.3.8
-		*
-		*  @param   $value (mixed)
-		*  @return  (array)
-		*/
-
+		/**
+		 * This function will return an array of choices data for Select2
+		 *
+		 * @type    function
+		 * @date    17/06/2016
+		 * @since   5.3.8
+		 *
+		 * @param   $value (mixed)
+		 * @return  (array)
+		 */
 		function get_clone_setting_choices( $value ) {
 
 			// vars
@@ -881,19 +834,16 @@ if ( ! class_exists( 'acf_field_clone' ) ) :
 		}
 
 
-		/*
-		*  get_clone_setting_choice
-		*
-		*  This function will return the label for a given clone choice
-		*
-		*  @type    function
-		*  @date    17/06/2016
-		*  @since   5.3.8
-		*
-		*  @param   $selector (mixed)
-		*  @return  (string)
-		*/
-
+		/**
+		 * This function will return the label for a given clone choice
+		 *
+		 * @type    function
+		 * @date    17/06/2016
+		 * @since   5.3.8
+		 *
+		 * @param   $selector (mixed)
+		 * @return  (string)
+		 */
 		function get_clone_setting_choice( $selector = '' ) {
 
 			// bail early no selector
@@ -923,19 +873,16 @@ if ( ! class_exists( 'acf_field_clone' ) ) :
 		}
 
 
-		/*
-		*  get_clone_setting_field_choice
-		*
-		*  This function will return the text for a field choice
-		*
-		*  @type    function
-		*  @date    20/07/2016
-		*  @since   5.4.0
-		*
-		*  @param   $field (array)
-		*  @return  (string)
-		*/
-
+		/**
+		 * This function will return the text for a field choice
+		 *
+		 * @type    function
+		 * @date    20/07/2016
+		 * @since   5.4.0
+		 *
+		 * @param   $field (array)
+		 * @return  (string)
+		 */
 		function get_clone_setting_field_choice( $field ) {
 
 			// bail early if no field
@@ -959,19 +906,16 @@ if ( ! class_exists( 'acf_field_clone' ) ) :
 		}
 
 
-		/*
-		*  get_clone_setting_group_choice
-		*
-		*  This function will return the text for a group choice
-		*
-		*  @type    function
-		*  @date    20/07/2016
-		*  @since   5.4.0
-		*
-		*  @param   $field_group (array)
-		*  @return  (string)
-		*/
-
+		/**
+		 * This function will return the text for a group choice
+		 *
+		 * @type    function
+		 * @date    20/07/2016
+		 * @since   5.4.0
+		 *
+		 * @param   $field_group (array)
+		 * @return  (string)
+		 */
 		function get_clone_setting_group_choice( $field_group ) {
 
 			// bail early if no field group
@@ -984,19 +928,16 @@ if ( ! class_exists( 'acf_field_clone' ) ) :
 		}
 
 
-		/*
-		*  ajax_query
-		*
-		*  description
-		*
-		*  @type    function
-		*  @date    17/06/2016
-		*  @since   5.3.8
-		*
-		*  @param   $post_id (int)
-		*  @return  $post_id (int)
-		*/
-
+		/**
+		 * description
+		 *
+		 * @type    function
+		 * @date    17/06/2016
+		 * @since   5.3.8
+		 *
+		 * @param   $post_id (int)
+		 * @return  $post_id (int)
+		 */
 		function ajax_query() {
 
 			// validate
@@ -1174,19 +1115,16 @@ if ( ! class_exists( 'acf_field_clone' ) ) :
 		}
 
 
-		/*
-		*  acf_prepare_field
-		*
-		*  This function will restore a field's key ready for input
-		*
-		*  @type    function
-		*  @date    6/09/2016
-		*  @since   5.4.0
-		*
-		*  @param   $field (array)
-		*  @return  $field
-		*/
-
+		/**
+		 * This function will restore a field's key ready for input
+		 *
+		 * @type    function
+		 * @date    6/09/2016
+		 * @since   5.4.0
+		 *
+		 * @param   $field (array)
+		 * @return  $field
+		 */
 		function acf_prepare_field( $field ) {
 
 			// bail early if not cloned
@@ -1204,19 +1142,16 @@ if ( ! class_exists( 'acf_field_clone' ) ) :
 		}
 
 
-		/*
-		*  validate_value
-		*
-		*  description
-		*
-		*  @type    function
-		*  @date    11/02/2014
-		*  @since   5.0.0
-		*
-		*  @param   $post_id (int)
-		*  @return  $post_id (int)
-		*/
-
+		/**
+		 * description
+		 *
+		 * @type    function
+		 * @date    11/02/2014
+		 * @since   5.0.0
+		 *
+		 * @param   $post_id (int)
+		 * @return  $post_id (int)
+		 */
 		function validate_value( $valid, $value, $field, $input ) {
 
 			// bail early if no $value

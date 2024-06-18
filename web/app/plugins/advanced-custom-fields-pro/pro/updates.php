@@ -4,6 +4,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
+// Register a store for license status.
+acf_register_store( 'acf_pro_license_status' );
+
 if ( ! class_exists( 'acf_pro_updates' ) ) :
 
 	class acf_pro_updates {
@@ -11,7 +14,6 @@ if ( ! class_exists( 'acf_pro_updates' ) ) :
 		/**
 		 * Initialize filters, action, variables and includes
 		 *
-		 * @date  23/06/12
 		 * @since 5.0.0
 		 */
 		public function __construct() {
@@ -30,7 +32,7 @@ if ( ! class_exists( 'acf_pro_updates' ) ) :
 			add_action( 'current_screen', 'acf_pro_display_activation_error', 30 );
 
 			// Bail early if the updates page is not visible.
-			if ( ! acf_is_updates_page_visible() ) {
+			if ( ! acf_pro_is_updates_page_visible() ) {
 				return;
 			}
 
@@ -52,7 +54,6 @@ if ( ! class_exists( 'acf_pro_updates' ) ) :
 		/**
 		 * Displays an update message for plugin list screens.
 		 *
-		 * @date    14/06/2016
 		 * @since   5.3.8
 		 *
 		 * @param array  $plugin_data An array of plugin metadata.
@@ -87,7 +88,6 @@ endif; // class_exists check
  * Check if a license is defined in wp-config.php and requires activation.
  * Also checks if the license key has been changed and reactivates.
  *
- * @date 29/09/2021
  * @since 5.11.0
  */
 function acf_pro_check_defined_license() {
@@ -109,7 +109,7 @@ function acf_pro_check_defined_license() {
 
 	// Check if we've been asked to clear the transient to retry activation.
 	if ( acf_verify_nonce( 'acf_delete_activation_transient' ) || ( isset( $_REQUEST['acf_retry_nonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['acf_retry_nonce'] ) ), 'acf_retry_activation' ) ) ) {
-		delete_transient( 'acf_activation_error' );
+		acf_pro_delete_license_transient( 'acf_activation_error' );
 	} else {
 		// If we've failed activation recently, check if the key has been changed, otherwise return.
 		$activation_data = acf_pro_get_activation_failure_transient();
@@ -136,17 +136,8 @@ function acf_pro_check_defined_license() {
 				return acf_pro_set_activation_failure_transient( __( 'Your defined license key has changed, but an error occurred when deactivating your old license', 'acf' ) . ' <span class="description">(' . $deactivation_response['message'] . ').</span>', ACF_PRO_LICENSE );
 			}
 		} else {
-
-			// Check if the license has been marked as invalid during the update check.
-			$basename = acf_get_setting( 'basename' );
-			$update   = acf_updates()->get_plugin_update( $basename );
-			if ( isset( $update['license_valid'] ) && ! $update['license_valid'] ) {
-				// Our site is not activated, so remove the license.
-				acf_pro_update_license( '' );
-			} else {
-				// License key hasn't changed, we are activated and license is still valid, return.
-				return;
-			}
+			// License key hasn't changed, we are activated and license is still valid, return.
+			return;
 		}
 	}
 
@@ -170,7 +161,7 @@ function acf_pro_check_defined_license() {
 	} else {
 
 		// Delete any previously saved activation error transient.
-		delete_transient( 'acf_activation_error' );
+		acf_pro_delete_license_transient( 'acf_activation_error' );
 
 		// Use our own success message instead of the one from connect so it can be translated.
 		acf_add_admin_notice(
@@ -191,7 +182,7 @@ function acf_pro_check_defined_license() {
  * Get translated upstream message
  *
  * @since   6.2.3
- * @param   string $text server side message string.
+ * @param   string $text Server side message string.
  *
  * @return  string a translated (or original, if unavailable), message string.
  */
@@ -245,7 +236,7 @@ function acf_pro_get_translated_connect_message( $text ) {
 		// Check again on the updates page if shown, or the field group page if not.
 		$nonce    = wp_create_nonce( 'acf_retry_activation' );
 		$base_url = 'edit.php?post_type=acf-field-group';
-		if ( acf_is_updates_page_visible() ) {
+		if ( acf_pro_is_updates_page_visible() ) {
 			$base_url .= '&page=acf-settings-updates';
 		}
 
@@ -259,29 +250,30 @@ function acf_pro_get_translated_connect_message( $text ) {
 		$text .= ' ' . sprintf( __( '%1$s or %2$s.', 'acf' ), $view_license, $check_again );
 
 		return $text;
+	} elseif ( strpos( $text, 'upstream API error' ) !== false ) {
+		return __( 'An upstream API error occurred when checking your ACF PRO license status. We will retry again shortly.', 'acf' );
 	} elseif ( strpos( $text, 'scheduled maintenance' ) !== false ) {
-		return __( 'The ACF activation server is temporarily unavailable for scheduled maintenance. Please try again later.', 'acf' );
+		return __( 'The ACF activation service is temporarily unavailable for scheduled maintenance. Please try again later.', 'acf' );
 	} elseif ( strpos( $text, 'Something went wrong' ) !== false ) {
-		return __( 'An internal error occurred when trying to check your license key. Please try again later.', 'acf' );
+		return __( 'The ACF activation service is temporarily unavailable. Please try again later.', 'acf' );
 	}
 
 	/* translators: %s an untranslatable internal upstream error message */
-	return sprintf( __( 'An unknown error occurred while trying to validate your license: %s.', 'acf' ), $text );
+	return sprintf( __( 'An unknown error occurred while trying to communicate with the ACF activation service: %s.', 'acf' ), $text );
 }
 
 /**
- *  Set the automatic activation failure transient
+ * Set the automatic activation failure transient
  *
- *  @date    11/10/2021
- *  @since   5.11.0
+ * @since   5.11.0
  *
- *  @param   string $error_text string containing the error text message.
- *  @param   string $license_key the license key that was used during the failed activation.
+ * @param   string $error_text  string containing the error text message.
+ * @param   string $license_key the license key that was used during the failed activation.
  *
- *  @return void
+ * @return void
  */
 function acf_pro_set_activation_failure_transient( $error_text, $license_key ) {
-	set_transient(
+	acf_pro_set_license_transient(
 		'acf_activation_error',
 		array(
 			'error'   => $error_text,
@@ -292,21 +284,19 @@ function acf_pro_set_activation_failure_transient( $error_text, $license_key ) {
 }
 
 /**
- *  Get the automatic activation failure transient
+ * Get the automatic activation failure transient
  *
- *  @date    11/10/2021
- *  @since   5.11.0
+ * @since   5.11.0
  *
- *  @return array|false Activation failure transient array, or false if it's not set.
+ * @return array|false Activation failure transient array, or false if it's not set.
  */
 function acf_pro_get_activation_failure_transient() {
-	return get_transient( 'acf_activation_error' );
+	return acf_pro_get_license_transient( 'acf_activation_error' );
 }
 
 /**
  * Display the stored activation error
  *
- * @date    11/10/2021
  * @since   5.11.0
  */
 function acf_pro_display_activation_error( $screen ) {
@@ -335,23 +325,21 @@ function acf_pro_display_activation_error( $screen ) {
 
 	// Check if the license key is defined. If not, delete the transient.
 	if ( ! defined( 'ACF_PRO_LICENSE' ) || empty( ACF_PRO_LICENSE ) || ! is_string( ACF_PRO_LICENSE ) ) {
-		delete_transient( 'acf_activation_error' );
+		acf_pro_delete_license_transient( 'acf_activation_error' );
 		return;
 	}
 
 	// Prepend ACF PRO for context since we're not in an ACF PRO admin screen.
-	$activation_data['error'] = __( '<strong>ACF PRO &mdash;</strong> ', 'acf' ) . $activation_data['error'];
+	$activation_data['error'] = __( '<strong>ACF PRO &mdash;</strong>', 'acf' ) . ' ' . $activation_data['error'];
 
-	// Append a retry link if we're not already on the settings page and we don't already have a link from upstream.
-	if ( ! acf_is_screen( 'acf_page_acf-settings-updates' ) ) {
-		if ( strpos( $activation_data['error'], 'http' ) === false ) {
-			$nonce           = wp_create_nonce( 'acf_retry_activation' );
-			$check_again_url = 'edit.php?post_type=acf-field-group';
-			if ( acf_is_updates_page_visible() ) {
-				$check_again_url .= '&page=acf-settings-updates';
-			}
-			$activation_data['error'] = $activation_data['error'] . ' <a href="' . admin_url( $check_again_url . '&acf_retry_nonce=' . $nonce ) . '">' . __( 'Check again', 'acf' ) . '</a>';
+	// Append a retry link if we don't already have a link from upstream.
+	if ( strpos( $activation_data['error'], 'http' ) === false ) {
+		$nonce           = wp_create_nonce( 'acf_retry_activation' );
+		$check_again_url = 'edit.php?post_type=acf-field-group';
+		if ( acf_pro_is_updates_page_visible() ) {
+			$check_again_url .= '&page=acf-settings-updates';
 		}
+		$activation_data['error'] = $activation_data['error'] . ' <a href="' . admin_url( $check_again_url . '&acf_retry_nonce=' . $nonce ) . '">' . __( 'Check again', 'acf' ) . '</a>';
 	}
 
 	// Add a non-dismissible error message with the activation error.
@@ -359,18 +347,15 @@ function acf_pro_display_activation_error( $screen ) {
 }
 
 /**
- *  This function will return the license
+ * This function will return the license
  *
- *  @type    function
- *  @date    20/09/2016
- *  @since   5.4.0
+ * @since   5.4.0
  *
- *  @return  $license    Activated license array
+ * @return array|boolean $license  The ACF PRO license array on success, or false on failure.
  */
 function acf_pro_get_license() {
-
-	// get option
-	$license = get_option( 'acf_pro_license' );
+	// get license data
+	$license = acf_pro_get_license_option( 'acf_pro_license' );
 
 	// bail early if no value
 	if ( ! $license ) {
@@ -393,19 +378,24 @@ function acf_pro_get_license() {
  * An ACF specific getter to replace `home_url` in our license checks to ensure we can avoid third party filters.
  *
  * @since 6.0.1
+ * @since 6.2.8 - Renamed to acf_pro_get_home_url to match pro exclusive function naming.
  *
  * @return string $home_url The output from home_url, sans known third party filters which cause license activation issues.
  */
-function acf_get_home_url() {
+function acf_pro_get_home_url() {
 	// Disable WPML and TranslatePress's home url overrides for our license check.
-	add_filter( 'wpml_get_home_url', 'acf_license_ml_intercept', 99, 2 );
-	add_filter( 'trp_home_url', 'acf_license_ml_intercept', 99, 2 );
+	add_filter( 'wpml_get_home_url', 'acf_pro_license_ml_intercept', 99, 2 );
+	add_filter( 'trp_home_url', 'acf_pro_license_ml_intercept', 99, 2 );
 
-	$home_url = home_url();
+	if ( acf_pro_is_legacy_multisite() && acf_is_multisite_sub_site() ) {
+		$home_url = get_home_url( get_main_site_id() );
+	} else {
+		$home_url = home_url();
+	}
 
 	// Re-enable WPML and TranslatePress's home url overrides.
-	remove_filter( 'wpml_get_home_url', 'acf_license_ml_intercept', 99 );
-	remove_filter( 'trp_home_url', 'acf_license_ml_intercept', 99 );
+	remove_filter( 'wpml_get_home_url', 'acf_pro_license_ml_intercept', 99 );
+	remove_filter( 'trp_home_url', 'acf_pro_license_ml_intercept', 99 );
 
 	return $home_url;
 }
@@ -415,12 +405,12 @@ function acf_get_home_url() {
  *
  * @since 6.0.1
  *
- * @param string $home_url the multilingual plugin converted home URL.
- * @param string $url the original home URL.
+ * @param string $home_url The multilingual plugin converted home URL.
+ * @param string $url      The original home URL.
  *
  * @return string $url
  */
-function acf_license_ml_intercept( $home_url, $url ) {
+function acf_pro_license_ml_intercept( $home_url, $url ) {
 	return $url;
 }
 
@@ -431,7 +421,16 @@ function acf_license_ml_intercept( $home_url, $url ) {
  *
  * @return boolean true if the updates page should be hidden as we're not the primary multisite site.
  */
-function acf_is_updates_page_visible() {
+function acf_pro_is_updates_page_visible() {
+	// Hide the updates page if we're a multisite subsite, legacy multisite, and the primary site is active.
+	if ( acf_is_multisite_sub_site() ) {
+		$status = get_blog_option( get_main_site_id(), 'acf_pro_license_status', array() );
+
+		if ( acf_pro_is_legacy_multisite( $status ) && acf_pro_is_license_active( $status ) ) {
+			return false;
+		}
+	}
+
 	return acf_get_setting( 'show_updates' );
 }
 
@@ -441,7 +440,7 @@ function acf_is_updates_page_visible() {
  * @since 5.4.0
  *
  * @param boolean $skip_url_check Skip the check of the current site url.
- * @return string|bool License key on success, or false on failure.
+ * @return string|boolean License key on success, or false on failure.
  */
 function acf_pro_get_license_key( $skip_url_check = false ) {
 	$license = acf_pro_get_license();
@@ -460,14 +459,12 @@ function acf_pro_get_license_key( $skip_url_check = false ) {
 }
 
 /**
- *  This function will update the DB license
+ * This function will update the DB license
  *
- *  @type    function
- *  @date    20/09/2016
- *  @since   5.4.0
+ * @since   5.4.0
  *
- *  @param   string $key    The license key
- *  @return  bool           The result of the update_option call
+ * @param   string $key The license key.
+ * @return  boolean The result of the update_option call
  */
 function acf_pro_update_license( $key = '' ) {
 
@@ -480,7 +477,7 @@ function acf_pro_update_license( $key = '' ) {
 		// vars
 		$data = array(
 			'key' => $key,
-			'url' => acf_get_home_url(),
+			'url' => acf_pro_get_home_url(),
 		);
 
 		// encode
@@ -499,13 +496,13 @@ function acf_pro_update_license( $key = '' ) {
 	);
 
 	// update
-	return update_option( 'acf_pro_license', $value );
+	return acf_pro_update_license_option( 'acf_pro_license', $value );
 }
 
 /**
  * Get count of registered ACF Blocks
  *
- * @return int
+ * @return integer
  */
 function acf_pro_get_registered_block_count() {
 	return acf_get_store( 'block-types' )->count();
@@ -517,9 +514,9 @@ function acf_pro_get_registered_block_count() {
  *
  * @since   5.11.0
  *
- * @param   string  $license_key    License key to activate.
- * @param   boolean $silent         Return errors rather than displaying them.
- * @param   boolean $automatic      True if this activation is happening automatically.
+ * @param   string  $license_key License key to activate.
+ * @param   boolean $silent      Return errors rather than displaying them.
+ * @param   boolean $automatic   True if this activation is happening automatically.
  * @return  mixed   $response       A wp-error instance, or an array with a boolean success key, and string message key.
  */
 function acf_pro_activate_license( $license_key, $silent = false, $automatic = false ) {
@@ -529,7 +526,7 @@ function acf_pro_activate_license( $license_key, $silent = false, $automatic = f
 		'acf_license'  => trim( $license_key ),
 		'acf_version'  => acf_get_setting( 'version' ),
 		'wp_name'      => get_bloginfo( 'name' ),
-		'wp_url'       => acf_get_home_url(),
+		'wp_url'       => acf_pro_get_home_url(),
 		'wp_version'   => get_bloginfo( 'version' ),
 		'wp_language'  => get_bloginfo( 'language' ),
 		'wp_timezone'  => get_option( 'timezone_string' ),
@@ -546,7 +543,12 @@ function acf_pro_activate_license( $license_key, $silent = false, $automatic = f
 		$activation_url .= '&automatic=true';
 	}
 
-	$response = acf_updates()->request( $activation_url, $post );
+	// Remove the current license status.
+	acf_pro_delete_license_transient( 'acf_activation_error' );
+	acf_pro_remove_license_status();
+
+	$response   = acf_updates()->request( $activation_url, $post );
+	$expiration = acf_updates()->get_expiration( $response, DAY_IN_SECONDS );
 
 	// Check response is expected JSON array (not string).
 	if ( is_string( $response ) ) {
@@ -556,7 +558,7 @@ function acf_pro_activate_license( $license_key, $silent = false, $automatic = f
 	// Display error.
 	if ( is_wp_error( $response ) ) {
 		if ( ! $silent ) {
-			display_wp_activation_error( $response );
+			acf_pro_display_wp_activation_error( $response );
 		}
 		return $response;
 	}
@@ -568,9 +570,9 @@ function acf_pro_activate_license( $license_key, $silent = false, $automatic = f
 
 		// Update license and clear out existing license status.
 		acf_pro_update_license( $response['license'] );
-		acf_pro_remove_license_status();
 
-		if ( ! empty( $response['license_status'] ) ) {
+		if ( ! empty( $response['license_status'] ) && is_array( $response['license_status'] ) ) {
+			$response['license_status']['next_check'] = time() + $expiration;
 			acf_pro_update_license_status( $response['license_status'] );
 		}
 
@@ -604,10 +606,9 @@ function acf_pro_activate_license( $license_key, $silent = false, $automatic = f
  * Deactivates the registered license key.
  * Formally ACF_Admin_Updates::deactivate_pro_licence since 5.0.0
  *
- * @date    30/09/2021
  * @since   5.11.0
  *
- * @param   bool $silent     Return errors rather than displaying them
+ * @param   boolean $silent Return errors rather than displaying them
  * @return  mixed   $response   A wp-error instance, or an array with a boolean success key, and string message key
  */
 function acf_pro_deactivate_license( $silent = false ) {
@@ -623,7 +624,7 @@ function acf_pro_deactivate_license( $silent = false ) {
 	// Connect to API.
 	$post     = array(
 		'acf_license' => $license,
-		'wp_url'      => acf_get_home_url(),
+		'wp_url'      => acf_pro_get_home_url(),
 	);
 	$response = acf_updates()->request( 'v2/plugins/deactivate?p=pro', $post );
 
@@ -635,7 +636,7 @@ function acf_pro_deactivate_license( $silent = false ) {
 	// Display error.
 	if ( is_wp_error( $response ) ) {
 		if ( ! $silent ) {
-			display_wp_activation_error( $response );
+			acf_pro_display_wp_activation_error( $response );
 		}
 		return $response;
 	}
@@ -665,12 +666,11 @@ function acf_pro_deactivate_license( $silent = false ) {
 /**
  * Adds an admin notice using the provided WP_Error.
  *
- * @date    14/1/19
  * @since   5.7.10
  *
  * @param   WP_Error $wp_error The error to display.
  */
-function display_wp_activation_error( $wp_error ) {
+function acf_pro_display_wp_activation_error( $wp_error ) {
 
 	// Only show one error on page.
 	if ( acf_has_done( 'display_wp_error' ) ) {
@@ -691,52 +691,83 @@ function display_wp_activation_error( $wp_error ) {
  *
  * @since 6.2.2
  *
- * @param bool $force_check If we should force a call to the API.
+ * @param boolean $force_check If we should force a call to the API.
  * @return array
  */
 function acf_pro_get_license_status( $force_check = false ) {
+	$store  = acf_get_store( 'acf_pro_license_status' );
+	$cached = $store->get_data();
+
+	if ( ! empty( $cached ) && ! $force_check ) {
+		return $cached;
+	}
+
 	$license = acf_pro_get_license_key( true );
 
 	// Defined licenses may not have a license stored in the database.
-	if ( ! $license && defined( 'ACF_PRO_LICENSE' ) ) {
+	if ( ! $license && defined( 'ACF_PRO_LICENSE' ) && acf_pro_get_license() ) {
 		$license = ACF_PRO_LICENSE;
 	}
 
-	$status     = get_option( 'acf_pro_license_status', array() );
+	$status     = acf_pro_get_license_option( 'acf_pro_license_status', array() );
 	$next_check = isset( $status['next_check'] ) ? (int) $status['next_check'] : 0;
+
+	if ( ! is_array( $status ) ) {
+		$status = array();
+	}
+
+	// If we don't have a license, remove any existing status.
+	if ( empty( $license ) && ! empty( $status ) ) {
+		acf_pro_remove_license_status();
+		$status = array();
+	}
 
 	// Call the API if necessary, if we have a license.
 	if ( ( empty( $status ) || $force_check || time() > $next_check ) && $license ) {
-		$post = array(
-			'acf_license' => $license,
-			'wp_url'      => acf_get_home_url(),
-		);
+		if ( ! get_transient( 'acf_pro_validating_license' ) || $force_check ) {
+			set_transient( 'acf_pro_validating_license', true, 15 * MINUTE_IN_SECONDS );
 
-		$response   = acf_updates()->request( 'v2/plugins/validate?p=pro', $post );
-		$expiration = acf_updates()->get_expiration( $response, DAY_IN_SECONDS, MONTH_IN_SECONDS );
+			$post = array(
+				'acf_license' => $license,
+				'wp_url'      => acf_pro_get_home_url(),
+			);
 
-		if ( is_array( $response ) ) {
-			if ( ! empty( $response['license_status'] ) ) {
-				$status = $response['license_status'];
+			$response   = acf_updates()->request( 'v2/plugins/validate?p=pro', $post );
+			$expiration = acf_updates()->get_expiration( $response );
+
+			if ( is_array( $response ) ) {
+				if ( ! empty( $response['license_status'] ) ) {
+					$status = $response['license_status'];
+				}
+
+				// Handle errors from connect.
+				if ( ! empty( $response['code'] ) && 'activation_not_found' === $response['code'] ) {
+
+					// If our activation is no longer found and the user has a defined license, deactivate the license and let the automatic reactivation attempt happen.
+					if ( defined( 'ACF_PRO_LICENSE' ) ) {
+						acf_pro_update_license( '' );
+						acf_pro_check_defined_license();
+					} else {
+						$status['error_msg'] = sprintf(
+						/* translators: %s - URL to ACF updates page */
+							__( 'Your license key is valid but not activated on this site. Please <a href="%s">deactivate</a> and then reactivate the license.', 'acf' ),
+							esc_url( admin_url( 'edit.php?post_type=acf-field-group&page=acf-settings-updates#deactivate-license' ) )
+						);
+					}
+				} elseif ( ! empty( $response['message'] ) ) {
+					$status['error_msg'] = acf_esc_html( acf_pro_get_translated_connect_message( $response['message'] ) );
+				}
 			}
 
-			// Handle errors from connect.
-			if ( ! empty( $response['code'] ) && 'activation_not_found' === $response['code'] ) {
-				$status['error_msg'] = sprintf(
-					/* translators: %s - URL to ACF updates page */
-					__( 'Your license key is valid but not activated on this site. Please <a href="%s">deactivate</a> and then reactivate the license.', 'acf' ),
-					esc_url( admin_url( 'edit.php?post_type=acf-field-group&page=acf-settings-updates#deactivate-license' ) )
-				);
-			} elseif ( ! empty( $response['message'] ) ) {
-				$status['error_msg'] = acf_esc_html( $response['message'] );
-			}
+			$status['next_check'] = time() + $expiration;
+			acf_pro_update_license_status( $status );
 		}
-
-		$status['next_check'] = time() + $expiration;
-		acf_pro_update_license_status( $status );
 	}
 
-	return acf_pro_parse_license_status( $status );
+	$status = acf_pro_parse_license_status( $status );
+	$store->set( $status );
+
+	return $status;
 }
 
 /**
@@ -759,7 +790,7 @@ function acf_pro_parse_license_status( $status = array() ) {
 		'view_licenses_url'       => '',
 		'manage_subscription_url' => '',
 		'error_msg'               => '',
-		'next_check'              => 0,
+		'next_check'              => time() + 3 * HOUR_IN_SECONDS,
 	);
 
 	return wp_parse_args( $status, $default );
@@ -771,12 +802,18 @@ function acf_pro_parse_license_status( $status = array() ) {
  * @since 6.2.2
  *
  * @param array $status The current license status.
- * @return bool True if the value was set, false otherwise.
+ * @return boolean True if the value was set, false otherwise.
  */
 function acf_pro_update_license_status( $status ) {
-	return update_option(
+	$status = acf_pro_parse_license_status( $status );
+	$store  = acf_get_store( 'acf_pro_license_status' );
+
+	$store->set( $status );
+
+	return acf_pro_update_license_option(
 		'acf_pro_license_status',
-		acf_pro_parse_license_status( $status )
+		$status,
+		true
 	);
 }
 
@@ -785,10 +822,13 @@ function acf_pro_update_license_status( $status ) {
  *
  * @since 6.2
  *
- * @return bool True if the transient was deleted, false otherwise.
+ * @return boolean True if the transient was deleted, false otherwise.
  */
 function acf_pro_remove_license_status() {
-	return delete_option( 'acf_pro_license_status' );
+	$store = acf_get_store( 'acf_pro_license_status' );
+	$store->reset();
+
+	return acf_pro_delete_license_option( 'acf_pro_license_status' );
 }
 
 /**
@@ -797,7 +837,7 @@ function acf_pro_remove_license_status() {
  * @since 6.2.2
  *
  * @param array $status Optional license status array.
- * @return bool True if active, false if not.
+ * @return boolean True if active, false if not.
  */
 function acf_pro_is_license_active( $status = array() ) {
 	if ( empty( $status ) ) {
@@ -813,11 +853,15 @@ function acf_pro_is_license_active( $status = array() ) {
  * @since 6.2.2
  *
  * @param array $status Optional license status array.
- * @return bool True if expired, false if not.
+ * @return boolean True if expired, false if not.
  */
 function acf_pro_is_license_expired( $status = array() ) {
 	if ( empty( $status ) ) {
 		$status = acf_pro_get_license_status();
+	}
+
+	if ( acf_pro_was_license_refunded( $status ) ) {
+		return false;
 	}
 
 	return in_array( $status['status'], array( 'expired', 'cancelled' ), true );
@@ -829,7 +873,7 @@ function acf_pro_is_license_expired( $status = array() ) {
  * @since 6.2.2
  *
  * @param array $status Optional license status array.
- * @return bool True if refunded, false if not.
+ * @return boolean True if refunded, false if not.
  */
 function acf_pro_was_license_refunded( $status = array() ) {
 	if ( empty( $status ) ) {
@@ -846,11 +890,11 @@ function acf_pro_was_license_refunded( $status = array() ) {
  *
  * @param array  $license Optional ACF license array.
  * @param string $url     An optional URL to provide.
- * @return bool           True if the URL has changed, false otherwise.
+ * @return boolean           True if the URL has changed, false otherwise.
  */
 function acf_pro_has_license_url_changed( $license = array(), $url = '' ) {
 	$license  = ! empty( $license ) ? $license : acf_pro_get_license();
-	$home_url = ! empty( $url ) ? $url : acf_get_home_url();
+	$home_url = ! empty( $url ) ? $url : acf_pro_get_home_url();
 
 	// We can't know without a license, so let's assume not.
 	if ( ! is_array( $license ) || empty( $license['url'] ) ) {
@@ -892,7 +936,7 @@ function acf_pro_maybe_reactivate_license() {
 	}
 
 	// Bail if we're in an AJAX request, or tried this recently.
-	if ( acf_is_ajax() || get_transient( 'acf_pro_license_reactivated' ) ) {
+	if ( acf_is_ajax() || acf_pro_get_license_transient( 'acf_pro_license_reactivated' ) ) {
 		return;
 	}
 
@@ -904,7 +948,7 @@ function acf_pro_maybe_reactivate_license() {
 	}
 
 	// Set a transient, so we don't keep trying this in a short period.
-	set_transient( 'acf_pro_license_reactivated', true, 3 * HOUR_IN_SECONDS );
+	acf_pro_set_license_transient( 'acf_pro_license_reactivated', true, HOUR_IN_SECONDS );
 
 	// Prevent subsequent attempts at reactivation by updating the license URL.
 	acf_pro_update_license( $license['key'] );
@@ -928,7 +972,7 @@ function acf_pro_maybe_reactivate_license() {
 		acf_pro_update_license_status( $license_status );
 	} else {
 		acf_add_admin_notice(
-			__( "Your site URL has changed since last activating your license. We've automatically activated it for this site URL.", 'acf' ),
+			__( '<strong>ACF PRO &mdash;</strong>', 'acf' ) . ' ' . __( "Your site URL has changed since last activating your license. We've automatically activated it for this site URL.", 'acf' ),
 			'success'
 		);
 	}
@@ -956,4 +1000,140 @@ function acf_pro_get_manage_license_url( $status = array() ) {
 	}
 
 	return $url;
+}
+
+/**
+ * Returns a multisite compatible licensing data value
+ * For multisite installs, this is from the main site options if available or the normal option otherwise.
+ *
+ * @since 6.2.6
+ *
+ * @param string $option_name   The option name to load.
+ * @param mixed  $default_value The default value to return if not set.
+ * @return mixed the resulting option value from cache or database.
+ */
+function acf_pro_get_license_option( $option_name, $default_value = false ) {
+	if ( acf_pro_is_legacy_multisite() ) {
+		return get_blog_option( get_main_site_id(), $option_name, $default_value );
+	}
+
+	return get_option( $option_name, $default_value );
+}
+
+/**
+ * Updates a multisite compatible licensing data value
+ * For multisite installs, this is from the main site options if available or the normal option otherwise.
+ *
+ * @since 6.2.6
+ *
+ * @param string  $option_name The option name to update.
+ * @param mixed   $value       The new value to set.
+ * @param boolean $autoload    True if the option should be autoloaded.
+ * @return boolean True if the value was updated, false otherwise.
+ */
+function acf_pro_update_license_option( $option_name, $value = false, $autoload = false ) {
+	if ( acf_pro_is_legacy_multisite() ) {
+		$main_site_id = get_main_site_id();
+		if ( $main_site_id !== get_current_blog_id() ) {
+			switch_to_blog( $main_site_id );
+			$return = update_option( $option_name, $value, $autoload );
+			restore_current_blog();
+			return $return;
+		}
+	}
+
+	return update_option( $option_name, $value, $autoload );
+}
+
+/**
+ * Deletes a multisite compatible licensing data value
+ * For multisite installs, this is from the main site options if available or the normal option otherwise.
+ *
+ * @since 6.2.6
+ *
+ * @param string $option_name The option name to load.
+ * @return boolean The result of the deletion request.
+ */
+function acf_pro_delete_license_option( $option_name ) {
+	if ( acf_pro_is_legacy_multisite() && acf_is_multisite_sub_site() ) {
+		return delete_blog_option( get_main_site_id(), $option_name );
+	}
+
+	return delete_option( $option_name );
+}
+
+/**
+ * Returns a license related transient
+ * For multisite installs, this is from the network, otherwise from the normal transient function.
+ *
+ * @since 6.2.6
+ *
+ * @param string $transient_name The name of the transient to return.
+ * @return mixed the resulting transient value from cache or database.
+ */
+function acf_pro_get_license_transient( $transient_name ) {
+	if ( acf_pro_is_legacy_multisite() ) {
+		return get_site_transient( $transient_name );
+	} else {
+		return get_transient( $transient_name );
+	}
+}
+
+/**
+ * Updates a license related transient
+ * For multisite installs, this is from the network, otherwise from the normal transient function.
+ *
+ * @since 6.2.6
+ *
+ * @param string $name  The name of the transient to update.
+ * @param mixed  $value The new value of the transient.
+ * @return mixed The result of the set function.
+ */
+function acf_pro_set_license_transient( $name, $value ) {
+	if ( acf_pro_is_legacy_multisite() ) {
+		return set_site_transient( $name, $value );
+	} else {
+		return set_transient( $name, $value );
+	}
+}
+
+/**
+ * Deletes a license related transient
+ * For multisite installs, this is from the network, otherwise from the normal transient function.
+ *
+ * @since 6.2.6
+ *
+ * @param string $transient_name The name of the transient to return.
+ * @return boolean True if the transient was deleted, false otherwise.
+ */
+function acf_pro_delete_license_transient( $transient_name ) {
+	if ( acf_pro_is_legacy_multisite() ) {
+		return delete_site_transient( $transient_name );
+	} else {
+		return delete_transient( $transient_name );
+	}
+}
+
+/**
+ * Checks if the current license allows the legacy multisite behavior if we're on a multisite install.
+ *
+ * @since 6.2.6
+ *
+ * @param array $status Optional license status array.
+ * @return boolean True if legacy multisite, false if not.
+ */
+function acf_pro_is_legacy_multisite( array $status = array() ) {
+	if ( ! is_multisite() ) {
+		return false;
+	}
+
+	if ( empty( $status ) ) {
+		$status = get_blog_option( get_main_site_id(), 'acf_pro_license_status', array() );
+	}
+
+	if ( ! is_array( $status ) || ! isset( $status['legacy_multisite'] ) ) {
+		return false;
+	}
+
+	return $status['legacy_multisite'] === true;
 }

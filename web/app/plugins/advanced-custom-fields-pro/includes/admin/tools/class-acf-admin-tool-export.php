@@ -17,17 +17,16 @@ if ( ! class_exists( 'ACF_Admin_Tool_Export' ) ) :
 
 
 		/**
-		 *  initialize
+		 * initialize
 		 *
-		 *  This function will initialize the admin tool
+		 * This function will initialize the admin tool
 		 *
-		 *  @date    10/10/17
-		 *  @since   5.6.3
+		 * @date    10/10/17
+		 * @since   5.6.3
 		 *
-		 *  @param   n/a
-		 *  @return  n/a
+		 * @param   n/a
+		 * @return  n/a
 		 */
-
 		function initialize() {
 
 			// vars
@@ -42,17 +41,16 @@ if ( ! class_exists( 'ACF_Admin_Tool_Export' ) ) :
 
 
 		/**
-		 *  submit
+		 * submit
 		 *
-		 *  This function will run when the tool's form has been submit
+		 * This function will run when the tool's form has been submit
 		 *
-		 *  @date    10/10/17
-		 *  @since   5.6.3
+		 * @date    10/10/17
+		 * @since   5.6.3
 		 *
-		 *  @param   n/a
-		 *  @return  n/a
+		 * @param   n/a
+		 * @return  n/a
 		 */
-
 		function submit() {
 
 			// vars
@@ -70,17 +68,16 @@ if ( ! class_exists( 'ACF_Admin_Tool_Export' ) ) :
 
 
 		/**
-		 *  submit_download
+		 * submit_download
 		 *
-		 *  description
+		 * description
 		 *
-		 *  @date    17/10/17
-		 *  @since   5.6.3
+		 * @date    17/10/17
+		 * @since   5.6.3
 		 *
-		 *  @param   n/a
-		 *  @return  n/a
+		 * @param   n/a
+		 * @return  n/a
 		 */
-
 		function submit_download() {
 
 			// vars
@@ -98,23 +95,22 @@ if ( ! class_exists( 'ACF_Admin_Tool_Export' ) ) :
 			header( 'Content-Type: application/json; charset=utf-8' );
 
 			// return
-			echo acf_json_encode( $json ) . "\r\n";
+			echo acf_json_encode( $json ) . "\r\n"; //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped as JSON export.
 			die;
 		}
 
 
 		/**
-		 *  submit_generate
+		 * submit_generate
 		 *
-		 *  description
+		 * description
 		 *
-		 *  @date    17/10/17
-		 *  @since   5.6.3
+		 * @date    17/10/17
+		 * @since   5.6.3
 		 *
-		 *  @param   n/a
-		 *  @return  n/a
+		 * @param   n/a
+		 * @return  n/a
 		 */
-
 		function submit_generate() {
 
 			// vars
@@ -129,23 +125,22 @@ if ( ! class_exists( 'ACF_Admin_Tool_Export' ) ) :
 			$url = add_query_arg( 'keys', implode( '+', $keys ), $this->get_url() );
 
 			// redirect
-			wp_redirect( $url );
+			wp_safe_redirect( $url );
 			exit;
 		}
 
 
 		/**
-		 *  load
+		 * load
 		 *
-		 *  description
+		 * description
 		 *
-		 *  @date    21/10/17
-		 *  @since   5.6.3
+		 * @date    21/10/17
+		 * @since   5.6.3
 		 *
-		 *  @param   n/a
-		 *  @return  n/a
+		 * @param   n/a
+		 * @return  n/a
 		 */
-
 		function load() {
 
 			// active
@@ -165,17 +160,16 @@ if ( ! class_exists( 'ACF_Admin_Tool_Export' ) ) :
 
 
 		/**
-		 *  html
+		 * html
 		 *
-		 *  This function will output the metabox HTML
+		 * This function will output the metabox HTML
 		 *
-		 *  @date    10/10/17
-		 *  @since   5.6.3
+		 * @date    10/10/17
+		 * @since   5.6.3
 		 *
-		 *  @param   n/a
-		 *  @return  n/a
+		 * @param   n/a
+		 * @return  n/a
 		 */
-
 		function html() {
 
 			// single (generate PHP)
@@ -192,10 +186,7 @@ if ( ! class_exists( 'ACF_Admin_Tool_Export' ) ) :
 		/**
 		 * Renders the checkboxes to select items to export.
 		 *
-		 * @date 24/10/17
 		 * @since 5.6.3
-		 *
-		 * @return void
 		 */
 		public function html_field_selection() {
 			// Ensure `l10n_var_export` is always false at the point we're outputting the options.
@@ -208,7 +199,10 @@ if ( ! class_exists( 'ACF_Admin_Tool_Export' ) ) :
 
 			$choices      = array();
 			$selected     = $this->get_selected_keys();
-			$field_groups = acf_get_internal_post_type_posts( 'acf-field-group' );
+			$field_groups = array_filter(
+				acf_get_internal_post_type_posts( 'acf-field-group' ),
+				'acf_internal_post_object_contains_valid_key'
+			);
 
 			if ( $field_groups ) {
 				foreach ( $field_groups as $field_group ) {
@@ -230,7 +224,10 @@ if ( ! class_exists( 'ACF_Admin_Tool_Export' ) ) :
 
 			$choices    = array();
 			$selected   = $this->get_selected_keys();
-			$post_types = acf_get_internal_post_type_posts( 'acf-post-type' );
+			$post_types = array_filter(
+				acf_get_internal_post_type_posts( 'acf-post-type' ),
+				'acf_internal_post_object_contains_valid_key'
+			);
 
 			if ( $post_types ) {
 				foreach ( $post_types as $post_type ) {
@@ -252,7 +249,10 @@ if ( ! class_exists( 'ACF_Admin_Tool_Export' ) ) :
 
 			$choices    = array();
 			$selected   = $this->get_selected_keys();
-			$taxonomies = acf_get_internal_post_type_posts( 'acf-taxonomy' );
+			$taxonomies = array_filter(
+				acf_get_internal_post_type_posts( 'acf-taxonomy' ),
+				'acf_internal_post_object_contains_valid_key'
+			);
 
 			if ( $taxonomies ) {
 				foreach ( $taxonomies as $taxonomy ) {
@@ -274,7 +274,10 @@ if ( ! class_exists( 'ACF_Admin_Tool_Export' ) ) :
 
 			$choices       = array();
 			$selected      = $this->get_selected_keys();
-			$options_pages = acf_get_internal_post_type_posts( 'acf-ui-options-page' );
+			$options_pages = array_filter(
+				acf_get_internal_post_type_posts( 'acf-ui-options-page' ),
+				'acf_internal_post_object_contains_valid_key'
+			);
 
 			if ( $options_pages ) {
 				foreach ( $options_pages as $options_page ) {
@@ -298,10 +301,7 @@ if ( ! class_exists( 'ACF_Admin_Tool_Export' ) ) :
 		/**
 		 * Renders the side panel for selecting ACF items to export via PHP.
 		 *
-		 * @date 21/10/17
 		 * @since 5.6.3
-		 *
-		 * @return void
 		 */
 		public function html_panel_selection() {
 			?>
@@ -311,59 +311,18 @@ if ( ! class_exists( 'ACF_Admin_Tool_Export' ) ) :
 			<?php
 		}
 
-		/**
-		 *  html_panel_settings
-		 *
-		 *  description
-		 *
-		 *  @date    21/10/17
-		 *  @since   5.6.3
-		 *
-		 *  @param   n/a
-		 *  @return  n/a
-		 */
-
-		function html_panel_settings() {
-
-			?>
-		<div class="acf-panel acf-panel-settings">
-			<h3 class="acf-panel-title"><?php _e( 'Settings', 'acf' ); ?> <i class="dashicons dashicons-arrow-right"></i></h3>
-			<div class="acf-panel-inside">
-				<?php
-
-				/*
-				acf_render_field_wrap(array(
-					'label'     => __('Empty settings', 'acf'),
-					'type'      => 'select',
-					'name'      => 'minimal',
-					'prefix'    => false,
-					'value'     => '',
-					'choices'   => array(
-						'all'       => __('Include all settings', 'acf'),
-						'minimal'   => __('Ignore empty settings', 'acf'),
-					)
-				));
-				*/
-
-				?>
-			</div>
-		</div>
-			<?php
-		}
-
 
 		/**
-		 *  html_archive
+		 * html_archive
 		 *
-		 *  description
+		 * description
 		 *
-		 *  @date    20/10/17
-		 *  @since   5.6.3
+		 * @date    20/10/17
+		 * @since   5.6.3
 		 *
-		 *  @param   n/a
-		 *  @return  n/a
+		 * @param   n/a
+		 * @return  n/a
 		 */
-
 		function html_archive() {
 
 			?>
@@ -376,8 +335,8 @@ if ( ! class_exists( 'ACF_Admin_Tool_Export' ) ) :
 				<?php $this->html_field_selection(); ?>
 			</div>
 			<p class="acf-submit acf-actions-strip">
-				<button type="submit" name="action" class="acf-btn acf-button-primary" value="download"><?php _e( 'Export As JSON', 'acf' ); ?></button>
-				<button type="submit" name="action" class="acf-btn acf-btn-secondary" value="generate"><?php _e( 'Generate PHP', 'acf' ); ?></button>
+				<button type="submit" name="action" class="acf-btn acf-button-primary" value="download"><?php esc_html_e( 'Export As JSON', 'acf' ); ?></button>
+				<button type="submit" name="action" class="acf-btn acf-btn-secondary" value="generate"><?php esc_html_e( 'Generate PHP', 'acf' ); ?></button>
 			</p>
 		</div>
 			<?php
@@ -386,10 +345,7 @@ if ( ! class_exists( 'ACF_Admin_Tool_Export' ) ) :
 		/**
 		 * Renders the PHP export screen.
 		 *
-		 * @date 20/10/17
 		 * @since 5.6.3
-		 *
-		 * @return void
 		 */
 		public function html_single() {
 			?>
@@ -414,10 +370,7 @@ if ( ! class_exists( 'ACF_Admin_Tool_Export' ) ) :
 		/**
 		 * Generates the HTML for the PHP export functionality.
 		 *
-		 * @date    17/10/17
 		 * @since   5.6.3
-		 *
-		 * @return void
 		 */
 		public function html_generate() {
 			// Prevent default translation and fake __() within string.
@@ -469,7 +422,7 @@ if ( ! class_exists( 'ACF_Admin_Tool_Export' ) ) :
 			echo '</textarea>';
 			?>
 			<p class="acf-submit">
-				<a class="button" id="acf-export-copy"><?php _e( 'Copy to clipboard', 'acf' ); ?></a>
+				<a class="button" id="acf-export-copy"><?php esc_html_e( 'Copy to clipboard', 'acf' ); ?></a>
 			</p>
 			<script type="text/javascript">
 			(function($){
@@ -509,10 +462,9 @@ if ( ! class_exists( 'ACF_Admin_Tool_Export' ) ) :
 		/**
 		 * Return an array of keys that have been selected in the export tool.
 		 *
-		 * @date 20/10/17
 		 * @since 5.6.3
 		 *
-		 * @return array|bool
+		 * @return array|boolean
 		 */
 		public function get_selected_keys() {
 			$key_names = array( 'keys', 'taxonomy_keys', 'post_type_keys', 'ui_options_page_keys' );
@@ -538,10 +490,9 @@ if ( ! class_exists( 'ACF_Admin_Tool_Export' ) ) :
 		/**
 		 * Returns the JSON data for given $_POST args.
 		 *
-		 * @date  17/10/17
 		 * @since 5.6.3
 		 *
-		 * @return array|bool
+		 * @return array|boolean
 		 */
 		public function get_selected() {
 			$selected = $this->get_selected_keys();

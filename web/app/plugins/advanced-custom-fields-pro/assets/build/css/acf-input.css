@@ -1153,7 +1153,10 @@ html[dir=rtl] .acf-button-group label:last-child {
 *
 *-----------------------------------------------------------------------------*/
 .acf-switch {
-  display: inline-block;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: fit-content;
+  max-width: 100%;
   border-radius: 5px;
   cursor: pointer;
   position: relative;
@@ -1184,6 +1187,10 @@ html[dir=rtl] .acf-button-group label:last-child {
 .acf-switch .acf-switch-on {
   color: #fff;
   text-shadow: #007cba 0 1px 0;
+  overflow: hidden;
+}
+.acf-switch .acf-switch-off {
+  overflow: hidden;
 }
 .acf-switch .acf-switch-slider {
   position: absolute;
@@ -2437,8 +2444,8 @@ tr.acf-accordion + tr.acf-accordion {
 .block-editor .edit-post-sidebar .acf-fields > .acf-field {
   border-width: 0;
   border-color: #e2e4e7;
-  margin: 16px;
-  padding: 0;
+  margin: 0px;
+  padding: 10px 16px;
   width: auto !important;
   min-height: 0 !important;
   float: none !important;
@@ -2470,6 +2477,27 @@ tr.acf-accordion + tr.acf-accordion {
 }
 .block-editor .edit-post-sidebar .acf-fields > .acf-field.acf-accordion .acf-accordion-content > .acf-fields {
   border-top-width: 0;
+}
+.block-editor .edit-post-sidebar .block-editor-block-inspector .acf-fields > .acf-notice {
+  display: grid;
+  grid-template-columns: 1fr 25px;
+  padding: 10px;
+  margin: 0;
+}
+.block-editor .edit-post-sidebar .block-editor-block-inspector .acf-fields > .acf-notice p:last-of-type {
+  margin: 0;
+}
+.block-editor .edit-post-sidebar .block-editor-block-inspector .acf-fields > .acf-notice > .acf-notice-dismiss {
+  position: relative;
+  top: unset;
+  right: unset;
+}
+.block-editor .edit-post-sidebar .block-editor-block-inspector .acf-fields .acf-field .acf-notice {
+  margin: 0;
+  padding: 0;
+}
+.block-editor .edit-post-sidebar .block-editor-block-inspector .acf-fields .acf-error {
+  margin-bottom: 10px;
 }
 
 /*-----------------------------------------------------------------------------
