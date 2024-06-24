@@ -1,0 +1,59 @@
+{#
+	@name Tertiary Hero
+	@desc secondary Hero
+#}
+
+<section
+    x-data
+    x-ref="hero"
+    class="relative fluid-container flex flex-col text-center pb-16"
+    :style="{ paddingTop: `${$store.header.height}px` }"
+>
+    {% include 'typography/h1.twig' with {
+        content: hero.headline ?: title,
+        attribute: "
+            x-data='animateText()'
+            x-init='
+                opacity.active = false;
+                yPercent = {
+                    ...yPercent, active: true,
+                    start: 102,
+                    duration: 0.4,
+                };
+                type = `chars`;
+                wordsClass = avalanche.textClass.words.h1;
+                stagger = 0.03;
+                setTrigger($refs.hero);
+                trigger = $refs.hero;
+                mounted();
+            '
+            x-ref='element'
+        ",
+    } %}
+
+    {% if hero.text %}
+        {% include "typography/paragraph.twig" with {
+            content: hero.text,
+            size: "lg",
+            margin: "mt-6",
+            class: "max-w-2xl mx-auto",
+            attribute: "
+                x-data='animateText()'
+                x-init='
+                    stagger = 0.03;
+                    setTrigger($refs.hero);
+                    trigger = $refs.hero;
+                    delay = delay + 0.3;
+                    mounted();
+                '
+                x-ref='element'
+            ",
+        } %}
+    {% endif %}
+
+    {% include "components/buttons.twig" with {
+        buttons: hero.buttons,
+        align: "items-center justify-center",
+        margin: "mt-11",
+    } %}
+</section>

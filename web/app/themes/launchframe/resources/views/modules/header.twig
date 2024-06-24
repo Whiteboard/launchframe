@@ -22,10 +22,18 @@
         },
     }"
     x-ref="header"
-    class="fixed z-30 top-0 w-full transition-all"
-    :class="sticky ? 'py-1 bg-neutral-50 text-primary-600' : 'py-6 text-white'"
+    id="site-header"
+    class="fixed z-30 top-0 w-full transition"
+    :class="{
+        'bg-neutral-100 text-secondary' : sticky,
+        'text-white' : !sticky && $store.header.theme === 'dark',
+        'text-neutral' : !sticky && $store.header.theme === 'light',
+    }"
 >
-    <div class="fluid-container">
+    <div
+        class="fluid-container py-6 transition-all"
+        :class="sticky ? '!py-1' : 'py-6'"
+    >
         <div class="relative flex justify-between items-center">
 
             <div

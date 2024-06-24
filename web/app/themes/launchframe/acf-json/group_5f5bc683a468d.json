@@ -1,6 +1,6 @@
 {
     "key": "group_5f5bc683a468d",
-    "title": "Component: Background",
+    "title": "Component: Media",
     "fields": [
         {
             "key": "field_5f5bc683a9357",
@@ -16,10 +16,10 @@
                 "class": "",
                 "id": ""
             },
-            "acfe_save_meta": 0,
             "choices": {
                 "image": "Image",
                 "video": "Video",
+                "remote_image": "Remote Image",
                 "remote_video": "Remote Video"
             },
             "default_value": "",
@@ -57,32 +57,6 @@
             "mime_types": "mp4"
         },
         {
-            "key": "field_64da39dfc815f",
-            "label": "Remote MP4",
-            "name": "remote_mp4",
-            "aria-label": "",
-            "type": "url",
-            "instructions": "This should be a URL from a service like AWS.",
-            "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_5f5bc683a9357",
-                        "operator": "==",
-                        "value": "remote_video"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "50",
-                "class": "",
-                "id": ""
-            },
-            "acfe_save_meta": 0,
-            "default_value": "",
-            "placeholder": ""
-        },
-        {
             "key": "field_5f5bc7e0b2d18",
             "label": "Image",
             "name": "image",
@@ -117,6 +91,121 @@
             "max_size": "",
             "mime_types": "",
             "uploader": "wp"
+        },
+        {
+            "key": "field_64da39dfc815f",
+            "label": "Remote Video URL",
+            "name": "remote_video",
+            "aria-label": "",
+            "type": "url",
+            "instructions": "This should be a URL from a service like AWS.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5f5bc683a9357",
+                        "operator": "==",
+                        "value": "remote_video"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": ""
+        },
+        {
+            "key": "field_6679c3c2e5b44",
+            "label": "Remote Image URL",
+            "name": "remote_image",
+            "aria-label": "",
+            "type": "url",
+            "instructions": "This should be a URL from a service like AWS.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5f5bc683a9357",
+                        "operator": "==",
+                        "value": "remote_image"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": ""
+        },
+        {
+            "key": "field_6679c3dafca8f",
+            "label": "Focal Point",
+            "name": "focal_point",
+            "aria-label": "",
+            "type": "group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "acfe_seamless_style": 0,
+            "acfe_group_modal": 0,
+            "sub_fields": [
+                {
+                    "key": "field_6679c3f0fca90",
+                    "label": "X Axis",
+                    "name": "x",
+                    "aria-label": "",
+                    "type": "range",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": 50,
+                    "min": 0,
+                    "max": 100,
+                    "step": "",
+                    "prepend": "",
+                    "append": "%"
+                },
+                {
+                    "key": "field_6679c40cfca91",
+                    "label": "Y Axis",
+                    "name": "y",
+                    "aria-label": "",
+                    "type": "range",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": 50,
+                    "min": 0,
+                    "max": 100,
+                    "step": "",
+                    "prepend": "",
+                    "append": "%"
+                }
+            ],
+            "acfe_group_modal_close": 0,
+            "acfe_group_modal_button": "",
+            "acfe_group_modal_size": "large"
         }
     ],
     "location": [
@@ -144,5 +233,5 @@
     "acfe_form": 0,
     "acfe_meta": "",
     "acfe_note": "",
-    "modified": 1692023749
+    "modified": 1719256134
 }

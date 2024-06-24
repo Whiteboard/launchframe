@@ -7,7 +7,7 @@
         {% include "components/intro.twig" with {
             overline: overline,
             title: title,
-        }%}
+        } %}
         
         {% if posts|length > 0 %}
 
@@ -36,7 +36,7 @@
                         heading: post.title,
                         text: text,
                         link: post.link,
-                    }%}
+                    } %}
                 {% endfor %}
 
             </div>

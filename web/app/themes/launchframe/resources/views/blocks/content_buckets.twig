@@ -3,7 +3,7 @@
         overline: blockset.overline,
         title: blockset.title,
         subtitle: blockset.subtitle
-    }%}
+    } %}
     {% if blockset.buckets|length > 0 %}
     <div class="flex flex-wrap gap-y-10">
         {% for item in blockset.buckets %}
@@ -12,10 +12,10 @@
             {% include "typography/h4.twig" with {
                 content: item.title,
                 as: "h3"
-            }%}
+            } %}
             {% include "typography/paragraph.twig" with {
                 content: item.text
-            }%}
+            } %}
         </div>
         {% endfor %}
     </div>

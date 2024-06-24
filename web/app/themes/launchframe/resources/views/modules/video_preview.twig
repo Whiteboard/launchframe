@@ -13,8 +13,8 @@
         scale.end = 1.12;
         mounted();
         "x-ref="container" 
-        {% include "components/button_attributes.twig" %} class="">
-            {% include "components/background.twig" with {
+        {% include "components/link_attributes.twig" %} class="">
+            {% include "components/media.twig" with {
                 image: video_cover_image ? video_cover_image : video_source == 'youtube' ? "https://img.youtube.com/vi/#{video_id}/maxresdefault.jpg" : video_source == 'vimeo' ? "https://vumbnail.com/#{video_id}_large.jpg" : video_cover_image,
                 mp4: video_mp4,
                 webm: preview_webm,
@@ -29,19 +29,19 @@
                             content: video_overline,
                             style: "overline",
                             margins: "mb-0"
-                        }%}
+                        } %}
                     {% endif %}
                     {% if video_title %}
                         {% include "typography/h2.twig" with {
                             content: video_title,
                             class: "mb-4"
-                        }%}
+                        } %}
                     {% endif %}
                     {% if video_subtitle %}
                         {% include "typography/paragraph.twig" with {
                             content: video_subtitle,
                             margins: "mb-8"
-                        }%}
+                        } %}
                     {% endif %}
                 </div>
                 <div class="flex items-center gap-3 relative {{ video_overline or video_title or video_subtitle ? '' : 'justify-center' }}">
@@ -49,7 +49,7 @@
                         {% include "components/button_play.twig" with {
                             tag: "button",
                             action: "video",
-                            button_color: "bg-primary-400"
+                            button_color: "bg-primary-500"
                         } %}
                     </div>
                     <div class="text-white {{ (hidePlayButtonText) ? 'hidden' : '' }}">
@@ -57,12 +57,12 @@
                             content: "Watch Video",
                             size: "lg",
                             margins: "mb-1"
-                        }%}
+                        } %}
                         {% include "typography/paragraph.twig" with {
                             content: video_duration,
                             size: "xs",
                             margins: "m-0"
-                        }%}
+                        } %}
                     </div>
                 </div>
             </div>

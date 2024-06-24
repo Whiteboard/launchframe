@@ -1,0 +1,45 @@
+{#
+    @name Section Snap
+    @desc This component is used to snap the page to a section when it comes into view.
+    @type snippet
+#}
+
+{% if is_home or is_front_page %}
+    x-data="{
+        inRange: false,
+        onEnterRange: true,
+        snapped: false,
+    }"
+    x-init="
+        ScrollTrigger.addEventListener('scrollEnd', () => {
+            if (inRange && !snapped) {
+                snapped = true;
+                smoother.scrollTo($refs.snapSection, true, `{{ offset ?: "-${$store.header.height}px" }}`);
+            }
+        });
+
+        ScrollTrigger.create({
+            trigger: $refs.snapSection,
+            start: `{{ start ?: "0% 40%" }}`,
+            end: `{{ end ?: "${window.innerHeight/2.5}px 40%" }}`,
+            markers: {{ markers ?: "false" }},
+            onEnter: () => {
+                inRange = onEnterRange;
+            },
+            onEnterBack: () => {
+                inRange = true;
+            },
+            onLeave: () => {
+                inRange = false;
+                snapped = false;
+            },
+            onLeaveBack: () => {
+                inRange = false;
+                snapped = false;
+            },
+        });
+    "
+    x-ref="snapSection"
+{% else %}
+    x-data
+{% endif %}

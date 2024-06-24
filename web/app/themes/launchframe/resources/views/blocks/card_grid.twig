@@ -27,7 +27,7 @@
         overline: blockset.overline,
         title: blockset.title,
         subtitle: blockset.subtitle
-    }%}
+    } %}
 
     {% if cards|length > 0 %}
     <div class="grid gap-10 {{ grid }}">
@@ -41,7 +41,7 @@
                 heading: card.title,
                 text: card.text,
                 link: card.link,
-            }%}
+            } %}
         {% endfor %}
     </div>
     {% endif %}

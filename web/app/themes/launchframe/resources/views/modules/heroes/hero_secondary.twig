@@ -1,0 +1,98 @@
+{#
+	@name Secondary Hero
+	@desc Media and content split
+    @type module
+#}
+
+<section
+    x-data
+    x-ref="hero"
+    class="fluid-container flex flex-col-reverse lg:flex-row justify-between gap-16 min-h-[80dvh] pb-16"
+    :style="{ paddingTop: `${$store.header.height}px` }"
+>
+    <div class="lg:w-1/2">
+        {% include 'typography/h2.twig' with {
+            content: hero.headline ?: title,
+            as: "h1",
+            attribute: "
+                x-data='animateText()'
+                x-init='
+                    opacity.active = false;
+                    yPercent = {
+                        ...yPercent, active: true,
+                        start: 102,
+                        duration: 0.4,
+                    };
+                    type = `chars`;
+                    wordsClass = avalanche.textClass.words.h1;
+                    stagger = 0.03;
+                    setTrigger($refs.hero);
+                    trigger = $refs.hero;
+                    mounted();
+                '
+                x-ref='element'
+            ",
+        } %}
+
+        {% if hero.text %}
+            {% include "typography/paragraph.twig" with {
+                content: hero.text,
+                size: "lg",
+                margin: "mt-4",
+                attribute: "
+                    x-data='animateText()'
+                    x-init='
+                        stagger = 0.03;
+                        setTrigger($refs.hero);
+                        trigger = $refs.hero;
+                        delay = delay + 0.3;
+                        mounted();
+                    '
+                    x-ref='element'
+                ",
+            } %}
+        {% endif %}
+
+        {% include "components/buttons.twig" with {
+            buttons: hero.buttons,
+            margin: "mt-6",
+        } %}
+    </div>
+
+    {% if hero.media %}
+        <div
+            {# :: Parallax ------------ #}
+            x-data="animate()"
+            x-init="
+                opacity.active = false;
+                scale = {
+                    ...scale, active: true,
+                    start: 1.16,
+                    end: 1.16,
+                    ease: 'none',
+                };
+                yPercent = {
+                    ...yPercent, active: true,
+                    start: -8,
+                    end: 8,
+                    ease: 'none',
+                };
+                trigger = $refs.container;
+                scrub = 1.2;
+                start = 'top bottom';
+                mounted();
+            "
+            x-ref="container"
+            class="relative z-0 flex-1 lg:w-1/2 rounded-3xl overflow-hidden"
+        >
+            {% include "components/media.twig" with {
+                asset_type: hero.media.asset_type,
+                image: hero.media.image,
+                video: hero.media.video,
+                remote_image: hero.media.remote_image,
+                remote_video: hero.media.remote_mp4,
+                attribute: "x-ref='element'",
+            } %}
+        </div>
+    {% endif %}
+</section>

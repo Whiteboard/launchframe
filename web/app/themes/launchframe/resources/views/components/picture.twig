@@ -1,0 +1,59 @@
+{#
+    @name Picture
+    @desc A responsive imageset in a picture element or just an img element
+    @param* image - An image URL.
+    @param* sizes - String. The sizes picture attribute. Something like `(min-width: 768px) 55vw, 90vw` or `auto` for example.
+    @param static_image - Boolean. Using just an image URL instead of an image from WordPress.
+    @param class - String. Add optional CSS classes.
+    @param cover - Boolean. Whether the image should cover the parent. Uses the focus point.
+    @param focal_point - Object. Containes `x` and `y` (Numbers) of the image's focal point
+    @param alt - String. Image's alt text.
+    @param lazy - Boolean. Whether the image should be natively lazy loaded.
+    @type component
+#}
+
+{% set sizes =
+    sizes == "md"
+    ? "(min-width: 1280px) 640px, (min-width: 768px) 50vw, 90vw"
+    : sizes ?: "(min-width: 1280px) 100vw, (min-width: 768px) 1440px, 400vw"
+%}
+
+{% if image %}
+    {%
+        if image.src ends with ".gif"
+        or image.src ends with ".svg"
+        or static_image
+    %}
+        {% include "components/image.twig" with {
+            image: static_image ? image : image.src,
+        } %}
+    {% else %}
+
+        <picture>
+            <source
+                srcset="
+                    {% for src in image_sizes %}
+                        {{ image.src("size_#{src}") | towebp }} {{ src }}w{{ not loop.last ? "," }}
+                    {% endfor %}
+                "
+                sizes="{{ sizes }}"
+                type="image/webp"
+            >
+
+            <source
+                srcset="
+                    {% for src in image_sizes %}
+                        {{ image.src("size_#{src}") }} {{ src }}w{{ not loop.last ? "," }}
+                    {% endfor %}
+                "
+                sizes="{{ sizes }}"
+                type="image/{{ image.src ends with ".png" ? "png" : "jpeg" }}"
+            >
+
+            {% include "components/image.twig" with {
+                image: image.src("size_768"),
+            } %}
+        </picture>
+
+    {% endif %}
+{% endif %}

@@ -11,7 +11,7 @@
                 {% include "components/navigation/nav_overlay_item.twig" %}
             {% else %}
                 <li>
-                    {% include "components/button.twig" with {
+                    {% include "components/buttons/button_primary.twig" with {
                         label: item.title,
                         action: "url",
                         url: item.link,

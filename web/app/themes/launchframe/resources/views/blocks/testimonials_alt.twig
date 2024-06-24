@@ -11,7 +11,7 @@
         {% include "typography/h2.twig" with {
             content: blockset.title,
             class: "text-center mb-8 md:mb-16 px-6"
-        }%}
+        } %}
     {% endif %}
 
 {% if blockset.testimonials|length > 1 %}
@@ -43,7 +43,7 @@
                         size: "lg",
                         as: "blockquote",
                         class: "text-center"
-                    }%}
+                    } %}
                 {% endif %}
                 <div class="flex justify-center items-center">
                     {% if item.image %}
@@ -55,14 +55,14 @@
                                 content: item.name,
                                 class: "font-bold",
                                 margins: "mb-0"
-                            }%}
+                            } %}
                         {% endif %}
                         {% if item.subtitle %}
                             {% include "typography/paragraph.twig" with {
                                 content: item.subtitle,
                                 size: "sm",
                                 margins: "mb-0"
-                            }%}
+                            } %}
                         {% endif %}
                     </cite>
                 </div>

@@ -1,11 +1,29 @@
-<{{ as ? as : "h2" }}
+{#
+    @name H2
+    @desc The typography h2 partial to render an h2.
+    @param* content - The meta content.
+    @param as - The wrapping element.
+    @param size - The font size utility.
+    @param color - Set a custom text color utility.
+    @param weight - Set a custom font weight utility.
+    @param line_height - Set a custom line height utility.
+    @param letter_spacing - Set a custom letter spacing utility.
+    @param class - Add custom CSS classes.
+    @param attribute - Add custom JS.
+    @type typography
+#}
+
+<{{ as ?: "h2" }}
     {{ attribute }}
     class="
-        {{ color ? color : "text-current" }}
-        font-sans leading-none font-bold
-        text-4xl md:text-5xl
+        {{ size ?: 'text-4xl md:text-5xl' }}
+        {{ color ?: 'text-current' }}
+        {{ weight ?: 'font-bold' }}
+        {{ line_height ?: 'leading-none'}}
+        {{ letter_spacing ?: 'tracking-normal' }}
         {{ class }}
+        font-sans
     "
 >
     {{ content }}
-</{{ as ? as : "h2" }}>
+</{{ as ?: "h2" }}>

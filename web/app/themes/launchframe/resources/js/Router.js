@@ -27,6 +27,7 @@ export default () => {
     })
 
     barba.hooks.afterOnce(() => {
+        Alpine.store('barba').started = true
         const elements = [...document.querySelectorAll('a, button')]
         mouse.set(elements)
     })
@@ -89,11 +90,13 @@ export default () => {
         timeout: 30000,
         transitions: [
             {
+                name: 'primary',
                 once() {
                     primaryOnce()
                 },
                 leave(data) {
                     const done = this.async()
+                    Alpine.store('barba').currentHeight = data.current.container.clientHeight
                     primaryLeave(data.current.container, done)
                 },
                 enter() {

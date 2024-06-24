@@ -1,0 +1,52 @@
+{#
+    @name Underline Button
+    @desc An underlined label button
+    @type component
+#}
+
+<div
+    data-button
+    class="inline-flex"
+>
+    {% if magnetic %}
+        <div
+            x-data="magnetic()"
+            x-ref="element"
+            @mousemove="magnetize($event, $el, $refs.element, 10)"
+            @mouseleave="demagnetize($refs.element)"
+            class="relative inline-flex hover:z-10"
+        >
+    {% endif %}
+
+    <{{ as ?: "a" }}
+        {{ attribute }}
+        class="
+            {{ color ? color : 'text-current' }}
+            {{ line_hover ? line_hover : 'lg:hover:border-primary' }}
+            {{ color ?: 'text-current' }}
+            {{ class }}
+            inline-flex items-center justify-center
+            font-bold border-b-2 border-current pb-1
+            leading-none select-none whitespace-nowrap cursor-pointer
+            focus:outline-none focus-visible:ring focus-visible:ring-primary-400/50
+            transition group
+        "
+        {% if not faux %}
+            {% include "components/link_attributes.twig" %}
+        {% endif %}
+    >
+        <span
+            class="
+                {{ color ?: 'text-current' }}
+                {{ hover ?: 'lg:group-hover:text-primary' }}
+                transition
+            "
+        >
+            {{ label }}
+        </span>
+    </{{ as ?: "a" }}>
+
+    {% if magnetic %}
+        </div>
+    {% endif %}
+</div>

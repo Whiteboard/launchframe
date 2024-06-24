@@ -108,5 +108,13 @@ class ThemeSupport extends ServiceProvider
                 'relative-urls', // Convert absolute URLs to relative URLs
             ]);
         });
+
+        /* :: People Cleanup
+        {+} ---------------------------------- */
+        add_filter('manage_edit-person_columns', function ($columns) {
+            $columns['title'] = 'Name';
+
+            return $columns;
+        });
     }
 }

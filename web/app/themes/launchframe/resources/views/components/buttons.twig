@@ -1,17 +1,48 @@
-{% for button in buttons %}
-    <div>
-        {% include "components/button.twig" with {
-            label: button.label,
-            action: button.action,
-            url: button.url,
-            entry: button.entry,
-            new_window: button.new_window,
-            email: button.email,
-            phone: button.phone,
-            asset: button.asset.url,
-            anchor: button.anchor,
-            class: class,
-            style: button.style
-        } %}
+{#
+    @name Buttons
+    @desc A grouping of buttons
+    @type component
+#}
+
+{% if buttons %}
+    <div
+        x-data="animate()"
+        x-init="
+            setTrigger({{ trigger ?: "$refs.buttons" }});
+            element = [...$refs.buttons.querySelectorAll('[data-button]')];
+            stagger = 0.2;
+            delay = delay + {{ delay ?: 0.1 }};
+            {% if toggle_actions %}
+                toggleActions = '{{ toggle_actions }}';
+            {% endif %}
+            {% if start %}
+                start = '{{ start }}';
+            {% endif %}
+            mounted();
+        "
+        x-ref="buttons"
+        class="
+            {{ width ?: 'w-full' }}
+            {{ align ?: 'items-center justify-center md:justify-start' }}
+            {{ margin ?: 'mt-3 sm:mt-4' }}
+            {{ class }}
+            relative z-10
+            flex flex-wrap gap-6
+        "
+    >
+        {% for button in buttons %}
+            {% include "components/buttons/button_#{button.type}.twig" with {
+                label: button.label,
+                action: button.action,
+                url: button.url,
+                entry: button.entry,
+                new_window: button.new_window,
+                email: button.email,
+                phone: button.phone,
+                asset: button.asset.url,
+                anchor: button.anchor,
+                class: button_class,
+            } %}
+        {% endfor %}
     </div>
-{% endfor %}
+{% endif %}

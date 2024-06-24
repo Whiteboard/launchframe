@@ -15,8 +15,8 @@ module.exports = {
                     sm: '2rem',
                     lg: '4rem',
                     xl: '5rem',
-                    '2xl': '6rem'
-                }
+                    '2xl': '6rem',
+                },
             },
 
             colors: {
@@ -24,6 +24,13 @@ module.exports = {
                 red: colors.red,
                 yellow: colors.amber,
                 green: colors.green,
+            },
+
+            fontSize: {
+                '3xs': '0.63rem',
+                '2xs': '0.75rem',
+                '10xl': '9rem',
+                '11xl': '10rem',
             },
 
             minHeight: {
@@ -42,13 +49,13 @@ module.exports = {
                 'screen-50': '50vh',
                 'screen-75': '75vh',
                 'screen-80': '80vh',
-                'screen-90': '90vh'
+                'screen-90': '90vh',
             },
 
             minWidth: theme => ({
                 ...theme('spacing'),
                 min: 'min-content',
-                max: 'max-content'
+                max: 'max-content',
             }),
 
             // cursor: { none: 'none' },
@@ -57,7 +64,7 @@ module.exports = {
 
             spacing: {
                 // Used for the mobile navigation toggle.
-                'safe': 'calc(env(safe-area-inset-bottom, 0rem) + 2rem)',
+                safe: 'calc(env(safe-area-inset-bottom, 0rem) + 2rem)',
             },
 
             transitionTimingFunction: {
@@ -78,17 +85,17 @@ module.exports = {
                 'in-out-quart': 'cubic-bezier(0.77, 0, 0.175, 1)',
                 'in-out-quint': 'cubic-bezier(0.86, 0, 0.07, 1)',
                 'in-out-expo': 'cubic-bezier(1, 0, 0, 1)',
-                'in-out-circ': 'cubic-bezier(0.785, 0.135, 0.15, 0.86)'
+                'in-out-circ': 'cubic-bezier(0.785, 0.135, 0.15, 0.86)',
             },
 
             translate: {
                 '-over': '-101%',
-                over: '101%'
+                over: '101%',
             },
 
             zIndex: {
                 // Z-index stuff behind it's parent.
-                'behind': '-1',
+                behind: '-1',
             },
         },
     },
@@ -101,7 +108,7 @@ module.exports = {
         // π ----
         // :: BASE STYLES ---------------------------::
         // ____
-        plugin(function({ addBase, theme }) {
+        plugin(function ({ addBase, theme }) {
             addBase({
                 ':root': {
                     // Fluid typography from 1 rem to 1.2 rem with fallback to 16px.
@@ -123,7 +130,7 @@ module.exports = {
                 // Used to hide alpine elements before being rendered.
                 '[x-cloak]': {
                     opacity: '0 !important',
-                    visibility: 'hidden !important'
+                    visibility: 'hidden !important',
                 },
 
                 // Implement the focus-visible polyfill: https://github.com/WICG/focus-visible
@@ -137,25 +144,6 @@ module.exports = {
                     color: theme('colors.neutral'),
                     textTransform: 'uppercase',
                     content: '"-"',
-                },
-
-                '.skip-link': {
-                    transform: 'translateY(-100%)',
-                    transition: 'transform 0.3s',
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    padding: '1rem 0.75rem',
-                    background: theme('colors.primary'),
-                    border: '2px solid',
-                    borderColor: theme('colors.primary'),
-                    color: theme('colors.black'),
-                    textAlign: 'center',
-                },
-
-                '.skip-link:focus': {
-                    transform: 'translateY(0%)',
-                    outline: 'none !important',
                 },
 
                 /* :: Grid Sizing Utilities
@@ -200,24 +188,22 @@ module.exports = {
             })
         }),
 
-
-        plugin(function({ addBase, theme}) {
+        plugin(function ({ addBase, theme }) {
             const breakpoints = Object.entries(theme('screens'))
                 .filter(value => typeof value[1] == 'string')
                 .sort((a, b) => {
                     return a[1].replace(/\D/g, '') - b[1].replace(/\D/g, '')
                 })
 
-                .map((value) => {
+                .map(value => {
                     return {
                         [`@media (min-width: ${value[1]})`]: {
                             '.breakpoint::before': {
                                 content: `"${value[0]}"`,
-                            }
-                        }
+                            },
+                        },
                     }
-                }
-            )
+                })
 
             addBase(breakpoints)
         }),
@@ -225,7 +211,7 @@ module.exports = {
         // π ----
         // :: COMPONENTS ---------------------------::
         // ____
-        plugin(function({ addComponents, theme }) {
+        plugin(function ({ addComponents, theme }) {
             const components = {
                 /* :: Fluid Container
                 {+} ---------------------------------- */
@@ -244,7 +230,7 @@ module.exports = {
                 // When a modal is open. Should be used on the <body>
                 '.no-scroll': {
                     height: '100%',
-                    overflow: 'hidden'
+                    overflow: 'hidden',
                 },
 
                 /* :: Outer Grid
@@ -299,16 +285,16 @@ module.exports = {
                     '.fluid-container': {
                         // Use safe-area-inset together with default padding for Apple devices with a notch.
                         paddingLeft: `calc(env(safe-area-inset-left, 0rem) + ${theme('padding.16')})`,
-                        paddingRight: `calc(env(safe-area-inset-right, 0rem) + ${theme('padding.16')})`
+                        paddingRight: `calc(env(safe-area-inset-right, 0rem) + ${theme('padding.16')})`,
                     },
 
                     // Larger vertical spacing between blocks on larger screens.
                     '.outer-grid': {
                         rowGap: theme('spacing.40'),
                         paddingTop: theme('spacing.40'),
-                        paddingBottom: theme('spacing.40')
-                    }
-                }
+                        paddingBottom: theme('spacing.40'),
+                    },
+                },
             }
 
             addComponents(components)
@@ -317,7 +303,7 @@ module.exports = {
         // π ----
         // :: UTILITIES ---------------------------::
         // ____
-        plugin(function({ addUtilities, theme, variants }) {
+        plugin(function ({ addUtilities, theme, variants }) {
             const newUtilities = {
                 // Break words only when needed.
                 '.break-decent': { wordBreak: 'break-word' },
@@ -329,9 +315,9 @@ module.exports = {
 
                 '.no-scrollbar': { scrollbarWidth: 'none' },
 
-                '.no-scrollbar::-webkit-scrollbar': { display: 'none' }
+                '.no-scrollbar::-webkit-scrollbar': { display: 'none' },
             }
             addUtilities(newUtilities)
         }),
-    ]
+    ],
 }

@@ -1,0 +1,103 @@
+{#
+    @name Primary Hero
+    @desc Full screen hero with background media, headline, text and buttons.
+    @type module
+#}
+
+<section
+    x-data
+    x-ref="hero"
+    class="
+        relative flex items-center w-full min-h-screen
+        bg-neutral text-white overflow-hidden
+    "
+>
+    {% if hero.media %}
+        <div
+            {# :: Parallax ------------ #}
+            x-data="animate()"
+            x-init="
+                opacity.active = false;
+                scale = {
+                ...scale, active: true,
+                    start: 1.28,
+                    end: 1.28,
+                    ease: 'none',
+                };
+                yPercent = {
+                    ...yPercent, active: true,
+                    start: -12,
+                    end: 12,
+                    ease: 'none',
+                };
+                trigger = $refs.hero;
+                scrub = 1.2;
+                start = 'top bottom';
+                mounted();
+            "
+            class="absolute inset-0 w-full h-full overflow-hidden"
+        >
+            {% include "components/media.twig" with {
+                asset_type: hero.media.asset_type,
+                image: hero.media.image,
+                video: hero.media.video,
+                remote_image: hero.media.remote_image,
+                remote_video: hero.media.remote_mp4,
+                attribute: "x-ref='element'",
+            } %}
+        </div>
+        <div class="absolute inset-0 w-full h-full bg-black opacity-40"></div>
+    {% endif %}
+
+    <div class="relative flex items-center w-full min-h-screen pt-20 pb-16">
+        <div class="relative fluid-container flex flex-col text-center">
+            {% include 'typography/h1.twig' with {
+                content: hero.headline ?: title,
+                attribute: "
+                    x-data='animateText()'
+                    x-init='
+                        opacity.active = false;
+                        yPercent = {
+                            ...yPercent, active: true,
+                            start: 102,
+                            duration: 0.4,
+                        };
+                        type = `chars`;
+                        wordsClass = avalanche.textClass.words.h1;
+                        stagger = 0.03;
+                        setTrigger($refs.hero);
+                        trigger = $refs.hero;
+                        mounted();
+                    '
+                    x-ref='element'
+                ",
+            } %}
+
+            {% if hero.text %}
+                {% include "typography/paragraph.twig" with {
+                    content: hero.text,
+                    size: "lg",
+                    margin: "mt-6",
+                    class: "max-w-2xl mx-auto",
+                    attribute: "
+                        x-data='animateText()'
+                        x-init='
+                            stagger = 0.03;
+                            setTrigger($refs.hero);
+                            trigger = $refs.hero;
+                            delay = delay + 0.3;
+                            mounted();
+                        '
+                        x-ref='element'
+                    ",
+                } %}
+            {% endif %}
+
+            {% include "components/buttons.twig" with {
+                buttons: hero.buttons,
+                align: "items-center justify-center",
+                margin: "mt-12",
+            } %}
+        </div>
+    </div>
+</section>

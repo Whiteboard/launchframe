@@ -60,8 +60,8 @@
                     "
                     :class="{
                         'bg-white' : $store.header.theme === 'dark',
-                        'bg-primary-600' : $store.header.theme === 'light',
-                        '!bg-primary-600' : sticky,
+                        'bg-neutral' : $store.header.theme === 'light',
+                        '!bg-neutral-400' : sticky,
                     }"
                 >
 
@@ -88,13 +88,8 @@
 
                         class="
                             w-full h-full
-                            {{ color_hover ?? "bg-secondary-400" }}
+                            {{ color_hover ?: "bg-primary" }}
                         "
-                        :class="{
-                            'bg-secondary-400' : $store.header.theme === 'dark',
-                            'bg-secondary' : $store.header.theme === 'light',
-                            '!bg-secondary-400' : sticky,
-                        }"
                     ></div>
                 </div>
             {% endfor %}

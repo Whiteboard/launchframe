@@ -1,6 +1,6 @@
 {
     "key": "group_63e558acb6fb6",
-    "title": "Block: 50\/50",
+    "title": "Block: Split",
     "fields": [
         {
             "key": "field_63e55a8175a8d",
@@ -220,5 +220,5 @@
     "acfe_form": 0,
     "acfe_meta": "",
     "acfe_note": "",
-    "modified": 1676058587
+    "modified": 1719259642
 }

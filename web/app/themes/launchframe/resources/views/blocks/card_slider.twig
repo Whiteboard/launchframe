@@ -24,7 +24,7 @@
                 title: blockset.title,
                 subtitle: blockset.subtitle,
                 sectionClass: "text-center xl:text-left mb-6"
-            }%}
+            } %}
             {% if blockset.buttons|length > 0 %}
                 <div class="flex justify-center xl:justify-start items-center gap-6 my-8">
                     {% include "components/buttons.twig" with {
@@ -58,7 +58,7 @@
                                 heading: card.title,
                                 text: card.text,
                                 link: card.link,
-                            }%}
+                            } %}
                         </div>
                     {% endfor %}
                 </div>

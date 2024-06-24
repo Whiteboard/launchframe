@@ -1,0 +1,22 @@
+{#
+    @name Active Page
+    @desc Set Alpine stores on-enter (Barba) based on the new active page's content (e.g. header theme)
+    @type snippet
+#}
+
+<div
+    x-data
+    x-init="
+        {% if user or environment == 'development' %}
+            $store.overlay.toolbar.editUrl = '{{ function("get_edit_post_link") }}';
+        {% endif %}
+
+        {% if hero.type == 'primary' %}
+            $store.header.theme = 'dark';
+        {% else %}
+            $store.header.theme = 'light';
+        {% endif %}
+    "
+    x-cloak
+    class="hidden"
+></div>

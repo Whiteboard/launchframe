@@ -1,7 +1,7 @@
 {#
     @name Primary
     @desc Primary naviagion used in the header
-    @type navigation
+    @type component
 #}
 
 <nav
@@ -35,7 +35,7 @@
                     "
                     x-ref="element"
                 >
-                    {% include "components/button.twig" with {
+                    {% include "components/buttons/button_primary.twig" with {
                         label: item.title,
                         action: "url",
                         url: item.link,

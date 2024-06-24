@@ -1,21 +1,38 @@
-<{{ as ? as : "p" }}
+{#
+    @name Paragraph
+    @desc The typography paragraph partial to render a paragraph element.
+    @param* content - The meta content.
+    @param as - The wrapping element.
+    @param size - The font size utility.
+    @param color - Set a custom text color utility.
+    @param weight - Set a custom font weight utility.
+    @param line_height - Set a custom line height utility.
+    @param letter_spacing - Set a custom letter spacing utility.
+    @param text_transform - Set a custom text transform utility.
+    @param class - Add custom CSS classes.
+    @param attribute - Add custom JS.
+    @type typography
+#}
+
+<{{ as ?: "p" }}
     {{ attribute }}
     class="
-        {{ color ?: 'text-current' }}
-        {{ margin ?: 'mt-0 mb-8 last:mb-0' }}
-        {{ class }}
-        {% if style == 'overline' %}
-            text-xs font-bold uppercase
-        {% elseif size == 'xl' %}
+        {% if size == 'xl' %}
             text-xl lg:text-2xl
         {% elseif size == 'lg' %}
             text-lg
         {% elseif size == 'sm' %}
             text-sm
         {% else %}
-            text-base
+            {{ size ?: 'text-base' }}
         {% endif %}
+        {{ color ?: 'text-current' }}
+        {{ weight ?: 'font-normal' }}
+        {{ line_height ?: 'leading-normal '}}
+        {{ letter_spacing ?: 'tracking-normal' }}
+        {{ margin ?: 'mt-0 mb-8 last:mb-0' }}
+        {{ class }}
     "
 >
     {{ content }}
-</{{ as ? as : "p" }}>
+</{{ as ?: "p" }}>

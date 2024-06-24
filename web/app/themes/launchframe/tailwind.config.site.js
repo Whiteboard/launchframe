@@ -14,27 +14,44 @@ module.exports = {
         extend: {
             colors: {
                 primary: {
-                    400: '#5DC9F0',
-                    DEFAULT: '#0D4F84',
-                    600: '#0B2254',
+                    100: '#FFD2CE',
+                    200: '#FFAAA1',
+                    300: '#FF8679',
+                    400: '#FF6A5A',
+                    DEFAULT: '#FF6A5A',
+                    500: '#EB5949',
+                    600: '#D14233',
+                    700: '#AE2315',
+                    800: '#891206',
+                    900: '#6A0C02',
                 },
 
                 secondary: {
-                    400: '#F25C96',
-                    DEFAULT: '#D23D77',
-                    600: '#9B2F59',
+                    50: '#f5f8f8',
+                    100: '#dcebe8',
+                    200: '#b9d6d1',
+                    DEFAULT: '#9bc1bc',
+                    400: '#679a95',
+                    500: '#4d7f7b',
+                    600: '#3c6562',
+                    700: '#335251',
+                    800: '#2c4343',
+                    900: '#283938',
+                    950: '#132020',
                 },
-
-                /*
-                tertiary: {
-                    DEFAULT: colors.yellow['500'],
-                    ...colors.yellow
-                },
-                */
 
                 neutral: {
-                    DEFAULT: colors.neutral['200'],
-                    ...colors.neutral,
+                    50: '#f7f8f5',
+                    100: '#E6EBE0', // Light
+                    200: '#d9e1d1',
+                    300: '#c1c0d0',
+                    400: '#a4a2b8',
+                    500: '#8f8ba6',
+                    600: '#807a96',
+                    700: '#746d88',
+                    DEFAULT: '#5d576b',
+                    900: '#514c5c',
+                    950: '#34313a',
                 },
 
                 black: '#000000',
@@ -105,13 +122,13 @@ module.exports = {
                 },
 
                 '::selection': {
-                    backgroundColor: theme('colors.primary.DEFAULT'),
-                    color: theme('colors.black'),
+                    backgroundColor: theme('colors.neutral.100'),
+                    color: theme('colors.neutral.DEFAULT'),
                 },
 
                 '::-moz-selection': {
-                    backgroundColor: theme('colors.primary.DEFAULT'),
-                    color: theme('colors.black'),
+                    backgroundColor: theme('colors.neutral.100'),
+                    color: theme('colors.neutral.DEFAULT'),
                 },
 
                 mark: {

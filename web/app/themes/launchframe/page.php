@@ -9,7 +9,7 @@ use Timber\Timber;
 
 class PageController extends Controller
 {
-    public function handle()
+    public function handle(): TimberResponse
     {
         $context = Timber::get_context();
         $page = new Page();
@@ -17,10 +17,7 @@ class PageController extends Controller
         $context['page'] = $page;
         $context['title'] = $page->title;
         $context['content'] = $page->content;
-
-        $hero = get_field('hero');
         $context['hero'] = get_field('hero');
-        $context['hero_style'] = $hero['hero_style'];
 
         return new TimberResponse('templates/page.twig', $context);
     }

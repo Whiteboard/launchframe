@@ -1,8 +1,20 @@
-<{{ as ? as : "blockquote" }}
+{#
+    @name Blockquote
+    @desc The typography blockquote partial
+    @param* content - The meta content.
+    @param as - The wrapping element.
+    @param color - Set a custom text color utility.
+    @param class - Add custom CSS classes.
+    @param attribute - Add custom JS.
+    @type typography
+#}
+
+<{{ as ?: "blockquote" }}
+    {{ attribute }}
     class="
-        {{ color ? color : "text-neutral-400" }}
-        font-headline text-2xl leading-9
+        {{ color ?: 'text-neutral-400' }}
         {{ class }}
+        font-headline text-2xl leading-normal italic
     "
 >
     {{ content }}

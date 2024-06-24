@@ -26,8 +26,12 @@
                 href="{{ item.link }}"
             >
                 <div
-                    class="group-hover:text-secondary transition duration-150"
-                    :class="sticky ? 'text-primary-600' : 'text-white'"
+                    class="transition duration-150"
+                    :class="{
+                        'text-secondary-400 lg:group-hover:text-secondary-500' : sticky,
+                        'text-white lg:group-hover:text-secondary' : !sticky && $store.header.theme === 'dark',
+                        'text-neutral lg:group-hover:text-secondary' : !sticky && $store.header.theme === 'light',
+                    }"
                 >
                     {{ item.title }}
                 </div>

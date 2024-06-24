@@ -14,7 +14,7 @@ use Timber\User as TimberUser;
 
 class AuthorController extends Controller
 {
-    public function handle()
+    public function handle(): TimberResponse
     {
         global $wp_query;
 

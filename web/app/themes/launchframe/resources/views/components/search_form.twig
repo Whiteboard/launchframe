@@ -17,12 +17,12 @@
         value="{{ query }}"
         placeholder="Enter search term"
         class="
-            {{ background ?: 'bg-primary' }}
+            {{ background ?: 'bg-neutral-900' }}
             {{ color ?: ' text-white' }}
-            {{ focus ?: 'focus:bg-white focus:text-primary-600' }}
-            {{ placeholder ?: 'placeholder:text-white/50' }}
+            {{ focus ?: 'focus:bg-neutral-100 focus:text-neutral' }}
+            {{ placeholder ?: 'placeholder:text-neutral-100/50' }}
             flex-grow p-2 rounded-l
-            border-none outline-0 focus:outline-none
+            border-none outline-0 focus:outline-none focus:ring-0
             transition duration-150
         "
     />
@@ -31,7 +31,7 @@
         type="submit"
         class="
             p-4 outline-0 rounded-r
-            bg-primary-400 lg:hover:bg-secondary-400 focus-visible:bg-secondary-400
+            bg-primary lg:hover:bg-primary-500 focus-visible:bg-primary-400
             transition group
         "
     >
