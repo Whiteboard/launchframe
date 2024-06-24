@@ -6,7 +6,7 @@
 
 <!doctype html>
 <html {{ site.language_attributes }}>
-    {% include "modules/html_header.twig" %}
+    {% include "modules/head.twig" %}
 
     <body
         data-portal="realm"
@@ -18,9 +18,9 @@
 
         {% include "modules/transitions.twig" %}
         {% include "modules/header.twig" %}
-        {#
-            {% include "components/navigation/skip_to_content.twig" %}
+        {% include "components/navigation/skip_to_content.twig" %}
         {% include "modules/overlays/overlay_nav.twig" %}
+        {#
         {% include "modules/overlays/overlay_highlight.twig" %}
         {% include "modules/overlays/overlay_video.twig" %}
         #}
@@ -36,16 +36,7 @@
                     class="{{ body_class }} -mb-px"
                 >
 
-                    {% if environment != "development" and globals.google_tag_manager %}
-                        <noscript>
-                            <iframe
-                                src="https://www.googletagmanager.com/ns.html?id={{ globals.google_tag_manager }}"
-                                height="0"
-                                width="0"
-                                style="display:none;visibility:hidden"
-                            ></iframe>
-                        </noscript>
-                    {% endif %}
+                    {% include "snippets/seo_body.twig" %}
 
                     {#
                     {% include "snippets/active_page.twig" %}

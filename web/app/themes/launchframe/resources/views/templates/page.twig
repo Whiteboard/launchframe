@@ -2,8 +2,8 @@
 
 {% block content %}
     {% include "modules/hero.twig" with {
-        hero: page.get_field("hero")
-    }%}
+        hero: page.get_field("hero"),
+    } %}
 
     <main
         class="
@@ -12,6 +12,7 @@
             {{ not page.get_field("blocks").spacing_bottom ? "!pb-0" : "" }}
         "
     >
+        {% include "typography/type_scaffold.twig" %}
         {% for blockset in page.get_field("blocks").sets %}
             {% include "blocks/#{blockset.acf_fc_layout}.twig" with {
                 id: blockset.anchor ? blockset.anchor : ' '

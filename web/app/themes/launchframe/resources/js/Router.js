@@ -11,11 +11,35 @@ window.barba = barba
 export default () => {
     barba.hooks.beforeOnce(() => {
         Alpine.start()
+
+        // Post Setup Utilities
+        Alpine.store('scroll', {
+            init(allow = true) {
+                if (smoother) {
+                    smoother.paused(!allow)
+                } else if (allow) {
+                    document.body.classList.remove('no-scroll')
+                } else {
+                    document.body.classList.add('no-scroll')
+                }
+            },
+        })
     })
 
     barba.hooks.afterOnce(() => {
         const elements = [...document.querySelectorAll('a, button')]
         mouse.set(elements)
+    })
+
+    barba.hooks.beforeEnter(() => {
+        window.smoother = ScrollSmoother.create({
+            smooth: 1,
+            effects: true,
+            smoothTouch: false,
+            ignoreMobileResize: true,
+        })
+        ScrollTrigger.refresh()
+        smoother.scrollTo(0)
     })
 
     barba.hooks.enter(() => {
@@ -43,13 +67,13 @@ export default () => {
         Alpine.store('audioPause', true)
 
         mouse.createEvent('cursorLoadingEnter')
-        if (Alpine.store('navigator').open) {
-            Alpine.store('navigator').toggle()
+        if (Alpine.store('overlay').nav.open) {
+            Alpine.store('overlay').nav.toggle()
         }
     })
 
     barba.hooks.afterLeave(() => {
-        Alpine.store('enterDelay', 0.5)
+        avalanche.delay.enter = 1.3
     })
 
     barba.hooks.after(() => {

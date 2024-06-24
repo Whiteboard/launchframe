@@ -2,7 +2,7 @@
     <div
         x-data="magnetic()"
         x-ref="element"
-        @mousemove="magnetize($event, $el, $refs.element)"
+        @mousemove="magnetize($event, $el, $refs.element, 10)"
         @mouseleave="demagnetize($refs.element)"
         class="relative inline-flex hover:z-10"
     >
@@ -13,11 +13,13 @@
     class="
         inline-flex items-center justify-center
         leading-none select-none whitespace-nowrap cursor-pointer
+        focus:outline-none
+        focus-visible:ring focus-visible:ring-primary-400/50
         transition group
         {% if style == 'arrow' %}
             {{ color ? color : 'text-current' }} font-bold
         {% elseif style == 'line' %}
-            {{ color ? color : 'text-current' }} 
+            {{ color ? color : 'text-current' }}
             {{ lineHover ? lineHover : 'hover:border-secondary' }}
             font-bold border-b-2 border-current pb-1
         {% elseif style == 'outline' %}
@@ -27,9 +29,9 @@
             {{ size == 'small' ? 'px-4 py-3 text-sm' : 'px-10 py-4'}}
             {{ hoverColor ? hoverColor :'hover:border-primary-600 hover:text-primary-600' }}
         {% else %}
-            rounded-3xl font-bold 
+            rounded-3xl font-bold
             {{ color ? color : 'text-primary-600' }}
-            {{ buttonBg ? buttonBg : 'bg-primary-400' }} 
+            {{ buttonBg ? buttonBg : 'bg-primary-400' }}
             {{ hoverColor ? hoverColor :'hover:bg-primary hover:text-white' }}
             {{ size == 'small' ? 'px-4 py-3 text-sm' : 'px-10 py-4'}}
         {% endif %}

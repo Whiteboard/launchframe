@@ -8,6 +8,7 @@
     title="Primary Navigation"
     x-data="animate()"
     x-init="
+        scrollTrigger = false;
         element = [...$refs.menu.querySelectorAll('[data-nav-item]')];
         opacity.active = false;
         xPercent = {
@@ -15,11 +16,9 @@
             start: -101,
         };
         stagger = 0.1;
-        setTrigger($refs.menu);
-        delay = delay + 0.2;
+        delay = avalanche.delay.enter + 0.2;
         mounted();
     "
-
     x-ref="menu"
 >
     <ul class="hidden md:flex items-center space-x-10">
@@ -27,7 +26,15 @@
             {% if loop.last != true %}
                 {% include "components/navigation/nav_primary_item.twig" %}
             {% else %}
-                <li>
+                <li
+                    x-data="animate()"
+                    x-init="
+                        scrollTrigger = false;
+                        delay = avalanche.delay.enter + 0.4;
+                        mounted();
+                    "
+                    x-ref="element"
+                >
                     {% include "components/button.twig" with {
                         label: item.title,
                         action: "url",

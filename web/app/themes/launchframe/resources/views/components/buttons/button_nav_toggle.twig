@@ -4,39 +4,100 @@
     @type component
 #}
 
-<button
-    title="Toggle Navigation"
-    @click.prevent="
-        $store.navigator.open = true;
-        $store.scroll(false);
-    "
-    class="
-        w-10 md:w-8 p-2
-        lg:hover:bg-secondary border
-        text-current lg:hover:text-primary
-        transition duration-75
-        group
-    "
-    :class="{
-        '!border-primary-400' : sticky,
-        'border-secondary' : !sticky && $store.header.border_color === 'primary' || $store.header.border_color === 'primary_dark',
-        'border-primary-400' : !sticky && $store.header.border_color === 'white' || $store.header.border_color === 'neutral',
+<div
+    x-data="{
+        hovered: false,
     }"
+    class="
+        {{ position ?? "relative" }}
+        {{ class }}
+    "
 >
-    <div class="flex flex-col justify-center space-y-[4px]">
-        {% for item in range(1, 3) %}
-            <div
-                class="
-                    w-full h-[2px]
-                    lg:group-hover:bg-primary group-focus:bg-secondary
-                    transition duration-75
-                "
-                :class="{
-                    'bg-white' : $store.header.theme === 'dark',
-                    'bg-primary-800' : $store.header.theme === 'light',
-                    '!bg-primary-900' : sticky,
-                }"
-            ></div>
-        {% endfor %}
-    </div>
-</button>
+
+    <button
+        :aria-label="$store.overlay.nav.open ? 'Close Nav' : 'Open Nav'"
+        x-data="magnetic()"
+        x-ref="button"
+        @mousemove="magnetize($event, $el, $refs.button, 10)"
+
+        @mouseenter="
+            mm.add(avalanche.breakpoint(avalanche.screens.lg), () => {
+                hovered = true;
+            });
+        "
+        @mouseleave="
+            demagnetize($refs.button);
+            mm.add(avalanche.breakpoint(avalanche.screens.lg), () => {
+                hovered = false;
+            });
+        "
+        @click.throttle="$store.overlay.nav.toggle()"
+        class="relative flex flex-col gap-2 w-10 md:w-8 focus:outline-none group"
+    >
+        <div
+            class="
+                absolute inset-0
+                w-[150%] aspect-[1/1] rounded-full
+                group-focus-visible:ring group-focus-visible:ring-primary-400/50
+                -translate-x-[20%] -translate-y-[40%] transition
+            "
+        ></div>
+
+        <div class="flex flex-col justify-center space-y-[4px] w-full overflow-hidden">
+            {% for item in range(1, 3) %}
+                <div
+                    class="
+                        {{
+                            loop.first
+                            ? "lg:group-hover:-translate-x-1/2"
+                            : loop.last
+                            ? "-translate-x-1/2 lg:group-hover:translate-x-0"
+                        }}
+                        {{ focus_color ?? "group-focus-visible:bg-white" }}
+                        relative w-full h-[2px]
+                        rounded-full overflow-hidden
+                        transition
+                    "
+                    :class="{
+                        'bg-white' : $store.header.theme === 'dark',
+                        'bg-primary-600' : $store.header.theme === 'light',
+                        '!bg-primary-600' : sticky,
+                    }"
+                >
+
+                    <div
+                        x-show="hovered"
+                        x-transition:enter="transition duration-300 ease-out-circ {{
+                                loop.first
+                                ? "delay-100"
+                                : loop.last
+                                ? "delay-300"
+                                : "delay-200"
+                            }}"
+                        x-transition:enter-start="translate-x-full"
+                        x-transition:enter-end="translate-x-0"
+                        x-transition:leave="transition duration-300 ease-out-circ {{
+                                loop.first
+                                ? "delay-300"
+                                : loop.last
+                                ? "delay-100"
+                                : "delay-200"
+                            }}"
+                        x-transition:leave-start="translate-x-0"
+                        x-transition:leave-end="-translate-x-full"
+
+                        class="
+                            w-full h-full
+                            {{ color_hover ?? "bg-secondary-400" }}
+                        "
+                        :class="{
+                            'bg-secondary-400' : $store.header.theme === 'dark',
+                            'bg-secondary' : $store.header.theme === 'light',
+                            '!bg-secondary-400' : sticky,
+                        }"
+                    ></div>
+                </div>
+            {% endfor %}
+        </div>
+    </button>
+</div>

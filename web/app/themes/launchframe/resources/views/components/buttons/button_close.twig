@@ -1,0 +1,48 @@
+{#
+    @name Close Button
+    @desc Close button used in overlays
+#}
+
+<div
+    {{ attribute }}
+    class="absolute z-10 right-4 md:right-8 top-4 md:top-8"
+>
+    <div
+        x-data="magnetic()"
+        x-ref="button"
+        @mousemove="magnetize($event, $el, $refs.button, 25)"
+        @mouseleave="demagnetize($refs.button)"
+        class="flex"
+    >
+        <button
+            x-data="{
+                hovered: false,
+            }"
+            @mouseleave="
+                mm.add(avalanche.breakpoint(avalanche.screens.lg), () => {
+                    hovered = false;
+                });
+            "
+            @mouseenter="
+                mm.add(avalanche.breakpoint(avalanche.screens.lg), () => {
+                    hovered = true;
+                });
+            "
+            @click="{{ click ?: "close()" }}"
+            class="
+                inline-flex
+                justify-center items-center
+                w-10 h-10
+                rounded-full
+                lg:hover:border-primary
+                focus-visible:border-primary
+                focus:outline-none
+                transition duration-300 ease-in-out-circ
+                group
+            "
+            aria-label="Close"
+        >
+            {% include "components/close.twig" %}
+        </button>
+    </div>
+</div>

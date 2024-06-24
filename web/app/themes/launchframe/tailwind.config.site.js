@@ -14,15 +14,15 @@ module.exports = {
         extend: {
             colors: {
                 primary: {
-                    '400': '#5DC9F0',
+                    400: '#5DC9F0',
                     DEFAULT: '#0D4F84',
-                    '600': '#0B2254'
+                    600: '#0B2254',
                 },
 
                 secondary: {
-                    '400': '#F25C96',
+                    400: '#F25C96',
                     DEFAULT: '#D23D77',
-                    '600': '#9B2F59'
+                    600: '#9B2F59',
                 },
 
                 /*
@@ -34,19 +34,15 @@ module.exports = {
 
                 neutral: {
                     DEFAULT: colors.neutral['200'],
-                    ...colors.neutral
+                    ...colors.neutral,
                 },
 
                 black: '#000000',
                 white: '#ffffff',
-
             },
 
             fontFamily: {
-                mono: [
-                    `'GT America Mono'`,
-                    ...defaultTheme.fontFamily.mono,
-                ],
+                mono: [`'GT America Mono'`, ...defaultTheme.fontFamily.mono],
                 sans: [
                     // `'Blender'`,
                     ...defaultTheme.fontFamily.sans,
@@ -68,7 +64,7 @@ module.exports = {
     },
 
     plugins: [
-        plugin(function({ addBase, theme }) {
+        plugin(function ({ addBase, theme }) {
             addBase({
                 /* :: Fonts
                 {+} ---------------------------------- */
@@ -92,51 +88,49 @@ module.exports = {
 
                 // Default color transition on links unless user prefers reduced motion.
                 '@media (prefers-reduced-motion: no-preference)': {
-                    'a': {
+                    a: {
                         transition: 'color 0.3s ease-in-out',
                     },
                 },
 
-                'html': {
-                        backgroundColor: theme('colors.neutral.50'),
-                        color: theme('colors.neutral.900'),
-                        //--------------------------------------------------------------------------
-                        // Set sans, serif or mono stack with optional custom font as default.
-                        //--------------------------------------------------------------------------
-                        // fontFamily: theme('fontFamily.mono'),
-                        fontFamily: theme('fontFamily.sans'),
-                        // fontFamily: theme('fontFamily.serif'),
+                html: {
+                    backgroundColor: theme('colors.neutral.50'),
+                    color: theme('colors.neutral.900'),
+                    //--------------------------------------------------------------------------
+                    // Set sans, serif or mono stack with optional custom font as default.
+                    //--------------------------------------------------------------------------
+                    // fontFamily: theme('fontFamily.mono'),
+                    fontFamily: theme('fontFamily.sans'),
+                    // fontFamily: theme('fontFamily.serif'),
                 },
 
                 '::selection': {
                     backgroundColor: theme('colors.primary.DEFAULT'),
-                    color: theme('colors.black')
+                    color: theme('colors.black'),
                 },
 
                 '::-moz-selection': {
                     backgroundColor: theme('colors.primary.DEFAULT'),
-                    color: theme('colors.black')
+                    color: theme('colors.black'),
                 },
 
-                'mark': {
+                mark: {
                     backgroundColor: theme('colors.primary.DEFAULT'),
-                    color: theme('colors.white')
+                    color: theme('colors.white'),
                 },
             })
         }),
 
         // Custom components for this particular site.
-        plugin(function({ addComponents, theme }) {
-            const components = {
-            }
+        plugin(function ({ addComponents, theme }) {
+            const components = {}
             addComponents(components)
         }),
 
         // Custom utilities for this particular site.
-        plugin(function({ addUtilities, theme, variants }) {
-            const newUtilities = {
-            }
+        plugin(function ({ addUtilities, theme, variants }) {
+            const newUtilities = {}
             addUtilities(newUtilities)
         }),
-    ]
+    ],
 }

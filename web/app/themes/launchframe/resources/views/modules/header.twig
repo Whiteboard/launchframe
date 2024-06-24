@@ -5,42 +5,59 @@
 #}
 
 <header
-    class="z-30 top-0 w-full py-6 transition {{ hero_style == 'one' ? 'text-white fixed' : 'sticky mb-10' }}"
-    {# Move inline #}
-    x-data="header()"
-    x-int="mounted()"
-    :class="sticky ? 'bg-neutral-50 text-neutral-800' : ''"
+    x-data="{
+        sticky: false,
+        init() {
+            ScrollTrigger.create({
+                trigger: document.body,
+                start: '400px top',
+                end: 'bottom bottom',
+                onEnter: () => {
+                    this.sticky = true;
+                },
+                onLeaveBack: () => {
+                    this.sticky = false;
+                },
+            })
+        },
+    }"
+    x-ref="header"
+    class="fixed z-30 top-0 w-full transition-all"
+    :class="sticky ? 'py-1 bg-neutral-50 text-primary-600' : 'py-6 text-white'"
 >
     <div class="fluid-container">
         <div class="relative flex justify-between items-center">
 
             <div
+                x-data="animate()"
+                x-init="
+                    scrollTrigger = false;
+                    delay = avalanche.delay.enter;
+                    mounted();
+                "
                 x-ref="element"
+                class="transition"
+                :class="{ 'scale-75' : sticky }"
             >
                 {% include "components/logo.twig" %}
             </div>
 
-            <div class="flex items-center">
-
+            <div
+                class="flex items-center space-x-6 lg:space-x-12"
+            >
+                {% include "navigation/nav_primary.twig" %}
                 <div
-                    class="flex items-center space-x-6 lg:space-x-12"
+                    x-data="animate()"
+                    x-init="
+                        scrollTrigger = false;
+                        delay = avalanche.delay.enter + 0.5;
+                        mounted();
+                    "
+                    x-ref="element"
                 >
-                    {% include "navigation/nav_primary.twig" %}
-
-                    <button
-                        @click.prevent="open()"
-                        class="text-current transition duration-300 ease-in-out group"
-                    >
-                        <div class="flex flex-col justify-center w-8 space-y-[4px]">
-                            <div class="w-full h-[2px] bg-current group-hover:bg-secondary group-focus:bg-secondary transition"></div>
-                            <div class="w-full h-[2px] bg-current group-hover:bg-secondary group-focus:bg-secondary transition"></div>
-                            <div class="w-full h-[2px] bg-current group-hover:bg-secondary group-focus:bg-secondary transition"></div>
-                        </div>
-                    </button>
+                    {% include "components/buttons/button_nav_toggle.twig" %}
                 </div>
-
             </div>
-
         </div>
     </div>
 </header>

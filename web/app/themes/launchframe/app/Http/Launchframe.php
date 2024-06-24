@@ -28,7 +28,7 @@ class Launchframe extends Lumberjack
 
         $context['nav'] = [
             'primary' => new Menu('primary'),
-            'hidden' => new Menu('hidden'),
+            'overlay' => new Menu('overlay'),
             'footer' => [
                 '1' => new Menu('footer-1'),
                 '2' => new Menu('footer-2'),

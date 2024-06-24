@@ -5,7 +5,7 @@ return [
     {+} ---------------------------------- */
     'menus' => [
         'primary' => __('Primary'),
-        'hidden' => __('Hidden'),
+        'overlay' => __('Overlay'),
         'footer-1' => __('Footer 1'),
         'footer-2' => __('Footer 2'),
     ],

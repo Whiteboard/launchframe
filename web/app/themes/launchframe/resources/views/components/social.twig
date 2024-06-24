@@ -1,0 +1,22 @@
+{#
+    @name Social
+    @desc Single social media icon with link
+    @type component
+#}
+
+{% if social %}
+    <a
+        href="{{ social.prefix }}{{ social.url }}"
+        target="_blank"
+        class="
+            {{ size ?: 'w-6' }}
+            block
+            focus:outline-none
+            lg:hover:text-secondary
+            focus-visible:text-primary-400
+            transition-200
+        "
+    >
+        {{ source("resources/images/social-#{social.acf_fc_layout}.svg") }}
+    </a>
+{% endif %}
