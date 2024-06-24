@@ -4,13 +4,22 @@
     "htmlWhitespaceSensitivity": "css",
     "insertPragma": false,
     "jsxBracketSameLine": false,
-    "jsxSingleQuote": false,
+    "jsxSingleQuote": true,
     "printWidth": 120,
     "proseWrap": "preserve",
     "requirePragma": false,
-    "semi": true,
+    "semi": false,
     "singleQuote": true,
     "tabWidth": 4,
-    "trailingComma": "none",
-    "useTabs": false
+    "trailingComma": "all",
+    "useTabs": false,
+
+    "overrides": [
+        {
+            "files": ["*.yaml"],
+            "options": {
+                "tabWidth": 2
+            }
+        }
+    ]
 }

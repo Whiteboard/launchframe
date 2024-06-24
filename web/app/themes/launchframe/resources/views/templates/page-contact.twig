@@ -1,4 +1,4 @@
-{% extends "layouts/base.twig" %}
+{% extends "layouts/layout_primary.twig" %}
 
 {% block content %}
 
@@ -11,7 +11,7 @@
             title: title,
             subtitle: page.subtitle,
             titleTag: "h1"
-        }%}
+        } %}
 
         <div class="md:flex justify-center xl:px-48">
             {% if page.hide_sections|length < 3 %}
@@ -21,7 +21,7 @@
                         {% include "typography/h4.twig" with {
                             content: "Email",
                             class: "mb-2"
-                        }%}
+                        } %}
                         <a href="mailto:{{globals.email_address}}" class="text-neutral-600 text-sm transition-all hover:underline">
                             {{ globals.email_address }}
                         </a>
@@ -32,7 +32,7 @@
                         {% include "typography/h4.twig" with {
                             content: "Phone",
                             class: "mb-2"
-                        }%}
+                        } %}
                         <a href="tel:{{globals.phone_number}}" class="text-neutral-600 text-sm transition-all hover:underline">
                             {{ globals.phone_number }}
                         </a>
@@ -43,7 +43,7 @@
                     {% include "typography/h4.twig" with {
                         content: "Address",
                         class: "mb-2"
-                    }%}
+                    } %}
                     <a href="https://www.google.com/maps/search/?api=1&query={{globals.address | striptags | url_encode}}" target="_blank" class="text-neutral-600 text-sm transition-all hover:underline">
                         {{ globals.address }}
                     </a>

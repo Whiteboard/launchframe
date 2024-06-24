@@ -1,21 +1,34 @@
-{% extends "layouts/base.twig" %}
+{#
+    @name Page
+    @desc The default template with an outer wrapper grid as defined in tailwind.config.js.
+    It makes sure all blocks on a page get evenly spaced without having to worry about margins or paddings.
+    @type template
+#}
+
+{% extends "layouts/layout_primary.twig" %}
+
+{% block namespace %}
+    data-portal-namespace="{{ namespace ?: "secondary" }}"
+{% endblock %}
 
 {% block content %}
-    {% include "modules/hero.twig" with {
-        hero: page.get_field("hero")
-    }%}
+    {% if hero.type != "none" %}
+        {% include "modules/heroes/hero_#{hero.type}.twig" %}
+    {% endif %}
 
     <main
         class="
+            {{ not page.get_field("blocks").spacing_top ? "!pt-0" }}
+            {{ is_child_page or not page.get_field("blocks").spacing_bottom ? "!pb-0" }}
             relative outer-grid overflow-hidden
-            {{ not page.get_field("blocks").spacing_top ? "!pt-0" : "" }}
-            {{ not page.get_field("blocks").spacing_bottom ? "!pb-0" : "" }}
+            -mb-px
         "
     >
+        {# {% include "typography/type_scaffold.twig" %} #}
         {% for blockset in page.get_field("blocks").sets %}
             {% include "blocks/#{blockset.acf_fc_layout}.twig" with {
-                id: blockset.anchor ? blockset.anchor : ' '
-            }%}
+                id: blockset.anchor ?: null,
+            } %}
         {% endfor %}
     </main>
 {% endblock %}

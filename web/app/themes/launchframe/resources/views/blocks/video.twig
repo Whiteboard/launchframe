@@ -39,12 +39,12 @@
                     overline: blockset.overline,
                     title: blockset.title,
                     subtitle: blockset.subtitle
-                }%}
+                } %}
             {% endif %}
 
             {% for video in blockset.videos %}
                 <div
-                    x-data="fadeIn()"
+                    x-data="animate()()"
                     x-init="
                         delay = $store.animationDelay + 0.15;
                         mounted();
@@ -72,7 +72,7 @@
                                 video_title : blockset.title,
                                 video_subtitle : blockset.subtitle,
                                 hidePlayButtonText : true
-                            }%}
+                            } %}
                         {% endfor %}
                     {% endif %}
                 </div>

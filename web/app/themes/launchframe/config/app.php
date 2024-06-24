@@ -29,6 +29,7 @@ return [
         App\Providers\Globals::class,
         // App\Providers\Vite::class,
         App\Providers\Assets::class,
+        App\Providers\RestAPI::class,
     ],
 
     'aliases' => [

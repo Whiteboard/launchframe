@@ -141,12 +141,13 @@ if ( ! class_exists( 'ACF_Ajax_Query_Users' ) ) :
 				// Determine if more results exist.
 				// As this query does not return grouped results, the calculation can be exact (">").
 				$this->more = ( $total_users > count( $users ) + $args['offset'] );
-
 				// Otherwise, group results via role.
 			} else {
 
 				// Unset args that will interfer with query results.
 				unset( $args['role__in'], $args['role__not_in'] );
+
+				$args['search'] = $this->search ? $this->search : '';
 
 				// Loop over each role.
 				foreach ( $roles as $role => $role_label ) {
@@ -160,7 +161,6 @@ if ( ! class_exists( 'ACF_Ajax_Query_Users' ) ) :
 					// acf_log( $args );
 					// acf_log( '- ', count($users) );
 					// acf_log( '- ', $total_users );
-
 					// If users were found for this query...
 					if ( $users ) {
 
@@ -247,8 +247,8 @@ if ( ! class_exists( 'ACF_Ajax_Query_Users' ) ) :
 		 * @date    9/3/20
 		 * @since   5.8.8
 		 *
-		 * @param   array         $columns An array of column names to be searched.
-		 * @param   string        $search The search term.
+		 * @param   array         $columns       An array of column names to be searched.
+		 * @param   string        $search        The search term.
 		 * @param   WP_User_Query $WP_User_Query The WP_User_Query instance.
 		 * @return  array
 		 */

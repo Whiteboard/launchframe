@@ -1,20 +1,18 @@
 <?php
 
 /**
- *  get_field()
- *
- *  This function will return a custom field value for a specific field name/key + post_id.
- *  There is a 3rd parameter to turn on/off formating. This means that an image field will not use
- *  its 'return option' to format the value but return only what was saved in the database
+ * This function will return a custom field value for a specific field name/key + post_id.
+ * There is a 3rd parameter to turn on/off formating. This means that an image field will not use
+ * its 'return option' to format the value but return only what was saved in the database
  *
  * @since   3.6
  *
  * @param string  $selector     The field name or key.
  * @param mixed   $post_id      The post_id of which the value is saved against.
  * @param boolean $format_value Whether or not to format the value as described above.
- * @param boolean $escape_html  If we're formatting the value, should we also ask the field to escape it for unsafe html.
- *                              This parameter will not guarantee the result is escaped, only if the field type supports it.
- * @return  mixed
+ * @param boolean $escape_html  If we're formatting the value, make sure it's also HTML safe.
+ *
+ * @return mixed
  */
 function get_field( $selector, $post_id = false, $format_value = true, $escape_html = false ) {
 
@@ -25,6 +23,7 @@ function get_field( $selector, $post_id = false, $format_value = true, $escape_h
 	$field = acf_maybe_get_field( $selector, $post_id );
 
 	// create dummy field
+	$dummy_field = false;
 	if ( ! $field ) {
 		$field = acf_get_valid_field(
 			array(
@@ -34,18 +33,47 @@ function get_field( $selector, $post_id = false, $format_value = true, $escape_h
 			)
 		);
 
-		// prevent formatting
+		// prevent formatting, flag as dummy in case $escape_html is true.
 		$format_value = false;
+		$dummy_field  = true;
 	}
 
 	// get value for field
 	$value = acf_get_value( $post_id, $field );
 
+	// escape html is only compatible when formatting the value too
+	if ( ! $dummy_field && ! $format_value && $escape_html ) {
+		_doing_it_wrong( __FUNCTION__, __( 'Returning an escaped HTML value is only possible when format_value is also true. The field value has not been returned for security.', 'acf' ), '6.2.6' ); //phpcs:ignore -- escape not required.
+		return false;
+	}
+
 	// format value
 	if ( $format_value ) {
+		if ( $escape_html ) {
+			// return the escaped HTML version if requested.
+			if ( acf_field_type_supports( $field['type'], 'escaping_html' ) ) {
+				$value = acf_format_value( $value, $post_id, $field, true );
+			} else {
+				$new_value = acf_format_value( $value, $post_id, $field );
+				if ( is_array( $new_value ) ) {
+					$value = map_deep( $new_value, 'acf_esc_html' );
+				} else {
+					$value = acf_esc_html( $new_value );
+				}
+			}
+		} else {
+			// get value for field
+			$value = acf_format_value( $value, $post_id, $field );
+		}
+	}
 
-		// get value for field
-		$value = acf_format_value( $value, $post_id, $field, $escape_html );
+	// If we've built a dummy text field, we won't format the value, but they may still request it escaped. Use `acf_esc_html`
+	if ( $dummy_field && $escape_html ) {
+		if ( is_array( $value ) ) {
+			$value = map_deep( $value, 'acf_esc_html' );
+		} else {
+			$value = acf_esc_html( $value );
+		}
 	}
 
 	// return
@@ -53,19 +81,19 @@ function get_field( $selector, $post_id = false, $format_value = true, $escape_h
 }
 
 /**
- *  This function is the same as echo get_field().
+ * This function is the same as echo get_field(), but will escape the value for safe HTML output regardless of parameters.
  *
  * @since   1.0.3
- * @date    29/01/13
  *
  * @param string  $selector     The field name or key.
  * @param mixed   $post_id      The post_id of which the value is saved against.
- * @param boolean $format_value Enable formatting of value.
- * @return  void
+ * @param boolean $format_value Enable formatting of value. Default true.
+ *
+ * @return void
  */
 function the_field( $selector, $post_id = false, $format_value = true ) {
-	$field = get_field_object( $selector, $post_id, $format_value, true, false );
-	$value = $field ? $field['value'] : get_field( $selector, $post_id, $format_value, false );
+	$field = get_field_object( $selector, $post_id, $format_value, true, $format_value );
+	$value = $field ? $field['value'] : get_field( $selector, $post_id, $format_value, $format_value );
 
 	if ( is_array( $value ) ) {
 		$value = implode( ', ', $value );
@@ -76,36 +104,22 @@ function the_field( $selector, $post_id = false, $format_value = true ) {
 		return;
 	}
 
-	$field_type              = is_array( $field ) && isset( $field['type'] ) ? $field['type'] : 'text';
-	$field_type_escapes_html = acf_field_type_supports( $field_type, 'escaping_html' );
+	// If $format_value is false, we've not been able to apply field level escaping as we're giving the raw DB value. Escape the output with `acf_esc_html`.
+	if ( ! $format_value ) {
+		$value = acf_esc_html( $value );
+	}
 
-	if ( ! apply_filters( 'acf/the_field/allow_unsafe_html', false, $selector, $post_id, $field_type, $field ) ) {
-		/*
-		 * If the field is compatible with generating a html safe version, use it, otherwise run the value through acf_esc_html.
-		 *
-		 * This logic become default in an upcoming release of ACF, where we will always ask for a html safe version regardless of support
-		 * then additionally run `acf_esc_html` if the field type is not marked as supporting `escaping_html`.
-		 */
+	// Get the unescaped value while we're still logging removed_unsafe_html.
+	$unescaped_value = get_field( $selector, $post_id, $format_value, false );
+	if ( is_array( $unescaped_value ) ) {
+		$unescaped_value = implode( ', ', $unescaped_value );
+	}
 
-		if ( $field_type_escapes_html ) {
-			$new_value = get_field( $selector, $post_id, $format_value, true );
-
-			if ( is_array( $new_value ) ) {
-				$new_value = implode( ', ', $new_value );
-			}
-		} else {
-			$new_value = acf_esc_html( $value );
-		}
-
-		if ( (string) $value !== (string) $new_value ) {
-			if ( apply_filters( 'acf/the_field/escape_html_optin', false ) ) {
-				$value = $new_value;
-				do_action( 'acf/removed_unsafe_html', __FUNCTION__, $selector, $field, $post_id );
-			} else {
-				do_action( 'acf/will_remove_unsafe_html', __FUNCTION__, $selector, $field, $post_id );
-			}
-		}
-		unset( $new_value );
+	$field_type = is_array( $field ) && isset( $field['type'] ) ? $field['type'] : 'text';
+	if ( apply_filters( 'acf/the_field/allow_unsafe_html', false, $selector, $post_id, $field_type, $field ) ) {
+		$value = $unescaped_value;
+	} elseif ( (string) $value !== (string) $unescaped_value ) {
+		do_action( 'acf/removed_unsafe_html', __FUNCTION__, $selector, $field, $post_id );
 	}
 
 	echo $value; //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped by logic above.
@@ -125,6 +139,16 @@ function the_field( $selector, $post_id = false, $format_value = true ) {
 function _acf_log_escaped_html( $function, $selector, $field, $post_id ) {
 	// If the notice isn't shown, no use in logging the errors.
 	if ( apply_filters( 'acf/admin/prevent_escaped_html_notice', false ) ) {
+		return;
+	}
+
+	// If the notice has been dismissed, don't log further errors.
+	if ( get_option( 'acf_escaped_html_notice_dismissed' ) ) {
+		return;
+	}
+
+	// If the field isn't set, we've output a non-ACF field, so don't log anything.
+	if ( ! is_array( $field ) ) {
 		return;
 	}
 
@@ -152,46 +176,6 @@ function _acf_log_escaped_html( $function, $selector, $field, $post_id ) {
 add_action( 'acf/removed_unsafe_html', '_acf_log_escaped_html', 10, 4 );
 
 /**
- * Logs instances of where ACF will soon escape HTML using the_field.
- *
- * @since 6.2.5
- *
- * @param string $function The function that resulted in HTML being escaped.
- * @param string $selector The selector (field key, name, etc.) passed to that function.
- * @param array  $field    The field being queried when HTML was escaped.
- * @param mixed  $post_id  The post ID the function was called on.
- * @return void
- */
-function _acf_log_will_escape_html( $function, $selector, $field, $post_id ) {
-	// If the notice isn't shown, no use in logging the errors.
-	if ( apply_filters( 'acf/admin/prevent_escaped_html_notice', false ) ) {
-		return;
-	}
-
-	$will_escape = _acf_get_will_escape_html_log();
-
-	// Only store up to 100 results at a time.
-	if ( count( $will_escape ) >= 100 ) {
-		return;
-	}
-
-	// Bail if we already logged an error for this field.
-	if ( isset( $will_escape[ $field['key'] ] ) ) {
-		return;
-	}
-
-	$will_escape[ $field['key'] ] = array(
-		'selector' => $selector,
-		'function' => $function,
-		'field'    => $field['name'],
-		'post_id'  => $post_id,
-	);
-
-	_acf_update_will_escape_html_log( $will_escape );
-}
-add_action( 'acf/will_remove_unsafe_html', '_acf_log_will_escape_html', 10, 4 );
-
-/**
  * Returns an array of instances where HTML was altered due to escaping in the_field or a shortcode.
  *
  * @since 6.2.5
@@ -212,53 +196,20 @@ function _acf_get_escaped_html_log() {
  * @return boolean True on success, or false on failure.
  */
 function _acf_update_escaped_html_log( $escaped = array() ) {
-	return update_option( 'acf_escaped_html_log', (array) $escaped, true );
+	return update_option( 'acf_escaped_html_log', (array) $escaped, false );
 }
 
 /**
  * Deletes the array of instances where HTML was altered due to escaping in the_field or a shortcode.
+ * Since 6.2.7, also clears the legacy `acf_will_escape_html_log` option to clean up.
  *
  * @since 6.2.5
  *
  * @return boolean True on success, or false on failure.
  */
 function _acf_delete_escaped_html_log() {
+	delete_option( 'acf_will_escape_html_log' );
 	return delete_option( 'acf_escaped_html_log' );
-}
-
-/**
- * Returns an array of instances where HTML will be escaped in the_field().
- *
- * @since 6.2.5
- *
- * @return array
- */
-function _acf_get_will_escape_html_log() {
-	$will_escape = get_option( 'acf_will_escape_html_log', array() );
-	return is_array( $will_escape ) ? $will_escape : array();
-}
-
-/**
- * Updates the array of instances where HTML will be escaped in the_field().
- *
- * @since 6.2.5
- *
- * @param array $escaped The array of instances.
- * @return boolean True on success, or false on failure.
- */
-function _acf_update_will_escape_html_log( $escaped = array() ) {
-	return update_option( 'acf_will_escape_html_log', (array) $escaped, true );
-}
-
-/**
- * Deletes the array of instances where HTML will be escaped in the_field().
- *
- * @since 6.2.5
- *
- * @return boolean True on success, or false on failure.
- */
-function _acf_delete_will_escape_html_log() {
-	return delete_option( 'acf_will_escape_html_log' );
 }
 
 /**
@@ -271,7 +222,6 @@ function _acf_delete_will_escape_html_log() {
  * @param boolean $format_value Whether to format the field value.
  * @param boolean $load_value   Whether to load the field value.
  * @param boolean $escape_html  Should the field return a HTML safe formatted value if $format_value is true.
- *                              This parameter will not guarantee the result is escaped, only if the field type supports it.
  *
  * @return array|false $field
  */
@@ -292,28 +242,48 @@ function get_field_object( $selector, $post_id = false, $format_value = true, $l
 		$field['value'] = acf_get_value( $post_id, $field );
 	}
 
-	if ( $format_value ) {
-		$field['value'] = acf_format_value( $field['value'], $post_id, $field, $escape_html );
+	// escape html is only compatible when formatting the value too
+	if ( ! $format_value && $escape_html ) {
+		_doing_it_wrong( __FUNCTION__, __( 'Returning an escaped HTML value is only possible when format_value is also true. The field value has not been returned for security.', 'acf' ), '6.2.6' ); //phpcs:ignore -- escape not required.
+		$field['value'] = false;
+		return $field;
+	}
+
+	// format value
+	if ( $load_value && $format_value ) {
+		if ( $escape_html ) {
+			// return the escaped HTML version if requested.
+			if ( acf_field_type_supports( $field['type'], 'escaping_html' ) ) {
+				$field['value'] = acf_format_value( $field['value'], $post_id, $field, true );
+			} else {
+				$new_value = acf_format_value( $field['value'], $post_id, $field );
+				if ( is_array( $new_value ) ) {
+					$field['value'] = map_deep( $new_value, 'acf_esc_html' );
+				} else {
+					$field['value'] = acf_esc_html( $new_value );
+				}
+			}
+		} else {
+			// get value for field
+			$field['value'] = acf_format_value( $field['value'], $post_id, $field );
+		}
 	}
 
 	return $field;
 }
 
-/*
-*  acf_get_object_field
-*
-*  This function will return a field for the given selector.
-*  It will also review the field_reference to ensure the correct field is returned which makes it useful for the template API
-*
-*  @type    function
-*  @date    4/08/2015
-*  @since   5.2.3
-*
-*  @param   $selector (mixed) identifier of field. Can be an ID, key, name or post object
-*  @param   $post_id (mixed) the post_id of which the value is saved against
-*  @param   $strict (boolean) if true, return a field only when a field key is found.
-*  @return  $field (array)
-*/
+/**
+ * This function will return a field for the given selector.
+ * It will also review the field_reference to ensure the correct field is returned which makes it useful for the template API
+ *
+ * @since   5.2.3
+ *
+ * @param   $selector (mixed) identifier of field. Can be an ID, key, name or post object
+ * @param   $post_id (mixed) the post_id of which the value is saved against
+ * @param   $strict (boolean) if true, return a field only when a field key is found.
+ *
+ * @return  $field (array)
+ */
 function acf_maybe_get_field( $selector, $post_id = false, $strict = true ) {
 
 	// init
@@ -340,19 +310,14 @@ function acf_maybe_get_field( $selector, $post_id = false, $strict = true ) {
 	return false;
 }
 
-/*
-*  acf_maybe_get_sub_field
-*
-*  This function will attempt to find a sub field
-*
-*  @type    function
-*  @date    3/10/2016
-*  @since   5.4.0
-*
-*  @param   $post_id (int)
-*  @return  $post_id (int)
-*/
-
+/**
+ * This function will attempt to find a sub field
+ *
+ * @since   5.4.0
+ *
+ * @param   $post_id (int)
+ * @return  $post_id (int)
+ */
 function acf_maybe_get_sub_field( $selectors, $post_id = false, $strict = true ) {
 
 	// bail early if not enough selectors
@@ -397,25 +362,28 @@ function acf_maybe_get_sub_field( $selectors, $post_id = false, $strict = true )
 	return $field;
 }
 
-/*
-*  get_fields()
-*
-*  This function will return an array containing all the custom field values for a specific post_id.
-*  The function is not very elegant and wastes a lot of PHP memory / SQL queries if you are not using all the values.
-*
-*  @type    function
-*  @since   3.6
-*  @date    29/01/13
-*
-*  @param   $post_id (mixed) the post_id of which the value is saved against
-*  @param   $format_value (boolean) whether or not to format the field value
-*  @return  (array) associative array where field name => field value
-*/
+/**
+ * This function will return an array containing all the custom field values for a specific post_id.
+ * The function is not very elegant and wastes a lot of PHP memory / SQL queries if you are not using all the values.
+ *
+ * @since   3.6
+ *
+ * @param mixed   $post_id      The post_id of which the value is saved against.
+ * @param boolean $format_value Whether or not to format the field value.
+ * @param boolean $escape_html  Should the field return a HTML safe formatted value if $format_value is true.
+ *
+ * @return array|false Associative array where field name => field value, or false on failure.
+ */
+function get_fields( $post_id = false, $format_value = true, $escape_html = false ) {
 
-function get_fields( $post_id = false, $format_value = true ) {
+	// escape html is only compatible when formatting the value too
+	if ( ! $format_value && $escape_html ) {
+		_doing_it_wrong( __FUNCTION__, __( 'Returning escaped HTML values is only possible when format_value is also true. The field values have not been returned for security.', 'acf' ), '6.2.6' ); //phpcs:ignore -- escape not required.
+		return false;
+	}
 
 	// vars
-	$fields = get_field_objects( $post_id, $format_value );
+	$fields = get_field_objects( $post_id, $format_value, true, $escape_html );
 	$meta   = array();
 
 	// bail early
@@ -443,8 +411,8 @@ function get_fields( $post_id = false, $format_value = true ) {
  * @param boolean $format_value Whether or not to format the field value.
  * @param boolean $load_value   Whether or not to load the field value.
  * @param boolean $escape_html  Should the field return a HTML safe formatted value if $format_value is true.
- *                              This parameter will not guarantee the result is escaped, only if the field type supports it.
- * @return array associative array where field name => field
+ *
+ * @return array|false Associative array where field name => field, or false on failure.
  */
 function get_field_objects( $post_id = false, $format_value = true, $load_value = true, $escape_html = false ) {
 
@@ -460,6 +428,11 @@ function get_field_objects( $post_id = false, $format_value = true, $load_value 
 	// bail early if no meta
 	if ( empty( $meta ) ) {
 		return false;
+	}
+
+	// escape html is only compatible when formatting the value too
+	if ( ! $format_value && $escape_html ) {
+		_doing_it_wrong( __FUNCTION__, __( 'Returning escaped HTML values is only possible when format_value is also true. The field values have not been returned for security.', 'acf' ), '6.2.6' ); //phpcs:ignore -- escape not required.
 	}
 
 	// populate vars
@@ -485,9 +458,29 @@ function get_field_objects( $post_id = false, $format_value = true, $load_value 
 			$field['value'] = acf_get_value( $post_id, $field );
 		}
 
+		// avoid returning field values when the function is called incorrectly.
+		if ( ! $format_value && $escape_html ) {
+			$field['value'] = false;
+		}
+
 		// format value
-		if ( $format_value ) {
-			$field['value'] = acf_format_value( $field['value'], $post_id, $field, $escape_html );
+		if ( $load_value && $format_value ) {
+			if ( $escape_html ) {
+				// return the escaped HTML version if requested.
+				if ( acf_field_type_supports( $field['type'], 'escaping_html' ) ) {
+					$field['value'] = acf_format_value( $field['value'], $post_id, $field, true );
+				} else {
+					$new_value = acf_format_value( $field['value'], $post_id, $field );
+					if ( is_array( $new_value ) ) {
+						$field['value'] = map_deep( $new_value, 'acf_esc_html' );
+					} else {
+						$field['value'] = acf_esc_html( $new_value );
+					}
+				}
+			} else {
+				// get value for field
+				$field['value'] = acf_format_value( $field['value'], $post_id, $field );
+			}
 		}
 
 		// append to $value
@@ -505,17 +498,14 @@ function get_field_objects( $post_id = false, $format_value = true, $load_value 
 
 
 /**
- * have_rows
- *
  * Checks if a field (such as Repeater or Flexible Content) has any rows of data to loop over.
  * This function is intended to be used in conjunction with the_row() to step through available values.
  *
- * @date    2/09/13
  * @since   4.3.0
  *
  * @param   string $selector The field name or field key.
- * @param   mixed  $post_id The post ID where the value is saved. Defaults to the current post.
- * @return  bool
+ * @param   mixed  $post_id  The post ID where the value is saved. Defaults to the current post.
+ * @return  boolean
  */
 function have_rows( $selector, $post_id = false ) {
 
@@ -641,19 +631,14 @@ function have_rows( $selector, $post_id = false ) {
 }
 
 
-/*
-*  the_row
-*
-*  This function will progress the global repeater or flexible content value 1 row
-*
-*  @type    function
-*  @date    2/09/13
-*  @since   4.3.0
-*
-*  @param   N/A
-*  @return  (array) the current row data
-*/
-
+/**
+ * This function will progress the global repeater or flexible content value 1 row
+ *
+ * @since   4.3.0
+ *
+ * @param   N/A
+ * @return  (array) the current row data
+ */
 function the_row( $format = false ) {
 
 	// vars
@@ -726,24 +711,18 @@ function get_row_index() {
 }
 
 function the_row_index() {
-
-	echo get_row_index();
+	echo intval( get_row_index() );
 }
 
 
-/*
-*  get_row_sub_field
-*
-*  This function is used inside a 'has_sub_field' while loop to return a sub field object
-*
-*  @type    function
-*  @date    16/05/2016
-*  @since   5.3.8
-*
-*  @param   $selector (string)
-*  @return  (array)
-*/
-
+/**
+ * This function is used inside a 'has_sub_field' while loop to return a sub field object
+ *
+ * @since   5.3.8
+ *
+ * @param   $selector (string)
+ * @return  (array)
+ */
 function get_row_sub_field( $selector ) {
 
 	// vars
@@ -770,19 +749,14 @@ function get_row_sub_field( $selector ) {
 }
 
 
-/*
-*  get_row_sub_value
-*
-*  This function is used inside a 'has_sub_field' while loop to return a sub field value
-*
-*  @type    function
-*  @date    16/05/2016
-*  @since   5.3.8
-*
-*  @param   $selector (string)
-*  @return  (mixed)
-*/
-
+/**
+ * This function is used inside a 'has_sub_field' while loop to return a sub field value
+ *
+ * @since   5.3.8
+ *
+ * @param   $selector (string)
+ * @return  (mixed)
+ */
 function get_row_sub_value( $selector ) {
 
 	// vars
@@ -803,20 +777,15 @@ function get_row_sub_value( $selector ) {
 }
 
 
-/*
-*  reset_rows
-*
-*  This function will find the current loop and unset it from the global array.
-*  To bo used when loop finishes or a break is used
-*
-*  @type    function
-*  @date    26/10/13
-*  @since   5.0.0
-*
-*  @param   $hard_reset (boolean) completely wipe the global variable, or just unset the active row
-*  @return  (boolean)
-*/
-
+/**
+ * This function will find the current loop and unset it from the global array.
+ * To be used when loop finishes or a break is used
+ *
+ * @since   5.0.0
+ *
+ * @param   $hard_reset (boolean) completely wipe the global variable, or just unset the active row
+ * @return  (boolean)
+ */
 function reset_rows() {
 
 	// remove last loop
@@ -827,22 +796,17 @@ function reset_rows() {
 }
 
 
-/*
-*  has_sub_field()
-*
-*  This function is used inside a while loop to return either true or false (loop again or stop).
-*  When using a repeater or flexible content field, it will loop through the rows until
-*  there are none left or a break is detected
-*
-*  @type    function
-*  @since   1.0.3
-*  @date    29/01/13
-*
-*  @param   $field_name (string) the field name
-*  @param   $post_id (mixed) the post_id of which the value is saved against
-*  @return  (boolean)
-*/
-
+/**
+ * This function is used inside a while loop to return either true or false (loop again or stop).
+ * When using a repeater or flexible content field, it will loop through the rows until
+ * there are none left or a break is detected
+ *
+ * @since   1.0.3
+ *
+ * @param   $field_name (string) the field name
+ * @param   $post_id (mixed) the post_id of which the value is saved against
+ * @return  (boolean)
+ */
 function has_sub_field( $field_name, $post_id = false ) {
 
 	// vars
@@ -857,29 +821,29 @@ function has_sub_field( $field_name, $post_id = false ) {
 	return $r;
 }
 
+/**
+ * Alias of has_sub_field
+ */
 function has_sub_fields( $field_name, $post_id = false ) {
-
 	return has_sub_field( $field_name, $post_id );
 }
 
 
-/*
-*  get_sub_field()
-*
-*  This function is used inside a 'has_sub_field' while loop to return a sub field value
-*
-*  @type    function
-*  @since   1.0.3
-*  @date    29/01/13
-*
-*  @param   $field_name (string) the field name
-*  @return  (mixed)
-*/
-
-function get_sub_field( $selector = '', $format_value = true ) {
+/**
+ * This function is used inside a 'has_sub_field' while loop to return a sub field value
+ *
+ * @since 1.0.3
+ *
+ * @param string  $selector     The field name or key.
+ * @param boolean $format_value Whether or not to format the value as described above.
+ * @param boolean $escape_html  If we're formatting the value, make sure it's also HTML safe.
+ *
+ * @return mixed
+ */
+function get_sub_field( $selector = '', $format_value = true, $escape_html = false ) {
 
 	// get sub field
-	$sub_field = get_sub_field_object( $selector, $format_value );
+	$sub_field = get_sub_field_object( $selector, $format_value, true, $escape_html );
 
 	// bail early if no sub field
 	if ( ! $sub_field ) {
@@ -892,15 +856,17 @@ function get_sub_field( $selector = '', $format_value = true ) {
 
 
 /**
- * This function is the same as echo get_sub_field
+ * This function is the same as echo get_sub_field(), but will escape the value for safe HTML output.
  *
  * @since   1.0.3
  *
  * @param string  $field_name   The field name.
- * @param boolean $format_value Format the value before output.
+ * @param boolean $format_value Enable formatting of value. When false, the field value will be escaped at this level with `acf_esc_html`. Default true.
+ *
+ * @return void
  */
 function the_sub_field( $field_name, $format_value = true ) {
-	$field = get_sub_field_object( $field_name, $format_value );
+	$field = get_sub_field_object( $field_name, $format_value, true, $format_value );
 	$value = ( is_array( $field ) && isset( $field['value'] ) ) ? $field['value'] : false;
 
 	if ( is_array( $value ) ) {
@@ -912,40 +878,25 @@ function the_sub_field( $field_name, $format_value = true ) {
 		return;
 	}
 
-	$field_type              = is_array( $field ) && isset( $field['type'] ) ? $field['type'] : 'text';
-	$field_type_escapes_html = acf_field_type_supports( $field_type, 'escaping_html' );
-
-	if ( ! apply_filters( 'acf/the_field/allow_unsafe_html', false, $field_name, 'sub_field', $field_type, $field ) ) {
-		/*
-		 * If the field is compatible with generating a html safe version, use it, otherwise run the value through acf_esc_html.
-		 *
-		 * This logic become default in an upcoming release of ACF, where we will always ask for a html safe version regardless of support
-		 * then additionally run `acf_esc_html` if the field type is not marked as supporting `escaping_html`.
-		 */
-
-		if ( $field_type_escapes_html ) {
-			$field     = get_sub_field_object( $field_name, $format_value, true, true );
-			$new_value = ( is_array( $field ) && isset( $field['value'] ) ) ? $field['value'] : false;
-
-			if ( is_array( $new_value ) ) {
-				$new_value = implode( ', ', $new_value );
-			}
-		} else {
-			$new_value = acf_esc_html( $value );
-		}
-
-		if ( (string) $value !== (string) $new_value ) {
-			if ( apply_filters( 'acf/the_field/escape_html_optin', false ) ) {
-				$value = $new_value;
-				do_action( 'acf/removed_unsafe_html', __FUNCTION__, $field_name, $field, false );
-			} else {
-				do_action( 'acf/will_remove_unsafe_html', __FUNCTION__, $field_name, $field, false );
-			}
-		}
-		unset( $new_value );
+	// If $format_value is false, we've not been able to apply field level escaping as we're giving the raw DB value. Escape the output with `acf_esc_html`.
+	if ( ! $format_value ) {
+		$value = acf_esc_html( $value );
 	}
 
-	echo $value;
+	$unescaped_field = get_sub_field_object( $field_name, $format_value, true, false );
+	$unescaped_value = ( is_array( $unescaped_field ) && isset( $unescaped_field['value'] ) ) ? $unescaped_field['value'] : false;
+	if ( is_array( $unescaped_value ) ) {
+		$unescaped_value = implode( ', ', $unescaped_value );
+	}
+
+	$field_type = is_array( $field ) && isset( $field['type'] ) ? $field['type'] : 'text';
+	if ( apply_filters( 'acf/the_field/allow_unsafe_html', false, $field_name, 'sub_field', $field_type, $field ) ) {
+		$value = $unescaped_value;
+	} elseif ( (string) $value !== (string) $unescaped_value ) {
+		do_action( 'acf/removed_unsafe_html', __FUNCTION__, $field_name, $field, false );
+	}
+
+	echo $value; //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped inside get_sub_field_object where necessary.
 }
 
 
@@ -958,7 +909,7 @@ function the_sub_field( $field_name, $format_value = true ) {
  * @param boolean $format_value Whether to format the field value.
  * @param boolean $load_value   Whether to load the field value.
  * @param boolean $escape_html  Should the field return a HTML safe formatted value.
- *                              This parameter will not guarantee the result is escaped, only if the field type supports it.
+ *
  * @return mixed
  */
 function get_sub_field_object( $selector, $format_value = true, $load_value = true, $escape_html = false ) {
@@ -983,10 +934,30 @@ function get_sub_field_object( $selector, $format_value = true, $load_value = tr
 		$sub_field['value'] = get_row_sub_value( $sub_field['key'] );
 	}
 
+	// escape html is only compatible when formatting the value too
+	if ( ! $format_value && $escape_html ) {
+		_doing_it_wrong( __FUNCTION__, __( 'Returning an escaped HTML value is only possible when format_value is also true. The field value has not been returned for security.', 'acf' ), '6.2.6' ); //phpcs:ignore -- escape not required.
+		$sub_field['value'] = false;
+	}
+
 	// format value
-	if ( $format_value ) {
-		// get value for field
-		$sub_field['value'] = acf_format_value( $sub_field['value'], $row['post_id'], $sub_field, $escape_html );
+	if ( $load_value && $format_value ) {
+		if ( $escape_html ) {
+			// return the escaped HTML version if requested.
+			if ( acf_field_type_supports( $sub_field['type'], 'escaping_html' ) ) {
+				$sub_field['value'] = acf_format_value( $sub_field['value'], $row['post_id'], $sub_field, true );
+			} else {
+				$new_value = acf_format_value( $sub_field['value'], $row['post_id'], $sub_field );
+				if ( is_array( $new_value ) ) {
+					$sub_field['value'] = map_deep( $new_value, 'acf_esc_html' );
+				} else {
+					$sub_field['value'] = acf_esc_html( $new_value );
+				}
+			}
+		} else {
+			// get value for field
+			$sub_field['value'] = acf_format_value( $sub_field['value'], $row['post_id'], $sub_field );
+		}
 	}
 
 	// return
@@ -994,19 +965,13 @@ function get_sub_field_object( $selector, $format_value = true, $load_value = tr
 }
 
 
-/*
-*  get_row_layout()
-*
-*  This function will return a string representation of the current row layout within a 'have_rows' loop
-*
-*  @type    function
-*  @since   3.0.6
-*  @date    29/01/13
-*
-*  @param   n/a
-*  @return  (string)
-*/
-
+/**
+ * This function will return a string representation of the current row layout within a 'have_rows' loop
+ *
+ * @since   3.0.6
+ *
+ * @return mixed
+ */
 function get_row_layout() {
 
 	// vars
@@ -1026,11 +991,10 @@ function get_row_layout() {
  * eg. [acf field="heading" post_id="123" format_value="1"]
  *
  * @since 1.1.1
- * @date  29/01/13
  *
  * @param array $atts The shortcode attributes.
  *
- * @return string
+ * @return string|void
  */
 function acf_shortcode( $atts ) {
 	// Return if the ACF shortcode is disabled.
@@ -1075,23 +1039,35 @@ function acf_shortcode( $atts ) {
 		add_filter( 'acf/prevent_access_to_unknown_fields', '__return_true' );
 	}
 
-	// Try to get the field value, ensuring any non-safe HTML is stripped from wysiwyg fields via `acf_the_content`
-	$field = get_field_object( $atts['field'], $atts['post_id'], $atts['format_value'], true, true );
-	$value = $field ? $field['value'] : get_field( $atts['field'], $atts['post_id'], $atts['format_value'], true );
+	// Decode the post ID for filtering.
+	$post_id         = acf_get_valid_post_id( $atts['post_id'] );
+	$decoded_post_id = acf_decode_post_id( $post_id );
 
-	if ( $filter_applied ) {
-		remove_filter( 'acf/prevent_access_to_unknown_fields', '__return_true' );
+	// Try to get the field value, ensuring any non-safe HTML is stripped from wysiwyg fields via `acf_the_content`
+	$field = get_field_object( $atts['field'], $post_id, $atts['format_value'], true, true );
+	$value = $field ? $field['value'] : get_field( $atts['field'], $post_id, $atts['format_value'], true );
+
+	$field_type = is_array( $field ) && isset( $field['type'] ) ? $field['type'] : 'text';
+
+	if ( apply_filters( 'acf/shortcode/prevent_access', false, $atts, $decoded_post_id['id'], $decoded_post_id['type'], $field_type, $field ) ) {
+		return;
 	}
 
 	if ( is_array( $value ) ) {
 		$value = implode( ', ', $value );
 	}
 
-	$field_type              = is_array( $field ) && isset( $field['type'] ) ? $field['type'] : 'text';
-	$field_type_escapes_html = acf_field_type_supports( $field_type, 'escaping_html' );
-
 	// Temporarily always get the unescaped version for action comparison.
-	$unescaped_value = get_field( $atts['field'], $atts['post_id'], $atts['format_value'], false );
+	$unescaped_value = get_field( $atts['field'], $post_id, $atts['format_value'], false );
+
+	if ( $filter_applied ) {
+		remove_filter( 'acf/prevent_access_to_unknown_fields', '__return_true' );
+	}
+
+	// Remove the filter preventing access to unknown filters now we've got all the values.
+	if ( $filter_applied ) {
+		remove_filter( 'acf/prevent_access_to_unknown_fields', '__return_true' );
+	}
 
 	if ( is_array( $unescaped_value ) ) {
 		$unescaped_value = implode( ', ', $unescaped_value );
@@ -1100,14 +1076,8 @@ function acf_shortcode( $atts ) {
 	// Handle getting the unescaped version if we're allowed unsafe html.
 	if ( apply_filters( 'acf/shortcode/allow_unsafe_html', false, $atts, $field_type, $field ) ) {
 		$value = $unescaped_value;
-	} else {
-		if ( ! $field_type_escapes_html ) {
-			$value = acf_esc_html( $value );
-		}
-
-		if ( (string) $value !== (string) $unescaped_value ) {
-			do_action( 'acf/removed_unsafe_html', __FUNCTION__, $atts['field'], $field, $atts['post_id'] );
-		}
+	} elseif ( (string) $value !== (string) $unescaped_value ) {
+		do_action( 'acf/removed_unsafe_html', __FUNCTION__, $atts['field'], $field, $post_id );
 	}
 
 	return $value;
@@ -1115,21 +1085,17 @@ function acf_shortcode( $atts ) {
 add_shortcode( 'acf', 'acf_shortcode' );
 
 
-/*
-*  update_field()
-*
-*  This function will update a value in the database
-*
-*  @type    function
-*  @since   3.1.9
-*  @date    29/01/13
-*
-*  @param   $selector (string) the field name or key
-*  @param   $value (mixed) the value to save in the database
-*  @param   $post_id (mixed) the post_id of which the value is saved against
-*  @return  (boolean)
-*/
-
+/**
+ * This function will update a value in the database
+ *
+ * @since   3.1.9
+ *
+ * @param string $selector The field name or key.
+ * @param mixed  $value    The value to save in the database.
+ * @param mixed  $post_id  The post_id of which the value is saved against.
+ *
+ * @return boolean
+ */
 function update_field( $selector, $value, $post_id = false ) {
 
 	// filter post_id
@@ -1154,21 +1120,17 @@ function update_field( $selector, $value, $post_id = false ) {
 }
 
 
-/*
-*  update_sub_field
-*
-*  This function will update a value of a sub field in the database
-*
-*  @type    function
-*  @date    2/04/2014
-*  @since   5.0.0
-*
-*  @param   $selector (mixed) the sub field name or key, or an array of ancestors
-*  @param   $value (mixed) the value to save in the database
-*  @param   $post_id (mixed) the post_id of which the value is saved against
-*  @return  (boolean)
-*/
-
+/**
+ * This function will update a value of a sub field in the database
+ *
+ * @since   5.0.0
+ *
+ * @param   $selector (mixed) the sub field name or key, or an array of ancestors
+ * @param   $value (mixed) the value to save in the database
+ * @param   $post_id (mixed) the post_id of which the value is saved against
+ *
+ * @return  boolean
+ */
 function update_sub_field( $selector, $value, $post_id = false ) {
 
 	// vars
@@ -1193,20 +1155,16 @@ function update_sub_field( $selector, $value, $post_id = false ) {
 }
 
 
-/*
-*  delete_field()
-*
-*  This function will remove a value from the database
-*
-*  @type    function
-*  @since   3.1.9
-*  @date    29/01/13
-*
-*  @param   $selector (string) the field name or key
-*  @param   $post_id (mixed) the post_id of which the value is saved against
-*  @return  (boolean)
-*/
-
+/**
+ * This function will remove a value from the database
+ *
+ * @since   3.1.9
+ *
+ * @param   $selector (string) the field name or key
+ * @param   $post_id (mixed) the post_id of which the value is saved against
+ *
+ * @return  boolean
+ */
 function delete_field( $selector, $post_id = false ) {
 
 	// filter post_id
@@ -1220,42 +1178,31 @@ function delete_field( $selector, $post_id = false ) {
 }
 
 
-/*
-*  delete_sub_field
-*
-*  This function will delete a value of a sub field in the database
-*
-*  @type    function
-*  @date    2/04/2014
-*  @since   5.0.0
-*
-*  @param   $selector (mixed) the sub field name or key, or an array of ancestors
-*  @param   $value (mixed) the value to save in the database
-*  @param   $post_id (mixed) the post_id of which the value is saved against
-*  @return  (boolean)
-*/
-
+/**
+ * This function will delete a value of a sub field in the database
+ *
+ * @since   5.0.0
+ *
+ * @param   $selector (mixed) the sub field name or key, or an array of ancestors
+ * @param   $value (mixed) the value to save in the database
+ * @param   $post_id (mixed) the post_id of which the value is saved against
+ * @return  (boolean)
+ */
 function delete_sub_field( $selector, $post_id = false ) {
-
 	return update_sub_field( $selector, null, $post_id );
 }
 
 
-/*
-*  add_row
-*
-*  This function will add a row of data to a field
-*
-*  @type    function
-*  @date    16/10/2015
-*  @since   5.2.3
-*
-*  @param   $selector (string)
-*  @param   $row (array)
-*  @param   $post_id (mixed)
-*  @return  (boolean)
-*/
-
+/**
+ * This function will add a row of data to a field
+ *
+ * @since   5.2.3
+ *
+ * @param   $selector (string)
+ * @param   $row (array)
+ * @param   $post_id (mixed)
+ * @return  (boolean)
+ */
 function add_row( $selector, $row = false, $post_id = false ) {
 
 	// filter post_id
@@ -1289,21 +1236,16 @@ function add_row( $selector, $row = false, $post_id = false ) {
 }
 
 
-/*
-*  add_sub_row
-*
-*  This function will add a row of data to a field
-*
-*  @type    function
-*  @date    16/10/2015
-*  @since   5.2.3
-*
-*  @param   $selector (string)
-*  @param   $row (array)
-*  @param   $post_id (mixed)
-*  @return  (boolean)
-*/
-
+/**
+ * This function will add a row of data to a field
+ *
+ * @since   5.2.3
+ *
+ * @param   $selector (string)
+ * @param   $row (array)
+ * @param   $post_id (mixed)
+ * @return  (boolean)
+ */
 function add_sub_row( $selector, $row = false, $post_id = false ) {
 
 	// vars
@@ -1340,22 +1282,17 @@ function add_sub_row( $selector, $row = false, $post_id = false ) {
 }
 
 
-/*
-*  update_row
-*
-*  This function will update a row of data to a field
-*
-*  @type    function
-*  @date    19/10/2015
-*  @since   5.2.3
-*
-*  @param   $selector (string)
-*  @param   $i (int)
-*  @param   $row (array)
-*  @param   $post_id (mixed)
-*  @return  (boolean)
-*/
-
+/**
+ * This function will update a row of data to a field
+ *
+ * @since   5.2.3
+ *
+ * @param   $selector (string)
+ * @param   $i (int)
+ * @param   $row (array)
+ * @param   $post_id (mixed)
+ * @return  (boolean)
+ */
 function update_row( $selector, $i = 1, $row = false, $post_id = false ) {
 
 	// vars
@@ -1390,21 +1327,16 @@ function update_row( $selector, $i = 1, $row = false, $post_id = false ) {
 }
 
 
-/*
-*  update_sub_row
-*
-*  This function will add a row of data to a field
-*
-*  @type    function
-*  @date    16/10/2015
-*  @since   5.2.3
-*
-*  @param   $selector (string)
-*  @param   $row (array)
-*  @param   $post_id (mixed)
-*  @return  (boolean)
-*/
-
+/**
+ * This function will add a row of data to a field
+ *
+ * @since   5.2.3
+ *
+ * @param   $selector (string)
+ * @param   $row (array)
+ * @param   $post_id (mixed)
+ * @return  (boolean)
+ */
 function update_sub_row( $selector, $i = 1, $row = false, $post_id = false ) {
 
 	// vars
@@ -1443,21 +1375,16 @@ function update_sub_row( $selector, $i = 1, $row = false, $post_id = false ) {
 }
 
 
-/*
-*  delete_row
-*
-*  This function will delete a row of data from a field
-*
-*  @type    function
-*  @date    19/10/2015
-*  @since   5.2.3
-*
-*  @param   $selector (string)
-*  @param   $i (int)
-*  @param   $post_id (mixed)
-*  @return  (boolean)
-*/
-
+/**
+ * This function will delete a row of data from a field
+ *
+ * @since   5.2.3
+ *
+ * @param   $selector (string)
+ * @param   $i (int)
+ * @param   $post_id (mixed)
+ * @return  (boolean)
+ */
 function delete_row( $selector, $i = 1, $post_id = false ) {
 
 	// vars
@@ -1497,21 +1424,16 @@ function delete_row( $selector, $i = 1, $post_id = false ) {
 }
 
 
-/*
-*  delete_sub_row
-*
-*  This function will add a row of data to a field
-*
-*  @type    function
-*  @date    16/10/2015
-*  @since   5.2.3
-*
-*  @param   $selector (string)
-*  @param   $row (array)
-*  @param   $post_id (mixed)
-*  @return  (boolean)
-*/
-
+/**
+ * This function will add a row of data to a field
+ *
+ * @since   5.2.3
+ *
+ * @param   $selector (string)
+ * @param   $row (array)
+ * @param   $post_id (mixed)
+ * @return  (boolean)
+ */
 function delete_sub_row( $selector, $i = 1, $post_id = false ) {
 
 	// vars
@@ -1555,19 +1477,16 @@ function delete_sub_row( $selector, $i = 1, $post_id = false ) {
 }
 
 
-/*
-*  Depreceated Functions
-*
-*  These functions are outdated
-*
-*  @type    function
-*  @date    4/03/2014
-*  @since   1.0.0
-*
-*  @param   n/a
-*  @return  n/a
-*/
-
+/**
+ * Depreceated Functions
+ *
+ * These functions are outdated
+ *
+ * @since   1.0.0
+ *
+ * @param   n/a
+ * @return  n/a
+ */
 function create_field( $field ) {
 
 	acf_render_field( $field );

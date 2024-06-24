@@ -8,7 +8,7 @@
                 overline: blockset.overline,
                 title: blockset.title,
                 subtitle: blockset.subtitle
-            }%}
+            } %}
             {% if blockset.buttons|length > 0 %}
                 <div class="flex items-center justify-center flex-wrap gap-6 mt-16">
                     {% include "components/buttons.twig" with {
@@ -28,7 +28,7 @@
                         subtitle: blockset.subtitle,
                         sectionClass: 'text-center lg:text-left',
                         textClass: 'w-auto'
-                    }%}
+                    } %}
                 </div>
                 <div class="basis-1/3 flex-shrink">
                     {% if blockset.buttons|length > 0 %}

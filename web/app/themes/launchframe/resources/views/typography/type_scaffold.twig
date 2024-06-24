@@ -1,0 +1,62 @@
+{#
+    @name Type Scaffold
+    @desc Lists out all the typography partials and their variations if they have any. This makes bulk styling all the text easy.
+#}
+
+<div class="grid gap-10 max-w-3xl mx-auto p-8">
+    {% include 'typography/h1.twig' with {
+      content: "H1. Cras Tristique Parturient Cursus Nibh.",
+    } %}
+
+    {% include 'typography/h2.twig' with {
+        content: "H2. Cras Tristique Parturient Cursus Nibh."
+    } %}
+
+
+    {% include 'typography/h3.twig' with {
+        content: "H3. Cras Tristique Parturient Cursus Nibh"
+    } %}
+
+    {% include 'typography/h4.twig' with {
+        content: "H4. Cras Tristique Parturient Cursus Nibh",
+    } %}
+
+    {% include 'typography/h5.twig' with {
+        content: "H5. Cras Tristique Parturient Cursus Nibh",
+    } %}
+
+    {% include 'typography/h6.twig' with {
+        content: "H6. Cras Tristique Parturient Cursus Nibh",
+    } %}
+
+    {% include 'typography/meta.twig' with {
+        content: "Meta. Doloremque adipisci.",
+    } %}
+
+    {% include 'typography/paragraph.twig' with {
+        content: "p xl. Mollis sapien, at vitae id at vestibulum nulla iaculis fames. Turpis a turpis in in urna arcu, lacus nunc. Diam pellentesque consequat maecenas eget at. Mollis sapien, at vitae id at vestibulum nulla iaculis fames. Turpis a turpis in in urna arcu, lacus nunc. Diam pellentesque consequat maecenas eget at.",
+        size: "xl",
+        margin: " ",
+      } %}
+
+    {% include 'typography/paragraph.twig' with {
+      content: "p lg. Mollis sapien, at vitae id at vestibulum nulla iaculis fames. Turpis a turpis in in urna arcu, lacus nunc. Diam pellentesque consequat maecenas eget at. Mollis sapien, at vitae id at vestibulum nulla iaculis fames. Turpis a turpis in in urna arcu, lacus nunc. Diam pellentesque consequat maecenas eget at.",
+      size: "lg",
+        margin: " ",
+    } %}
+
+    {% include 'typography/paragraph.twig' with {
+        content: "p. Mollis sapien, at vitae id at vestibulum nulla iaculis fames. Turpis a turpis in in urna arcu, lacus nunc. Diam pellentesque consequat maecenas eget at. Mollis sapien, at vitae id at vestibulum nulla iaculis fames. Turpis a turpis in in urna arcu, lacus nunc. Diam pellentesque consequat maecenas eget at.",
+        margin: " ",
+    } %}
+
+    {% include 'typography/paragraph.twig' with {
+        content: "p sm. Mollis sapien, at vitae id at vestibulum nulla iaculis fames. Turpis a turpis in in urna arcu, lacus nunc. Diam pellentesque consequat maecenas eget at. Mollis sapien, at vitae id at vestibulum nulla iaculis fames. Turpis a turpis in in urna arcu, lacus nunc. Diam pellentesque consequat maecenas eget at.",
+        size: "sm",
+        margin: " ",
+    } %}
+
+    {% include 'typography/blockquote.twig' with {
+        content: "blockquote. Mollis sapien, at vitae id at vestibulum nulla iaculis fames. Turpis a turpis in in urna arcu, lacus nunc. Diam pellentesque consequat maecenas eget at. Mollis sapien, at vitae id at vestibulum nulla iaculis fames. Turpis a turpis in in urna arcu, lacus nunc. Diam pellentesque consequat maecenas eget at.",
+    } %}
+</div>

@@ -1,4 +1,4 @@
-import { Howl, Howler } from 'howler';
+import { Howl, Howler } from 'howler'
 
 export default () => {
     return {
@@ -10,29 +10,29 @@ export default () => {
             this.audio = new Howl({
                 src: this.src,
                 onplay: () => {
-                    this.playing = true;
+                    this.playing = true
                 },
                 onpause: () => {
-                    this.playing = false;
+                    this.playing = false
                 },
                 onend: () => {
-                    this.playing = false;
-                }
-            });
+                    this.playing = false
+                },
+            })
         },
 
         toggle() {
             if (this.playing) {
-                this.audio.pause();
+                this.audio.pause()
             } else {
-                this.audio.play();
+                this.audio.play()
             }
         },
 
         stop() {
             if (this.playing) {
-                this.audio.pause();
+                this.audio.pause()
             }
-        }
-    };
-};
+        },
+    }
+}

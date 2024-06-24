@@ -12,8 +12,6 @@ if ( ! class_exists( 'ACF_Admin' ) ) :
 		 * Constructor.
 		 *
 		 * @since 5.0.0
-		 *
-		 * @return void
 		 */
 		public function __construct() {
 			add_action( 'admin_menu', array( $this, 'admin_menu' ) );
@@ -21,7 +19,8 @@ if ( ! class_exists( 'ACF_Admin' ) ) :
 			add_action( 'admin_body_class', array( $this, 'admin_body_class' ) );
 			add_action( 'current_screen', array( $this, 'current_screen' ) );
 			add_action( 'admin_notices', array( $this, 'maybe_show_escaped_html_notice' ) );
-			add_action( 'wp_ajax_acf/dismiss_escaped_html_notice', array( $this, 'dismiss_escaped_html_notice' ) );
+			add_action( 'admin_init', array( $this, 'dismiss_escaped_html_notice' ) );
+			add_action( 'admin_init', array( $this, 'clear_escaped_html_log' ) );
 			add_filter( 'parent_file', array( $this, 'ensure_menu_selection' ) );
 			add_filter( 'submenu_file', array( $this, 'ensure_submenu_selection' ) );
 		}
@@ -51,8 +50,6 @@ if ( ! class_exists( 'ACF_Admin' ) ) :
 		 * Enqueues global admin styling.
 		 *
 		 * @since   5.0.0
-		 *
-		 * @return void
 		 */
 		public function admin_enqueue_scripts() {
 			wp_enqueue_style( 'acf-global' );
@@ -62,9 +59,8 @@ if ( ! class_exists( 'ACF_Admin' ) ) :
 				'acf-escaped-html-notice',
 				'acf_escaped_html_notice',
 				array(
-					'nonce'        => wp_create_nonce( 'acf/dismiss_escaped_html_notice' ),
-					'show_details' => __( 'Show details', 'acf' ),
-					'hide_details' => __( 'Hide details', 'acf' ),
+					'show_details' => __( 'Show&nbsp;details', 'acf' ),
+					'hide_details' => __( 'Hide&nbsp;details', 'acf' ),
 				)
 			);
 		}
@@ -212,8 +208,6 @@ if ( ! class_exists( 'ACF_Admin' ) ) :
 		 * had HTML removed/altered due to unsafe HTML being escaped.
 		 *
 		 * @since 6.2.5
-		 *
-		 * @return void
 		 */
 		public function maybe_show_escaped_html_notice() {
 			// Only show to editors and above.
@@ -226,42 +220,68 @@ if ( ! class_exists( 'ACF_Admin' ) ) :
 				return;
 			}
 
+			if ( get_option( 'acf_escaped_html_notice_dismissed' ) ) {
+				return;
+			}
+
 			$escaped = _acf_get_escaped_html_log();
 
 			// Notice for when HTML has already been escaped.
 			if ( ! empty( $escaped ) ) {
 				acf_get_view( 'escaped-html-notice', array( 'acf_escaped' => $escaped ) );
 			}
-
-			// Throw a separate notice for HTML that will be escaped in future releases.
-			if ( ! apply_filters( 'acf/the_field/escape_html_optin', false ) ) {
-				$will_escape = _acf_get_will_escape_html_log();
-
-				if ( ! empty( $will_escape ) ) {
-					acf_get_view( 'escaped-html-notice', array( 'acf_will_escape' => $will_escape ) );
-				}
-			}
 		}
 
 		/**
-		 * Dismisses the escaped unsafe HTML notice by clearing the stored log.
+		 * Dismisses the escaped unsafe HTML notice.
 		 *
 		 * @since 6.2.5
 		 */
 		public function dismiss_escaped_html_notice() {
-			if (
-				! check_admin_referer( 'acf/dismiss_escaped_html_notice', 'nonce' ) ||
-				! current_user_can( acf_get_setting( 'capability' ) ) ) {
+			if ( empty( $_GET['acf-dismiss-esc-html-notice'] ) ) {
 				return;
 			}
 
-			$to_dismiss = acf_request_arg( 'notice', 'escaped_html' );
+			$nonce = sanitize_text_field( wp_unslash( $_GET['acf-dismiss-esc-html-notice'] ) );
 
-			if ( 'escaped_html' === $to_dismiss ) {
-				_acf_delete_escaped_html_log();
-			} else {
-				_acf_delete_will_escape_html_log();
+			if (
+				! wp_verify_nonce( $nonce, 'acf/dismiss_escaped_html_notice' ) ||
+				! current_user_can( acf_get_setting( 'capability' ) )
+			) {
+				return;
 			}
+
+			update_option( 'acf_escaped_html_notice_dismissed', true );
+
+			_acf_delete_escaped_html_log();
+
+			wp_safe_redirect( remove_query_arg( 'acf-dismiss-esc-html-notice' ) );
+			exit;
+		}
+
+		/**
+		 * Clear the escaped unsafe HTML log.
+		 *
+		 * @since 6.2.5
+		 */
+		public function clear_escaped_html_log() {
+			if ( empty( $_GET['acf-clear-esc-html-log'] ) ) {
+				return;
+			}
+
+			$nonce = sanitize_text_field( wp_unslash( $_GET['acf-clear-esc-html-log'] ) );
+
+			if (
+				! wp_verify_nonce( $nonce, 'acf/clear_escaped_html_log' ) ||
+				! current_user_can( acf_get_setting( 'capability' ) )
+			) {
+				return;
+			}
+
+			_acf_delete_escaped_html_log();
+
+			wp_safe_redirect( remove_query_arg( 'acf-clear-esc-html-log' ) );
+			exit;
 		}
 
 		/**

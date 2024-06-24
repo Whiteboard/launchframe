@@ -1,0 +1,77 @@
+{#
+    @name Media
+    @desc Image or looping video
+    @param image - An image URL.
+    @param video - A video URL.
+    @param remote_video - An external video URL.
+    @param position - String. CSS position classes.
+    @param size - String. CSS size classes.
+    @param class - String. Add optional CSS classes.
+    @param image_class - String. Add optional CSS classes for the img tag.
+    @param video_position - String. CSS position classes for the video tag.
+    @param video_width - String. CSS width classes for the video tag.
+    @param video_class - String. Add optional CSS classes for the video tag.
+    @param focal_point - Object. Containes `x` and `y` (Numbers) of the image's focal point
+    @param class - String. Add optional CSS classes.
+    @param attribute - String. Javascript attributes.
+    @type component
+#}
+
+<div
+    {{ attribute }}
+    class="
+        {{ position ?: "absolute inset-0" }}
+        {{ size ?: "w-full h-full" }}
+        {{ class }}
+    "
+>
+    {# :: Video
+    {+} ---------------------------------- #}
+    {% if asset_type == "video" or asset_type == "remote_video" %}
+        <video
+            x-data
+            x-ref="video"
+            x-init="$refs.video.play()"
+            class="
+                {{ video_position ?: "absolute inset-0" }}
+                {{ video_width ?: "w-full" }}
+                {{ not no_cover ? "h-full object-cover" }}
+                {{ video_class }}
+            "
+            {% if not no_cover and focal_point %}
+                style="object-position: {{ focal_point.x ?: 50 }}% {{ focal_point.y ?: 50 }}%"
+            {% endif %}
+            playsinline
+            autoplay
+            muted
+            loop
+            oncanplay="this.muted=true"
+        >
+            <source src="{{ asset_type == "video" ? video : remote_video }}" />
+        </video>
+
+    {# :: Remote Image
+    {+} ---------------------------------- #}
+    {% elseif asset_type == "remote_image" %}
+        {% include "components/image.twig" with {
+            image: remote_image,
+            cover: not no_cover,
+            class: image_class ?: "w-full h-full",
+            static_image: true,
+        } %}
+
+    {# :: Image
+    {+} ---------------------------------- #}
+    {% else %}
+        {% include "components/picture.twig" with {
+            image: Image(image),
+            alt: Image(image).alt,
+            cover: not no_cover,
+            class: image_class ?: "w-full h-full",
+        } %}
+    {% endif %}
+
+    {% if include_image_tint %}
+        <div class="absolute w-full h-full z-10 inset-0 bg-black opacity-40"></div>
+    {% endif %}
+</div>

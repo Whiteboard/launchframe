@@ -11,7 +11,7 @@ $activate_deactivate_btn = $active ? __( 'Deactivate License', 'acf' ) : __( 'Ac
 /**
  * Renders the license status table.
  *
- * @since 6.?
+ * @since 6.2.3
  *
  * @param array $status The current license status array.
  * @return void
@@ -98,7 +98,7 @@ function acf_pro_render_license_status_table( $status ) {
 /**
  * Renders the "Manage License"/"Renew Subscription" button.
  *
- * @since 6.?
+ * @since 6.2.3
  *
  * @param array $status The current license status.
  * @return void
@@ -114,7 +114,7 @@ function acf_pro_render_manage_license_button( $status ) {
 	$text  = __( 'Manage License', 'acf' );
 	$class = '';
 
-	if ( acf_pro_is_license_expired( $status ) ) {
+	if ( acf_pro_is_license_expired( $status ) || acf_pro_was_license_refunded( $status ) ) {
 		$text  = __( 'Renew Subscription', 'acf' );
 		$class = ' acf-btn acf-renew-subscription';
 	}
@@ -142,18 +142,18 @@ function acf_pro_render_manage_license_button( $status ) {
 					<?php echo acf_esc_html( apply_filters( 'acf/admin/license_key_constant_message', __( 'Your license key is defined in wp-config.php.', 'acf' ) ) ); ?>
 				</p>
 
-				<?php if ( ! $active ) : ?>
+				<?php if ( ! acf_pro_is_license_active() ) : ?>
 					<div class="acf-retry-activation">
 						<?php
 						$acf_recheck_class = ' acf-btn acf-btn-secondary';
 
-						if ( acf_pro_is_license_expired( $license_status ) ) {
+						if ( acf_pro_is_license_expired( $license_status ) || acf_pro_was_license_refunded( $license_status ) ) {
 							acf_pro_render_manage_license_button( $license_status );
 							$acf_recheck_class = '';
 						}
 
 						$acf_recheck_nonce = wp_create_nonce( 'acf_retry_activation' );
-						$acf_recheck_url   = admin_url( 'edit.php?post_type=acf-field-group&page=acf-settings-updates&acf_retry_nonce=' . $nonce );
+						$acf_recheck_url   = admin_url( 'edit.php?post_type=acf-field-group&page=acf-settings-updates&acf_retry_nonce=' . $acf_recheck_nonce );
 						$acf_recheck_text  = __( 'Recheck License', 'acf' );
 						printf(
 							'<a class="acf-recheck-license%1$s" href="%2$s"><i class="acf-icon acf-icon-regenerate"></i>%3$s</a>',
@@ -181,13 +181,14 @@ function acf_pro_render_manage_license_button( $status ) {
 					$activate_deactivate_btn_id    = $active ? 'id="deactivate-license" ' : '';
 					$activate_deactivate_btn_class = $active ? ' acf-btn-tertiary' : '';
 					?>
-					<input <?php echo $activate_deactivate_btn_id; ?>type="submit" value="<?php echo esc_attr( $activate_deactivate_btn ); ?>" class="acf-btn<?php echo esc_attr( $activate_deactivate_btn_class ); ?>">
+					<input <?php echo $activate_deactivate_btn_id; //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- manually defined safe HTML. ?>type="submit" value="<?php echo esc_attr( $activate_deactivate_btn ); ?>" class="acf-btn<?php echo esc_attr( $activate_deactivate_btn_class ); ?>">
 					<?php
 					acf_pro_render_manage_license_button( $license_status );
 
-					if ( acf_pro_is_license_expired( $license_status ) ) {
-						$acf_recheck_url  = admin_url( 'edit.php?post_type=acf-field-group&page=acf-settings-updates&acf-recheck-license=true' );
-						$acf_recheck_text = __( 'Recheck License', 'acf' );
+					if ( acf_pro_is_license_expired( $license_status ) || acf_pro_was_license_refunded( $license_status ) ) {
+						$acf_recheck_nonce = wp_create_nonce( 'acf_recheck_status' );
+						$acf_recheck_url   = admin_url( 'edit.php?post_type=acf-field-group&page=acf-settings-updates&acf_retry_nonce=' . $acf_recheck_nonce );
+						$acf_recheck_text  = __( 'Recheck License', 'acf' );
 						printf(
 							'<a class="acf-recheck-license" href="%1$s"><i class="acf-icon acf-icon-regenerate"></i>%2$s</a>',
 							esc_url( $acf_recheck_url ),
@@ -213,10 +214,12 @@ function acf_pro_render_manage_license_button( $status ) {
 								acf_add_url_utm_tags( 'https://www.advancedcustomfields.com/pro/', 'ACF upgrade', 'license activations' ),
 								$acf_view_pricing_text
 							);
-							printf(
-							/* translators: %s - link to ACF website */
-								__( 'Don\'t have an ACF PRO license? %s', 'acf' ),
-								$acf_view_pricing_link
+							echo acf_esc_html(
+								sprintf(
+									/* translators: %s - link to ACF website */
+									__( 'Don\'t have an ACF PRO license? %s', 'acf' ),
+									$acf_view_pricing_link
+								)
 							);
 							?>
 						</span>
@@ -289,13 +292,15 @@ function acf_pro_render_manage_license_button( $status ) {
 					<a class="button" disabled="disabled" href="#"><?php esc_html_e( 'Please reactivate your license to unlock updates', 'acf' ); ?></a>
 				<?php elseif ( $active && is_multisite() ) : ?>
 					<a class="button" disabled="disabled" href="#"><?php esc_html_e( 'Update ACF in Network Admin', 'acf' ); ?></a>
+				<?php elseif ( $active && ! is_plugin_active( ACF_BASENAME ) ) : ?>
+					<a class="button" disabled="disabled" href="#"><?php esc_html_e( 'Updates must be manually installed in this configuration', 'acf' ); ?></a>
 				<?php elseif ( $active ) : ?>
-					<a class="acf-btn" href="<?php echo esc_attr( admin_url( 'plugins.php?s=Advanced+Custom+Fields+Pro' ) ); ?>"><?php esc_html_e( 'Update Plugin', 'acf' ); ?></a>
+					<a class="acf-btn" href="<?php echo esc_url( admin_url( 'plugins.php?s=Advanced+Custom+Fields+Pro' ) ); ?>"><?php esc_html_e( 'Update Plugin', 'acf' ); ?></a>
 				<?php else : ?>
 					<a class="button" disabled="disabled" href="#"><?php esc_html_e( 'Enter your license key to unlock updates', 'acf' ); ?></a>
 				<?php endif; ?>
 			<?php else : ?>
-				<a class="acf-btn acf-btn-secondary" href="<?php echo esc_attr( add_query_arg( 'force-check', 1 ) ); ?>"><?php esc_html_e( 'Check For Updates', 'acf' ); ?></a>
+				<a class="acf-btn acf-btn-secondary" href="<?php echo esc_url( add_query_arg( 'force-check', 1 ) ); ?>"><?php esc_html_e( 'Check For Updates', 'acf' ); ?></a>
 			<?php endif; ?>
 		</div>
 	</div>

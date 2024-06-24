@@ -1,0 +1,23 @@
+{#
+    @name Overlay
+    @desc Hidden naviagion used in the nav overlay
+    @type navigation
+#}
+
+<nav>
+    <ul class="space-y-6">
+        {% for item in nav.overlay.items %}
+            {% if loop.last != true %}
+                {% include "components/navigation/nav_overlay_item.twig" %}
+            {% else %}
+                <li>
+                    {% include "components/buttons/button_primary.twig" with {
+                        label: item.title,
+                        action: "url",
+                        url: item.link,
+                    } %}
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+</nav>

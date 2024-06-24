@@ -1,0 +1,29 @@
+{#
+    @name H5
+    @desc The typography h5 partial to render an h5.
+    @param* content - The meta content.
+    @param as - The wrapping element.
+    @param size - The font size utility.
+    @param color - Set a custom text color utility.
+    @param weight - Set a custom font weight utility.
+    @param line_height - Set a custom line height utility.
+    @param letter_spacing - Set a custom letter spacing utility.
+    @param class - Add custom CSS classes.
+    @param attribute - Add custom JS.
+    @type typography
+#}
+
+<{{ as ?: "h5" }}
+    {{ attribute }}
+    class="
+        {{ size ?: 'text-lg' }}
+        {{ color ?: 'text-current' }}
+        {{ weight ?: 'font-bold' }}
+        {{ line_height ?: 'leading-none'}}
+        {{ letter_spacing ?: 'tracking-normal' }}
+        {{ class }}
+        font-sans
+    "
+>
+    {{ content }}
+</{{ as ?: "h5" }}>

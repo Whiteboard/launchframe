@@ -12,7 +12,7 @@ use Timber\Timber;
 
 class SearchController extends Controller
 {
-    public function handle()
+    public function handle(): TimberResponse
     {
         $context = Timber::get_context();
         $searchQuery = get_search_query();

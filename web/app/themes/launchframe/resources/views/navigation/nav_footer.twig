@@ -1,0 +1,21 @@
+{#
+    @name Footer
+    @desc Footer naviagion used in the footer
+    @type navigation
+#}
+
+{% if nav.items | length > 0 %}
+    <div class="grid gap-4 content-start">
+        {% include "typography/h5.twig" with {
+            content: nav.title,
+            color: "text-neutral-500",
+            as: "span",
+            attribute: "data-nav-item",
+        } %}
+        <ul class="grid grid-cols-1 gap-2">
+            {% for item in nav.items %}
+                {% include "components/navigation/nav_footer_item.twig" %}
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}

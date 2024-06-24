@@ -1,38 +1,13 @@
+import animations from '@stores/Animations'
+import audio from '@stores/Audio'
+import header from '@stores/Header'
+import overlays from '@stores/Overlays'
+import utilities from '@stores/Utilities'
+
 export default () => {
-    Alpine.store('animationDelay', 0.25);
-    Alpine.store('enterDelay', 1);
-
-    Alpine.store('navigator', {
-        open: false,
-        animating: false,
-
-        toggle() {
-            if (!this.animating) {
-                this.animating = true; // End of animations set this to false
-                this.open = !this.open;
-            }
-        }
-    });
-
-    Alpine.store('search', {
-        open: false,
-    });
-
-    Alpine.store('audioMute', false); // User Toggled & Persisted
-    Alpine.store('audioPause', false);
-
-    document.addEventListener('visibilitychange', () => {
-        Alpine.store('audioPause', document.hidden);
-    });
-
-    Alpine.store('lightboxVideo', {
-        open: false,
-        source: '',
-        youtube: '',
-        vimeo: '',
-        mp4: '',
-        webm: '',
-        poster: ''
-    });
-
-};
+    animations()
+    audio()
+    header()
+    overlays()
+    utilities()
+}

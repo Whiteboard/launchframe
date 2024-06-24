@@ -1,29 +1,60 @@
 {% if overline or title or subtitle %}
-    <div class="{{ sectionClass ? sectionClass : 'mb-8 md:mb-16 text-center' }}">
+    <div
+        x-data
+        x-ref="content"
+        class="{{ sectionClass ? sectionClass : 'mb-8 md:mb-16 text-center' }}"
+    >
         {% if overline %}
-            {% include "typography/paragraph.twig" with {
+            {% include "typography/meta.twig" with {
                 content: overline,
-                style: "overline",
-                margins: "mb-4",
-            }%}
+                class: "mb-4",
+                attribute: "
+                    x-data='animateText()'
+                    x-init='
+                        type = `chars`;
+                        stagger = 0.03;
+                        setTrigger($refs.content);
+                        trigger = $refs.content;
+                        delay = delay + 0.3;
+                        mounted();
+                    '
+                    x-ref='element'
+                ",
+                as: "div",
+            } %}
         {% endif %}
+
         {% if title %}
             {% include "typography/h2.twig" with {
                 content: title,
-                as: titleTag ? titleTag : "h2",
                 attribute: "
-                    x-data='words()'
-                    x-init='mounted()'
+                    x-data='animateText()'
+                    x-init='
+                        opacity.active = false;
+                        yPercent = {
+                            ...yPercent, active: true,
+                            start: 102,
+                            duration: 0.4,
+                        };
+                        type = `chars`;
+                        wordsClass = avalanche.textClass.words.h1;
+                        stagger = 0.03;
+                        setTrigger($refs.content);
+                        trigger = $refs.content;
+                        mounted();
+                    '
                     x-ref='element'
                 ",
-            }%}
+                as: title_tag ?: "h2",
+            } %}
         {% endif %}
+
         {% if subtitle %}
             {% include "typography/paragraph.twig" with {
                 content: subtitle,
                 margins: "mt-4",
                 class: textClass ? textClass : "max-w-xl mx-auto"
-            }%}
+            } %}
         {% endif %}
     </div>
 {% endif %}

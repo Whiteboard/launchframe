@@ -8,15 +8,6 @@ module.exports = {
 
     mode: 'jit',
     // Configure Purge CSS.
-    content: [
-        './resources/views/**/*.twig',
-        './resources/js/**/*.js',
-        './resources/js/**/*.vue',
-    ],
-    safelist: [
-         'wpcf7-list-item',
-         'wpcf7-checkbox',
-         'wpcf7-radio',
-         'wpcf7-form-control-wrap'
-    ]
+    content: ['./resources/views/**/*.twig', './resources/js/**/*.js', './resources/js/**/*.vue'],
+    safelist: ['wpcf7-list-item', 'wpcf7-checkbox', 'wpcf7-radio', 'wpcf7-form-control-wrap'],
 }

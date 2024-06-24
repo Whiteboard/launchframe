@@ -1,59 +1,38 @@
-<footer class="w-full py-16 bg-neutral-200">
+{#
+    @name Footer
+    @desc The sites footer rendered on each page.
+    @type module
+#}
+
+<footer class="relative w-full -mb-px py-16 bg-neutral-900 text-neutral-300">
     <div class="fluid-container">
         {% include "modules/email_signup.twig" %}
+
         <div class="lg:flex justify-between mt-12">
             <div class="w-full lg:w-2/5 xl:w-1/2 mb-10 lg:mb-0">
-                <div
-                    x-data="fadeIn()"
-                    x-init="
-                        scrollTrigger = false;
-                        delay = $store.enterDelay + 0.2;
-                        mounted();
-                    "
-                    x-cloak
-                    x-ref="element"
-                    class="flex justify-center lg:justify-start"
-                >
-                    {% include "components/logo.twig" with {
-                        size: "w-16 h-16"
-                    }%}
-                </div>
+                {% include "components/logo.twig" with {
+                    size: "w-16 h-16",
+                } %}
             </div>
-            <div class="w-full lg:w-3/5 xl:w-1/2 grid grid-cols-2 md:grid-cols-4 gap-10">
-                <div class="">
-                    {% include "components/footer_link_list.twig" with {
-                        menu_name: footer_menu_one
-                    }%}
-                </div>
-                <div class="">
-                    {% include "components/footer_link_list.twig" with {
-                        menu_name: footer_menu_two
-                    }%}
-                </div>
-                <div class="">
-                    {% include "components/footer_link_list.twig" with {
-                        menu_name: footer_menu_three
-                    }%}
-                </div>
-                <div class="">
-                    {% include "components/footer_link_list.twig" with {
-                        menu_name: footer_menu_four
-                    }%}
-                </div>
+
+            <div class="w-full lg:w-3/5 xl:w-1/2 grid grid-cols-2 gap-10">
+                {% include "navigation/nav_footer.twig" with {
+                    nav: nav.footer.1,
+                } %}
+                {% include "navigation/nav_footer.twig" with {
+                    nav: nav.footer.2,
+                } %}
             </div>
         </div>
-        <div class="border-t border-neutral-400 mt-12 pt-12 flex flex-col md:flex-row justify-between items-center gap-6">
-            {% include "typography/paragraph.twig" with {
-                content: "&copy; " ~ site.title ~ ' ' ~ today|date('Y'),
-                size: "sm",
-                margins: " "
-            }%}
+
+        <div class="border-t border-secondary-400 mt-12 pt-12 flex flex-col md:flex-row justify-between items-center gap-6">
+            {% include "typography/meta.twig" with {
+                content: "&copy; " ~ site.title ~ ' ' ~ today | date('Y'),
+            } %}
             {% include "components/socials.twig" %}
-            {% include "typography/paragraph.twig" with {
+            {% include "typography/meta.twig" with {
                 content: "All rights reserved",
-                size: "sm",
-                margins: " "
-            }%}
+            } %}
         </div>
     </div>
 </footer>

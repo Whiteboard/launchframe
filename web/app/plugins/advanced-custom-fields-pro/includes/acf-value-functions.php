@@ -130,16 +130,15 @@ function acf_get_value( $post_id, $field ) {
 acf_add_filter_variations( 'acf/load_value', array( 'type', 'name', 'key' ), 2 );
 
 /**
- * acf_format_value
- *
  * Returns a formatted version of the provided value.
  *
  * @since   5.0.0
  *
- * @param mixed          $value     The field value.
- * @param integer|string $post_id   The post id.
- * @param array          $field     The field array.
+ * @param mixed          $value       The field value.
+ * @param integer|string $post_id     The post id.
+ * @param array          $field       The field array.
  * @param boolean        $escape_html Ask the field for a HTML safe version of it's output.
+ *
  * @return mixed
  */
 function acf_format_value( $value, $post_id, $field, $escape_html = false ) {
@@ -169,7 +168,6 @@ function acf_format_value( $value, $post_id, $field, $escape_html = false ) {
 	 * @param string  $post_id     The post ID for this value.
 	 * @param array   $field       The field array.
 	 * @param boolean $escape_html Ask the field for a HTML safe version of it's output.
-	 *                             This parameter will not guarantee the result is escaped, only if the field type supports it.
 	 */
 	$value = apply_filters( 'acf/format_value', $value, $post_id, $field, $escape_html );
 
@@ -374,10 +372,11 @@ function acf_log_invalid_field_notice( $field, $function ) {
 	}
 
 	$error_text = sprintf(
+		/* translators: %1 plugin name, %2 the URL to the documentation on this error */
 		__( '<strong>%1$s</strong> - We\'ve detected one or more calls to retrieve ACF field values before ACF has been initialized. This is not supported and can result in malformed or missing data. <a href="%2$s" target="_blank">Learn how to fix this</a>.', 'acf' ),
 		acf_get_setting( 'name' ),
 		acf_add_url_utm_tags( 'https://www.advancedcustomfields.com/resources/acf-field-functions/', 'docs', 'early_init_warning' )
 	);
-	_doing_it_wrong( $function, $error_text, '5.11.1' );
+	_doing_it_wrong( esc_html( $function ), acf_esc_html( $error_text ), '5.11.1' );
 }
 add_action( 'acf/get_invalid_field_value', 'acf_log_invalid_field_notice', 10, 2 );

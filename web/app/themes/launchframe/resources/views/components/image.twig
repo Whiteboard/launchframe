@@ -1,71 +1,30 @@
-{% if image %}
+{#
+    @name Image
+    @desc Used to display an image; mainly used by the picture component.
+    @param* image - An image URL.
+    @param class - String. Add optional CSS classes.
+    @param cover - Boolean. Whether the image should cover the parent. Uses the focus point.
+    @param focal_point - Object. Containes `x` and `y` (Numbers) of the image's focal point
+    @param alt - String. Image's alt text.
+    @param lazy - Boolean. Whether the image should be natively lazy loaded.
+    @type component
+#}
 
-    {% if size == "small" %}
-        <picture>
-            <source
-                srcset="
-                    {{ image | towebp | resize(1024) }} 1024w,
-                    {{ image | towebp | resize(800) }} 800w,
-                    {{ image | towebp | resize(600) }} 600w,
-                    {{ image | towebp | resize(375) }} 375w"
-                sizes="auto"
-                type="image/webp"
-            >
-            <img
-                class="absolute inset-0 w-full h-full {{ objectFit ? objectFit : 'object-cover'}} {{ imageClass }}"
-                src="{{ image | resize(800) }}"
-                alt="{{ alt }}"
-                loading="{{ loading ? loading : 'lazy' }}"
-            >
-        </picture>
-
-    {% elseif size == "medium" %}
-        <picture>
-            <source
-                srcset="
-                    {{ image | towebp | resize(1440) }} 1440w,
-                    {{ image | towebp | resize(1320) }} 1320w,
-                    {{ image | towebp | resize(1200) }} 1200w,
-                    {{ image | towebp | resize(1024) }} 1024w,
-                    {{ image | towebp | resize(800) }} 800w,
-                    {{ image | towebp | resize(600) }} 600w,
-                    {{ image | towebp | resize(375) }} 375w"
-                sizes="auto"
-                type="image/webp"
-            >
-            <img
-                class="absolute inset-0 w-full h-full {{ objectFit ? objectFit : 'object-cover'}} {{ imageClass }}"
-                src="{{ image | resize(800) }}"
-                alt="{{ alt }}"
-                loading="{{ loading ? loading : 'lazy' }}"
-            >
-        </picture>
-
-
-    {% else %}
-        <picture>
-            <source
-                srcset="
-                    {{ image | towebp | resize(2500) }} 2500w,
-                    {{ image | towebp | resize(1920) }} 1920w,
-                    {{ image | towebp | resize(1600) }} 1600w,
-                    {{ image | towebp | resize(1440) }} 1440w,
-                    {{ image | towebp | resize(1320) }} 1320w,
-                    {{ image | towebp | resize(1200) }} 1200w,
-                    {{ image | towebp | resize(1024) }} 1024w,
-                    {{ image | towebp | resize(800) }} 800w,
-                    {{ image | towebp | resize(600) }} 600w,
-                    {{ image | towebp | resize(375) }} 375w"
-                sizes="auto"
-                type="image/webp"
-            >
-            <img
-                class="absolute inset-0 w-full h-full {{ objectFit ? objectFit : 'object-cover'}} {{ imageClass }}"
-                src="{{ image | resize(800) }}"
-                alt="{{ alt }}"
-                loading="{{ loading ? loading : 'lazy' }}"
-            >
-        </picture>
+<img
+    src="{{ image }}"
+    class="
+        {{ cover ? "absolute inset-0 w-full h-full object-cover" }}
+        {{ class }}
+    "
+    {% if cover and focal_point %}
+        style="object-position: {{ focal_point.x ?: 50 }}% {{ focal_point.y ?: 50 }}%"
     {% endif %}
-
-{% endif %}
+    {% if alt %}
+        alt="{{ alt }}"
+    {% else %}
+        aria-hidden="true"
+    {% endif %}
+    {% if lazy %}
+        loading="lazy"
+    {% endif %}
+/>

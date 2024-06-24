@@ -1,0 +1,59 @@
+{#
+    @name Primary
+    @desc The default layout wrapper.
+    @type layout
+#}
+
+<!doctype html>
+<html {{ site.language_attributes }}>
+    {% include "modules/head.twig" %}
+
+    <body
+        data-portal="realm"
+        class="
+            {{ environment == "development" ? "debug" : "" }}
+            text-base antialiased
+        "
+    >
+
+        {% include "modules/transitions.twig" %}
+        {% include "modules/header.twig" %}
+        {% include "components/navigation/skip_to_content.twig" %}
+        {% include "modules/overlays/overlay_nav.twig" %}
+        {#
+        {% include "modules/overlays/overlay_highlight.twig" %}
+        {% include "modules/overlays/overlay_video.twig" %}
+        #}
+        {% include "components/toolbar.twig" %}
+
+        <div id="smooth-wrapper">
+            <div id="smooth-content">
+                <div
+                    data-portal="destination"
+                    {% block namespace %}
+                        data-portal-namespace="primary"
+                    {% endblock %}
+                    class="{{ body_class }} -mb-px"
+                >
+
+                    {% include "snippets/seo_body.twig" %}
+                    {% include "snippets/active_page.twig" %}
+                    <div id="maincontent"></div>
+
+                    {% block content %}
+                    {% endblock %}
+
+                    {% include "modules/footer.twig" %}
+                    {#
+                    {% include "components/dev_section.twig" %}
+                    #}
+                </div>
+            </div>
+        </div>
+
+        {# {% include "components/cursor.twig" %} #}
+
+        {{ function("wp_footer") }}
+        {% include "snippets/browser_sync.twig" %}
+    </body>
+</html>

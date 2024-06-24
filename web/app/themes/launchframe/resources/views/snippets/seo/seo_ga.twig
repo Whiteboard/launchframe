@@ -1,0 +1,15 @@
+{#
+    @name SEO: Google Analytics
+    @desc Adds Google Analytics to the site
+    @type snippet
+#}
+
+{% if environment != "development" and globals.google_analytics %}
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ globals.google_analytics }}"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '{{ globals.google_analytics }}');
+    </script>
+{% endif %}

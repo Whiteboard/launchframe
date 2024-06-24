@@ -1,0 +1,50 @@
+{#
+    @name Primary
+    @desc Primary naviagion used in the header
+    @type component
+#}
+
+<nav
+    title="Primary Navigation"
+    x-data="animate()"
+    x-init="
+        scrollTrigger = false;
+        element = [...$refs.menu.querySelectorAll('[data-nav-item]')];
+        opacity.active = false;
+        xPercent = {
+            ...xPercent, active: true,
+            start: -101,
+        };
+        stagger = 0.1;
+        delay = avalanche.delay.enter + 0.2;
+        mounted();
+    "
+    x-ref="menu"
+>
+    <ul class="hidden md:flex items-center space-x-10">
+        {% for item in nav.primary.items %}
+            {% if loop.last != true %}
+                {% include "components/navigation/nav_primary_item.twig" %}
+            {% else %}
+                <li
+                    x-data="animate()"
+                    x-init="
+                        scrollTrigger = false;
+                        delay = avalanche.delay.enter + 0.4;
+                        mounted();
+                    "
+                    x-ref="element"
+                >
+                    {% include "components/buttons/button_primary.twig" with {
+                        label: item.title,
+                        action: "url",
+                        url: item.link,
+                        fade_in_disable: true,
+                        size: "small",
+                    } %}
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+</nav>
+

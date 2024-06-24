@@ -1,0 +1,77 @@
+<section
+    x-data
+    id="{{ id }}"
+    class="
+        {{ blockset.media_side == 'left' ? 'lg:flex-row' : 'lg:flex-row-reverse' }}
+        {% include "snippets/no_block_spacing.twig" %}
+        fluid-container flex flex-col lg:justify-between gap-10 md:gap-16
+    "
+>
+
+    {% if blockset.media %}
+        <div
+            {# :: Parallax ------------ #}
+            x-data="animate()"
+            x-init="
+                opacity.active = false;
+                scale = {
+                    ...scale, active: true,
+                    start: 1.16,
+                    end: 1.16,
+                    ease: 'none',
+                };
+                yPercent = {
+                    ...yPercent, active: true,
+                    start: -8,
+                    end: 8,
+                    ease: 'none',
+                };
+                trigger = $refs.container;
+                scrub = 1.2;
+                start = 'top bottom';
+                mounted();
+            "
+            x-ref="container"
+            class="relative z-0 lg:basis-1/2 aspect-square rounded-3xl overflow-hidden"
+        >
+            {% include "components/media.twig" with {
+                asset_type: blockset.media.asset_type,
+                image: blockset.media.image,
+                video: blockset.media.video,
+                remote_image: blockset.media.remote_image,
+                remote_video: blockset.media.remote_video,
+                attribute: "x-ref='element'",
+            } %}
+        </div>
+    {% endif %}
+
+    <div x-ref="container" class="lg:basis-1/2 lg:py-6 xl:py-10">
+        {% include "components/intro.twig" with {
+            overline: blockset.overline,
+            title: blockset.title,
+            sectionClass: "text-left mb-8",
+        } %}
+
+        {% if blockset.text %}
+            {% include "typography/paragraph.twig" with {
+                content: blockset.text,
+                size: "lg",
+                attribute: "
+                    x-data='animateText()'
+                    x-init='
+                        stagger = 0.03;
+                        setTrigger($refs.container);
+                        trigger = $refs.hero;
+                        delay = delay + 0.3;
+                        mounted();
+                    '
+                    x-ref='element'
+                ",
+            } %}
+        {% endif %}
+
+        {% include "components/buttons.twig" with {
+            buttons: blockset.buttons,
+        } %}
+    </div>
+</section>

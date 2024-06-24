@@ -4,7 +4,7 @@
         overline: blockset.overline,
         title: blockset.title,
         subtitle: blockset.subtitle
-    }%}
+    } %}
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
         {% for item in blockset.ctas %}
@@ -13,13 +13,13 @@
                 {% if item.title %}
                     {% include "typography/h3.twig" with {
                         content: item.title
-                    }%}
+                    } %}
                 {% endif %}
                 {% if item.text %}
                     {% include "typography/paragraph.twig" with {
                         content: item.text,
                         margins: "my-4"
-                    }%}
+                    } %}
                 {% endif %}
             </div>
             {% if item.buttons|length > 0 %}

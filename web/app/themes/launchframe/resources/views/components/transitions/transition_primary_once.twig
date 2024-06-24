@@ -1,0 +1,13 @@
+{#
+    @name Primary Once Transition
+    @desc Transition on the first page load.
+    @type component
+#}
+
+<div id="primary-once" class="fixed z-50 inset-0 w-full h-screen overflow-hidden">
+    <div data-curtain class="absolute inset-0 w-full h-full bg-primary"></div>
+
+    <div data-logo class="absolute left-12 lg:left-24 bottom-12 lg:bottom-24 w-24 fill-current text-neutral-100">
+        {{ source("resources/images/logo.svg") }}
+    </div>
+</div>

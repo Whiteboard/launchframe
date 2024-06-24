@@ -1,4 +1,4 @@
-{% extends "layouts/base.twig" %}
+{% extends "layouts/layout_primary.twig" %}
 
 {% block content %}
 
@@ -19,11 +19,11 @@
                     content: page.title,
                     as: "h1",
                     class: "mb-2"
-                }%}
+                } %}
                 {% if page.thumbnail %}
                     {% include "typography/paragraph.twig" with {
                         content: page.preview.length(20).read_more(false)
-                    }%}
+                    } %}
                 {% endif %}
             </div>
 
@@ -32,7 +32,7 @@
         {% if page.thumbnail %}
         <div class="mb-12">
             <div class="w-full h-screen-25 md:h-screen-40 lg:h-screen-50 xl:h-screen-75 bg-primary relative">
-                {% include "components/background.twig" with {
+                {% include "components/media.twig" with {
                     asset_type: "image",
                     image: page.thumbnail,
                 } %}
@@ -69,7 +69,7 @@
                         style: "overline",
                         class: "border-b border-neutral-300 pb-1",
                         margins: "mb-3"
-                    }%}
+                    } %}
                     {% include "modules/sharing.twig" %}
                 </div>
 
@@ -79,7 +79,7 @@
                         style: "overline",
                         class: "border-b border-neutral-300 pb-1",
                         margins: "mb-3"
-                    }%}
+                    } %}
                     <div class="grid grid-cols-1 gap-6">
                         {% for post in related %}
                             <a class="group" href="{{ post.link }}">
@@ -88,13 +88,13 @@
                                     size: "lg",
                                     margins: "mb-0",
                                     class: "group-hover:text-secondary"
-                                }%}
+                                } %}
                                 {% include "typography/paragraph.twig" with {
                                     content: post.date,
                                     size: "sm",
                                     margins: "mb-0",
                                     class: "opacity-80"
-                                }%}
+                                } %}
                             </a>
                         {% endfor %}
                     </div>

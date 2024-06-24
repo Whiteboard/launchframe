@@ -13,7 +13,7 @@ use Timber\Timber;
 
 class SingleController extends Controller
 {
-    public function handle()
+    public function handle(): TimberResponse
     {
         $context = Timber::get_context();
         $post = new Post();

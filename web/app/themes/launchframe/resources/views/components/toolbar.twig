@@ -1,61 +1,99 @@
-{% if user and user.can("edit") %}
-    <aside
-        x-data="{
-            visible: true
-        }"
-        x-ref="toolbar"
-        x-cloak
-        class="fixed z-50 bottom-0 right-0 flex bg-neutral text-sm uppercase cursor-default hover:opacity-100 transition-opacity"
-        :class="{ 'opacity-100': visible, 'opacity-0': !visible }"
-    >
+{#
+    @name Launchframe Toolbar
+    @desc The Launchframe toolbar component displaying debug information.
+#}
 
+{% if environment == "development" %}
+<aside
+    x-data="{
+        visible: true,
+    }"
+    x-cloak
+    class="
+        fixed z-40 bottom-0 right-0
+        flex bg-neutral font-mono text-xs
+        uppercase cursor-default
+        lg:hover:opacity-100 transition-opacity
+    "
+    :class="{
+        'opacity-100': visible,
+        'opacity-0': !visible,
+    }"
+>
+
+    <span
+        title="Current Tailwind breakpoint"
+        class="flex items-center p-2 space-x-1 text-white bg-primary"
+    >
+            <div class="w-5 h-5 fill-current pr-1">
+                {{ source("resources/images/breakpoint.svg") }}
+            </div>
+        <span class="breakpoint"></span>
+    </span>
+
+    {% if user %}
         <a
-            href="{{ function('get_edit_post_link') }}"
+            :href="$store.overlay.toolbar.editUrl"
             title="Edit entry in CP"
             aria-label="Edit entry in CP"
             target="_blank"
-            class="flex items-center pl-4 pr-3 py-2 space-x-1 text-red-500 hover:text-pink-400 bg-gray-900 hover:bg-gray-950 cursor-pointer transition-colors"
+            class="
+                flex items-center space-x-1
+                pl-4 pr-3 py-2
+                text-red-500 hover:text-pink-400
+                bg-gray-900 hover:bg-gray-950
+                cursor-pointer transition-colors
+            "
         >
             <div class="w-5 h-5 fill-current pr-1">
-                {{ source('assets/images/edit.svg') }}
+                {{ source("resources/images/edit.svg") }}
             </div>
             <span class="pt-0.5">Edit</span>
         </a>
+    {% endif %}
 
-        <button
-            @click="
-                visible = !visible;
-            "
-            title="Toggle toolbar visibility"
-            aria-label="Toggle toolbar visibility"
-            class="flex items-center justify-center px-2 bg-gray-900 hover:bg-gray-950 text-white hover:text-orange-500 cursor-pointer transition-colors"
+    <button
+        @click="visible = !visible"
+        title="Toggle toolbar visibility"
+        aria-label="Toggle toolbar visibility"
+        class="
+            flex items-center justify-center px-2
+            bg-gray-900 hover:bg-gray-950
+            text-white hover:text-orange-500
+            cursor-pointer transition-colors
+        "
+    >
+        <div
+            class="w-5 fill-current"
+            :class="{ 'hidden': visible, 'block': !visible }"
         >
-            <div
-                class="w-5 fill-current"
-                :class="{ 'hidden': visible, 'block': !visible }"
-            >
-                {{ source('assets/images/invisible.svg') }}
-            </div>
+            {{ source("resources/images/invisible.svg") }}
+        </div>
 
-            <div
-                class="w-5 fill-current"
-                :class="{ 'block': visible, 'hidden': !visible }"
-            >
-                {{ source('assets/images/visible.svg') }}
-            </div>
-        </button>
-
-        <button
-            @click="$refs.toolbar.remove()"
-            title="Remove toolbar"
-            aria-label="Remove toolbar"
-            class="flex items-center justify-center px-2 text-gray-500 hover:text-teal-400 bg-gray-900 hover:bg-gray-950 cursor-pointer transition-colors"
+        <div
+            class="w-5 fill-current"
+            :class="{ 'block': visible, 'hidden': !visible }"
         >
-            <div
-                class="w-5 h-5 stroke-current"
-            >
-                {{ source('assets/images/trash.svg') }}
-            </div>
-        </button>
-    </aside>
+            {{ source("resources/images/visible.svg") }}
+        </div>
+    </button>
+
+    <button
+        @click="$refs.toolbar.remove()"
+        title="Remove toolbar"
+        aria-label="Remove toolbar"
+        class="
+            flex items-center justify-center px-2
+            text-gray-500 hover:text-teal-400
+            bg-gray-900 hover:bg-gray-950
+            cursor-pointer transition-colors
+        "
+    >
+        <div
+            class="w-5 h-5 stroke-current"
+        >
+            {{ source("resources/images/trash.svg") }}
+        </div>
+    </button>
+</aside>
 {% endif %}

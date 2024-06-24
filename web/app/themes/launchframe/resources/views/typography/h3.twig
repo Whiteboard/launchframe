@@ -1,11 +1,29 @@
-<{{ as ? as : "h3" }}
+{#
+    @name H3
+    @desc The typography h3 partial to render an h3.
+    @param* content - The meta content.
+    @param as - The wrapping element.
+    @param size - The font size utility.
+    @param color - Set a custom text color utility.
+    @param weight - Set a custom font weight utility.
+    @param line_height - Set a custom line height utility.
+    @param letter_spacing - Set a custom letter spacing utility.
+    @param class - Add custom CSS classes.
+    @param attribute - Add custom JS.
+    @type typography
+#}
+
+<{{ as ?: "h3" }}
     {{ attribute }}
     class="
-        {{ color ? color : "text-current" }}
-        font-sans leading-none font-bold
-        text-3xl md:text-4xl
+        {{ size ?: 'text-3xl md:text-4xl' }}
+        {{ color ?: 'text-current' }}
+        {{ weight ?: 'font-bold' }}
+        {{ line_height ?: 'leading-none'}}
+        {{ letter_spacing ?: 'tracking-normal' }}
         {{ class }}
+        font-sans
     "
 >
     {{ content }}
-</{{ as ? as : "h3" }}>
+</{{ as ?: "h3" }}>

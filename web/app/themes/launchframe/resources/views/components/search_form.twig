@@ -1,3 +1,9 @@
+{#
+    @name Search Form
+    @desc Primary search form for the site
+    @type component
+#}
+
 <form
     role="search"
     method="get"
@@ -5,12 +11,32 @@
     class="flex p-1 justify-start w-full"
 >
     <label for="search" class="sr-only">Search</label>
-    <input 
-        name="s" required 
-        class="search-box outline-0 p-2 flex-grow rounded-l text-neutral-800 {{ focus ? focus : 'focus:ring-secondary focus:ring-2' }} {{ placeholder ? placeholder : 'placeholder:text-neutral-400' }} {{ background }}" 
-        value="{{ query }}" 
-        placeholder="Enter search term" />
-    <button type="submit" class="p-4 outline-0 bg-primary-400 rounded-r {{ focus ? focus : 'focus:ring-secondary focus:ring-2' }}">
-        <div class="w-4">{{ source('resources/images/search.svg') }}</div>
+    <input
+        name="s"
+        required
+        value="{{ query }}"
+        placeholder="Enter search term"
+        class="
+            {{ background ?: 'bg-neutral-900' }}
+            {{ color ?: ' text-white' }}
+            {{ focus ?: 'focus:bg-neutral-100 focus:text-neutral' }}
+            {{ placeholder ?: 'placeholder:text-neutral-100/50' }}
+            flex-grow p-2 rounded-l
+            border-none outline-0 focus:outline-none focus:ring-0
+            transition duration-150
+        "
+    />
+
+    <button
+        type="submit"
+        class="
+            p-4 outline-0 rounded-r
+            bg-primary lg:hover:bg-primary-500 focus-visible:bg-primary-400
+            transition group
+        "
+    >
+        <div class="w-4 lg:group-hover:scale-125 transition duration-200">
+            {{ source("resources/images/search.svg") }}
+        </div>
     </button>
 </form>

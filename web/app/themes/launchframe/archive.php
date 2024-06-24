@@ -17,7 +17,7 @@ use Timber\Timber;
 
 class ArchiveController extends Controller
 {
-    public function handle()
+    public function handle(): TimberResponse
     {
         $context = Timber::get_context();
         $context['title'] = 'Archive';

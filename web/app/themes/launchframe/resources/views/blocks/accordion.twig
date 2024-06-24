@@ -21,11 +21,11 @@
         subtitle: blockset.subtitle,
         sectionClass: style == 'side' ? 'lg:w-2/5 lg:pr-20 mb-8 lg:mb-0 text-center lg:text-left' : 'mb-16 text-center',
         textClass: style == 'side' ? 'w-full' : 'max-w-xl mx-auto'
-    }%}
+    } %}
 
     <div 
         class="{{ style == 'side' ? 'lg:w-3/5' : 'max-w-4xl mx-auto' }}"
-        x-data="fadeIn()"
+        x-data="animate()()"
         x-cloak
         x-init="
             translate = 'y';

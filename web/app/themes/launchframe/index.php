@@ -16,7 +16,7 @@ use Timber\Timber;
 
 class IndexController extends Controller
 {
-    public function handle()
+    public function handle(): TimberResponse
     {
 
         $context = Timber::get_context();

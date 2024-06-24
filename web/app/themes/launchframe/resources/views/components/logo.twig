@@ -1,11 +1,22 @@
+{#
+    @name Logo
+    @desc The site logo with different styles and optional sizes
+    @type component
+#}
+
 {% if attribute %}
     <div {{ attribute }}>
 {% endif %}
 
     <a
         href="{{ site.link }}"
-        class="flex justify-center items-center p-3 bg-primary text-white rounded-full {{ size ? size : 'w-20 h-20' }}"
-        aria-label="{{ site.name }}"
+        class="
+            {{ size ?: 'w-20 h-20' }}
+            flex justify-center items-center p-3
+            bg-primary text-neutral-100 rounded-full
+            focus:outline-none focus-visible:ring focus-visible:ring-secondary-400/50
+        "
+        aria-label="{{ site.name }} Logo"
     >
         {{ source("resources/images/logo.svg") }}
     </a>

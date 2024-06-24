@@ -1,88 +1,71 @@
+{#
+    @name Header
+    @desc The main header that is used across the website.
+    @type module
+#}
+
 <header
-    class="z-30 top-0 w-full py-6 transition {{ hero_style == 'one' ? 'text-white fixed' : 'sticky mb-10' }}"
-    x-data="header()"
-    x-int="mounted()"
-    :class="sticky ? 'bg-neutral-50 text-neutral-800' : ''"
+    x-data="{
+        sticky: false,
+        init() {
+            ScrollTrigger.create({
+                trigger: document.body,
+                start: '400px top',
+                end: 'bottom bottom',
+                onEnter: () => {
+                    this.sticky = true;
+                },
+                onLeaveBack: () => {
+                    this.sticky = false;
+                },
+            })
+        },
+    }"
+    x-ref="header"
+    id="site-header"
+    class="fixed z-30 top-0 w-full transition"
+    :class="{
+        'bg-neutral-100 text-secondary' : sticky,
+        'text-white' : !sticky && $store.header.theme === 'dark',
+        'text-neutral' : !sticky && $store.header.theme === 'light',
+    }"
 >
-
-    <a class="skip-link" href="#maincontent">
-        Skip to content
-    </a>
-
-    <div class="fluid-container">
+    <div
+        class="fluid-container py-6 transition-all"
+        :class="sticky ? '!py-1' : 'py-6'"
+    >
         <div class="relative flex justify-between items-center">
 
             <div
-                x-data="fadeIn()"
+                x-data="animate()"
                 x-init="
                     scrollTrigger = false;
-                    delay = $store.enterDelay + 0.2;
+                    delay = avalanche.delay.enter;
                     mounted();
                 "
-                x-cloak
                 x-ref="element"
-                class=""
+                class="transition"
+                :class="{ 'scale-75' : sticky }"
             >
                 {% include "components/logo.twig" %}
             </div>
 
-            <div class="flex items-center">
-
+            <div
+                class="flex items-center space-x-6 lg:space-x-12"
+            >
+                {% include "navigation/nav_primary.twig" %}
                 <div
-                    x-data="fadeIn()"
+                    x-data="animate()"
                     x-init="
                         scrollTrigger = false;
-                        delay = $store.enterDelay + 0.4;
+                        delay = avalanche.delay.enter + 0.5;
                         mounted();
                     "
-                    x-cloak
                     x-ref="element"
-                    class="flex items-center space-x-6 lg:space-x-12"
                 >
-                <nav>
-                    <ul class="hidden md:flex items-center space-x-10">
-                        {% for item in menu.items %}
-                            {% if loop.last != true %}
-                                <li>
-                                    <a
-                                        class="relative text-sm font-bold leading-none transition duration-300 ease-in-out hover:text-secondary"
-                                        href="{{ item.link }}"
-                                    >
-                                        {{ item.title }}
-                                    </a>
-                                </li>
-
-                            {% else %}
-                                <li>
-                                    {% include "components/button.twig" with {
-                                        label: item.title,
-                                        action: "url",
-                                        url: item.link,
-                                        fade_in_disable: true,
-                                        size: "small"
-                                    } %}
-                                </li>
-
-                            {% endif %}
-                        {% endfor %}
-                    </ul>
-                </nav>
-
-                    <button
-                        @click.prevent="$store.navigator.open = true; document.body.classList.add('no-scroll')"
-                        class="text-current transition duration-300 ease-in-out group"
-                    >
-                        <div class="flex flex-col justify-center w-8 space-y-[4px]">
-                            <div class="w-full h-[2px] bg-current group-hover:bg-secondary group-focus:bg-secondary transition"></div>
-                            <div class="w-full h-[2px] bg-current group-hover:bg-secondary group-focus:bg-secondary transition"></div>
-                            <div class="w-full h-[2px] bg-current group-hover:bg-secondary group-focus:bg-secondary transition"></div>
-                        </div>
-                    </button>
-
+                    {% include "components/buttons/button_nav_toggle.twig" %}
                 </div>
-
             </div>
-
         </div>
     </div>
 </header>

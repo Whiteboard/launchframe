@@ -1,39 +1,13 @@
-<div class="flex items-center space-x-8 xl:space-x-4">
+{#
+    @name Socials
+    @desc Group of social media icon links
+    @type component
+#}
 
-{% if globals.facebook %}
-    <a href="{{ globals.facebook }}" target="_blank" class="w-5 block transition {{ hover ? hover : 'hover:opacity-70' }}">
-        {{ source("resources/images/social-facebook.svg") }}
-    </a>
-{% endif %}
-
-{% if globals.twitter %}
-    <a href="{{ globals.twitter }}" target="_blank" class="w-5 block transition {{ hover ? hover : 'hover:opacity-70' }}">
-        {{ source("resources/images/social-twitter.svg") }}
-    </a>
-{% endif %}
-
-{% if globals.youtube %}
-    <a href="{{ globals.youtube }}" target="_blank" class="w-5 block transition {{ hover ? hover : 'hover:opacity-70' }}">
-        {{ source("resources/images/social-youtube.svg") }}
-    </a>
-{% endif %}
-
-{% if globals.linkedin %}
-    <a href="{{ globals.linkedin }}" target="_blank" class="w-5 block transition {{ hover ? hover : 'hover:opacity-70' }}">
-        {{ source("resources/images/social-linkedin.svg") }}
-    </a>
-{% endif %}
-
-{% if globals.instagram %}
-    <a href="{{ globals.instagram }}" target="_blank" class="w-5 block transition {{ hover ? hover : 'hover:opacity-70' }}">
-        {{ source("resources/images/social-instagram.svg") }}
-    </a>
-{% endif %}
-
-{% if globals.tiktok %}
-    <a href="{{ globals.tiktok }}" target="_blank" class="w-5 block transition {{ hover ? hover : 'hover:opacity-70' }}">
-        {{ source("resources/images/social-tiktok.svg") }}
-    </a>
-{% endif %}
-
+<div
+    class="flex items-center space-x-8 xl:space-x-4"
+>
+    {% for social in globals.social_media %}
+        {% include "components/social.twig" %}
+    {% endfor %}
 </div>

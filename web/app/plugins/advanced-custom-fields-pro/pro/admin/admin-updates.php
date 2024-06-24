@@ -109,7 +109,7 @@ if ( ! class_exists( 'ACF_Admin_Updates' ) ) :
 			}
 
 			// Bail early if the updates page is not visible.
-			if ( ! acf_is_updates_page_visible() ) {
+			if ( ! acf_pro_is_updates_page_visible() ) {
 				return;
 			}
 
@@ -136,19 +136,26 @@ if ( ! class_exists( 'ACF_Admin_Updates' ) ) :
 			add_action( 'admin_body_class', array( $this, 'admin_body_class' ) );
 
 			// Check activate.
-			if ( acf_verify_nonce( 'activate_pro_license' ) ) {
-				acf_pro_activate_license( sanitize_text_field( $_POST['acf_pro_license'] ) );
+			if ( acf_verify_nonce( 'activate_pro_license' ) && ! empty( $_POST['acf_pro_license'] ) ) {
+				acf_pro_activate_license( sanitize_text_field( $_POST['acf_pro_license'] ) ); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash -- unslash not needed.
 
 				// Check deactivate.
 			} elseif ( acf_verify_nonce( 'deactivate_pro_license' ) ) {
 				acf_pro_deactivate_license();
 			}
 
+			// Check if we should force check the license status.
+			$force_get_license_status = false;
+			$retry_license_nonce      = acf_request_arg( 'acf_retry_nonce' );
+			if ( wp_verify_nonce( $retry_license_nonce, 'acf_recheck_status' ) || ! empty( $_GET['force-license-check'] ) ) {
+				$force_get_license_status = true;
+			}
+
 			// vars
 			$license    = acf_pro_get_license_key();
 			$this->view = array(
 				'license'            => $license,
-				'license_status'     => acf_pro_get_license_status( ! empty( $_GET['acf-recheck-license'] ) ),
+				'license_status'     => acf_pro_get_license_status( $force_get_license_status ),
 				'active'             => $license ? 1 : 0,
 				'current_version'    => acf_get_setting( 'version' ),
 				'remote_version'     => '',

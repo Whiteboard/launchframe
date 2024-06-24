@@ -4,7 +4,7 @@
     {% if image or video or remote_mp4 %}
         <{{ link ? 'a href="' ~ link ~ '"' : 'div' }} class="block w-full mb-6 {{ size == 'tall' ? 'h-60 md:h-80 lg:h-96' : 'h-48 md:h-56' }}">
         <div class="block relative overflow-hidden w-full h-full">
-            {% include "components/background.twig" with {
+            {% include "components/media.twig" with {
                 asset_type: asset_type,
                 image: image,
                 video: video,
@@ -22,7 +22,7 @@
                 content: overline,
                 style: "overline",
                 margins: "mb-2"
-            }%}
+            } %}
         {% endif %}
         {% if link %}<a href="{{ link }}" class="transition hover:text-secondary">{% endif %}
         {% if heading %}
@@ -37,7 +37,7 @@
             {% include 'typography/paragraph.twig' with {
                 content: text,
                 size: "sm"
-            }%}
+            } %}
         {% endif %}
     </div>
 

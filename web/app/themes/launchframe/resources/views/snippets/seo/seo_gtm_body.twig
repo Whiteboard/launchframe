@@ -1,0 +1,16 @@
+{#
+    @name SEO: Google Tag Manager
+    @desc Adds Google Tag Manager to the current page's body
+    @type snippet
+#}
+
+{% if environment != "development" and globals.google_tag_manager %}
+    <noscript>
+        <iframe
+            src="https://www.googletagmanager.com/ns.html?id={{ globals.google_tag_manager }}"
+            height="0"
+            width="0"
+            style="display:none;visibility:hidden"
+        ></iframe>
+    </noscript>
+{% endif %}

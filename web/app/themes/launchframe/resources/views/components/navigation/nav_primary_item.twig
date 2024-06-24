@@ -1,0 +1,43 @@
+{#
+    @name Nav Primary Item
+    @desc Nav item used in the primary navigation in the header
+    @type component
+#}
+
+<li
+    x-data="{
+        dropdown: false,
+    }"
+    @mouseenter="dropdown = true"
+    @mouseleave="dropdown = false"
+    class="relative"
+>
+    <div class="relative z-10 overflow-hidden">
+        <div data-nav-item>
+            <a
+                class="
+                    relative
+                    text-sm font-bold leading-none
+                    focus:outline-none
+                    focus-visible:ring focus-visible:ring-secondary-400/50
+                    transition
+                    group
+                "
+                href="{{ item.link }}"
+            >
+                <div
+                    class="transition duration-150"
+                    :class="{
+                        'text-secondary-400 lg:group-hover:text-secondary-500' : sticky,
+                        'text-white lg:group-hover:text-secondary' : !sticky && $store.header.theme === 'dark',
+                        'text-neutral lg:group-hover:text-secondary' : !sticky && $store.header.theme === 'light',
+                    }"
+                >
+                    {{ item.title }}
+                </div>
+            </a>
+        </div>
+    </div>
+
+    {% include "components/navigation/nav_primary_dropdown.twig" %}
+</li>

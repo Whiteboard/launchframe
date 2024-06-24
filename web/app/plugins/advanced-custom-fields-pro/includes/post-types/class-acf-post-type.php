@@ -233,7 +233,7 @@ if ( ! class_exists( 'ACF_Post_Type' ) ) {
 				'rename_capabilities'      => false,
 				'singular_capability_name' => 'post',
 				'plural_capability_name'   => 'posts',
-				'supports'                 => array( 'title', 'editor', 'thumbnail' ),
+				'supports'                 => array( 'title', 'editor', 'thumbnail', 'custom-fields' ),
 				'taxonomies'               => array(),
 				'has_archive'              => false,
 				'has_archive_slug'         => '',
@@ -312,10 +312,14 @@ if ( ! class_exists( 'ACF_Post_Type' ) ) {
 		 *
 		 * @since 6.1
 		 *
-		 * @return bool validity status
+		 * @return boolean validity status
 		 */
 		public function ajax_validate_values() {
-			$post_type_key = acf_sanitize_request_args( $_POST['acf_post_type']['post_type'] ); // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Verified elsewhere.
+			if ( empty( $_POST['acf_post_type']['post_type'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Verified elsewhere.
+				return false;
+			}
+
+			$post_type_key = acf_sanitize_request_args( wp_unslash( $_POST['acf_post_type']['post_type'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Verified elsewhere.
 			$post_type_key = is_string( $post_type_key ) ? $post_type_key : '';
 			$valid         = true;
 
@@ -336,8 +340,9 @@ if ( ! class_exists( 'ACF_Post_Type' ) ) {
 				acf_add_internal_post_type_validation_error( 'post_type', $message );
 			} else {
 				// Check if this post key exists in the ACF store for registered post types, excluding those which failed registration.
-				$store      = acf_get_store( $this->store );
-				$post_id    = (int) acf_sanitize_request_args( $_POST['post_id'] ); // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Verified elsewhere.
+				$store   = acf_get_store( $this->store );
+				$post_id = (int) acf_maybe_get_POST( 'post_id', 0 );
+
 				$matches    = array_filter(
 					$store->get_data(),
 					function ( $item ) use ( $post_type_key ) {
@@ -377,7 +382,7 @@ if ( ! class_exists( 'ACF_Post_Type' ) ) {
 		 *
 		 * @since 6.1
 		 *
-		 * @param  array   $post The main ACF post type settings array.
+		 * @param  array   $post          The main ACF post type settings array.
 		 * @param  boolean $escape_labels Determines if the label values should be escaped.
 		 * @return array
 		 */
@@ -476,10 +481,21 @@ if ( ! class_exists( 'ACF_Post_Type' ) ) {
 				$args['menu_position'] = $menu_position;
 			}
 
-			// WordPress defaults to the same icon as the posts icon.
-			$menu_icon = (string) $post['menu_icon'];
-			if ( ! empty( $menu_icon ) ) {
-				$args['menu_icon'] = $menu_icon;
+			// Set the default for the icon.
+			$args['menu_icon'] = 'dashicons-admin-post';
+
+			// Override that default if a value is provided.
+			if ( ! empty( $post['menu_icon'] ) ) {
+				if ( is_string( $post['menu_icon'] ) ) {
+					$args['menu_icon'] = $post['menu_icon'];
+				}
+				if ( is_array( $post['menu_icon'] ) ) {
+					if ( $post['menu_icon']['type'] === 'media_library' ) {
+						$args['menu_icon'] = wp_get_attachment_image_url( $post['menu_icon']['value'] );
+					} else {
+						$args['menu_icon'] = $post['menu_icon']['value'];
+					}
+				}
 			}
 
 			// WordPress defaults to "post" for `$args['capability_type']`, but can also take an array.
@@ -502,7 +518,6 @@ if ( ! class_exists( 'ACF_Post_Type' ) ) {
 			}
 
 			// TODO: We don't handle the `capabilities` arg at the moment, but may in the future.
-
 			// WordPress defaults to the "title" and "editor" supports, but none can be provided by passing false (WP 3.5+).
 			$supports = is_array( $post['supports'] ) ? $post['supports'] : array();
 			$supports = array_unique( array_filter( array_map( 'strval', $supports ) ) );
@@ -769,7 +784,6 @@ if ( ! class_exists( 'ACF_Post_Type' ) ) {
 			}
 
 			// TODO: Investigate CPTUI usage of with_feeds, pages settings.
-
 			// ACF handles capability type differently.
 			if ( isset( $args['capability_type'] ) ) {
 				if ( 'post' !== trim( $args['capability_type'] ) ) {
