@@ -44,7 +44,7 @@
 
             {% for video in blockset.videos %}
                 <div
-                    x-data="fadeIn()"
+                    x-data="animate()()"
                     x-init="
                         delay = $store.animationDelay + 0.15;
                         mounted();

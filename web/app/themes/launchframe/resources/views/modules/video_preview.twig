@@ -1,25 +1,25 @@
 <div
-    x-data="fadeIn()"
+    x-data="animate()()"
     x-init="
     delay = $store.animationDelay + 0.15;
     mounted();"
     x-ref="element"
     class="relative w-full overflow-hidden flex flex-col justify-center h-full"
-    >  
-    <div x-data="parallaxBackground()" x-init="
+    >
+    <div x-data="animate()()" x-init="
         y.start = -8;
         y.end = 8;
         scale.start = 1.12;
         scale.end = 1.12;
         mounted();
-        "x-ref="container" 
+        "x-ref="container"
         {% include "components/link_attributes.twig" %} class="">
             {% include "components/media.twig" with {
                 image: video_cover_image ? video_cover_image : video_source == 'youtube' ? "https://img.youtube.com/vi/#{video_id}/maxresdefault.jpg" : video_source == 'vimeo' ? "https://vumbnail.com/#{video_id}_large.jpg" : video_cover_image,
                 mp4: video_mp4,
                 webm: preview_webm,
                 poster: video_poster,
-                attribute: "x-ref='background'",
+                attribute: "x-ref='element'",
             } %}
             <div class="bg-black opacity-40 h-full w-full absolute inset-0"></div>
             <div class="video-info-wrapper py-32 px-20">
