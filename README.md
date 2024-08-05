@@ -3,10 +3,6 @@
 ## Features
 
 -   Built on top of the powerful and modern [Lumberjack](https://lumberjack.rareloop.com/) MVC Framework.
--   [Tailwind](https://tailwindcss.com/) CSS Framework & Sass for the styling.
--   Modern JavaScript using libraries such as [GreenSock](https://greensock.com/) & [ScrollMagic](https://scrollmagic.io/)
--   [Vue.js](http://vuejs.org) capabilities ready to go!
--   [Laravel Mix](https://github.com/JeffreyWay/laravel-mix) for compiling assets and concatenating and minifying files
 -   [Twig](https://twig.symfony.com/) as a templating engine and integrating with WordPress using [Timber](https://www.upstatement.com/timber/).
 -   [ACF](https://www.advancedcustomfields.com/resources/) for creating an assortment of custom fieldsets.
 

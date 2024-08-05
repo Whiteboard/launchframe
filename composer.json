@@ -10,8 +10,8 @@
             ]
         },
         {
-            "type":"composer",
-            "url":"https://connect.advancedcustomfields.com"
+            "type": "composer",
+            "url": "https://connect.advancedcustomfields.com"
         }
     ],
     "require": {
@@ -35,7 +35,6 @@
         "wpackagist-plugin/minify-html-markup": "^2.1.9",
         "wpackagist-plugin/safe-svg": "^2.2",
         "wpengine/advanced-custom-fields-pro": "^6.3"
-
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "^3.7.1",
