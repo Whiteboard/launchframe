@@ -22,7 +22,7 @@ class RestAPI extends ServiceProvider
     {
         add_action(
             'rest_api_init',
-            'launchframe_rest_endpoints'
+            [$this, 'launchframe_rest_endpoints']
         );
     }
 
