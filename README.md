@@ -2,34 +2,33 @@
 
 ## Features
 
--   Built on top of the powerful and modern [Lumberjack](https://lumberjack.rareloop.com/) MVC Framework.
--   [Twig](https://twig.symfony.com/) as a templating engine and integrating with WordPress using [Timber](https://www.upstatement.com/timber/).
--   [ACF](https://www.advancedcustomfields.com/resources/) for creating an assortment of custom fieldsets.
+- Built on top of the powerful and modern [Lumberjack](https://lumberjack.rareloop.com/) MVC Framework.
+- [Twig](https://twig.symfony.com/) as a templating engine and integrating with WordPress using [Timber](https://www.upstatement.com/timber/).
+- [ACF](https://www.advancedcustomfields.com/resources/) for creating an assortment of custom fieldsets.
 
 ## Setup
 
--   From the project root, run `composer install`
--   Set the document root on your webserver to the web folder: /path/to/site/web/
--   Update the .env file
--   Login & activate plugins
+- From the project root, run `composer install`
+- Set the document root on your webserver to the web folder: /path/to/site/web/
+- Update the .env file
+- Login & activate plugins
 
 ## Theme development
 
--   From the theme directory, run `composer install`
--   `npm install` to install dependencies
--   Update `webpack.mix.js` with your local dev URL
--   You are good to go to activate the theme now inside of WordPress
+- From the theme directory, run `composer install`
+- `npm install` to install dependencies
+- You are ready to activate the theme now inside of WordPress
 
 ### Build commands
 
--   `npm run watch` — Compile assets when file changes are made, start Browsersync session
--   `npm run dev` — Compile and optimize the files in your assets directory
--   `npm run production` — Compile assets for production
+- `npm run watch` — Compile assets when file changes are made, start Browsersync session
+- `npm run dev` — Compile and optimize the files in your assets directory
+- `npm run production` — Compile assets for production
 
 ### Partials Structures
 
 The partials for Twig, JS, and Sass all have sub-folders for better organization and abstraction.
 
--   _Components_ - The smallest reusable item, such as a button or post item card.
--   _Module_ - This is for a whole layout section that can contain multiple smaller components. For an example: Hero, CTA
--   _Block_ - Blocks are the same type of items as the modules, just that these are meant to be Flex Blocks.
+- _Components_ - The smallest reusable item, such as a button or post item card.
+- _Module_ - This is for a whole layout section that can contain multiple smaller components. For an example: Hero, CTA
+- _Block_ - Blocks are the same type of items as the modules, just that these are meant to be Flex Blocks.

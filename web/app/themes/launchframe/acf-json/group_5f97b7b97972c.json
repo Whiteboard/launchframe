@@ -4,7 +4,7 @@
     "fields": [
         {
             "key": "field_5f97b7b97d888",
-            "label": "Hero",
+            "label": "🦸🏼‍♂️️ Hero",
             "name": "",
             "aria-label": "",
             "type": "tab",
@@ -16,9 +16,9 @@
                 "class": "",
                 "id": ""
             },
-            "acfe_permissions": "",
             "placement": "top",
-            "endpoint": 0
+            "endpoint": 0,
+            "selected": 0
         },
         {
             "key": "field_63487998721de",
@@ -36,10 +36,6 @@
             },
             "layout": "block",
             "acfe_seamless_style": 1,
-            "acfe_group_modal": 0,
-            "acfe_group_modal_close": 0,
-            "acfe_group_modal_button": "",
-            "acfe_group_modal_size": "large",
             "sub_fields": [
                 {
                     "key": "field_5f97b7b97d896",
@@ -68,11 +64,15 @@
                     "acfe_clone_modal_button": "",
                     "acfe_clone_modal_size": "large"
                 }
-            ]
+            ],
+            "acfe_group_modal": 0,
+            "acfe_group_modal_close": 0,
+            "acfe_group_modal_button": "",
+            "acfe_group_modal_size": "large"
         },
         {
             "key": "field_5f97b7b97d8a1",
-            "label": "Blocks",
+            "label": "🧱️ Blocks",
             "name": "",
             "aria-label": "",
             "type": "tab",
@@ -84,9 +84,9 @@
                 "class": "",
                 "id": ""
             },
-            "acfe_permissions": "",
             "placement": "top",
-            "endpoint": 0
+            "endpoint": 0,
+            "selected": 0
         },
         {
             "key": "field_5f97b7b97d8a9",
@@ -157,7 +157,7 @@
     ],
     "menu_order": 0,
     "position": "normal",
-    "style": "default",
+    "style": "seamless",
     "label_placement": "top",
     "instruction_placement": "label",
     "hide_on_screen": [
@@ -176,5 +176,5 @@
     "acfe_form": 0,
     "acfe_meta": "",
     "acfe_note": "",
-    "modified": 1675351573
+    "modified": 1748894377
 }

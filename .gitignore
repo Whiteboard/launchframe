@@ -27,3 +27,4 @@ wp-cli.local.yml
 .DS_Store
 web/app/ai1wm-backups
 web/app/plugins/advanced-custom-fields-pro
+web/app/themes/launchframe/public/*

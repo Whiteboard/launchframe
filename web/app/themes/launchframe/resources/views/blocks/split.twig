@@ -2,8 +2,8 @@
     x-data
     id="{{ id }}"
     class="
-        {{ blockset.media_side == 'left' ? 'lg:flex-row' : 'lg:flex-row-reverse' }}
-        {% include "snippets/no_block_spacing.twig" %}
+        {{ blockset.alignment == 'left' ? 'lg:flex-row' : 'lg:flex-row-reverse' }}
+        {% include 'snippets/no_block_spacing.twig' %}
         fluid-container flex flex-col lg:justify-between gap-10 md:gap-16
     "
 >

@@ -1,11 +1,11 @@
 {
     "key": "group_63e558acb6fb6",
-    "title": "Block: Split",
+    "title": "Block: Split ☯️️",
     "fields": [
         {
             "key": "field_63e55a8175a8d",
-            "label": "Media Side",
-            "name": "media_side",
+            "label": "Alignment",
+            "name": "alignment",
             "aria-label": "",
             "type": "button_group",
             "instructions": "",
@@ -17,12 +17,13 @@
                 "id": ""
             },
             "choices": {
-                "left": "Left",
-                "right": "Right"
+                "left": "Text \/ Media",
+                "right": "Media \/ Text"
             },
             "default_value": "",
             "return_format": "value",
             "allow_null": 0,
+            "allow_in_bindings": 1,
             "layout": "horizontal"
         },
         {
@@ -220,5 +221,5 @@
     "acfe_form": 0,
     "acfe_meta": "",
     "acfe_note": "",
-    "modified": 1719259642
+    "modified": 1748894506
 }

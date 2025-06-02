@@ -1,6 +1,6 @@
 {
     "key": "group_5f7d3d065cc1e",
-    "title": "Module: Hero",
+    "title": "Module: Hero 🦸🏼‍♂️️",
     "fields": [
         {
             "key": "field_63d1a3661921c",
@@ -17,14 +17,15 @@
                 "id": ""
             },
             "choices": {
-                "primary": "Primary",
-                "secondary": "Secondary",
-                "tertiary": "Tertiary",
-                "none": "No Hero"
+                "primary": "Primary 🔱️",
+                "secondary": "Secondary ⚔️️",
+                "tertiary": "Tertiary 🗡️️",
+                "none": "No Hero 🙅🏼️"
             },
             "default_value": "",
             "return_format": "value",
             "allow_null": 0,
+            "allow_in_bindings": 1,
             "layout": "horizontal"
         },
         {
@@ -186,5 +187,5 @@
     "acfe_form": 0,
     "acfe_meta": "",
     "acfe_note": "",
-    "modified": 1719257469
+    "modified": 1748894296
 }
