@@ -1,6 +1,5 @@
 # Application
 web/app/plugins/*
-!web/app/plugins/advanced-custom-fields-pro
 !web/app/plugins/soil
 web/app/mu-plugins/*/
 web/app/upgrade
@@ -27,4 +26,4 @@ auth.json
 wp-cli.local.yml
 .DS_Store
 web/app/ai1wm-backups
-web/app/themes/launchframe/public/css
+web/app/plugins/advanced-custom-fields-pro
