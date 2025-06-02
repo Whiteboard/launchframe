@@ -28,3 +28,4 @@ wp-cli.local.yml
 web/app/ai1wm-backups
 web/app/plugins/advanced-custom-fields-pro
 web/app/themes/launchframe/public/*
+web/app/themes/launchframe/public/js
