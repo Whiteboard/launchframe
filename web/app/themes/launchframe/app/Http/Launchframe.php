@@ -3,7 +3,6 @@
 namespace App\Http;
 
 use Rareloop\Lumberjack\Http\Lumberjack;
-use Timber\Menu;
 use Timber\Timber;
 
 class Launchframe extends Lumberjack
@@ -27,11 +26,11 @@ class Launchframe extends Lumberjack
         }
 
         $context['nav'] = [
-            'primary' => new Menu('primary'),
-            'overlay' => new Menu('overlay'),
+            'primary' => Timber::get_menu('primary'),
+            'overlay' => Timber::get_menu('overlay'),
             'footer' => [
-                '1' => new Menu('footer-1'),
-                '2' => new Menu('footer-2'),
+                '1' => Timber::get_menu('footer-1'),
+                '2' => Timber::get_menu('footer-2'),
             ],
         ];
 

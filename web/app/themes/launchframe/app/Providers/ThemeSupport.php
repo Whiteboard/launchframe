@@ -24,13 +24,6 @@ class ThemeSupport extends ServiceProvider
             $wp_admin_bar->remove_node('comments');
             $wp_admin_bar->remove_node('new-content');
             $wp_admin_bar->remove_node('blog-1-default');
-
-            $my_account = $wp_admin_bar->get_node('my-account');
-            $title = str_replace('Howdy,', '', $my_account->title);
-            $wp_admin_bar->add_node([
-                'id' => 'my-account',
-                'title' => $title,
-            ]);
         }, 999);
 
         show_admin_bar(false);
