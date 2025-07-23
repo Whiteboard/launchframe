@@ -1,9 +1,8 @@
 <div 
+    x-data
     class="fluid-container {% include "snippets/no_block_spacing.twig" %}"
-    x-data="{ 'activePerson': 0 }" 
     id="{{ id }}"
 >
-    
     {% include "components/intro.twig" with {
         overline: blockset.overline,
         title: blockset.title,
@@ -12,27 +11,26 @@
 
     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-10 items-start">
         {% for person in people %}
-        <button @click="activePerson = {{ person.id }}; document.body.classList.add('no-scroll'); ">
-            {% include "components/cards/card.twig" with {
-                asset_type: "image",
-                image: person.thumbnail,
-                heading: person.title,
-                text: person.position
-            } %}
-        </button>
+            <button @click="$store.overlay.person.toggle({{ person.id }})">
+                {% include "components/cards/card.twig" with {
+                    asset_type: "image",
+                    image: person.thumbnail,
+                    heading: person.title,
+                    text: person.position
+                } %}
+            </button>
         {% endfor %}
     </div>
 
     {% for person in people %}
-    {% include "modules/lightboxes/lightbox_person.twig" with {
-        id: person.id,
-        name: person.title,
-        position: person.position,
-        bio: person.content,
-        phone: person.phone,
-        email: person.email,
-        image: person.thumbnail,
-    } %}
-{% endfor %}
-
+        {% include "modules/overlays/overlay_person.twig" with {
+            id: person.id,
+            name: person.title,
+            position: person.position,
+            bio: person.content,
+            phone: person.phone,
+            email: person.email,
+            image: person.thumbnail,
+        } %}
+    {% endfor %}
 </div>

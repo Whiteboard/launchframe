@@ -1,18 +1,18 @@
 <div 
-x-show="activePerson == {{ person.id }}"  
-x-trap="activePerson == {{ person.id }}"
-x-cloak="{display: none;}" 
-@keydown.window.escape="activePerson = 0"
-class="w-full fixed pin flex inset-0 z-40 bg-black bg-opacity-80 transition ease-in-out" 
-x-transition:enter="transition ease-out duration-500" 
-x-transition:enter-start="opacity-0" 
-x-transition:enter-end="opacity-100" 
-x-transition:leave="transition ease-in duration-500" 
-x-transition:leave-start="opacity-100" 
-x-transition:leave-end="opacity-0"
+    x-show="$store.overlay.person.open && $store.overlay.person.active == {{ person.id }}"  
+    x-trap="$store.overlay.person.open && $store.overlay.person.active == {{ person.id }}"
+    x-cloak="{display: none;}" 
+    @keydown.window.escape="$store.overlay.person.close()"
+    class="w-full fixed pin flex inset-0 z-40 bg-black bg-opacity-80 transition ease-in-out" 
+    x-transition:enter="transition ease-out duration-500" 
+    x-transition:enter-start="opacity-0" 
+    x-transition:enter-end="opacity-100" 
+    x-transition:leave="transition ease-in duration-500" 
+    x-transition:leave-start="opacity-100" 
+    x-transition:leave-end="opacity-0"
 >
-    <div class="relative bg-neutral-200 shadow-md w-11/12 m-auto max-h-[90%] max-w-4xl z-50 py-10 px-8 md:px-16 outline outline-1 outline-primary scroller overflow-y-auto 
-    "
+    <div 
+        class="relative bg-neutral-200 shadow-md w-11/12 m-auto max-h-[90%] max-w-4xl z-50 py-10 px-8 md:px-16 outline outline-1 outline-primary scroller overflow-y-auto"
         x-transition:enter="transition ease-out duration-500" 
         x-transition:enter-start="opacity-0 transform scale-90" 
         x-transition:enter-end="opacity-100 transform scale-100" 
@@ -21,8 +21,9 @@ x-transition:leave-end="opacity-0"
         x-transition:leave-end="opacity-0 transform scale-90"
     >
         <button
-            class="absolute right-8 md:right-14 top-10 z-50 w-8 text-black"             
-            @click="activePerson = 0; document.body.classList.remove('no-scroll')">
+            class="absolute right-8 md:right-14 top-10 z-50 w-8 text-black"
+            @click="$store.overlay.person.close()"
+        >
             {{ source('resources/images/close.svg') }}
         </button>
         <div class="md:flex items-center md:space-x-4">

@@ -2,6 +2,7 @@ export default () => {
     Alpine.store('header', {
         height: 100,
         theme: 'dark',
+        scrollingOffsetPx: 40,
 
         init() {
             this.setSize()

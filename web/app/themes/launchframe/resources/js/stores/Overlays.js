@@ -23,11 +23,11 @@ export default () => {
             toggle(active) {
                 this.open = !this.open
                 active ? (this.active = active) : null
-                smoother.paused(!smoother.paused())
+                Alpine.store('scroll').toggle()
             },
 
             close() {
-                smoother.paused(false)
+                Alpine.store('scroll').pause(false)
                 this.open = false
             },
         },
@@ -37,11 +37,11 @@ export default () => {
 
             toggle() {
                 this.open = !this.open
-                smoother.paused(!smoother.paused())
+                Alpine.store('scroll').toggle()
             },
 
             close() {
-                smoother.paused(false)
+                Alpine.store('scroll').pause(false)
                 this.open = false
             },
         },

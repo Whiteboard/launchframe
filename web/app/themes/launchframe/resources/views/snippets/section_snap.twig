@@ -14,7 +14,7 @@
         ScrollTrigger.addEventListener('scrollEnd', () => {
             if (inRange && !snapped) {
                 snapped = true;
-                smoother.scrollTo($refs.snapSection, true, `{{ offset ?: "-${$store.header.height}px" }}`);
+                $store.scroll.handleScrollToElement($refs.snapSection);
             }
         });
 

@@ -3,12 +3,13 @@ export default (container, done) => {
     const curtain = loader.querySelector('[data-curtain]')
     const logo = loader.querySelector('[data-logo]')
 
-    document.body.classList.add('no-scroll', 'cursor-wait')
+    document.body.classList.add('cursor-wait')
+    Alpine.store('scroll').pause(true)
 
     const leave = gsap.timeline({
         defaults: { ease: 'circ.inOut' },
         onComplete: () => {
-            window.scrollTo(0, 0)
+            Alpine.store('scroll').resetPositionToTop()
 
             setTimeout(() => {
                 done()

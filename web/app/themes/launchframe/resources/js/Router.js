@@ -11,19 +11,6 @@ window.barba = barba
 export default () => {
     barba.hooks.beforeOnce(() => {
         Alpine.start()
-
-        // Post Setup Utilities
-        Alpine.store('scroll', {
-            init(allow = true) {
-                if (smoother) {
-                    smoother.paused(!allow)
-                } else if (allow) {
-                    document.body.classList.remove('no-scroll')
-                } else {
-                    document.body.classList.add('no-scroll')
-                }
-            },
-        })
     })
 
     barba.hooks.afterOnce(() => {
@@ -33,14 +20,11 @@ export default () => {
     })
 
     barba.hooks.beforeEnter(() => {
-        window.smoother = ScrollSmoother.create({
-            smooth: 1,
-            effects: true,
-            smoothTouch: false,
-            ignoreMobileResize: true,
-        })
+        if (!Alpine.store('isTouch')) {
+            Alpine.store('scroll').createSmoother()
+        }
         ScrollTrigger.refresh()
-        smoother.scrollTo(0)
+        Alpine.store('scroll').resetPositionToTop()
     })
 
     barba.hooks.enter(() => {
