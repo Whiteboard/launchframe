@@ -5,7 +5,8 @@ export default () => {
     const enter = gsap.timeline({
         defaults: { ease: 'circ.inOut' },
         onComplete: () => {
-            document.body.classList.remove('no-scroll', 'cursor-wait')
+            document.body.classList.remove('cursor-wait')
+            Alpine.store('scroll').pause(false)
         },
     })
 

@@ -70,4 +70,73 @@ export default () => {
             })
         },
     })
+
+    /* :: Custom Scroll Handler
+    {+ ---------------------------------- */
+    Alpine.store('scroll', {
+        isScrollingPaused: false,
+
+        init() {
+            this.isScrollingPaused = false
+            this.pause(false)
+        },
+        pause(paused = false) {
+            if (window.smoother && !Alpine.store('isTouch')) {
+                this._handlePausedScrollingWithSmoother(paused)
+            } else {
+                this._handlePausedScrollingWithoutSmoother(paused)
+            }
+        },
+        _handlePausedScrollingWithSmoother(paused = false) {
+            smoother.paused(paused)
+            this.isScrollingPaused = !!paused
+        },
+        _handlePausedScrollingWithoutSmoother(paused = false) {
+            if (paused) {
+                this.createSmoother()
+                smoother.paused(true)
+                this.isScrollingPaused = true
+            } else {
+                this.destroySmoother()
+                this.isScrollingPaused = false
+            }
+        },
+        toggle() {
+            this.pause(!this.isScrollingPaused)
+        },
+        createSmoother() {
+            window.smoother = ScrollSmoother.create({
+                smooth: 1,
+                effects: true,
+                smoothTouch: false,
+                ignoreMobileResize: true,
+            })
+        },
+        destroySmoother() {
+            if (window.smoother) {
+                window.smoother.kill()
+                window.smoother = null
+                document.body.classList.remove('no-scroll')
+                this.isScrollingPaused = false
+            }
+        },
+        handleScrollToElement(target, offset = Alpine.store('header').scrollingOffsetPx) {          
+            if (window.smoother && target) {
+                smoother.scrollTo(target, true, `top ${Alpine.store('header').height + offset}px`)
+            } else if (target) {
+                const elementPosition = target.getBoundingClientRect().top + window.scrollY
+                window.scrollTo({
+                    top: elementPosition - Alpine.store('header').height - offset,
+                    behavior: 'smooth',
+                })
+            }
+        },
+        resetPositionToTop() {
+            if (window.smoother) {
+                smoother.scrollTo(0)
+            } else {
+                window.scrollTo(0, 0)
+            }
+        },
+    })
 }

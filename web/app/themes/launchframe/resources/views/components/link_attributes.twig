@@ -14,7 +14,7 @@
 {% elseif action == "asset" %}
     href="{{ asset }}" download
 {% elseif action == "anchor" %}
-    @click="smoother.scrollTo('#{{ anchor }}', true, 0)"
+    @click="$store.scroll.handleScrollToElement(document.getElementById('{{ anchor }}'))"
 {% elseif action == "alpine_url" %}
     :href="{{ alpine_href }}"
 {% endif %}
