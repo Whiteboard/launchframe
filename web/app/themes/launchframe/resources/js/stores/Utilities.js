@@ -1,8 +1,15 @@
 export default () => {
-    Alpine.store('isTouch', 'ontouchstart' in document.documentElement && navigator.userAgent.match(/Mobi/))
+    Alpine.store('isTouch', !!(
+        ('ontouchstart' in window) ||
+        window.matchMedia?.('(pointer: coarse)')?.matches ||
+        navigator?.maxTouchPoints > 0 ||
+        navigator?.msMaxTouchPoints > 0
+    ))
 
     Alpine.store('parseHtmlEntities', str =>
-        str?.replace(/&#([0-9]{1,4});/gi, (match, numStr) => String.fromCharCode(parseInt(numStr, 10))),
+        (str || '')
+            .replace(/&#([0-9]{1,4});/gi, (match, numStr) => String.fromCharCode(parseInt(numStr, 10)))
+            .replaceAll('&amp;', '&'),
     )
 
     Alpine.store('isFirefox', !!navigator.userAgent.match(/firefox|fxios/i))
