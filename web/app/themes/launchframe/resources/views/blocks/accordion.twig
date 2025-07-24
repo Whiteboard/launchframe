@@ -5,7 +5,6 @@
 
 {% set style = blockset.style %}
 
-
 <div 
     class="
     fluid-container 
@@ -14,7 +13,6 @@
     x-data="{ accordionItem: 0 }"
     id="{{ id }}"
 >
-
     {% include "components/intro.twig" with {
         overline: blockset.overline,
         title: blockset.title,
@@ -40,44 +38,58 @@
         "
         x-ref="element"
     >
+        {% for item in blockset.items %}
+            <div class="py-6 relative w-full border-neutral-300 border-b last:border-b-0">
+                <button 
+                    @click="accordionItem !== {{ loop.index }} ? accordionItem = {{ loop.index }} : accordionItem = null" 
+                    class="flex justify-between gap-6 items-center relative w-full"
+                >
+                    {% include "typography/h4.twig" with {
+                        content: item.title,
+                        tag: "h3",
+                        class: "text-left max-w-[85%]"
+                    } %}
 
-    {% for item in blockset.items %}
-        <div class="py-6 relative w-full border-neutral-300 border-b last:border-b-0">
-            <button @click="accordionItem !== {{ loop.index }} ? accordionItem = {{ loop.index }} : accordionItem = null" class="flex justify-between gap-6 items-center relative w-full">
-                {% include "typography/h4.twig" with {
-                    content: item.title,
-                    tag: "h3",
-                    class: "text-left max-w-[85%]"
-                } %}
-                <div class="w-4 h-4">
-                    <span class="text-black" x-show="accordionItem !== {{ loop.index }}" x-cloak>
-                        {{ source('resources/images/open.svg') }}
-                    </span> 
-                    <span class="text-black" x-show="accordionItem === {{ loop.index }} " x-cloak>
-                        {{ source('resources/images/close.svg') }}
-                    </span> 
-                </div>
-            </button>
-            <div
-                {# Note: Vertical padding or vertical margin cannot be applied on this element with Alpine Collapse. #}
-                x-ref="container{{ loop.index }}" 
-                x-show="accordionItem == {{ loop.index }}" 
-                x-collapse.duration.700ms
-                x-cloak
-            >
-                {% set buttonsPresent = item.buttons|length > 0 %}
-                <div class="prose max-w-none {{ buttonsPresent ? 'mt-6' : 'my-6' }}">{{ item.text }}</div>
-                {% if buttonsPresent %}
-                    <div class="flex items-center flex-wrap gap-6 my-6">
-                        {% include "components/buttons.twig" with {
-                            buttons: item.buttons,
-                        } %}
+                    <div class="w-4 h-4">
+                        <span class="text-black" x-show="accordionItem !== {{ loop.index }}" x-cloak>
+                            {{ source('resources/images/open.svg') }}
+                        </span> 
+
+                        <span class="text-black" x-show="accordionItem === {{ loop.index }} " x-cloak>
+                            {{ source('resources/images/close.svg') }}
+                        </span> 
                     </div>
-                {% endif %}
+                </button>
+
+                <div
+                    {# Note: Vertical padding or vertical margin cannot be applied on this element with Alpine Collapse. #}
+                    x-ref="container{{ loop.index }}" 
+                    x-show="accordionItem == {{ loop.index }}" 
+                    x-collapse.duration.700ms
+                    x-cloak
+                >
+                    {% set buttons_present = item.buttons|length > 0 %}
+
+                    <div class="h-6 w-full block" aria-hidden="true"></div>
+
+                    <div class="prose max-w-none">
+                        {{ item.text }}
+                    </div>
+
+                    {% if buttons_present %}
+                        <div class="h-3 w-full block" aria-hidden="true"></div>
+
+                        <div class="flex items-center flex-wrap gap-6">
+                            {% include "components/buttons.twig" with {
+                                buttons: item.buttons,
+                            } %}
+                        </div>
+                        <div class="h-3 w-full block" aria-hidden="true"></div>
+                    {% else %}
+                        <div class="h-6 w-full block" aria-hidden="true"></div>
+                    {% endif %}
+                </div>
             </div>
-        </div>
-    {% endfor %}
-
+        {% endfor %}
     </div>
-
 </div>
