@@ -1,12 +1,12 @@
 <div
-    x-data="animate()()"
+    x-data="animate()"
     x-init="
     delay = $store.animationDelay + 0.15;
     mounted();"
     x-ref="element"
     class="relative w-full overflow-hidden flex flex-col justify-center h-full"
     >
-    <div x-data="animate()()" x-init="
+    <div x-data="animate()" x-init="
         y.start = -8;
         y.end = 8;
         scale.start = 1.12;
