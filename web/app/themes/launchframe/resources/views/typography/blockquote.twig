@@ -2,6 +2,7 @@
     @name Blockquote
     @desc The typography blockquote partial
     @param* content - The meta content.
+    @param x_text - String. The Alpine.js text to be rendered.
     @param as - The wrapping element.
     @param color - Set a custom text color utility.
     @param class - Add custom CSS classes.
@@ -16,6 +17,7 @@
         {{ class }}
         font-headline text-2xl leading-normal italic
     "
+    {{ x_text ? "x-text=\"#{x_text}\"" }}
 >
     {{ content }}
 </{{ as ? as : "blockquote" }}>

@@ -2,6 +2,7 @@
     @name H3
     @desc The typography h3 partial to render an h3.
     @param* content - The meta content.
+    @param x_text - String. The Alpine.js text to be rendered.
     @param as - The wrapping element.
     @param size - The font size utility.
     @param color - Set a custom text color utility.
@@ -24,6 +25,7 @@
         {{ class }}
         font-sans
     "
+    {{ x_text ? "x-text=\"#{x_text}\"" }}
 >
     {{ content }}
 </{{ as ?: "h3" }}>
