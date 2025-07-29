@@ -39,7 +39,7 @@
                 {{ video_class }}
             "
             {% if not no_cover and focal_point %}
-                style="object-position: {{ focal_point.x ?: 50 }}% {{ focal_point.y ?: 50 }}%"
+                style="object-position: {{ focal_point.x == 0 ? 0 : focal_point.x ?: 50 }}% {{ focal_point.y == 0 ? 0 : focal_point.y ?: 50 }}%"
             {% endif %}
             playsinline
             autoplay
