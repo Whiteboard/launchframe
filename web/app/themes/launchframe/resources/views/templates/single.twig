@@ -30,21 +30,21 @@
         </div>
 
         {% if page.thumbnail %}
-        <div class="mb-12">
-            <div class="w-full h-screen-25 md:h-screen-40 lg:h-screen-50 xl:h-screen-75 bg-primary relative">
-                {% include "components/media.twig" with {
-                    asset_type: "image",
-                    image: page.thumbnail,
-                } %}
+            <div class="mb-12">
+                <div class="w-full h-screen-25 md:h-screen-40 lg:h-screen-50 xl:h-screen-75 bg-primary relative">
+                    {% include "components/media.twig" with {
+                        asset_type: "image",
+                        image: page.thumbnail,
+                    } %}
+                </div>
+                <div class="fluid-container mt-2">
+                    {% include "typography/paragraph.twig" with {
+                        content: page.thumbnail.caption,
+                        size: "sm",
+                        color: "text-neutral-500"
+                    } %}
+                </div>
             </div>
-            <div class="fluid-container mt-2">
-                {% include "typography/paragraph.twig" with {
-                    content: page.thumbnail.caption,
-                    size: "sm",
-                    color: "text-neutral-500"
-                } %}
-            </div>
-        </div>
         {% endif %}
 
         <div class="fluid-container lg:flex justify-between">

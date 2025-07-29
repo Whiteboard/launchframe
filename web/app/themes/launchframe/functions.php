@@ -19,3 +19,8 @@ require_once 'routes.php';
 /* :: Set global params in the Timber context
 {+} ---------------------------------- */
 add_filter('timber_context', [$launchframe, 'addToContext']);
+
+/* :: Include our custom functions
+{+} ---------------------------------- */
+include_once 'functions/misc.php';
+include_once 'functions/helpers.php';

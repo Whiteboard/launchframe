@@ -12,7 +12,7 @@
         bg-neutral text-white overflow-hidden
     "
 >
-    {% if hero.media %}
+    {% if hero.media and not function('is_media_empty', hero.media) %}
         <div
             {# :: Parallax ------------ #}
             x-data="animate()"
