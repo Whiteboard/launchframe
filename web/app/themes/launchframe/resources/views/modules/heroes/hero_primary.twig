@@ -12,7 +12,7 @@
         bg-neutral text-white overflow-hidden
     "
 >
-    {% if hero.media %}
+    {% if hero.media and not function('is_media_empty', hero.media) %}
         <div
             {# :: Parallax ------------ #}
             x-data="animate()"
@@ -42,7 +42,7 @@
                 image: hero.media.image,
                 video: hero.media.video,
                 remote_image: hero.media.remote_image,
-                remote_video: hero.media.remote_mp4,
+                remote_video: hero.media.remote_mp4 ?: hero.media.remote_video,
                 attribute: "x-ref='element'",
             } %}
         </div>
