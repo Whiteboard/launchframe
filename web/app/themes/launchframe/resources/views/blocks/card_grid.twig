@@ -36,7 +36,7 @@
                 asset_type: card.media.asset_type,
                 image: card.media.image,
                 video: card.media.video,
-                remote_mp4: card.media.remote_mp4,
+                remote_mp4: card.media.remote_mp4 ?: card.media.remote_video,
                 overline: card.overline,
                 heading: card.title,
                 text: card.text,
