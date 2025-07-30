@@ -8,30 +8,29 @@
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
         {% for item in blockset.ctas %}
-        <div class="bg-primary text-white text-center py-12 px-8 lg:p-16 flex flex-col justify-between">
-            <div class="">
-                {% if item.title %}
-                    {% include "typography/h3.twig" with {
-                        content: item.title
-                    } %}
-                {% endif %}
-                {% if item.text %}
-                    {% include "typography/paragraph.twig" with {
-                        content: item.text,
-                        margins: "my-4"
-                    } %}
+            <div class="bg-primary text-white text-center py-12 px-8 lg:p-16 flex flex-col justify-between">
+                <div class="">
+                    {% if item.title %}
+                        {% include "typography/h3.twig" with {
+                            content: item.title
+                        } %}
+                    {% endif %}
+                    {% if item.text %}
+                        {% include "typography/paragraph.twig" with {
+                            content: item.text,
+                            margin: "my-4"
+                        } %}
+                    {% endif %}
+                </div>
+                {% if item.buttons|length > 0 %}
+                    <div class="flex items-center flex-wrap gap-6 justify-center mt-8 lg:mt-10">
+                        {% include "components/buttons.twig" with {
+                            buttons: item.buttons,
+                            hoverColor: 'hover:bg-white hover:text-primary'
+                        } %}
+                    </div>
                 {% endif %}
             </div>
-            {% if item.buttons|length > 0 %}
-                <div class="flex items-center flex-wrap gap-6 justify-center mt-8 lg:mt-10">
-                    {% include "components/buttons.twig" with {
-                        buttons: item.buttons,
-                        hoverColor: 'hover:bg-white hover:text-primary'
-                    } %}
-                </div>
-            {% endif %}
-        </div>
         {% endfor %}
     </div>
-
 </div>

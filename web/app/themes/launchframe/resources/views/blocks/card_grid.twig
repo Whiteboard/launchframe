@@ -18,7 +18,7 @@
 {% set source = 'custom' %}
 
 {% if source == 'custom' %}
-{% set cards = blockset.cards %}
+    {% set cards = blockset.cards %}
 {% endif %}
 
 <div class="fluid-container {% include "snippets/no_block_spacing.twig" %}" id="{{ id }}">
@@ -30,20 +30,20 @@
     } %}
 
     {% if cards|length > 0 %}
-    <div class="grid gap-10 {{ grid }}">
-        {% for card in cards %}
-            {% include "components/cards/card.twig" with {
-                asset_type: card.media.asset_type,
-                image: card.media.image,
-                video: card.media.video,
-                remote_mp4: card.media.remote_mp4 ?: card.media.remote_video,
-                overline: card.overline,
-                heading: card.title,
-                text: card.text,
-                link: card.link,
-            } %}
-        {% endfor %}
-    </div>
+        <div class="grid gap-10 {{ grid }}">
+            {% for card in cards %}
+                {% include "components/cards/card.twig" with {
+                    asset_type: card.media.asset_type,
+                    image: card.media.image,
+                    video: card.media.video,
+                    remote_mp4: card.media.remote_mp4 ?: card.media.remote_video,
+                    overline: card.overline,
+                    heading: card.title,
+                    text: card.text,
+                    link: card.link,
+                } %}
+            {% endfor %}
+        </div>
     {% endif %}
 
     {% if blockset.buttons|length > 0 %}

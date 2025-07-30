@@ -12,7 +12,6 @@
     "
     class="relative w-full select-none"
 >
-
     {% if source == "local" %}
         <video
             x-ref="player"
@@ -20,14 +19,12 @@
         >
             <source src="{{ video.url }}">
         </video>
-
     {% elseif source == "youtube" %}
         <div
             x-ref="player"
             data-plyr-provider="{{ source }}"
             data-plyr-embed-id="{{ youtube }}"
         ></div>
-
     {% elseif source == "vimeo" %}
         <div
             x-ref="player"
@@ -35,5 +32,4 @@
             class="aspect-video"
         ></div>
     {% endif %}
-
 </div>

@@ -37,26 +37,26 @@
                 } %}
                 {% include "typography/paragraph.twig" with {
                     content: position,
-                    margins: "mb-0"
+                    margin: " "
                 } %}
                 {% if phone or email %}
-                <div class="md:flex items-center mt-1">
-                    {% if phone %}
-                        {% include "typography/paragraph.twig" with {
-                            content: phone,
-                            style: "overline",
-                            margins: "mb-0"
-                        } %}
-                    {% endif %}
-                    {% if phone and email %}<span class="hidden md:block mx-2">/</span>{% endif %}
-                    {% if email %}
-                        {% include "typography/paragraph.twig" with {
-                            content: email,
-                            style: "overline",
-                            margins: "mb-0"
-                        } %}
-                    {% endif %}
-                </div>
+                    <div class="md:flex items-center mt-1">
+                        {% if phone %}
+                            {% include "typography/paragraph.twig" with {
+                                content: phone,
+                                style: "overline",
+                                margin: " "
+                            } %}
+                        {% endif %}
+                        {% if phone and email %}<span class="hidden md:block mx-2">/</span>{% endif %}
+                        {% if email %}
+                            {% include "typography/paragraph.twig" with {
+                                content: email,
+                                style: "overline",
+                                margin: " "
+                            } %}
+                        {% endif %}
+                    </div>
                 {% endif %}
             </div>
         </div>
