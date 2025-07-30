@@ -9,7 +9,7 @@
             <ul class="flex justify-start items-center flex-wrap text-sm mb-8 gap-3 md:gap-6">
                 <li class="block px-4 py-1 rounded-xl bg-black text-white">{{ page.date }}</li>
                 {% for cat in page.terms %}
-                <li class="block transition-all hover:text-secondary"><a href="{{ cat.link }}" class="">{{ cat.name }}</a></li>
+                    <li class="block transition-all hover:text-secondary"><a href="{{ cat.link }}" class="">{{ cat.name }}</a></li>
                 {% endfor %}
                 <li class="block transition-all hover:text-secondary"><a href="{{ page.author.link }}" class="">By {{ page.author.name }}</a></li>
             </ul>
@@ -68,7 +68,7 @@
                         content: "Share",
                         style: "overline",
                         class: "border-b border-neutral-300 pb-1",
-                        margins: "mb-3"
+                        margin: "mb-3"
                     } %}
                     {% include "modules/sharing.twig" %}
                 </div>
@@ -78,7 +78,7 @@
                         content: "More Articles",
                         style: "overline",
                         class: "border-b border-neutral-300 pb-1",
-                        margins: "mb-3"
+                        margin: "mb-3"
                     } %}
                     <div class="grid grid-cols-1 gap-6">
                         {% for post in related %}
@@ -86,13 +86,13 @@
                                 {% include "typography/paragraph.twig" with {
                                     content: post.title,
                                     size: "lg",
-                                    margins: "mb-0",
+                                    margin: " ",
                                     class: "group-hover:text-secondary"
                                 } %}
                                 {% include "typography/paragraph.twig" with {
                                     content: post.date,
                                     size: "sm",
-                                    margins: "mb-0",
+                                    margin: " ",
                                     class: "opacity-80"
                                 } %}
                             </a>

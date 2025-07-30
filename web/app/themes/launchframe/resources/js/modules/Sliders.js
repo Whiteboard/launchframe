@@ -3,8 +3,11 @@ import 'swiper/swiper-bundle.min.css'
 
 export default () => {
     return {
+        testimonialSliderHash: null,
+        cardSliderHash: null,
+
         mounted() {
-            const testimonialSlider = new Swiper('.testimonial-slider', {
+            const testimonialSlider = new Swiper(`.testimonial-slider-${this.testimonialSliderHash}`, {
                 modules: [Navigation, Pagination, EffectFade],
                 loop: true,
                 effect: 'fade',
@@ -12,12 +15,12 @@ export default () => {
                     crossFade: true,
                 },
                 navigation: {
-                    nextEl: '.testimonial-slider-next',
-                    prevEl: '.testimonial-slider-prev',
+                    nextEl: `.testimonial-slider-next-${this.testimonialSliderHash}`,
+                    prevEl: `.testimonial-slider-prev-${this.testimonialSliderHash}`,
                 },
             })
 
-            const cardSlider = new Swiper('.card-slider', {
+            const cardSlider = new Swiper(`.card-slider-${this.cardSliderHash}`, {
                 modules: [Navigation],
                 loop: true,
                 slidesPerView: 1,
@@ -43,8 +46,8 @@ export default () => {
                     },
                 },
                 navigation: {
-                    nextEl: '.card-slider-next',
-                    prevEl: '.card-slider-prev',
+                    nextEl: `.card-slider-next-${this.cardSliderHash}`,
+                    prevEl: `.card-slider-prev-${this.cardSliderHash}`,
                 },
             })
         },

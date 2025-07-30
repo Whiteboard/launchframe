@@ -33,7 +33,7 @@
                     {% include "typography/paragraph.twig" with {
                         content: video_overline,
                         style: "overline",
-                        margins: "mb-0"
+                        margin: " "
                     } %}
                 {% endif %}
                 {% if video_title %}
@@ -45,7 +45,7 @@
                 {% if video_subtitle %}
                     {% include "typography/paragraph.twig" with {
                         content: video_subtitle,
-                        margins: "mb-8"
+                        margin: "mb-8"
                     } %}
                 {% endif %}
             </div>
@@ -61,12 +61,12 @@
                     {% include "typography/paragraph.twig" with {
                         content: "Watch Video",
                         size: "lg",
-                        margins: "mb-1"
+                        margin: "mb-1"
                     } %}
                     {% include "typography/paragraph.twig" with {
                         content: video_duration,
                         size: "xs",
-                        margins: "m-0"
+                        margin: " "
                     } %}
                 </div>
             </div>
