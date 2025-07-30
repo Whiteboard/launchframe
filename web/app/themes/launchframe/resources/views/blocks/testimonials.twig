@@ -1,9 +1,14 @@
 {# This starter block assumes the testimonials are NOT their own post type. If you need the ability to re-use testimonials throughout the site, this will need to be reworked to pull from a CPT.  #}
 
+{% set testimonials_slider_hash = random() %}
+
 <div 
     class="fluid-container {% include "snippets/no_block_spacing.twig" %}" 
     x-data="sliders()" 
-    x-init="mounted()"
+    x-init="
+        testimonialSliderHash = '{{ testimonials_slider_hash }}';
+        mounted();
+    "
     id="{{ id }}"
 >
     {% if blockset.title %}
@@ -15,7 +20,7 @@
         } %}
     {% endif %}
 
-    <div class="swiper testimonial-slider max-w-[80vw] lg:max-w-[90vw] mx-auto">
+    <div class="swiper testimonial-slider-{{ testimonials_slider_hash }} max-w-[80vw] lg:max-w-[90vw] mx-auto">
         <div class="swiper-wrapper">
             {% for item in blockset.testimonials %}
                 <div class="swiper-slide md:flex justify-between">
@@ -62,11 +67,11 @@
                         </cite>
                         {% if blockset.testimonials|length > 1 %}
                             <div class="flex gap-6 mt-12 lg:mt-24">
-                                <button class="testimonial-slider-prev w-12 h-12 transition hover:scale-110 hover:text-secondary rotate-180" title="Previous">
+                                <button class="testimonial-slider-prev-{{ testimonials_slider_hash }} w-12 h-12 transition hover:scale-110 hover:text-secondary rotate-180" title="Previous">
                                     {{ source("resources/images/arrow-circle.svg") }}
                                 </button>
 
-                                <button class="testimonial-slider-next w-12 h-12 transition hover:scale-110 hover:text-secondary" title="Next">
+                                <button class="testimonial-slider-next-{{ testimonials_slider_hash }} w-12 h-12 transition hover:scale-110 hover:text-secondary" title="Next">
                                     {{ source("resources/images/arrow-circle.svg") }}
                                 </button>
                             </div>
