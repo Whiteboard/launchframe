@@ -31,4 +31,6 @@
     aria-label="{{ attr_aria }}"
 {% endif %}
 
-
+{% if force_reload %}
+    data-portal-prevent="self"
+{% endif %}
