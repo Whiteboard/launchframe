@@ -49,6 +49,8 @@ export default () => {
     })
 
     barba.hooks.leave(() => {
+        ScrollTrigger.getAll().forEach(trigger => trigger.kill())
+
         Alpine.store('audioPause', true)
 
         mouse.createEvent('cursorLoadingEnter')
