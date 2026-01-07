@@ -4,7 +4,7 @@
 #}
 
 {% if action == "url" %}
-    href="{{ url }}"
+    href="{{ function('ensureTrailingSlash', url) }}"
 {% elseif action == "entry" %}
     href="{{ entry }}"
 {% elseif action == "email" %}
