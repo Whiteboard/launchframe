@@ -1,5 +1,27 @@
 /* If you don't want to use the JS in CSS syntax from `tailwind.config.site.js` you can add your own custom CSS here. Use different layers to make sure your CSS either gets purged or not: https://tailwindcss.com/docs/functions-and-directives#layer. CSS in the base layer won't get purged. */
 
+@view-transition {
+    navigation: auto;
+}
+
+::view-transition-old(root) {
+    animation: vt-fade-out 0.15s ease-in;
+}
+
+::view-transition-new(root) {
+    animation: vt-fade-in 0.2s ease-out;
+}
+
+@keyframes vt-fade-out {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+@keyframes vt-fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
 @layer base {
     label {
         @apply font-bold;

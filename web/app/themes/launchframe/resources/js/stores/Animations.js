@@ -9,15 +9,5 @@ export default () => {
         h1: 'pb-[0.9%]',
     }
 
-    // Example
-    // avalanche.textClass.chars = {
-    //     h1: '-mr-1 pr-1',
-    // }
-
-    Alpine.store('barba', {
-        currentHeight: 0,
-        started: false,
-    })
-
     Alpine.store('focusState', false)
 }

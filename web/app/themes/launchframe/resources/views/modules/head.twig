@@ -22,4 +22,10 @@
     {{ function("wp_head") }}
     {% include "snippets/seo.twig" %}
     <script src="https://www.youtube.com/iframe_api"></script>
+    <script type="speculationrules">
+    {
+        "prerender": [{ "where": { "href_matches": "/*" }, "eagerness": "moderate" }],
+        "prefetch": [{ "where": { "href_matches": "/*" }, "eagerness": "moderate" }]
+    }
+    </script>
 </head>

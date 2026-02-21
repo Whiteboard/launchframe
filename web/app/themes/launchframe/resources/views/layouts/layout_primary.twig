@@ -9,14 +9,12 @@
     {% include "modules/head.twig" %}
 
     <body
-        data-portal="realm"
         class="
             {{ environment == "development" ? "debug" : "" }}
             text-base antialiased
         "
     >
 
-        {% include "modules/transitions.twig" %}
         {% include "modules/header.twig" %}
         {% include "components/navigation/skip_to_content.twig" %}
         {% include "modules/overlays/overlay_nav.twig" %}
@@ -25,10 +23,6 @@
         <div id="smooth-wrapper">
             <div id="smooth-content">
                 <div
-                    data-portal="destination"
-                    {% block namespace %}
-                        data-portal-namespace="primary"
-                    {% endblock %}
                     class="{{ body_class }} -mb-px"
                 >
 

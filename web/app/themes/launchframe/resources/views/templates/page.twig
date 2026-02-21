@@ -7,13 +7,9 @@
 
 {% extends "layouts/layout_primary.twig" %}
 
-{% block namespace %}
-    data-portal-namespace="{{ namespace ?: "secondary" }}"
-{% endblock %}
-
 {% block content %}
     {% if hero.type != "none" %}
-        {% include "modules/heroes/hero_#{hero.type}.twig" %}
+        {% include "modules/heroes/hero_#{hero.type ?: 'primary'}.twig" %}
     {% endif %}
 
     <main

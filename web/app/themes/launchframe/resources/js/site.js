@@ -9,10 +9,11 @@ import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ScrollSmoother } from 'gsap/ScrollSmoother'
 import { SplitText } from 'gsap/SplitText'
+import 'instant.page'
 
 import stateManager from '@/StateManager'
 import core from '@/Core'
-import router from '@/Router'
+import mouse from '@components/MouseController'
 
 Alpine.plugin(persist)
 Alpine.plugin(focus)
@@ -30,8 +31,16 @@ Avalanche()
 
 core()
 stateManager()
+Alpine.start()
+
+if (!Alpine.store('isTouch')) {
+    Alpine.store('scroll').createSmoother()
+}
+
+const elements = [...document.querySelectorAll('a, button')]
+mouse.set(elements)
+
 console.log(
     `%cCrafted with ❤ by https://whiteboard.is`,
     'background: #5DC9F0; color: #0B2254; font-size: 13px; padding: 4px 8px;',
 )
-router()

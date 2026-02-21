@@ -25,7 +25,7 @@ export default () => {
 
             if (this.endRedirect) {
                 player.on('ended', () => {
-                    barba.go(this.redirect)
+                    window.location.href = this.redirect
                 })
             }
 
