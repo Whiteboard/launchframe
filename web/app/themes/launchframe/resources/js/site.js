@@ -22,7 +22,6 @@ window.Alpine = Alpine
 gsap.registerPlugin(DrawSVGPlugin, ScrollTrigger, ScrollToPlugin, ScrollSmoother, SplitText)
 window.gsap = gsap
 window.mm = gsap.matchMedia()
-ScrollTrigger.normalizeScroll(true)
 window.ScrollSmoother = ScrollSmoother
 window.ScrollTrigger = ScrollTrigger
 window.SplitText = SplitText

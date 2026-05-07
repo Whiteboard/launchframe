@@ -11,6 +11,9 @@ window.barba = barba
 export default () => {
     barba.hooks.beforeOnce(() => {
         Alpine.start()
+        if (!Alpine.store('isTouch')) {
+            ScrollTrigger.normalizeScroll(true)
+        }
     })
 
     barba.hooks.afterOnce(() => {
