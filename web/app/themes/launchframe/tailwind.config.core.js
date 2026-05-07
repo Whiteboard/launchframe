@@ -46,10 +46,6 @@ module.exports = {
                 '4xl': '56rem',
                 '5xl': '64rem',
                 '6xl': '72rem',
-                'screen-50': '50vh',
-                'screen-75': '75vh',
-                'screen-80': '80vh',
-                'screen-90': '90vh',
             },
 
             minWidth: theme => ({
@@ -318,6 +314,48 @@ module.exports = {
                 '.no-scrollbar::-webkit-scrollbar': { display: 'none' },
             }
             addUtilities(newUtilities)
+        }),
+
+        // Emit h-screen-N and min-h-screen-N utilities with both vh and dvh
+        // values so browsers without dvh support fall back to vh instead of
+        // losing the floor entirely.
+        plugin(function ({ matchUtilities }) {
+            matchUtilities(
+                {
+                    'min-h-screen': (value) => ({
+                        'min-height': [`${value}vh`, `${value}dvh`],
+                    }),
+                    'h-screen': (value) => ({
+                        height: [`${value}vh`, `${value}dvh`],
+                    }),
+                },
+                {
+                    values: {
+                        25: '25',
+                        40: '40',
+                        50: '50',
+                        60: '60',
+                        65: '65',
+                        70: '70',
+                        75: '75',
+                        80: '80',
+                        90: '90',
+                    },
+                }
+            )
+        }),
+
+        // Override Tailwind's default .h-screen and .min-h-screen so the
+        // unsuffixed forms also emit the vh/dvh fallback pair.
+        plugin(function ({ addUtilities }) {
+            addUtilities({
+                '.h-screen': {
+                    height: ['100vh', '100dvh'],
+                },
+                '.min-h-screen': {
+                    'min-height': ['100vh', '100dvh'],
+                },
+            })
         }),
     ],
 }
